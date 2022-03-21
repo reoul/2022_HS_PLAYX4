@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
 
-public class BowManager : MonoBehaviour
+public class BowManager : Singleton<BowManager>
 {
 }

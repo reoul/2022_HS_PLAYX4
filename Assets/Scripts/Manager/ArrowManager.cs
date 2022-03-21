@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
 
-public class ArrowManager : MonoBehaviour
+public class ArrowManager : Singleton<ArrowManager>
 {
 }
