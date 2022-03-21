@@ -36,6 +36,8 @@ public class DataManager : MonoBehaviour
         return settingData;
     }
 
+    // 반드시 게임 시작시 무조건 호출해서
+    // 각 플레이 요소에 로드된 세팅값을 적용해야한다.
     /// <summary>
     /// 세팅값 로드 및 적용
     /// </summary>
