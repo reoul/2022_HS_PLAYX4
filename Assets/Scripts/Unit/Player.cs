@@ -18,7 +18,7 @@ public class Player : Unit
         }
     }
 
-    new public void Damage(float damage)
+    override public void Damage(float damage)
     {
         currentHealth -= damage;
         if(currentHealth < 0)

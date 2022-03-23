@@ -11,7 +11,7 @@ public class Unit : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    public void Damage(float damage)
+    public virtual void Damage(float damage)
     {
         currentHealth -= damage;
     }
