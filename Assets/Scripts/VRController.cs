@@ -20,17 +20,20 @@ public class VRController : MonoBehaviour
     
     public SteamVR_Action_Vibration HapticAction;
 
+    [Range(0,3999)] public int frequency;
+
     public void Vibration()
     {
-        Pulse(1, 150, 75, HandType);
+        Pulse(1, frequency, 75, HandType);
     }
 
     private void Update()
     {
-        if (GetGrab())
+        Vibration();
+        /*if (GetTrigger())
         {
-            Vibration();
-        }
+            
+        }*/
     }
 
     /// <summary>
@@ -46,11 +49,32 @@ public class VRController : MonoBehaviour
     }
 
     /// <summary>
-    /// 트리거 버튼이 작동 중 상태
+    /// 트리거 버튼을 지속적으로 누르고 있는 상태
     /// </summary>
     /// <returns>트리거 상태</returns>
-    public bool GetGrab()
+    public bool GetTrigger()
     {
+        Debug.Log("트리거 버튼을 지속적으로 누르고 있는 상태");
         return GrabAction.GetState(HandType);
+    }
+
+    /// <summary>
+    /// 트리거 버튼이 한번 누른 상태
+    /// </summary>
+    /// <returns>트리거 상태</returns>
+    public bool GetTriggerDown()
+    {
+        Debug.Log("트리거 버튼이 한번 누른 상태");
+        return GrabAction.GetStateDown(HandType);
+    }
+
+    /// <summary>
+    /// 트리거 버튼이 한번 눌렀다가 땐 상태
+    /// </summary>
+    /// <returns>트리거 상태</returns>
+    public bool GetTriggerUp()
+    {
+        Debug.Log("트리거 버튼이 한번 눌렀다가 땐 상태");
+        return GrabAction.GetStateUp(HandType);
     }
 }
