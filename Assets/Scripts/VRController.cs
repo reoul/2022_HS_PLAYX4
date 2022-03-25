@@ -29,7 +29,6 @@ public class VRController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(VRControllerManager.Instance.distance);
         if(VRControllerManager.Instance.distance > 1)
         {
             Vibration();

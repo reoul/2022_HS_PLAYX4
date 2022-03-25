@@ -16,6 +16,14 @@ public class VRControllerManager : Singleton<VRControllerManager>
         FindController();
     }
 
+    private void Update()
+    {
+        if (RightController.GetTriggerDown())
+        {
+            ArrowManager.Instance.Shot(RightController.transform.position, direction);
+        }
+    }
+
     // 반드시 처음에 컨트롤러를 찾아서 해당 변수에 적용시켜줘야한다.
     /// <summary>
     /// VR컨트롤러를 찾는다
