@@ -20,7 +20,7 @@ public class VRController : MonoBehaviour
     
     public SteamVR_Action_Vibration HapticAction;
 
-    [Range(0,3999)] public int frequency;
+    private int frequency = 300;
 
     public void Vibration()
     {
@@ -29,11 +29,26 @@ public class VRController : MonoBehaviour
 
     private void Update()
     {
-        Vibration();
-        /*if (GetTrigger())
+        Debug.Log(VRControllerManager.Instance.distance);
+        if(VRControllerManager.Instance.distance > 1)
         {
-            
-        }*/
+            Vibration();
+        }
+        if (GetTrigger())
+        {
+            //Vibration();
+        }
+        if(GetTriggerDown())
+        {
+            Debug.Log("트리거 버튼이 한번 누른 상태");
+        }
+        if (GetTriggerUp())
+        {
+            GameObject gameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            gameObject.AddComponent<Rigidbody>();
+            gameObject.transform.position = this.transform.position;
+            gameObject.GetComponent<Rigidbody>().AddForce(VRControllerManager.Instance.direction * 10, ForceMode.Impulse);
+        }
     }
 
     /// <summary>
@@ -54,7 +69,6 @@ public class VRController : MonoBehaviour
     /// <returns>트리거 상태</returns>
     public bool GetTrigger()
     {
-        Debug.Log("트리거 버튼을 지속적으로 누르고 있는 상태");
         return GrabAction.GetState(HandType);
     }
 
@@ -64,7 +78,6 @@ public class VRController : MonoBehaviour
     /// <returns>트리거 상태</returns>
     public bool GetTriggerDown()
     {
-        Debug.Log("트리거 버튼이 한번 누른 상태");
         return GrabAction.GetStateDown(HandType);
     }
 
@@ -74,7 +87,6 @@ public class VRController : MonoBehaviour
     /// <returns>트리거 상태</returns>
     public bool GetTriggerUp()
     {
-        Debug.Log("트리거 버튼이 한번 눌렀다가 땐 상태");
         return GrabAction.GetStateUp(HandType);
     }
 }

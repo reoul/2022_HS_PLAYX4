@@ -7,6 +7,10 @@ public class VRControllerManager : Singleton<VRControllerManager>
     public VRController LeftController { get; set; }
     public VRController RightController { get; set; }
 
+    public Vector3 direction { get { return LeftController.transform.position - RightController.transform.position; } }
+
+    public float distance { get { return Vector3.Distance(LeftController.transform.position, RightController.transform.position); } }
+
     private void Awake()
     {
         FindController();
