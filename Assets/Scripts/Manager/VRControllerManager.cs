@@ -6,10 +6,41 @@ public class VRControllerManager : Singleton<VRControllerManager>
 {
     public VRController LeftController { get; set; }
     public VRController RightController { get; set; }
+    
+    
+    /// <summary>
+    /// 활을 들고 있는 컨트롤러
+    /// </summary>
+    public VRController BowController { get; set; }
+    
+    public VRController ArrowController
+    {
+        get { return BowController == LeftController ? RightController : LeftController;  }
+    }
 
-    public Vector3 direction { get { return LeftController.transform.position - RightController.transform.position; } }
+    public Vector3 direction
+    {
+        get
+        {
+            if (BowController == null)
+            {
+                return Vector3.zero;
+            }
+            return BowController.transform.position - ArrowController.transform.position;
+        }
+    }
 
-    public float distance { get { return Vector3.Distance(LeftController.transform.position, RightController.transform.position); } }
+    public float distance
+    {
+        get
+        {
+            if (BowController == null)
+            {
+                return 0;
+            }
+            return Vector3.Distance(BowController.transform.position, ArrowController.transform.position);
+        }
+    }
 
     private void Awake()
     {
@@ -18,9 +49,39 @@ public class VRControllerManager : Singleton<VRControllerManager>
 
     private void Update()
     {
-        if (RightController.GetTriggerDown())
+        CheckBow();
+        
+        if ((BowController != null) && ArrowController.GetTriggerUp())
         {
             ArrowManager.Instance.Shot(RightController.transform.position, direction);
+        }
+    }
+
+    private void CheckBow()
+    {
+        if (LeftController.GetTriggerDown())
+        {
+            // 오른쪽 컨트롤러 트리거를 사용 안할때
+            if (!(RightController.GetTrigger() || RightController.GetTriggerDown()))
+            {
+                BowController = LeftController;
+            }
+        }
+        else if(RightController.GetTriggerDown())
+        {
+            // 왼쪽 컨트롤러 트리거를 사용 안할때
+            if (!(LeftController.GetTrigger() || LeftController.GetTriggerDown()))
+            {
+                BowController = RightController;
+            }
+        }
+
+        if (BowController != null)
+        {
+            if (BowController.GetTriggerUp())
+            {
+                BowController = null;
+            }
         }
     }
 

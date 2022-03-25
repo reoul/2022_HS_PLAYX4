@@ -41,13 +41,13 @@ public class VRController : MonoBehaviour
         {
             Debug.Log("트리거 버튼이 한번 누른 상태");
         }
-        if (GetTriggerUp())
+        /*if (GetTriggerUp())
         {
             GameObject gameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             gameObject.AddComponent<Rigidbody>();
             gameObject.transform.position = this.transform.position;
             gameObject.GetComponent<Rigidbody>().AddForce(VRControllerManager.Instance.direction * 10, ForceMode.Impulse);
-        }
+        }*/
     }
 
     /// <summary>
