@@ -22,17 +22,18 @@ public class VRController : MonoBehaviour
 
     private int frequency = 300;
 
-    public void Vibration()
+    public void Vibration(int frequency)
     {
-        Pulse(1, frequency, 75, HandType);
+        frequency = Mathf.Clamp(frequency, 0, 60);
+        Pulse(0.1f, frequency, 75, HandType);
+    }
+
+    private void Awake() {
+        //StartCoroutine(aaaa());
     }
 
     private void Update()
     {
-        if(VRControllerManager.Instance.distance > 1)
-        {
-            Vibration();
-        }
         if (GetTrigger())
         {
             //Vibration();
@@ -48,6 +49,18 @@ public class VRController : MonoBehaviour
             gameObject.transform.position = this.transform.position;
             gameObject.GetComponent<Rigidbody>().AddForce(VRControllerManager.Instance.direction * 10, ForceMode.Impulse);
         }*/
+    }
+
+    IEnumerator aaaa()
+    {
+        int i = 0;
+        while (true)
+        {
+            Debug.Log(i);
+            Pulse(2, i, 75, HandType);
+            yield return new WaitForSeconds(2);
+            i+=10;
+        }
     }
 
     /// <summary>

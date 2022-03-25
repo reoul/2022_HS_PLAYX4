@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using Valve.VR;
 
@@ -8,6 +9,8 @@ public class VRControllerManager : Singleton<VRControllerManager>
     public VRController RightController { get; set; }
 
     private bool _isCharging;
+
+    private float _chargingTime;
     
     
     /// <summary>
@@ -47,6 +50,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
     private void Awake()
     {
         FindController();
+        _isCharging = false;
     }
 
     private void Update()
@@ -56,8 +60,20 @@ public class VRControllerManager : Singleton<VRControllerManager>
         
         if ((BowController != null) && ArrowController.GetTriggerUp())
         {
-            ArrowManager.Instance.Shot(RightController.transform.position, direction);
+            if(_chargingTime >= 60)
+            {
+                ArrowManager.Instance.Shot(RightController.transform.position, direction);
+                _isCharging = false;
+                _chargingTime= 0;
+            }
         }
+
+        //if(_isCharging)
+        //{
+        //    _chargingTime += Time.deltaTime;
+        //    Debug.Log((int)((_chargingTime) * 220 * 0.1f));
+        //    Vibration(HandType.LeftRight, (int)((_chargingTime) * 220 * 0.01f));
+        //}
         
     }
 
@@ -85,6 +101,8 @@ public class VRControllerManager : Singleton<VRControllerManager>
             if (BowController.GetTriggerUp())
             {
                 BowController = null;
+                _isCharging = false;
+                _chargingTime= 0;
             }
         }
     }
@@ -101,6 +119,8 @@ public class VRControllerManager : Singleton<VRControllerManager>
             if (ArrowController.GetTriggerDown())
             {
                 _isCharging = true;
+                StartCoroutine(VibrationCoroutine());
+                _chargingTime = 0;
             }
         }
     }
@@ -131,20 +151,36 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// 진동 주기
     /// </summary>
     /// <param name="handType">컨트롤러 타입</param>
-    public void Vibration(SteamVR_Input_Sources handType)
+    public void Vibration(HandType handType, int frequency)
     {
         switch (handType)
         {
-            case SteamVR_Input_Sources.Any:
-                LeftController.Vibration();
-                RightController.Vibration();
+            case HandType.LeftRight:
+                LeftController.Vibration(frequency);
+                RightController.Vibration(frequency);
                 break;
-            case SteamVR_Input_Sources.LeftHand:
-                LeftController.Vibration();
+            case HandType.Left:
+                LeftController.Vibration(frequency);
                 break;
-            case SteamVR_Input_Sources.RightHand:
-                RightController.Vibration();
+            case HandType.Right:
+                RightController.Vibration(frequency);
                 break;
         }
+    }
+
+    IEnumerator VibrationCoroutine()
+    {
+        while(_isCharging)
+        {
+            if(distance > 0.7f)
+            {
+
+            _chargingTime += 5f;
+            Debug.Log(_chargingTime);
+            Vibration(HandType.LeftRight, (int)_chargingTime);
+            }
+            yield return new WaitForSeconds(0.08f);
+        }
+        yield return null;
     }
 }
