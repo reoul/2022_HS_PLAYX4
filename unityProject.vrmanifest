@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.2022_hs_playx4.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "C:\\Users\\user\\Desktop\\GitHub\\2022_HS_PLAYX4\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "2022_HS_PLAYX4 [Testing]"
+        }
+      }
+    }
+  ]
+}
