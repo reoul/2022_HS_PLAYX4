@@ -15,6 +15,7 @@ public class Arrow : MonoBehaviour
     public void Init(Vector3 positon, Vector3 direction)
     {
         this.transform.position = positon;
+        this.transform.forward = direction;
         _direction = direction;
     }
 
