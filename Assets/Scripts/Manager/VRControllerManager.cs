@@ -6,6 +6,8 @@ public class VRControllerManager : Singleton<VRControllerManager>
 {
     public VRController LeftController { get; set; }
     public VRController RightController { get; set; }
+
+    private bool _isCharging;
     
     
     /// <summary>
@@ -50,11 +52,13 @@ public class VRControllerManager : Singleton<VRControllerManager>
     private void Update()
     {
         CheckBow();
+        CheckCharging();
         
         if ((BowController != null) && ArrowController.GetTriggerUp())
         {
             ArrowManager.Instance.Shot(RightController.transform.position, direction);
         }
+        
     }
 
     private void CheckBow()
@@ -81,6 +85,22 @@ public class VRControllerManager : Singleton<VRControllerManager>
             if (BowController.GetTriggerUp())
             {
                 BowController = null;
+            }
+        }
+    }
+
+    private void CheckCharging()
+    {
+        if (_isCharging)
+        {
+            return;
+        }
+        
+        if (BowController != null)
+        {
+            if (ArrowController.GetTriggerDown())
+            {
+                _isCharging = true;
             }
         }
     }
