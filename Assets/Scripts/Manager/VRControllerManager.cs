@@ -8,22 +8,61 @@ public class VRControllerManager : Singleton<VRControllerManager>
     public VRController LeftController { get; set; }
     public VRController RightController { get; set; }
 
-    private bool _isCharging;
+    /// <summary>
+    /// 차징하고 있는지
+    /// </summary>
+    public bool IsCharging { get; private set; }
 
-    private float _chargingTime;
-    
-    
+    /// <summary>
+    /// 차징된 시간
+    /// </summary>
+    private float _chargingTime = 0;
+
+    /// <summary>
+    /// 최대 차징 게이지
+    /// </summary>
+    private const float _maxCharging = 60;
+
+    /// <summary>
+    /// 차징 딜레이 주기 체크하는 변수
+    /// </summary>
+    private float _checkChargingTime = 0;
+
+    /// <summary>
+    /// 차징 딜레이 시간
+    /// </summary>
+    private const float _chargingDelay = 0.08f;
+
+    /// <summary>
+    /// 차징 할 때 두 컨트롤러 최대 거리
+    /// </summary>
+    private const float _chargingDistance = 0.2f;
+
+    /// <summary>
+    /// 플레이어의 두 컨트롤러 간의 최대 거리 (최대한 멀어질때마다 값 업데이트)
+    /// </summary>
+    private float _maxDistance;
+
+    private readonly WaitForSeconds _delay008 = new WaitForSeconds(0.08f);
+
+
     /// <summary>
     /// 활을 들고 있는 컨트롤러
     /// </summary>
     public VRController BowController { get; set; }
-    
+
+    /// <summary>
+    /// 활 시위를 당기고 있는 컨트롤러
+    /// </summary>
     public VRController ArrowController
     {
-        get { return BowController == LeftController ? RightController : LeftController;  }
+        get { return BowController == LeftController ? RightController : LeftController; }
     }
 
-    public Vector3 direction
+    /// <summary>
+    /// 화살 방향
+    /// </summary>
+    public Vector3 Direction
     {
         get
         {
@@ -31,52 +70,46 @@ public class VRControllerManager : Singleton<VRControllerManager>
             {
                 return Vector3.zero;
             }
+
             return BowController.transform.position - ArrowController.transform.position;
         }
     }
 
-    public float distance
+    /// <summary>
+    /// 두 컨트롤러 간의 거리
+    /// </summary>
+    public float Distance
     {
         get
         {
-            if (BowController == null)
+            if (BowController != null)
             {
-                return 0;
+                return Vector3.Distance(BowController.transform.position, ArrowController.transform.position);
             }
-            return Vector3.Distance(BowController.transform.position, ArrowController.transform.position);
+
+            return 0;
         }
     }
 
     private void Awake()
     {
         FindController();
-        _isCharging = false;
+        IsCharging = false;
+        _maxDistance = 0;
     }
 
     private void Update()
     {
         CheckBow();
         CheckCharging();
-        
-        if ((BowController != null) && ArrowController.GetTriggerUp())
-        {
-            if(_chargingTime >= 60)
-            {
-                ArrowManager.Instance.Shot(RightController.transform.position, direction);
-                _isCharging = false;
-                _chargingTime= 0;
-            }
-        }
-
-        //if(_isCharging)
-        //{
-        //    _chargingTime += Time.deltaTime;
-        //    Debug.Log((int)((_chargingTime) * 220 * 0.1f));
-        //    Vibration(HandType.LeftRight, (int)((_chargingTime) * 220 * 0.01f));
-        //}
-        
+        UpdateMaxDistance();
+        ChargingVibration();
+        CheckShot();
     }
 
+    /// <summary>
+    /// BowController와 ArrowController를 지정해준다
+    /// </summary>
     private void CheckBow()
     {
         if (LeftController.GetTriggerDown())
@@ -87,7 +120,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
                 BowController = LeftController;
             }
         }
-        else if(RightController.GetTriggerDown())
+        else if (RightController.GetTriggerDown())
         {
             // 왼쪽 컨트롤러 트리거를 사용 안할때
             if (!(LeftController.GetTrigger() || LeftController.GetTriggerDown()))
@@ -101,25 +134,48 @@ public class VRControllerManager : Singleton<VRControllerManager>
             if (BowController.GetTriggerUp())
             {
                 BowController = null;
-                _isCharging = false;
-                _chargingTime= 0;
+                IsCharging = false;
+                _chargingTime = 0;
             }
         }
     }
 
+    /// <summary>
+    /// 차징 시작했는지 확인
+    /// </summary>
     private void CheckCharging()
     {
-        if (_isCharging)
+        if (IsCharging)
         {
             return;
         }
-        
+
         if (BowController != null)
         {
             if (ArrowController.GetTriggerDown())
             {
-                _isCharging = true;
-                StartCoroutine(VibrationCoroutine());
+                IsCharging = true;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 화살을 발사하는 입력을 받았는지 체크
+    /// </summary>
+    private void CheckShot()
+    {
+        if ((BowController != null) && ArrowController.GetTriggerUp())
+        {
+            // 두 컨트롤러가 멀 때
+            if (Distance > _chargingDistance)
+            {
+                return;
+            }
+            
+            if (_chargingTime >= _maxCharging)
+            {
+                ArrowManager.Instance.Shot(RightController.transform.position, Direction);
+                IsCharging = false;
                 _chargingTime = 0;
             }
         }
@@ -133,17 +189,14 @@ public class VRControllerManager : Singleton<VRControllerManager>
     {
         foreach (var controller in FindObjectsOfType<VRController>())
         {
-            switch (controller.HandType)
+            if (controller.HandType == SteamVR_Input_Sources.LeftHand)
             {
-                case SteamVR_Input_Sources.LeftHand:
-                    LeftController = controller;
-                    break;
-                case SteamVR_Input_Sources.RightHand:
-                    RightController = controller;
-                    break;
+                LeftController = controller;
             }
-
-            Debug.Log(controller.name);
+            else if (controller.HandType == SteamVR_Input_Sources.RightHand)
+            {
+                RightController = controller;
+            }
         }
     }
 
@@ -151,6 +204,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// 진동 주기
     /// </summary>
     /// <param name="handType">컨트롤러 타입</param>
+    /// <param name="frequency">진동 크기 (0~60)</param>
     public void Vibration(HandType handType, int frequency)
     {
         switch (handType)
@@ -165,22 +219,91 @@ public class VRControllerManager : Singleton<VRControllerManager>
             case HandType.Right:
                 RightController.Vibration(frequency);
                 break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(handType), handType, null);
         }
     }
 
-    IEnumerator VibrationCoroutine()
+    /// <summary>
+    /// 차징 진동
+    /// </summary>
+    private void ChargingVibration()
     {
-        while(_isCharging)
+        if (IsCharging)
         {
-            if(distance > 0.7f)
+            _checkChargingTime += Time.deltaTime;
+            if (_checkChargingTime >= _chargingDelay)
             {
-
-            _chargingTime += 5f;
-            Debug.Log(_chargingTime);
-            Vibration(HandType.LeftRight, (int)_chargingTime);
+                _checkChargingTime -= _chargingDelay;
+                ChargingTime();
+                StartChargingVibration();
             }
-            yield return new WaitForSeconds(0.08f);
         }
+    }
+
+    /// <summary>
+    /// 차징 진동
+    /// </summary>
+    private void StartChargingVibration()
+    {
+        Vibration(HandType.LeftRight, (int) _chargingTime);
+    }
+
+    /// <summary>
+    /// 차징 중일때 일정 시간마다 차징 게이지를 늘려줌
+    /// </summary>
+    private void ChargingTime()
+    {
+        // 두 컨트롤러 거리가 일정 이상 멀어졌을때(활 쏘는 동작을 했을 때)
+        if (Distance > Mathf.Lerp(0, _maxDistance, 0.7f))
+        {
+            _chargingTime += 5f;
+        }
+    }
+
+    /// <summary>
+    /// 차징 시간에 따른 진동 주는 코루틴
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator VibrationCoroutine()
+    {
+        while (IsCharging)
+        {
+            Vibration(HandType.LeftRight, (int) _chargingTime);
+            yield return _delay008;
+        }
+
         yield return null;
+    }
+
+    /// <summary>
+    /// 차징 시간 늘려주는 코루틴
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator ChargingTimeCoroutine()
+    {
+        _chargingTime = 0;
+        while (IsCharging)
+        {
+            if (Distance > Mathf.Lerp(0, _maxDistance, 0.7f))
+            {
+                _chargingTime += 5f;
+            }
+
+            yield return _delay008;
+        }
+
+        yield return null;
+    }
+
+    /// <summary>
+    /// 플레이어의 최대 팔 거리 업데이트
+    /// </summary>
+    private void UpdateMaxDistance()
+    {
+        if (Distance > _maxDistance)
+        {
+            _maxDistance = Distance;
+        }
     }
 }
