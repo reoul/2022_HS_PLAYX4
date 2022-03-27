@@ -41,4 +41,4 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DissolveColor: {r: 1, g: 0.5, b: 0.2, a: 0}
     - _EdgeEmission: {r: 0.5298507, g: 0.4543632, b: 0.11466918, a: 0}
-    - _RimColor: {r: 0.6940298, g: 0.8716209, b: 1, a: 0}
+    - _RimColor: {r: 0, g: 1, b: 0.083798885, a: 1}

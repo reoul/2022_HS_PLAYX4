@@ -20,11 +20,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 6c5199bacd1113a2a0008cea4ada8c59, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 1702c13dcd1113a2a0008cea4ada8c59, type: 3}
+        m_Texture: {fileID: 2800000, guid: bb00cc87e146a414fbf2c4d3c0d31151, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicTex:
@@ -45,7 +45,7 @@ Material:
     - _RimPower: 3
     - _TileFactor: 4
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
     - _DissolveColor: {r: 0.6641791, g: 0.7604635, b: 1, a: 0}
     - _EdgeEmission: {r: 1, g: 0.8392193, b: 0.52628654, a: 0}
     - _RimColor: {r: 0.26, g: 0.7, b: 1, a: 0}
