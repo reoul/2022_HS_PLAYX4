@@ -8,8 +8,8 @@ public class BowManager : Singleton<BowManager>
     private void Awake()
     {
         _arrowTrajectoryLineRenderer = GameObject.Find("ArrowTrajectoryLine").GetComponent<LineRenderer>();
-        _arrowTrajectoryLineRenderer.SetPosition(0,new Vector3(0.5f,1,0));
-        _arrowTrajectoryLineRenderer.SetPosition(1,new Vector3(0,1,5));
+        _arrowTrajectoryLineRenderer.SetPosition(0, Vector3.zero);
+        _arrowTrajectoryLineRenderer.SetPosition(1, Vector3.zero);
     }
 
     private void Update()
@@ -22,9 +22,15 @@ public class BowManager : Singleton<BowManager>
     /// </summary>
     private void ShowArrowTrajectory()
     {
-        _arrowTrajectoryLineRenderer.SetPosition(0,_arrowTrajectoryLineRenderer.GetPosition(0) + Vector3.forward * Time.deltaTime);
-        _arrowTrajectoryLineRenderer.SetPosition(1,_arrowTrajectoryLineRenderer.GetPosition(1) + Vector3.forward * Time.deltaTime);
+        // 차징하고 있지 않을 때
+        if (!VRControllerManager.Instance.IsCharging)
+        {
+            _arrowTrajectoryLineRenderer.SetPosition(0, Vector3.zero);
+            _arrowTrajectoryLineRenderer.SetPosition(1, Vector3.zero);
+            return;
+        }
+
+        _arrowTrajectoryLineRenderer.SetPosition(0, VRControllerManager.Instance.BowController.gameObject.transform.position);
+        _arrowTrajectoryLineRenderer.SetPosition(1, VRControllerManager.Instance.Direction * 1000);
     }
-    
-    
 }
