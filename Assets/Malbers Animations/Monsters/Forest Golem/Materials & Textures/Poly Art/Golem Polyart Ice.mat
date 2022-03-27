@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Golem Polyart Ice
-  m_Shader: {fileID: 4800000, guid: 64ce74c36ec896d42a70b7451202a4da, type: 3}
+  m_Shader: {fileID: 4800000, guid: 878bccf5c21784b0692b775f4d0267c1, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
@@ -56,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 9099b924166a6764b91e4fb1b7745c82, type: 3}
+        m_Texture: {fileID: 2800000, guid: ea84df73cd1123a2a0008cea4ada8c59, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -84,9 +84,12 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _Brightness: 1.5
     - _BumpScale: 1
+    - _ClipPower: 200
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
+    - _DiffuseAmount: 0
     - _DstBlend: 0
     - _EmissionHue: 1
     - _EmissionPower: 1
@@ -97,6 +100,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
+    - _RimPower: 3
     - _Shadows: 1
     - _Shininess: 0.078125
     - _Smoothness: 0.338
@@ -124,6 +128,7 @@ Material:
     - _EmissionColor: {r: 2, g: 1.625178, b: 0, a: 1}
     - _Emissive1: {r: 0, g: 2, b: 1.5372549, a: 1}
     - _Emissive2: {r: 0, g: 1.2470589, b: 2, a: 1}
+    - _RimColor: {r: 0.25999996, g: 0.7, b: 1, a: 0}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 0}
     - _cc: {r: 0, g: 0, b: 0, a: 1}
     - _color1: {r: 0, g: 0, b: 0, a: 1}
