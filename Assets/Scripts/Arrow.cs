@@ -10,6 +10,8 @@ public class Arrow : MonoBehaviour
     /// </summary>
     private Vector3 _direction = Vector3.zero;
 
+    public bool abd;
+    
     public float Speed;
 
     public void Init(Vector3 positon, Vector3 direction)
