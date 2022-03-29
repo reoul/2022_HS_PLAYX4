@@ -15,7 +15,16 @@ public class Enemy : Unit
     {
     }
 
+    //피격 판정
+    override public void Damage(float damage)
+    {
+        OnDamage();
+    }
+
+    private void OnDamage() { }
+
     //전략
+
     private enum EnemyState { Spawn, Idle, Run, Attack, Hit, Death };
     private StateMachine _stateMachine;
     private Dictionary<EnemyState, IState> _dicState;
@@ -111,7 +120,7 @@ public class Enemy : Unit
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, _targetTransform.position, 0.01f);
             float _distance = Vector2.Distance(new Vector2(gameObject.transform.position.x, gameObject.transform.position.z), new Vector2(_targetTransform.position.x, _targetTransform.position.z));
-            if (_distance < 1.5f)
+            if (_distance < 0.5f)
             {
                 gameObject.GetComponent<Enemy>()._stateMachine.SetState(gameObject.GetComponent<Enemy>()._dicState[EnemyState.Attack]);
                 Debug.Log(_distance);
@@ -186,14 +195,6 @@ public class Enemy : Unit
 
         }
     }
-    //피격 판정
-    override public void Damage(float damage)
-    {
-        OnDamage();
-    }
-
-    private void OnDamage() { }
-
 
     //UnityEngine
     private void Awake()

@@ -38,10 +38,10 @@ public class EnemyBuilder
                 enemyObj = GameObject.Instantiate(Resources.Load("SPIDER", typeof(GameObject))) as GameObject;
                 break;
             case EnemyType.monter2:
-                enemyObj = GameObject.Instantiate(Resources.Load("Forest_Golem_4_PA", typeof(GameObject))) as GameObject;
+                enemyObj = GameObject.Instantiate(Resources.Load("Monster_X_Green", typeof(GameObject))) as GameObject;
                 break;
             case EnemyType.monter3:
-                enemyObj = GameObject.Instantiate(Resources.Load("Temp_DefaultCubeEnemy", typeof(GameObject))) as GameObject;
+                enemyObj = GameObject.Instantiate(Resources.Load("Rhino_PBR", typeof(GameObject))) as GameObject;
                 break;
             default:
                 enemyObj = GameObject.Instantiate(Resources.Load("Temp_DefaultCubeEnemy", typeof(GameObject))) as GameObject;
