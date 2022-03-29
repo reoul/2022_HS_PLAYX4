@@ -22,5 +22,6 @@ public class EnemySpawner : MonoBehaviour
         Enemy _stage1Enemy = new EnemyBuilder("test").SetHealth(100).SetEnemyType(EnemyType.monter1).Build();
         _stage1Enemy.gameObject.transform.parent = this.transform.parent;
         _stage1Enemy.gameObject.transform.localPosition = this.transform.localPosition;
+        _stage1Enemy.gameObject.transform.LookAt(GameObject.Find("[CameraRig]").transform.position);
     }
 }
