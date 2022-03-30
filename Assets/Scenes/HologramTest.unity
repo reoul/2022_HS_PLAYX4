@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdca7af940a895d41a628437102d5e85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noiseStrength: 0.25
+  noiseStrength: 1
   objectHeight: 1
 --- !u!1001 &386620558
 PrefabInstance:
@@ -490,11 +490,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95149237592212000, guid: 004ef9bea1b52204fb4d8df512e629a0,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 137877345137750152, guid: 004ef9bea1b52204fb4d8df512e629a0,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 137877345137750152, guid: 004ef9bea1b52204fb4d8df512e629a0,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 72aea42e6848edc42a6a45fb91e1ffbc, type: 2}
+    - target: {fileID: 137877345137750152, guid: 004ef9bea1b52204fb4d8df512e629a0,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 72aea42e6848edc42a6a45fb91e1ffbc, type: 2}
+    - target: {fileID: 137932378385655502, guid: 004ef9bea1b52204fb4d8df512e629a0,
+        type: 3}
+      propertyPath: m_RootBone
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 137932378385655502, guid: 004ef9bea1b52204fb4d8df512e629a0,
         type: 3}
       propertyPath: m_CastShadows
@@ -503,7 +523,7 @@ PrefabInstance:
     - target: {fileID: 137932378385655502, guid: 004ef9bea1b52204fb4d8df512e629a0,
         type: 3}
       propertyPath: m_Materials.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 137932378385655502, guid: 004ef9bea1b52204fb4d8df512e629a0,
         type: 3}
@@ -514,6 +534,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: b7e596017016ca0448dc8b346eae8117, type: 2}
+      objectReference: {fileID: 2100000, guid: 72aea42e6848edc42a6a45fb91e1ffbc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 004ef9bea1b52204fb4d8df512e629a0, type: 3}
