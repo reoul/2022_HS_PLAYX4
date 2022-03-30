@@ -97,9 +97,12 @@ public class Beam : MonoBehaviour {
 	
 	public void OnDestroy()
 	{
-		foreach(Material m in EffectMaterials)
-		{
-			Destroy (m);
+		if(EffectMaterials != null)
+        {
+			foreach (Material m in EffectMaterials)
+			{
+				Destroy(m);
+			}
 		}
 	}
 }
