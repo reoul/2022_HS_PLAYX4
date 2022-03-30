@@ -118,7 +118,7 @@ public class Enemy : Unit
 
         public void Update()
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, _targetTransform.position, 0.01f);
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, _targetTransform.position, 0.03f);
             float _distance = Vector2.Distance(new Vector2(gameObject.transform.position.x, gameObject.transform.position.z), new Vector2(_targetTransform.position.x, _targetTransform.position.z));
             if (_distance < 0.5f)
             {
@@ -182,7 +182,7 @@ public class Enemy : Unit
         }
         public void Enter()
         {
-            gameObject.GetComponent<BeamController>().BeamOut(true);
+            gameObject.GetComponent<BeamController>().BeamOut(false);
         }
 
         public void Exit()
@@ -192,19 +192,19 @@ public class Enemy : Unit
 
         public void Update()
         {
-
+            if (gameObject.transform.GetChild(1).GetComponent<Renderer>().material.GetFloat("_DisintegrateAmount") >= 1)
+            {
+                gameObject.SetActive(false);
+            }
         }
     }
 
     //UnityEngine
-    private void Awake()
-    {
-        currentHealth = maxHealth;
-    }
 
-    private void Start()
+    private void OnEnable()
     {
         InitState();
+        currentHealth = maxHealth;
     }
 
     private void Update()
