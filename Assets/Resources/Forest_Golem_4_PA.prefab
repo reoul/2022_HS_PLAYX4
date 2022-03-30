@@ -756,7 +756,7 @@ GameObject:
   - component: {fileID: 3242908925191864710}
   m_Layer: 0
   m_Name: Forest_Golem_4_PA
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

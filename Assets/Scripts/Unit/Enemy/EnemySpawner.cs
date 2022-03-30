@@ -7,12 +7,17 @@ public class EnemySpawner : MonoBehaviour
     private float _spawnTimeDelay;
     private ObjectPooler _pooler;
 
+    private enum EnemyType{ Spider = 1,Goblin, Lihano};
+
+    [SerializeField]
+    private EnemyType _enemyType;
+
     private void Start()
     {
 
         _spawnTimeDelay = Random.RandomRange(0, 10);
         _pooler = new ObjectPooler();
-        _pooler.StartPooling(this.transform);
+        _pooler.StartPooling(this.transform, ((int)_enemyType));
     }
 
     private void Update()
@@ -65,15 +70,17 @@ public class ObjectPooler : MonoBehaviour
     public int numberOfObject;
     private List<GameObject> gameObjects;
     private Transform _parant;
+    private int _enemytype;
 
-    public void StartPooling(Transform parant)
+    public void StartPooling(Transform parant, int type)
     {
         numberOfObject = 3;
         gameObjects = new List<GameObject>();
         _parant = parant;
         for (int i = 0; i < numberOfObject; i++)
         {
-            GameObject gameObject = SpawnEnemy(1).gameObject;
+            _enemytype = type;
+            GameObject gameObject = SpawnEnemy(_enemytype).gameObject;
             gameObject.transform.parent = _parant;
             gameObject.SetActive(false);
             gameObjects.Add(gameObject);
@@ -90,7 +97,7 @@ public class ObjectPooler : MonoBehaviour
             }
         }
 
-        GameObject gameObj = SpawnEnemy(1).gameObject;
+        GameObject gameObj = SpawnEnemy(_enemytype).gameObject;
         gameObj.transform.parent = _parant;
         gameObj.SetActive(false);
         gameObjects.Add(gameObj);
