@@ -17,52 +17,18 @@ public class VRController : MonoBehaviour
 {
     public SteamVR_Input_Sources HandType;  //모두 사용, 왼손, 오른손
     public SteamVR_Action_Boolean GrabAction;
-    
     public SteamVR_Action_Vibration HapticAction;
 
-    private int frequency = 300;
-
+    /// <summary>
+    /// 진동
+    /// </summary>
+    /// <param name="frequency">진동 크기(0~60)</param>
     public void Vibration(int frequency)
     {
         frequency = Mathf.Clamp(frequency, 0, 60);
         Pulse(0.1f, frequency, 75, HandType);
     }
-
-    private void Awake() {
-        //StartCoroutine(aaaa());
-    }
-
-    private void Update()
-    {
-        if (GetTrigger())
-        {
-            //Vibration();
-        }
-        if(GetTriggerDown())
-        {
-            Debug.Log("트리거 버튼이 한번 누른 상태");
-        }
-        /*if (GetTriggerUp())
-        {
-            GameObject gameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            gameObject.AddComponent<Rigidbody>();
-            gameObject.transform.position = this.transform.position;
-            gameObject.GetComponent<Rigidbody>().AddForce(VRControllerManager.Instance.direction * 10, ForceMode.Impulse);
-        }*/
-    }
-
-    IEnumerator aaaa()
-    {
-        int i = 0;
-        while (true)
-        {
-            Debug.Log(i);
-            Pulse(2, i, 75, HandType);
-            yield return new WaitForSeconds(2);
-            i+=10;
-        }
-    }
-
+    
     /// <summary>
     /// 진동
     /// </summary>

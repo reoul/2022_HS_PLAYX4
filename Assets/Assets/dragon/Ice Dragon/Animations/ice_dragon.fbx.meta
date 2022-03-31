@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5c5775b7784b5424db9e3ea4764d908d
+guid: 8e810b8f6578eab469031931e38a870b
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable:
@@ -749,12 +749,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: ice_dragon2
-    second: {fileID: 2100000, guid: 1abce9dc7d35b58469bb37e04aa5e44a, type: 2}
+    second: {fileID: 2100000, guid: 60d0da5f00d87ef44a9ddbb9cbdab046, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: wings3
-    second: {fileID: 2100000, guid: e183a9ad28b9e5d4d800fc7081a65e6d, type: 2}
+    second: {fileID: 2100000, guid: 0a149e43b42baf64fbc71c52690b56bc, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -820,24 +820,24 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips:
-  - 9fbd2631181e80943bb2ec1e4bc98d07
-  - c16076311dc121a41b4a1c84b07a81be
-  - 94270731a49776d4b88aa9fac04e6016
-  - 61f17ba078ae5f040a09e577809038a6
-  - 69ad5760df372f44680757444ef976e0
-  - 70419ad930c23db4d8b5fc629fe3ae53
-  - d3183278e0bb65d4291772f0e32f4674
-  - 577593cc82818994fae93203f5628936
-  - 1eda1fe3918151c488098bdc83c37c00
-  - 412a9c12a4a120e42a46b6303a79d6af
-  - a3545917dd08acc45b3ddfb3b059edfe
-  - 899d40991aef90140800ee6abb134b27
-  - 467d925fc49fff44fb7f0b08a9ddb1d3
-  - 0cf64efb513f74145872296a886c712d
-  - 82095db8450b20347b9fc7cefbf69678
-  - 0b6e467b12c56194d91dda19a1c4231b
-  - 2040ea68b293988479d3e5696c4ba3a8
-  - 066b6c62db0825b4c8363fe98261e706
+  - 68cb1b2eb5e53254b91088d56442dafc
+  - 15bf71ca35fd03e478ffd0b1fe6956ce
+  - 6f7039cb4b02e6d49b8f69da7e6e71bf
+  - 74d2ba35fadc66149b53a21692b5bca0
+  - 78096e2db338aff45a564944ba552536
+  - ec800146cb9400747a4b8a4d7c617ce2
+  - 7933a4268c51bd740b6011170ae15d2b
+  - 4fc9951787b9e2544a8062db40862e4e
+  - 3caa38de6a95bd64aa6df2a9b8872fa0
+  - ce2bacf9d1ad21d4598f1e5ef20fc172
+  - 7e203d8c2fabc004ea4ca073ddbdcc06
+  - 0c1365803e7f94d45bdd289269289ea0
+  - b0429d5770891eb47bb8cc97e79efcd7
+  - b7817d6c4c18ab248858aa8463eef850
+  - 244d5800175047f408ceeec8cbbacbf1
+  - 1a14c8a58ce6abc4d82799578fcfc0d2
+  - c4db61caaf45d834cad5150542c0bf3c
+  - 3a584601f979eac46be94106d230539e
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
