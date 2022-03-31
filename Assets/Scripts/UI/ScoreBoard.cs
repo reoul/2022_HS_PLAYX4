@@ -16,10 +16,8 @@ public class ScoreBoard : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Semicolon))
-        {
-            this.AddCurrentScore = 100;
-        }
+        ScoreSystem.DebugAddScore();
+        _currentScore = ScoreSystem.score;
         UpdateDisplayScore();
         this.GetComponent<Text>().text = Mathf.Round(_displayScore).ToString();
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StageManager : MonoBehaviour
+public class StageManager : Singleton<StageManager>
 {
     [SerializeField]
     private GameObject[] stages;
