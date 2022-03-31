@@ -73,6 +73,10 @@ public class Enemy : Unit
             {
                 gameObject.GetComponent<Enemy>()._stateMachine.SetState(gameObject.GetComponent<Enemy>()._dicState[EnemyState.Run]);
             }
+            else if(gameObject.transform.GetChild(1).GetComponent<Renderer>().material.GetFloat("_DisintegrateAmount") >= 1)
+            {
+                gameObject.GetComponent<BeamController>().BeamIn();
+            }
         }
     }
     public class StateIdle : IState
@@ -118,7 +122,7 @@ public class Enemy : Unit
 
         public void Update()
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, _targetTransform.position, 0.03f);
+            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(_targetTransform.position.x, gameObject.transform.position.y, _targetTransform.position.z), 0.03f);
             float _distance = Vector2.Distance(new Vector2(gameObject.transform.position.x, gameObject.transform.position.z), new Vector2(_targetTransform.position.x, _targetTransform.position.z));
             if (_distance < 0.5f)
             {
