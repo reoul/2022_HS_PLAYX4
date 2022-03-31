@@ -75,11 +75,14 @@ public class VRControllerManager : Singleton<VRControllerManager>
                 return Vector3.zero;
             }
 
+
             // 에임 고정중이면
-            if (_autoAim.IsAutoAnim)
-            {
-                return _autoAim.Target.transform.position - BowController.transform.position;
-            }
+            //if (_autoAim.IsAutoAnim)
+            //{
+            //    BoxCollider bc = _autoAim.Target.GetComponent<BoxCollider>();
+            //    Vector3 center = bc.center;
+            //    return center - BowController.transform.position;
+            //}
 
             return BowController.transform.position - ArrowController.transform.position;
         }
@@ -163,6 +166,11 @@ public class VRControllerManager : Singleton<VRControllerManager>
 
         if (BowController != null)
         {
+            if (Distance > _chargingDistance)
+            {
+                return;
+            }
+
             if (ArrowController.GetTriggerDown())
             {
                 IsCharging = true;
@@ -177,18 +185,13 @@ public class VRControllerManager : Singleton<VRControllerManager>
     {
         if ((BowController != null) && ArrowController.GetTriggerUp())
         {
-            // 두 컨트롤러가 멀 때
-            if (Distance > _chargingDistance)
-            {
-                return;
-            }
-            
             if (_chargingTime >= _maxCharging)
             {
                 ArrowManager.Instance.Shot(RightController.transform.position, Direction);
-                IsCharging = false;
-                _chargingTime = 0;
+                
             }
+            IsCharging = false;
+            _chargingTime = 0;
         }
     }
 
@@ -315,6 +318,10 @@ public class VRControllerManager : Singleton<VRControllerManager>
         if (Distance > _maxDistance)
         {
             _maxDistance = Distance;
+            if (_maxDistance >= 1.1f)
+            {
+                _maxDistance = 1.1f;
+            }
         }
     }
 }

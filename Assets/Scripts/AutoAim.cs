@@ -29,6 +29,16 @@ public class AutoAim : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if(VRControllerManager.Instance.IsCharging)
+        {
+            this.transform.position = VRControllerManager.Instance.BowController.transform.position;
+            var direction = VRControllerManager.Instance.BowController.transform.position - VRControllerManager.Instance.ArrowController.transform.position;
+            this.transform.forward = direction;
+        }
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject == Target)

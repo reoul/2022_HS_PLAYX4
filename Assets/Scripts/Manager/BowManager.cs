@@ -29,7 +29,6 @@ public class BowManager : Singleton<BowManager>
             _arrowTrajectoryLineRenderer.SetPosition(1, Vector3.zero);
             return;
         }
-
         _arrowTrajectoryLineRenderer.SetPosition(0, VRControllerManager.Instance.BowController.gameObject.transform.position);
         _arrowTrajectoryLineRenderer.SetPosition(1, VRControllerManager.Instance.Direction * 1000);
     }

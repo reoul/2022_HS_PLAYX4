@@ -321,6 +321,7 @@ GameObject:
   m_Component:
   - component: {fileID: 400006}
   - component: {fileID: 13700006}
+  - component: {fileID: 6970631160666851033}
   m_Layer: 0
   m_Name: Body_mesh
   m_TagString: Untagged
@@ -414,6 +415,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -5.466118, y: 1.6491809, z: -0.008432388}
     m_Extent: {x: 24.185719, y: 15.109064, z: 33.49138}
   m_DirtyAABB: 0
+--- !u!114 &6970631160666851033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76666bfd487f00948aac80d2b73886d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseStrength: 0.25
+  objectHeight: 1
 --- !u!1 &100008
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,6 +1487,7 @@ GameObject:
   - component: {fileID: 863072699058247213}
   - component: {fileID: 7964698133535673019}
   - component: {fileID: 4653139924672676057}
+  - component: {fileID: 2539923955446743987}
   m_Layer: 0
   m_Name: Monster_X_Green
   m_TagString: Enemy
@@ -1488,7 +1504,7 @@ Transform:
   m_GameObject: {fileID: 100066}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.008430481, y: -0.026616096, z: 0.5442772}
-  m_LocalScale: {x: 0.025, y: 0.025, z: 0.025}
+  m_LocalScale: {x: 0.075, y: 0.075, z: 0.075}
   m_Children:
   - {fileID: 400064}
   - {fileID: 400006}
@@ -1580,3 +1596,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 15.104906, y: 44.3331, z: 18.703726}
   m_Center: {x: -0.8304024, y: 21.666553, z: 1.4958727}
+--- !u!114 &2539923955446743987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0560519c9f913974998166e0f16c87d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

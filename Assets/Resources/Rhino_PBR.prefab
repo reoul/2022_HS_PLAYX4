@@ -766,6 +766,7 @@ GameObject:
   - component: {fileID: 339391059160660165}
   - component: {fileID: 3885264788069204668}
   - component: {fileID: 507627341011358859}
+  - component: {fileID: -6774486237314899231}
   m_Layer: 0
   m_Name: Rhino_PBR
   m_TagString: Enemy
@@ -876,6 +877,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.7411153, z: 2.1303935}
   m_Center: {x: 0, y: 0.8642186, z: 0.2685852}
+--- !u!114 &-6774486237314899231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 153050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0560519c9f913974998166e0f16c87d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &153338
 GameObject:
   m_ObjectHideFlags: 0
@@ -1674,6 +1687,7 @@ GameObject:
   m_Component:
   - component: {fileID: 493766}
   - component: {fileID: 13704024}
+  - component: {fileID: 2421190653569527951}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -1776,6 +1790,20 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.9846919, y: -0.01767391, z: -0.0000002682209}
     m_Extent: {x: 1.3658246, y: 0.8588915, z: 0.64277005}
   m_DirtyAABB: 0
+--- !u!114 &2421190653569527951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76666bfd487f00948aac80d2b73886d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  noiseStrength: 0.25
+  objectHeight: 1
 --- !u!1 &192784
 GameObject:
   m_ObjectHideFlags: 0

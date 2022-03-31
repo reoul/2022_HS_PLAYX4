@@ -16,6 +16,7 @@ public class Enemy : Unit
 
     }
 
+
     //피격 판정
     override public void Damage(float damage)
     {
@@ -30,10 +31,5 @@ public class Enemy : Unit
     {
         currentHealth = maxHealth;
     }
-
-    private void Update()
-    {
-    }
-
 }
 
