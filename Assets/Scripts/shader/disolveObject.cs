@@ -9,6 +9,7 @@ public class disolveObject : MonoBehaviour
 
     private Material material;
     private float height_two = -999f;
+    private bool iscreate = false;
 
     private void Awake()
     {
@@ -17,7 +18,7 @@ public class disolveObject : MonoBehaviour
 
     private void Update()
     {
-        if (height_two <= (9.5f + transform.position.y)) 
+        if (height_two <= (9.95f + transform.position.y) && !iscreate ) 
         {
             var time = Time.time * Mathf.PI * 0.2f;
 
@@ -28,6 +29,10 @@ public class disolveObject : MonoBehaviour
             //Debug.Log(height);
 
             SetHeight(height);
+        }
+        else
+        {
+            iscreate = true;
         }
     }
 
