@@ -25,7 +25,7 @@ public class disolveObject : MonoBehaviour
 
             height += Mathf.Sin(time) * objectHeight * 10;
             height_two = height;
-            Debug.Log(height);
+            //Debug.Log(height);
 
             SetHeight(height);
         }
