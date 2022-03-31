@@ -24,6 +24,10 @@ Material:
         m_Texture: {fileID: 2800000, guid: 266781ae59ecc9141a8aa024f4dba290, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - Texture2D_EC796762:
+        m_Texture: {fileID: 2800000, guid: 8036a15b25fd6624fb2bdbd6c81b0fd9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -61,11 +65,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_9D28C46A: 0.13
     - Vector1_AB9595E4: 1
     - _Brightness: 1.5
     - _BumpScale: 1
     - _ClipPower: 200
     - _Cutoff: 0.5
+    - _CutoffHeight: 9
     - _DetailNormalMapScale: 1
     - _DiffuseAmount: 0
     - _DstBlend: 0
@@ -74,6 +80,7 @@ Material:
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
+    - _NoiseStrength: 1.53
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _RimPower: 3
@@ -83,8 +90,9 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - Color_38AF21B: {r: 2.400929, g: 4.3645673, b: 16.966568, a: 1}
-    - Color_D6F51521: {r: 0, g: 7.1218195, b: 5.050018, a: 0}
+    - Color_38AF21B: {r: 5.0333414, g: 9.3602495, b: 9.2350855, a: 0.08627451}
+    - Color_3E147E5: {r: 0.69705826, g: 2.8418531, b: 2.8418531, a: 1}
+    - Color_D6F51521: {r: 0, g: 256, b: 175.58118, a: 0}
     - Vector2_DBB181D0: {r: 1, g: 1, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
