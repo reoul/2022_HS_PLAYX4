@@ -1791,6 +1791,7 @@ GameObject:
   - component: {fileID: 6474195954620314905}
   - component: {fileID: 5026688838873706849}
   - component: {fileID: 8887898448688646847}
+  - component: {fileID: -7721530521364619639}
   m_Layer: 0
   m_Name: SPIDER
   m_TagString: Enemy
@@ -1895,3 +1896,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.0666318, y: 2.9067545, z: 4.7572756}
   m_Center: {x: 0, y: 2.108374, z: 0.29289293}
+--- !u!114 &-7721530521364619639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0560519c9f913974998166e0f16c87d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
