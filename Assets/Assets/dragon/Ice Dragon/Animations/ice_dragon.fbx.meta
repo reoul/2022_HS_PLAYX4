@@ -820,24 +820,24 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips:
-  - 68cb1b2eb5e53254b91088d56442dafc
-  - 15bf71ca35fd03e478ffd0b1fe6956ce
-  - 6f7039cb4b02e6d49b8f69da7e6e71bf
-  - 74d2ba35fadc66149b53a21692b5bca0
-  - 78096e2db338aff45a564944ba552536
-  - ec800146cb9400747a4b8a4d7c617ce2
-  - 7933a4268c51bd740b6011170ae15d2b
+  - cd46cf2ace218eb44a13db24be6ef9d3
+  - 393e7b36666782d4e803ef371fb0940b
+  - 1342d8b28ce8ee140bf7de9adc009eff
+  - f00569103cba13341aebba3be919220d
+  - 508af363ef475964dbabb60c8e4d3c4c
+  - 63e9fa6af963c794190de8dd7c88a13d
+  - 0db94c268c4a10846a2fb6561edcaebe
   - 4fc9951787b9e2544a8062db40862e4e
-  - 3caa38de6a95bd64aa6df2a9b8872fa0
-  - ce2bacf9d1ad21d4598f1e5ef20fc172
+  - e2ffb5ae612e4974fa977cffaa714f96
+  - 979a13da0d6250645954351f6b21689f
   - 7e203d8c2fabc004ea4ca073ddbdcc06
   - 0c1365803e7f94d45bdd289269289ea0
   - b0429d5770891eb47bb8cc97e79efcd7
-  - b7817d6c4c18ab248858aa8463eef850
-  - 244d5800175047f408ceeec8cbbacbf1
-  - 1a14c8a58ce6abc4d82799578fcfc0d2
-  - c4db61caaf45d834cad5150542c0bf3c
-  - 3a584601f979eac46be94106d230539e
+  - 95fbb8f5dd1115f4d9897598413e18be
+  - 2970c8342c337ad41b5edf035eca6324
+  - d80a1b579bec1b94f9aa2c8bcc6902ca
+  - d01c4cace443af0498344e91474aa8a9
+  - f42a2149b9afe8b46894262d2c3335da
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
