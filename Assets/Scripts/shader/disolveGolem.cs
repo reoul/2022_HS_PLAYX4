@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class disolveObject : MonoBehaviour
+public class disolveGolem : MonoBehaviour
 {
     [SerializeField] private float noiseStrength = 0.25f;
     [SerializeField] private float objectHeight = 1.0f;
 
     private Material material;
-    private float height_two = -999f;
+    private float height_two = -1;
 
     private void Awake()
     {
@@ -17,9 +17,9 @@ public class disolveObject : MonoBehaviour
 
     private void Update()
     {
-        if (height_two <= (9.5f + transform.position.y)) 
+        if (height_two <= 9)
         {
-            var time = Time.time * Mathf.PI * 0.2f;
+            var time = Time.time * Mathf.PI * 0.1f;
 
             float height = transform.position.y;
 
@@ -37,3 +37,4 @@ public class disolveObject : MonoBehaviour
         material.SetFloat("_NoiseStrength", noiseStrength);
     }
 }
+
