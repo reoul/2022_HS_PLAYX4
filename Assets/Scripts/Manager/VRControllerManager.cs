@@ -45,7 +45,11 @@ public class VRControllerManager : Singleton<VRControllerManager>
 
     private readonly WaitForSeconds _delay008 = new WaitForSeconds(0.08f);
 
-
+    /// <summary>
+    /// 에임 고정 관련 스크립트
+    /// </summary>
+    private AutoAim _autoAim;
+    
     /// <summary>
     /// 활을 들고 있는 컨트롤러
     /// </summary>
@@ -69,6 +73,12 @@ public class VRControllerManager : Singleton<VRControllerManager>
             if (BowController == null)
             {
                 return Vector3.zero;
+            }
+
+            // 에임 고정중이면
+            if (_autoAim.IsAutoAnim)
+            {
+                return _autoAim.Target.transform.position - BowController.transform.position;
             }
 
             return BowController.transform.position - ArrowController.transform.position;
@@ -96,6 +106,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
         FindController();
         IsCharging = false;
         _maxDistance = 0;
+        _autoAim = FindObjectOfType<AutoAim>();
     }
 
     private void Update()
