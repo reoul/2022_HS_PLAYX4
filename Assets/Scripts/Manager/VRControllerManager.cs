@@ -39,6 +39,11 @@ public class VRControllerManager : Singleton<VRControllerManager>
     private const float _chargingDistance = 0.2f;
 
     /// <summary>
+    /// 차징이 100퍼센트 됬는지 체크
+    /// </summary>
+    public bool IsChargingFinish {get {return _chargingTime >= _maxCharging;}}
+
+    /// <summary>
     /// 플레이어의 두 컨트롤러 간의 최대 거리 (최대한 멀어질때마다 값 업데이트)
     /// </summary>
     private float _maxDistance;
