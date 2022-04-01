@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StrategySpider : MonoBehaviour
+public class StrategySpider : Strategy
 {
+    private Vector3 _targetPostion;
+
     //전략
-
-    enum EnemyState { Spawn, Idle, Run, Attack, Hit, Death };
-    StateMachine _stateMachine;
-    Dictionary<EnemyState, IState> _dicState;
-
     private void InitState()
     {
-        _dicState = new Dictionary<EnemyState, IState>();
-
+        _dicState = new Dictionary<State, IState>();
         IState spawn = new StateSpawn(this.gameObject);
         IState idle = new StateIdle(this.gameObject);
         IState run = new StateRun(this.gameObject);
@@ -21,18 +17,19 @@ public class StrategySpider : MonoBehaviour
         IState hit = new StateHit(this.gameObject);
         IState death = new StateDeath(this.gameObject);
 
-        _dicState.Add(EnemyState.Spawn, spawn);
-        _dicState.Add(EnemyState.Idle, idle);
-        _dicState.Add(EnemyState.Run, run);
-        _dicState.Add(EnemyState.Attack, attack);
-        _dicState.Add(EnemyState.Hit, hit);
-        _dicState.Add(EnemyState.Death, death);
+        _dicState.Add(State.Spawn, spawn);
+        _dicState.Add(State.Idle, idle);
+        _dicState.Add(State.Run, run);
+        _dicState.Add(State.Attack, attack);
+        _dicState.Add(State.Hit, hit);
+        _dicState.Add(State.Death, death);
 
         _stateMachine = new StateMachine(spawn);
     }
 
     private void OnEnable()
     {
+        _targetPostion = GameObject.Find("[CameraRig]").transform.position;
         InitState();
     }
 
@@ -46,43 +43,49 @@ public class StrategySpider : MonoBehaviour
     {
         if(other.name == "PlayerZone")
         {
-            _stateMachine.SetState(_dicState[EnemyState.Attack]);
+            _stateMachine.SetState(_dicState[State.Attack]);
         }
         else if(other.tag == "Arrow")
         {
-            _stateMachine.SetState(_dicState[EnemyState.Death]);
+            _stateMachine.SetState(_dicState[State.Death]);
         }
     }
 
-    //States
-    public class StateSpawn : IState
+    public override float MoveToPlayer(float speed)
     {
-        public GameObject gameObj;
+        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(_targetPostion.x, gameObject.transform.position.y, _targetPostion.z), speed);
+        //Debug.Log(gameObject.transform.position);
+        //Debug.Log(new Vector3(_targetPostion.x, gameObject.transform.position.y, _targetPostion.z));
 
-        public StateSpawn(GameObject gameObject)
-        {
-            this.gameObj = gameObject;
-        }
+        float _distance = Vector2.Distance(new Vector2(gameObject.transform.position.x, gameObject.transform.position.z), new Vector2(_targetPostion.x, _targetPostion.z));
+
+        return _distance;
+    }
+
+    //States
+    private class StateSpawn : IState
+    {
+        public StateSpawn(GameObject gameObject) : base(gameObject) { }
 
         private disolveSpider _disolveSpider;
 
-        public void Enter()
+        public override void StateEnter()
         {
-            _disolveSpider = gameObj.GetComponentInChildren<disolveSpider>();
+            _disolveSpider = _gameObj.GetComponentInChildren<disolveSpider>();
             _disolveSpider.InitTime();
         }
 
-        public void Exit()
+        public override void StateExit()
         {
 
         }
 
-        public void Update()
+        public override void StateUpdate()
         {
 
             //if (gameObject.transform.GetChild(1).GetComponent<Renderer>().material.GetFloat("_DisintegrateAmount") <= 0)
             //{
-            //    gameObject.GetComponent<StrategySpider>()._stateMachine.SetState(gameObject.GetComponent<StrategySpider>()._dicState[EnemyState.Run]);
+            //    gameObject.GetComponent<StrategySpider>()._stateMachine.SetState(gameObject.GetComponent<StrategySpider>()._dicState[State.Run]);
             //}
             //else if (gameObject.transform.GetChild(1).GetComponent<Renderer>().material.GetFloat("_DisintegrateAmount") >= 1)
             //{
@@ -90,150 +93,125 @@ public class StrategySpider : MonoBehaviour
             //}
             if(_disolveSpider.Disolve())
             {
-                Debug.Log("asdasasasdasd");
-                gameObj.GetComponent<StrategySpider>()._stateMachine.SetState(gameObj.GetComponent<StrategySpider>()._dicState[EnemyState.Run]);
+                _stateMachine.SetState(_dicState[State.Run]);
             }
         }
     }
-    public class StateIdle : IState
+    private class StateIdle : IState
     {
-        private GameObject gameObject;
-        public StateIdle(GameObject gameObject)
-        {
-            this.gameObject = gameObject;
-        }
-        public void Enter()
+        public StateIdle( GameObject gameObject) : base( gameObject) { }
+        public override void StateEnter()
         {
 
         }
 
-        public void Exit()
+        public override void StateExit()
         {
 
         }
 
-        public void Update()
+        public override void StateUpdate()
         {
 
         }
     }
-    public class StateRun : IState
+    private class StateRun : IState
     {
-        private GameObject gameObject;
-        private Transform _targetTransform;
-        public StateRun(GameObject gameObject)
+        public StateRun( GameObject gameObject) : base( gameObject) { }
+        public override void StateEnter()
         {
-            this.gameObject = gameObject;
-        }
-        public void Enter()
-        {
-            _targetTransform = GameObject.Find("[CameraRig]").transform;
-            gameObject.GetComponent<Animator>().Play("Run");
+            _gameObj.GetComponent<Animator>().Play("Run");
         }
 
-        public void Exit()
+        public override void StateExit()
         {
 
         }
 
-        public void Update()
+        public override void StateUpdate()
         {
-            gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(_targetTransform.position.x, gameObject.transform.position.y, _targetTransform.position.z), 0.06f);
-            float _distance = Vector2.Distance(new Vector2(gameObject.transform.position.x, gameObject.transform.position.z), new Vector2(_targetTransform.position.x, _targetTransform.position.z));
-            if (_distance < 7)
+            if (_gameObj.GetComponent<Strategy>().MoveToPlayer(0.06f) < 7)
             {
-                gameObject.GetComponent<StrategySpider>()._stateMachine.SetState(gameObject.GetComponent<StrategySpider>()._dicState[EnemyState.Attack]);
+                _stateMachine.SetState(_dicState[State.Attack]);
             }
         }
     }
-    public class StateAttack : IState
+    private class StateAttack : IState
     {
-        private GameObject gameObj;
-        public StateAttack(GameObject gameObject)
-        {
-            this.gameObj = gameObject;
-        }
+        public StateAttack( GameObject gameObject) : base( gameObject) { }
 
         private Transform _targetTransform;
 
         private disolveSpider _disolveSpider;
 
-        public void Enter()
+        public override void StateEnter()
         {
-            _disolveSpider = gameObj.GetComponentInChildren<disolveSpider>();
-            _targetTransform = GameObject.Find("[CameraRig]").transform;
+            _disolveSpider = _gameObj.GetComponentInChildren<disolveSpider>();
             _disolveSpider.InitTime();
             ScoreSystem.score -= 100;
             _disolveSpider.InitAA();
         }
 
-        public void Exit()
+        public override void StateExit()
         {
 
         }
 
-        public void Update()
+        public override void StateUpdate()
         {
-            gameObj.transform.position = Vector3.MoveTowards(gameObj.transform.position, new Vector3(_targetTransform.position.x, gameObj.transform.position.y, _targetTransform.position.z), 0.06f);
-            if(_disolveSpider.DeleteDisolve())
+            _gameObj.GetComponent<Strategy>().MoveToPlayer(0.06f);
+            if (_disolveSpider.DeleteDisolve())
             {
-                gameObj.SetActive(false);
+                _gameObj.SetActive(false);
             }
         }
     }
-    public class StateHit : IState
+    private class StateHit : IState
     {
         private GameObject gameObject;
-        public StateHit(GameObject gameObject)
-        {
-            this.gameObject = gameObject;
-        }
-        public void Enter()
+        public StateHit( GameObject gameObject) : base( gameObject) { }
+
+        public override void StateEnter()
         {
 
         }
 
-        public void Exit()
+        public override void StateExit()
         {
 
         }
 
-        public void Update()
+        public override void StateUpdate()
         {
 
         }
     }
-    public class StateDeath : IState
+    private class StateDeath : IState
     {
-        private GameObject gameObj;
         private Transform _targetTransform;
-        public StateDeath(GameObject gameObject)
-        {
-            this.gameObj = gameObject;
-            _targetTransform = GameObject.Find("[CameraRig]").transform;
-        }
+        public StateDeath( GameObject gameObject) : base( gameObject) { }
 
         private disolveSpider _disolveSpider;
 
-        public void Enter()
+        public override void StateEnter()
         {
-            _disolveSpider = gameObj.GetComponentInChildren<disolveSpider>();
+            _disolveSpider = _gameObj.GetComponentInChildren<disolveSpider>();
             _disolveSpider.InitTime();
             ScoreSystem.score += 100;
             _disolveSpider.InitAA();
         }
 
-        public void Exit()
+        public override void StateExit()
         {
 
         }
 
-        public void Update()
+        public override void StateUpdate()
         {
-            gameObj.transform.position = Vector3.MoveTowards(gameObj.transform.position, new Vector3(_targetTransform.position.x, gameObj.transform.position.y, _targetTransform.position.z), 0.06f);
-            if(_disolveSpider.DeleteDisolve())
+            _gameObj.GetComponent<Strategy>().MoveToPlayer(0.06f);
+            if (_disolveSpider.DeleteDisolve())
             {
-                gameObj.SetActive(false);
+                _gameObj.SetActive(false);
             }
         }
     }
