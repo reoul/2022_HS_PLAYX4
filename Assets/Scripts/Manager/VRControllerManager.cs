@@ -5,6 +5,7 @@ using Valve.VR;
 
 public class VRControllerManager : Singleton<VRControllerManager>
 {
+
     public VRController LeftController { get; set; }
     public VRController RightController { get; set; }
 
@@ -105,6 +106,12 @@ public class VRControllerManager : Singleton<VRControllerManager>
         UpdateMaxDistance();
         ChargingVibration();
         CheckShot();
+        if(Input.GetKeyDown(KeyCode.D))
+        {
+            _chargingTime++;
+            SoundManager.Instance.PlaySound("Bio Gun reload 1", 1);
+        }
+        Debug.Log(_chargingTime);
     }
 
     /// <summary>

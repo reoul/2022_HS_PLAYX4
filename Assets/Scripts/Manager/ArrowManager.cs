@@ -8,6 +8,7 @@ public class ArrowManager : Singleton<ArrowManager>
     {
         var arrow = GameObject.Instantiate(ArrowPrefab);
         arrow.GetComponent<Arrow>().Init(positon, direction);
+        SoundManager.Instance.PlaySound("Rock 6", 1);
     }
 
     private void Update()
