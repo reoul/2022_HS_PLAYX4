@@ -67,7 +67,7 @@ public class SoundManager : Singleton<SoundManager>
     }
 
 
-    // 음악 종료
+    // 배경음악 종료
     public void StopBGM()
     {
         bgmPlayer.Stop();
