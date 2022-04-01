@@ -29,6 +29,11 @@ public class VRControllerManager : Singleton<VRControllerManager>
     private float _checkChargingTime = 0;
 
     /// <summary>
+    /// 차징 속도
+    /// </summary>
+    private float _chargingSpeed = 360;
+
+    /// <summary>
     /// 차징 딜레이 시간
     /// </summary>
     private const float _chargingDelay = 0.08f;
@@ -273,11 +278,40 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// </summary>
     private void ChargingTime()
     {
-        // 두 컨트롤러 거리가 일정 이상 멀어졌을때(활 쏘는 동작을 했을 때)
-        if (Distance > Mathf.Lerp(0, _maxDistance, 0.7f))
+        Debug.Log(_chargingTime);
+        //if(IsCharging)
+        //{
+        //    _chargingTime += _chargingSpeed * Time.deltaTime;
+        //}
+        //else
+        //{
+        //    _chargingTime -= _chargingSpeed * Time.deltaTime;
+        //}
+
+        if(Distance > _maxDistance)
         {
-            _chargingTime += 5f;
+            _chargingTime += _chargingSpeed * Time.deltaTime;
         }
+        else if (Distance >= Mathf.Lerp(0, _maxDistance, 0.5f))
+        {
+            _chargingTime += _chargingSpeed * Time.deltaTime;
+            _chargingTime = Mathf.Clamp(_chargingTime, 0, Mathf.Lerp(0,_maxCharging,0.67f));
+        }
+        else
+        {
+            _chargingTime += _chargingSpeed * Time.deltaTime;
+            _chargingTime = Mathf.Clamp(_chargingTime, 0, Mathf.Lerp(0,_maxCharging,0.34f));
+        }
+
+        // 두 컨트롤러 거리가 일정 이상 멀어졌을때(활 쏘는 동작을 했을 때)
+        //if (Distance > Mathf.Lerp(0, _maxDistance, 0.7f))
+        //{
+        //    _chargingTime += _chargingSpeed * Time.deltaTime;
+        //}
+        //else
+        //{
+        //    _chargingTime -= _chargingSpeed * Time.deltaTime;
+        //}
     }
 
     /// <summary>
@@ -320,12 +354,13 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// </summary>
     private void UpdateMaxDistance()
     {
+        Debug.Log(Distance);
         if (Distance > _maxDistance)
         {
             _maxDistance = Distance;
-            if (_maxDistance >= 1.1f)
+            if (_maxDistance >= 0.6f)
             {
-                _maxDistance = 1.1f;
+                _maxDistance = 0.6f;
             }
         }
     }

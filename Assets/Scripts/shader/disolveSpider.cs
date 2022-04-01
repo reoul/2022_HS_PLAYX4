@@ -12,6 +12,8 @@ public class disolveSpider : MonoBehaviour
     private bool _isCreate = false;
     private bool _isDelete = false;
 
+    private float _disolveSpeed = 20;
+
     private float _startTime;
 
     private void Awake()
@@ -30,16 +32,13 @@ public class disolveSpider : MonoBehaviour
     {
         if (height_two <= (1.8f + transform.position.y) && !_isCreate ) 
         {
-            Debug.Log(Time.time - _startTime);
-            var time = (Time.time - _startTime) * Mathf.PI * 0.15f;
+            var time = (Time.time - _startTime) * Mathf.PI * Time.deltaTime * _disolveSpeed;
+            //var time = (Time.time - _startTime) * Mathf.PI * 0.15f;
 
             float height = transform.position.y - gameObject.GetComponentInParent<Collider>().bounds.size.y * 0.5f;
-            Debug.Log(height);
-            Debug.Log(Mathf.Sin(time));
 
             height += Mathf.Sin(time) * objectHeight * 5;
             height_two = height;
-            Debug.Log(height_two);
             SetHeight(height);
             return false;
         }
@@ -47,7 +46,6 @@ public class disolveSpider : MonoBehaviour
         {
             _isCreate = true;
             height_two += 1;
-            Debug.Log(height_two);
             return true;
         }
     }
