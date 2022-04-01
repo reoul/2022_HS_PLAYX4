@@ -13,7 +13,7 @@ public abstract class IState
         _gameObj = gameObject;
         _dicState = _gameObj.GetComponent<Strategy>()._dicState;
     }
-
+    
     public abstract void StateEnter();
     public abstract void StateUpdate();
     public abstract void StateExit();
