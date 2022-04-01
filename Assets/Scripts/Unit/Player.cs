@@ -5,6 +5,7 @@ public class Player : Unit
     [SerializeField]
     private PlayerHealthBar healthBar;
 
+
     private void Start()
     {
         healthBar.InitHealthBar(maxHealth,currentHealth);
@@ -16,6 +17,7 @@ public class Player : Unit
         {
             Damage(10f);
         }
+
     }
 
     override public void Damage(float damage)

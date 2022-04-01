@@ -21,21 +21,9 @@ public class SoundManager : Singleton<SoundManager>
     AudioSource sfxPlayer;
     AudioSource bgmPlayer;
 
-    void Awake()
-    {
-        if (_instance != null && _instance != this)
-        {
-            DestroyImmediate(gameObject);
-        }
-        else
-        {
-            _instance = this;
-            DontDestroyOnLoad(this.gameObject);
-            AwakeAfter();
-        }
-    }
+    
 
-    void AwakeAfter()
+    void Awake()
     {
         sfxPlayer = GetComponent<AudioSource>();
         SetupBGM();
@@ -49,6 +37,7 @@ public class SoundManager : Singleton<SoundManager>
         }
     }
 
+    //배경음악 세팅
     void SetupBGM()
     {
         if (BGMClip == null) return;
@@ -66,7 +55,7 @@ public class SoundManager : Singleton<SoundManager>
             bgmPlayer.Play();
     }
 
-    // 사운드 재생
+    // 효과음 재생
     public void PlaySound(string sfx_name, float sfx_volume = 1f)
     {
         if (audioClipsDic.ContainsKey(sfx_name) == false)
@@ -97,6 +86,9 @@ public class SoundManager : Singleton<SoundManager>
         bgmPlayer.volume = masterVolumeBGM;
     }
 
+    private void Update()
+    {
 
+    }
 
 }
