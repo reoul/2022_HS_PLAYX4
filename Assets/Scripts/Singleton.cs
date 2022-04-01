@@ -6,7 +6,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     private static bool _shuttingDown = false;
     private static object _lock = new object();
     
-    private static T _instance;
+    public static T _instance;
     public static T Instance
     {
         get
