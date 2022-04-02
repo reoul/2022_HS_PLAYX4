@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StrategySpider : Strategy
 {
-    private Vector3 _targetPostion;
+    private Transform _target;
 
     //전략
     private void InitState()
@@ -29,7 +29,7 @@ public class StrategySpider : Strategy
 
     private void OnEnable()
     {
-        _targetPostion = GameObject.Find("[CameraRig]").transform.position;
+        _target = GameObject.Find("[CameraRig]").transform;
         InitState();
     }
 
@@ -53,8 +53,9 @@ public class StrategySpider : Strategy
 
     public override float MoveToPlayer(float speed)
     {
-        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(_targetPostion.x, gameObject.transform.position.y, _targetPostion.z), speed * Time.deltaTime * 120);
-        float _distance = Vector2.Distance(new Vector2(gameObject.transform.position.x, gameObject.transform.position.z), new Vector2(_targetPostion.x, _targetPostion.z));
+        this.GetComponent<AiSpider>().SetTarget(_target);
+        //gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(_targetPostion.x, gameObject.transform.position.y, _targetPostion.z), speed * Time.deltaTime * 120);
+        float _distance = Vector2.Distance(new Vector2(gameObject.transform.position.x, gameObject.transform.position.z), new Vector2(_target.position.x, _target.position.z));
 
         return _distance;
     }
@@ -159,6 +160,7 @@ public class StrategySpider : Strategy
             _gameObj.GetComponent<Strategy>().MoveToPlayer(0.06f);
             if (_disolveSpider.DeleteDisolve())
             {
+                _gameObj.GetComponent<AiSpider>().DisableTarget();
                 _gameObj.SetActive(false);
             }
         }
