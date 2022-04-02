@@ -53,10 +53,7 @@ public class StrategySpider : Strategy
 
     public override float MoveToPlayer(float speed)
     {
-        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(_targetPostion.x, gameObject.transform.position.y, _targetPostion.z), speed);
-        //Debug.Log(gameObject.transform.position);
-        //Debug.Log(new Vector3(_targetPostion.x, gameObject.transform.position.y, _targetPostion.z));
-
+        gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(_targetPostion.x, gameObject.transform.position.y, _targetPostion.z), speed * Time.deltaTime * 120);
         float _distance = Vector2.Distance(new Vector2(gameObject.transform.position.x, gameObject.transform.position.z), new Vector2(_targetPostion.x, _targetPostion.z));
 
         return _distance;
