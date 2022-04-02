@@ -4,6 +4,7 @@ using UnityEngine;
 public class BowManager : Singleton<BowManager>
 {
     public LineRenderer _arrowTrajectoryLineRenderer;
+    public GameObject BowObj;
 
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class BowManager : Singleton<BowManager>
     private void Update()
     {
         ShowArrowTrajectory();
+        UpdateRotate();
     }
 
     /// <summary>
@@ -29,7 +31,7 @@ public class BowManager : Singleton<BowManager>
             _arrowTrajectoryLineRenderer.SetPosition(1, Vector3.zero);
             return;
         }
-        if(!VRControllerManager.Instance.IsChargingFinish)
+        if (!VRControllerManager.Instance.IsChargingFinish)
         {
             _arrowTrajectoryLineRenderer.material.color = Color.red;
         }
@@ -39,5 +41,11 @@ public class BowManager : Singleton<BowManager>
         }
         _arrowTrajectoryLineRenderer.SetPosition(0, VRControllerManager.Instance.BowController.gameObject.transform.position);
         _arrowTrajectoryLineRenderer.SetPosition(1, VRControllerManager.Instance.Direction * 1000);
+    }
+
+    private void UpdateRotate()
+    {
+        BowObj.transform.position = VRControllerManager.Instance.BowController.transform.Find("ControllerPoint").position;
+        BowObj.transform.forward = VRControllerManager.Instance.Direction;
     }
 }

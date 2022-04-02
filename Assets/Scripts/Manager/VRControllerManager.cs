@@ -73,6 +73,8 @@ public class VRControllerManager : Singleton<VRControllerManager>
         get { return BowController == LeftController ? RightController : LeftController; }
     }
 
+    public GameObject CameraObj;
+
     /// <summary>
     /// 화살 방향
     /// </summary>
@@ -184,6 +186,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
             if (ArrowController.GetTriggerDown())
             {
                 IsCharging = true;
+                SetBow();
             }
         }
     }
@@ -216,12 +219,24 @@ public class VRControllerManager : Singleton<VRControllerManager>
             if (controller.HandType == SteamVR_Input_Sources.LeftHand)
             {
                 LeftController = controller;
+                CreatePoint();
             }
             else if (controller.HandType == SteamVR_Input_Sources.RightHand)
             {
                 RightController = controller;
             }
         }
+    }
+
+    private void CreatePoint()
+    {
+        Vector3 pos = new Vector3(0f, -0.072f, 0.044f);
+        var leftGameObj = new GameObject("ControllerPoint");
+        leftGameObj.transform.parent = LeftController.transform;
+        leftGameObj.transform.localPosition = pos;
+        var rightGameObj = new GameObject("ControllerPoint");
+        rightGameObj.transform.parent = RightController.transform;
+        rightGameObj.transform.localPosition = pos;
     }
 
     /// <summary>
@@ -263,6 +278,15 @@ public class VRControllerManager : Singleton<VRControllerManager>
                 StartChargingVibration();
             }
         }
+    }
+
+    private void SetBow()
+    {
+        GameObject bowOgj = FindObjectOfType<BowManager>().BowObj;
+        bowOgj.transform.SetParent(BowController.transform);
+        bowOgj.transform.position = Vector3.zero;
+        bowOgj.transform.LookAt(bowOgj.transform.position - Camera.main.transform.position);
+        bowOgj.SetActive(true);
     }
 
     /// <summary>
