@@ -33,11 +33,11 @@ public class BowManager : Singleton<BowManager>
         }
         if (!VRControllerManager.Instance.IsChargingFinish)
         {
-            _arrowTrajectoryLineRenderer.material.color = Color.red;
+            _arrowTrajectoryLineRenderer.material.color = new Color(1,0,0,0.5f);
         }
         else
         {
-            _arrowTrajectoryLineRenderer.material.color = Color.green;
+            _arrowTrajectoryLineRenderer.material.color = new Color(0, 1, 0, 0.5f);
         }
         _arrowTrajectoryLineRenderer.SetPosition(0, VRControllerManager.Instance.BowController.gameObject.transform.position);
         _arrowTrajectoryLineRenderer.SetPosition(1, VRControllerManager.Instance.Direction * 1000);
@@ -45,7 +45,14 @@ public class BowManager : Singleton<BowManager>
 
     private void UpdateRotate()
     {
-        BowObj.transform.position = VRControllerManager.Instance.BowController.transform.Find("ControllerPoint").position;
-        BowObj.transform.forward = VRControllerManager.Instance.Direction;
+        if (VRControllerManager.Instance.IsCharging)
+        {
+            BowObj.transform.position = VRControllerManager.Instance.BowController.CenterTransform.position;
+            BowObj.transform.forward = VRControllerManager.Instance.Direction;
+        }
+        else
+        {
+            BowObj.transform.localRotation = Quaternion.Euler(70, 0, 0);
+        }
     }
 }
