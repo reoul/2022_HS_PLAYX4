@@ -18,6 +18,34 @@ public class VRController : MonoBehaviour
     public SteamVR_Input_Sources HandType;  //모두 사용, 왼손, 오른손
     public SteamVR_Action_Boolean GrabAction;
     public SteamVR_Action_Vibration HapticAction;
+    public Transform CenterTransform;
+
+    public MeshRenderer[] _meshRenderers;
+
+    void Start()
+    {
+        StartCoroutine(FindChildMeshCoroutine());
+    }
+
+
+    private void FindChildMesh()
+    {
+        _meshRenderers = this.GetComponentsInChildren<MeshRenderer>();
+    }
+
+    private IEnumerator FindChildMeshCoroutine()
+    {
+        while (true)
+        {
+            if(_meshRenderers.Length != 0)
+            {
+                CenterTransform = this.transform.GetChild(0).Find("sys_button");
+                break;
+            }
+            FindChildMesh();
+            yield return new WaitForEndOfFrame();
+        }
+    }
 
     /// <summary>
     /// 진동
@@ -26,7 +54,7 @@ public class VRController : MonoBehaviour
     public void Vibration(int frequency)
     {
         frequency = Mathf.Clamp(frequency, 0, 60);
-        Pulse(0.1f, frequency, 75, HandType);
+        Pulse(0.1f, frequency, 1, HandType);
     }
     
     /// <summary>
@@ -66,5 +94,33 @@ public class VRController : MonoBehaviour
     public bool GetTriggerUp()
     {
         return GrabAction.GetStateUp(HandType);
+    }
+
+    /// <summary>
+    /// 컨트롤러 mesh 끄기
+    /// </summary>
+    public void MeshOff()
+    {
+        MeshOnOFF(false);
+    }
+
+    /// <summary>
+    /// 컨트롤러 mesh 켜기
+    /// </summary>
+    public void MeshON()
+    {
+        MeshOnOFF(true);
+    }
+
+    /// <summary>
+    /// 컨트롤러 mesh 켜고 끄기
+    /// </summary>
+    /// <param name="isOn"></param>
+    private void MeshOnOFF(bool isOn)
+    {
+        foreach (var meshRenderer in _meshRenderers)
+        {
+            meshRenderer.enabled = isOn;
+        }
     }
 }
