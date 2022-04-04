@@ -5,8 +5,8 @@ using Valve.VR;
 
 public class VRControllerManager : Singleton<VRControllerManager>
 {
-    public VRController LeftController { get; set; }
-    public VRController RightController { get; set; }
+    public VRController LeftController { get; private set; }
+    public VRController RightController { get; private set; }
 
     /// <summary>
     /// 차징하고 있는지
@@ -41,7 +41,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// <summary>
     /// 차징 할 때 두 컨트롤러 최대 거리
     /// </summary>
-    private const float _chargingDistance = 0.2f;
+    private const float _chargingDistance = 0.3f;
 
     /// <summary>
     /// 차징이 100퍼센트 됬는지 체크
@@ -87,16 +87,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
                 return Vector3.zero;
             }
 
-
-            // 에임 고정중이면
-            //if (_autoAim.IsAutoAnim)
-            //{
-            //    BoxCollider bc = _autoAim.Target.GetComponent<BoxCollider>();
-            //    Vector3 center = bc.center;
-            //    return center - BowController.transform.position;
-            //}
-
-            return BowController.transform.position - ArrowController.transform.position;
+            return BowController.CenterTransform.transform.position - ArrowController.CenterTransform.transform.position;
         }
     }
 
@@ -109,7 +100,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
         {
             if (BowController != null)
             {
-                return Vector3.Distance(BowController.transform.position, ArrowController.transform.position);
+                return Vector3.Distance(BowController.CenterTransform.transform.position, ArrowController.CenterTransform.transform.position);
             }
 
             return 0;
@@ -143,7 +134,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
             // 오른쪽 컨트롤러 트리거를 사용 안할때
             if (!(RightController.GetTrigger() || RightController.GetTriggerDown()))
             {
-                BowController = LeftController;
+                SetBowController(LeftController);
             }
         }
         else if (RightController.GetTriggerDown())
@@ -151,7 +142,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
             // 왼쪽 컨트롤러 트리거를 사용 안할때
             if (!(LeftController.GetTrigger() || LeftController.GetTriggerDown()))
             {
-                BowController = RightController;
+                SetBowController(RightController);
             }
         }
 
@@ -159,6 +150,8 @@ public class VRControllerManager : Singleton<VRControllerManager>
         {
             if (BowController.GetTriggerUp())
             {
+                BowController.MeshON();
+                BowManager.Instance.BowObj.SetActive(false);
                 BowController = null;
                 IsCharging = false;
                 _chargingTime = 0;
@@ -186,6 +179,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
             if (ArrowController.GetTriggerDown())
             {
                 IsCharging = true;
+                ArrowController.MeshOff();
                 SetBow();
             }
         }
@@ -201,8 +195,8 @@ public class VRControllerManager : Singleton<VRControllerManager>
             if (_chargingTime >= _maxCharging)
             {
                 ArrowManager.Instance.Shot(RightController.transform.position, Direction);
-                
             }
+            ArrowController.MeshON();
             IsCharging = false;
             _chargingTime = 0;
         }
@@ -339,38 +333,18 @@ public class VRControllerManager : Singleton<VRControllerManager>
     }
 
     /// <summary>
-    /// 차징 시간에 따른 진동 주는 코루틴
+    /// BowController 지정해주고 mesh를 꺼줌
     /// </summary>
-    /// <returns></returns>
-    private IEnumerator VibrationCoroutine()
+    /// <param name="controller"></param>
+    private void SetBowController(VRController controller)
     {
-        while (IsCharging)
-        {
-            Vibration(HandType.LeftRight, (int) _chargingTime);
-            yield return _delay008;
-        }
-
-        yield return null;
-    }
-
-    /// <summary>
-    /// 차징 시간 늘려주는 코루틴
-    /// </summary>
-    /// <returns></returns>
-    private IEnumerator ChargingTimeCoroutine()
-    {
-        _chargingTime = 0;
-        while (IsCharging)
-        {
-            if (Distance > Mathf.Lerp(0, _maxDistance, 0.7f))
-            {
-                _chargingTime += 5f;
-            }
-
-            yield return _delay008;
-        }
-
-        yield return null;
+        BowController = controller;
+        BowController.MeshOff();
+        GameObject bowObj = BowManager.Instance.BowObj;
+        bowObj.transform.parent = BowController.transform;
+        bowObj.transform.transform.localPosition = Vector3.zero;
+        bowObj.transform.localRotation = Quaternion.Euler(70, 0, 0);
+        bowObj.SetActive(true);
     }
 
     /// <summary>
@@ -378,7 +352,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// </summary>
     private void UpdateMaxDistance()
     {
-        Debug.Log(Distance);
+        //Debug.Log(Distance);
         if (Distance > _maxDistance)
         {
             _maxDistance = Distance;
