@@ -90,7 +90,6 @@ public class StrategySpider : MonoBehaviour
             //}
             if(_disolveSpider.Disolve())
             {
-                Debug.Log("asdasasasdasd");
                 gameObj.GetComponent<StrategySpider>()._stateMachine.SetState(gameObj.GetComponent<StrategySpider>()._dicState[EnemyState.Run]);
             }
         }
