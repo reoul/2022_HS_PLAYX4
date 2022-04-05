@@ -195,6 +195,7 @@ public class LSM_VRControllerManager : Singleton<LSM_VRControllerManager>
             if (_chargingTime >= _maxCharging)
             {
                 ArrowManager.Instance.Shot(RightController.transform.position, Direction);
+                SoundManager.Instance.PlaySound("Rock 6", 1f);
             }
             ArrowController.MeshON();
             IsCharging = false;

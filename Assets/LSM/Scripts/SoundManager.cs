@@ -24,7 +24,7 @@ public class SoundManager : Singleton<SoundManager>
     {
         sfxPlayer = GetComponent<AudioSource>();
         SetupBGM();
-        SetVolumeBGM(0.3f);
+        SetVolumeBGM(0.05f);
 
         // 딕셔너리로 오디오클립 배열에서 원하는 오디오를 탐색
         audioClipsDic = new Dictionary<string, AudioClip>();
@@ -60,6 +60,7 @@ public class SoundManager : Singleton<SoundManager>
             Debug.Log(sfx_name + " 이 포함된 오디오가 없습니다.");
             return;
         }
+        Debug.Log(sfx_name+"assadasdas");
         sfxPlayer.PlayOneShot(audioClipsDic[sfx_name], sfx_volume * masterVolumeSFX);
     }
 
