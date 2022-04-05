@@ -111,7 +111,6 @@ public class VRControllerManager : Singleton<VRControllerManager>
             _chargingTime++;
             SoundManager.Instance.PlaySound("Bio Gun reload 1", 1);
         }
-        Debug.Log(_chargingTime);
     }
 
     /// <summary>
