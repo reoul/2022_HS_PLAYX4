@@ -2,11 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IState
+public abstract class IState
 {
-    void Enter();
-    void Update();
-    void Exit();
+    protected GameObject _gameObj;
+    protected StateMachine _stateMachine { get { return _gameObj.GetComponent<Strategy>()._stateMachine; }}
+    protected Dictionary<Strategy.State, IState> _dicState;
+
+    public IState(GameObject gameObject)
+    {
+        _gameObj = gameObject;
+        _dicState = _gameObj.GetComponent<Strategy>()._dicState;
+    }
+    
+    public abstract void StateEnter();
+    public abstract void StateUpdate();
+    public abstract void StateExit();
 }
 
 public class StateMachine
@@ -16,20 +26,20 @@ public class StateMachine
     public StateMachine(IState defaultState)
     {
         CurrentState = defaultState;
-        CurrentState.Enter();
+        CurrentState.StateEnter();
     }
     public void SetState(IState state)
     {
         if(CurrentState == state){
             return;
         }
-        CurrentState.Exit();
+        CurrentState.StateExit();
         CurrentState = state;
-        CurrentState.Enter();
+        CurrentState.StateEnter();
     }
 
     public void DoUpdate()
     {
-        CurrentState.Update();
+        CurrentState.StateUpdate();
     }
 }
