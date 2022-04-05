@@ -14,7 +14,6 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-
         _spawnTimeDelay = Random.RandomRange(0, 10);
         _pooler = new ObjectPooler();
         _pooler.StartPooling(this.transform, ((int)_enemyType));
@@ -25,17 +24,25 @@ public class EnemySpawner : MonoBehaviour
         _spawnTimeDelay -= Time.deltaTime;
         if(_spawnTimeDelay < 0)
         {
-            _spawnTimeDelay = Random.RandomRange(10, 15);
-            GameObject spawnedObj;
-            spawnedObj = _pooler.GetPooledObject();
-            spawnedObj.transform.localPosition = Vector3.zero;
-            spawnedObj.transform.LookAt(GameObject.Find("[CameraRig]").transform.position);
-            spawnedObj.SetActive(true);
+            if (true)
+            {
+
+            }
         }
         //{
         //    _spawnTimeDelay = Random.RandomRange(10, 15);
         //    ;
         //}
+    }
+
+    public void Spawn()
+    {
+        _spawnTimeDelay = Random.RandomRange(10, 15);
+        GameObject spawnedObj;
+        spawnedObj = _pooler.GetPooledObject();
+        spawnedObj.transform.localPosition = Vector3.zero;
+        spawnedObj.transform.LookAt(GameObject.Find("[CameraRig]").transform.position);
+        spawnedObj.SetActive(true);
     }
 
 
