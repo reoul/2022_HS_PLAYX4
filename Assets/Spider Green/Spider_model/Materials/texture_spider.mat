@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: texture_spider
+  m_Shader: {fileID: -6465566751694194690, guid: 33d0597041213ed47a507d92a92f5c6f,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_AFEA8446:
+        m_Texture: {fileID: 2800000, guid: 266781ae59ecc9141a8aa024f4dba290, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_EC796762:
+        m_Texture: {fileID: 2800000, guid: 8036a15b25fd6624fb2bdbd6c81b0fd9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BumpMap:
+        m_Texture: {fileID: 2800000, guid: aceff7d9ae43b16448fc8ad366ef6f42, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: d54280bc64c249e49811bcb80f687fb7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NoiseTex:
+        m_Texture: {fileID: 2800000, guid: 72b1bb295756843889b97a3dc58ba5dc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_9D28C46A: 2.03
+    - Vector1_AB9595E4: 1
+    - _CutoffHeight: 0
+    - _DisintegrateAmount: 1
+    - _DissolveEdge: 0.01
+    - _Glossiness: 0.5
+    - _Metallic: 0
+    - _NoiseStrength: 1.53
+    - _Shininess: 0.48113528
+    - _TileFactor: 1
+    m_Colors:
+    - Color_38AF21B: {r: 5.0333414, g: 9.3602495, b: 9.2350855, a: 0.08627451}
+    - Color_3E147E5: {r: 0.69705826, g: 2.8418531, b: 2.8418531, a: 1}
+    - Color_D6F51521: {r: 0, g: 256, b: 175.58118, a: 0}
+    - Vector2_DBB181D0: {r: 1, g: 1, b: 0, a: 0}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _DissolveColor: {r: 1, g: 0.5, b: 0.19999996, a: 0}
+    - _EdgeEmission: {r: 0, g: 0, b: 0, a: 0}
+    - _SpecColor: {r: 0.3358209, g: 0.3358209, b: 0.3358209, a: 1}
