@@ -13,6 +13,7 @@ public class disolveSpider : MonoBehaviour
     private bool _isDelete = false;
 
     private float _startTime;
+    private float _disolveSpeed = 300;
 
     private void Awake()
     {
