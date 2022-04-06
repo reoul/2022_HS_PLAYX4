@@ -41,13 +41,16 @@ public class StrategySpider : Strategy
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.name == "PlayerZone")
+        if (_stateMachine.CurrentState == _dicState[State.Run])
         {
-            _stateMachine.SetState(_dicState[State.Attack]);
-        }
-        else if(other.tag == "Arrow")
-        {
-            _stateMachine.SetState(_dicState[State.Death]);
+            if(other.name == "PlayerZone")
+            {
+                _stateMachine.SetState(_dicState[State.Attack]);
+            }
+            else if(other.tag == "Arrow")
+            {
+                _stateMachine.SetState(_dicState[State.Death]);
+            }  
         }
     }
 
