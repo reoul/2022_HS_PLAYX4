@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private float _spawnTimeDelay;
     private ObjectPooler _pooler;
 
     private enum EnemyType{ Spider = 1,Goblin, Lihano};
@@ -14,30 +13,13 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        _spawnTimeDelay = Random.RandomRange(0, 10);
         _pooler = new ObjectPooler();
         _pooler.StartPooling(this.transform, ((int)_enemyType));
-    }
-
-    private void Update()
-    {
-        _spawnTimeDelay -= Time.deltaTime;
-        if(_spawnTimeDelay < 0)
-        {
-            if (true)
-            {
-
-            }
-        }
-        //{
-        //    _spawnTimeDelay = Random.RandomRange(10, 15);
-        //    ;
-        //}
+        SpawnerManager.Instance.spawnerQueue.Enqueue(this);
     }
 
     public void Spawn()
     {
-        _spawnTimeDelay = Random.RandomRange(10, 15);
         GameObject spawnedObj;
         spawnedObj = _pooler.GetPooledObject();
         spawnedObj.transform.localPosition = Vector3.zero;
