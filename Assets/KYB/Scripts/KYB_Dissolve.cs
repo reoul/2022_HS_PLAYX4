@@ -17,20 +17,24 @@ public class KYB_Dissolve : MonoBehaviour
             Bottom = bottom;
         }
     }
-    private enum DissolveState
+    public enum DissolveState
     {
         /// <summary>
         /// 감소
         /// </summary>
-        Dec = -1,
+        Dec = -2,
         /// <summary>
-        /// 변화 없음
+        /// 투명인 상태
         /// </summary>
-        Nomal,
+        Hide = -1,
+        /// <summary>
+        /// 온 몸이 다 보이는 상태
+        /// </summary>
+        Nomal = 1,
         /// <summary>
         /// 증가
         /// </summary>
-        Inc
+        Inc = 2
     }
     /// <summary>
     /// 디졸브 목표 시간
@@ -43,7 +47,7 @@ public class KYB_Dissolve : MonoBehaviour
     /// <summary>
     /// 디졸브 상태
     /// </summary>
-    private DissolveState _state = DissolveState.Nomal;
+    public DissolveState State = DissolveState.Hide;
     /// <summary>
     /// 콜리더 상단 위치
     /// </summary>
@@ -67,6 +71,14 @@ public class KYB_Dissolve : MonoBehaviour
     {
         _material = GetComponent<Renderer>().material;
         _collider = GetComponent<BoxCollider>();
+        if (State == DissolveState.Nomal || State == DissolveState.Dec)
+        {
+            _time = DissolveSecond;
+        }
+        else
+        {
+            _time = 0;
+        }
     }
     
     public void Update()
@@ -76,15 +88,15 @@ public class KYB_Dissolve : MonoBehaviour
 
     private void UpdateDissolve()
     {
-        // 디졸브 중일때
-        if (_state != DissolveState.Nomal)
-        {
-            Dissolve();
-        }
-        else //안끝났다면
+        // 디졸브 하지 않을때
+        if (State == DissolveState.Nomal || State == DissolveState.Hide)
         {
             TopBottom topBottom = GetDissolveTopBottom();
-            SetHeight(_percent >= 1 ? topBottom.Top + 0.001f : topBottom.Bottom - 0.001f);
+            SetHeight(State == DissolveState.Nomal ? topBottom.Top + 0.001f : topBottom.Bottom - 0.001f);
+        }
+        else
+        {
+            Dissolve();
         }
     }
     
@@ -94,7 +106,7 @@ public class KYB_Dissolve : MonoBehaviour
     public void StartCreateDissolve()
     {
         _time = 0;
-        _state = DissolveState.Inc;
+        State = DissolveState.Inc;
     }
 
     /// <summary>
@@ -103,7 +115,7 @@ public class KYB_Dissolve : MonoBehaviour
     public void StartDestroyDissolve()
     {
         _time = DissolveSecond;
-        _state = DissolveState.Dec;
+        State = DissolveState.Dec;
     }
     
     /// <summary>
@@ -111,13 +123,13 @@ public class KYB_Dissolve : MonoBehaviour
     /// </summary>
     private void Dissolve()
     {
-        // 박스 콜리더의 영역을 가져온다
-        var bounds = GetComponent<BoxCollider>().bounds;
-        _time += (int)_state * Time.deltaTime;
+        
+        _time += ((int)State / 2) * Time.deltaTime;
+        _time = Mathf.Clamp(_time, 0, DissolveSecond);
+        // 디졸드 다 됐는지 확인
         if ((_percent % 1) == 0)
         {
-            _time = (_state == DissolveState.Inc) ? DissolveSecond : 0;
-            _state = DissolveState.Nomal;
+            State = State > DissolveState.Nomal ? DissolveState.Nomal : DissolveState.Hide;
         }
 
         TopBottom topBottom = GetDissolveTopBottom();
@@ -125,6 +137,10 @@ public class KYB_Dissolve : MonoBehaviour
         _material.SetFloat(CutoffHeight, height);
     }
 
+    /// <summary>
+    /// 오브젝트의 상단 위치와 하단 위치를 가져옮
+    /// </summary>
+    /// <returns></returns>
     private TopBottom GetDissolveTopBottom()
     {
         float degeWidth = _material.GetFloat(DegeWidth);
