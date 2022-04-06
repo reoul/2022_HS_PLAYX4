@@ -18,5 +18,6 @@ public class LSM_ArrowManager : Singleton<LSM_ArrowManager>
             SoundManager.Instance.PlaySound("Rock 6", 1f);
         }
         
+        
     }
 }

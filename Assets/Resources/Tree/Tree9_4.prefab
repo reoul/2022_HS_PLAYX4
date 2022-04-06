@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 114418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -82,7 +82,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -139,6 +139,7 @@ Material:
     - Vector1_AB9595E4: 0.05
     - _Cutoff: 0.3
     - _CutoffHeight: 10
+    - _DegeWidth: 0.05
     - _NoiseStrength: 1
     - _ShadowOffsetScale: 1
     - _ShadowStrength: 0.8
@@ -198,6 +199,7 @@ Material:
     - Vector1_AB9595E4: 0.05
     - _Cutoff: 0.3
     - _CutoffHeight: 10
+    - _DegeWidth: 0.05
     - _NoiseStrength: 1
     - _SquashAmount: 1
     m_Colors:

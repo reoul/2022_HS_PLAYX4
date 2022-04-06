@@ -8,6 +8,7 @@ public class LSM_VRControllerManager : Singleton<LSM_VRControllerManager>
     public VRController LeftController { get; private set; }
     public VRController RightController { get; private set; }
 
+    private bool chargePoint = false;
     /// <summary>
     /// 차징하고 있는지
     /// </summary>
@@ -122,6 +123,12 @@ public class LSM_VRControllerManager : Singleton<LSM_VRControllerManager>
         UpdateMaxDistance();
         ChargingVibration();
         CheckShot();
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            _chargingTime += 10 * Time.deltaTime;
+            Debug.Log(_chargingTime);
+        }
     }
 
     /// <summary>
@@ -195,7 +202,7 @@ public class LSM_VRControllerManager : Singleton<LSM_VRControllerManager>
             if (_chargingTime >= _maxCharging)
             {
                 ArrowManager.Instance.Shot(RightController.transform.position, Direction);
-                SoundManager.Instance.PlaySound("Rock 6", 1f);
+                SoundManager.Instance.PlaySound("Rock 6-1", 1f);
             }
             ArrowController.MeshON();
             IsCharging = false;
@@ -292,6 +299,12 @@ public class LSM_VRControllerManager : Singleton<LSM_VRControllerManager>
         Vibration(HandType.LeftRight, (int) _chargingTime);
     }
 
+    private IEnumerator ChargingSound()
+    {
+        
+        yield return new WaitForSeconds(1f);
+        chargePoint = true;
+    }
     /// <summary>
     /// 차징 중일때 일정 시간마다 차징 게이지를 늘려줌
     /// </summary>
@@ -321,6 +334,10 @@ public class LSM_VRControllerManager : Singleton<LSM_VRControllerManager>
             _chargingTime += _chargingSpeed * Time.deltaTime;
             _chargingTime = Mathf.Clamp(_chargingTime, 0, Mathf.Lerp(0,_maxCharging,0.34f));
         }
+
+        
+
+
 
         // 두 컨트롤러 거리가 일정 이상 멀어졌을때(활 쏘는 동작을 했을 때)
         //if (Distance > Mathf.Lerp(0, _maxDistance, 0.7f))

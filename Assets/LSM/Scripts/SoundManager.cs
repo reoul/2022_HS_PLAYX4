@@ -44,6 +44,7 @@ public class SoundManager : Singleton<SoundManager>
         bgmPlayer = child.AddComponent<AudioSource>();
         bgmPlayer.clip = BGMClip;
         bgmPlayer.volume = masterVolumeBGM;
+        bgmPlayer.loop = true;
     }
 
     private void Start()
@@ -60,9 +61,9 @@ public class SoundManager : Singleton<SoundManager>
             Debug.Log(sfx_name + " 이 포함된 오디오가 없습니다.");
             return;
         }
-        Debug.Log(sfx_name+"assadasdas");
         sfxPlayer.PlayOneShot(audioClipsDic[sfx_name], sfx_volume * masterVolumeSFX);
     }
+
 
 
     // 배경음악 종료
