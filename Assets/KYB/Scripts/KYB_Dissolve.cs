@@ -3,6 +3,7 @@ using System.Net.Sockets;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor.Compilation;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class KYB_Dissolve : MonoBehaviour
 {
@@ -36,10 +37,12 @@ public class KYB_Dissolve : MonoBehaviour
         /// </summary>
         Inc = 2
     }
+    
     /// <summary>
     /// 디졸브 목표 시간
     /// </summary>
-    public int DissolveSecond = 1;
+    [SerializeField]
+    private int _dissolveSecond = 1;
     /// <summary>
     /// 디졸브 타이머
     /// </summary>
@@ -59,7 +62,7 @@ public class KYB_Dissolve : MonoBehaviour
     /// <summary>
     /// 디졸브 상태 퍼센트(몇퍼센트 디졸브 됐는지)
     /// </summary>
-    private float _percent => _time / DissolveSecond;
+    private float _percent => _time / _dissolveSecond;
 
     private BoxCollider _collider;
     private Material _material;
@@ -73,7 +76,7 @@ public class KYB_Dissolve : MonoBehaviour
         _collider = GetComponent<BoxCollider>();
         if (State == DissolveState.Nomal || State == DissolveState.Dec)
         {
-            _time = DissolveSecond;
+            _time = _dissolveSecond;
         }
         else
         {
@@ -114,7 +117,7 @@ public class KYB_Dissolve : MonoBehaviour
     /// </summary>
     public void StartDestroyDissolve()
     {
-        _time = DissolveSecond;
+        _time = _dissolveSecond;
         State = DissolveState.Dec;
     }
     
@@ -125,7 +128,7 @@ public class KYB_Dissolve : MonoBehaviour
     {
         
         _time += ((int)State / 2) * Time.deltaTime;
-        _time = Mathf.Clamp(_time, 0, DissolveSecond);
+        _time = Mathf.Clamp(_time, 0, _dissolveSecond);
         // 디졸드 다 됐는지 확인
         if ((_percent % 1) == 0)
         {
