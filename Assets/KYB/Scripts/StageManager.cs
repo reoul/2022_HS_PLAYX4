@@ -17,13 +17,24 @@ public class StageManager : Singleton<StageManager>
     [SerializeField]
     private GameObject[] stages;
 
-    public StageType _currentStage = StageType.Intro;
+    private StageType _currentStage = StageType.Intro;
 
     private void NextStage()
     {
         _currentStage = (StageType)(((int)_currentStage + 1) % Enum.GetValues(typeof(StageType)).Length);
         SetUpStage(_currentStage);
     }
+
+    public Stage stage;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            stage.StageSetUP();
+        }
+    }
+
 
     private void SetUpStage(StageType type)
     {
@@ -42,13 +53,5 @@ public class StageManager : Singleton<StageManager>
     private void StartHologram()
     {
         
-    }
-
-    private void Update() //디버깅용 :: 오른쪽 화살표 버튼 입력시 다음 스테이지 세팅
-    {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            NextStage();
-        }
     }
 }
