@@ -23,7 +23,6 @@ public class SpawnerManager : Singleton<SpawnerManager>
             {
                 spawnerQueue.Enqueue(obj);
             }
-            Debug.Log("Shuffle!");
         }
     }
 
