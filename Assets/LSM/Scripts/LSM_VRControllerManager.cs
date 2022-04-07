@@ -209,10 +209,13 @@ public class LSM_VRControllerManager : Singleton<LSM_VRControllerManager>
     /// </summary>
     private void CheckShot()
     {
+        Debug.Log("asdasds");
         if ((BowController != null) && ArrowController.GetTriggerUp())
         {
+        Debug.Log("123");
             if (_chargingTime >= _maxCharging)
             {
+        Debug.Log("456");
                 ArrowManager.Instance.Shot(RightController.transform.position, Direction);
                 SoundManager.Instance.PlaySound("Rock 6-1", 1f);
             }
@@ -317,22 +320,23 @@ public class LSM_VRControllerManager : Singleton<LSM_VRControllerManager>
 
         {
 
-            SoundManager.Instance.PlaySound("Buff 2-1", 1f);
+            SoundManager.Instance.PlaySound("Buff 2-1", 0.8f);
+            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = 0.8f;
 
         }
 
         else if (_chargingTime > 20f && _chargingTime <=40f)
 
         {
-            SoundManager.Instance.PlaySound("Buff 2-1", 1f);
-            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = 1.4f;
+            SoundManager.Instance.PlaySound("Buff 2-1", 0.8f);
+            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = 1f;
         }
 
         else if (_chargingTime > 40f)
 
         {
-            SoundManager.Instance.PlaySound("Buff 2-1", 1f);
-            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = 1.8f;
+            SoundManager.Instance.PlaySound("Buff 2-1", 0.8f);
+            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = 1.2f;
         }
 
 
