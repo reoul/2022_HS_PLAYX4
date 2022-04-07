@@ -316,29 +316,12 @@ public class LSM_VRControllerManager : Singleton<LSM_VRControllerManager>
 
     private void ChargingSound()
     {
-        if (_chargingTime > 1f && _chargingTime <=20f)
-
+        if (IsCharging)
         {
 
             SoundManager.Instance.PlaySound("Buff 2-1", 0.8f);
-            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = 0.8f;
-
+            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = Mathf.Lerp(1, 2, _chargingTime / _maxCharging);
         }
-
-        else if (_chargingTime > 20f && _chargingTime <=40f)
-
-        {
-            SoundManager.Instance.PlaySound("Buff 2-1", 0.8f);
-            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = 1f;
-        }
-
-        else if (_chargingTime > 40f)
-
-        {
-            SoundManager.Instance.PlaySound("Buff 2-1", 0.8f);
-            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = 1.2f;
-        }
-
 
     }
     /// <summary>
