@@ -40,7 +40,7 @@ public class SpawnerManager : Singleton<SpawnerManager>
         _currentTime = 0;
     }
 
-    private void Update()
+    public void SpawnUpdate()
     {
         _currentTime += Time.deltaTime;
         if ((_currentTime > _spawnDelay) && (_currentSpawnCount < _maxSpawnCount))

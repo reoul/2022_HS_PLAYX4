@@ -15,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     {
         _pooler = new ObjectPooler();
         _pooler.StartPooling(this.transform, ((int)_enemyType));
-        SpawnerManager.Instance.spawnerQueue.Enqueue(this);
+        FindObjectOfType<SpawnerManager>()?.spawnerQueue.Enqueue(this);
     }
 
     public void Spawn()
