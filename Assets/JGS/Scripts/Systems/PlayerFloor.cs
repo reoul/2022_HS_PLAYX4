@@ -33,7 +33,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
         IsRayHit();
         if (Input.GetKeyDown(KeyCode.I))
         {
-            StartCoroutine(hit(Floor.Center));
+            StartCoroutine(Hit(10));
         }
     }
 
@@ -74,9 +74,9 @@ public class PlayerFloor : Singleton<PlayerFloor>
         floorTransforms[(int)floor].GetComponent<MeshRenderer>().material.color = new Color(0.7f, 0, 0);
     }
 
-    IEnumerator hit(Floor floor)
+    public IEnumerator Hit(int cnt)
     {
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < cnt; i++)
         {
             float tmp = 0.2f;
             int count = 1;
