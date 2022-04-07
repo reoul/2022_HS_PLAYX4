@@ -28,12 +28,12 @@ public class PlayerFloor : Singleton<PlayerFloor>
     {
         foreach(Transform obj in floorTransforms)
         {
-            obj.GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
+            //obj.GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
         }
         IsRayHit();
         if (Input.GetKeyDown(KeyCode.I))
         {
-            AAAAA();
+            StartCoroutine(hit(Floor.Center));
         }
     }
 
@@ -72,5 +72,28 @@ public class PlayerFloor : Singleton<PlayerFloor>
     public void SetTagetFloor(Floor floor)  
     {
         floorTransforms[(int)floor].GetComponent<MeshRenderer>().material.color = new Color(0.7f, 0, 0);
+    }
+
+    IEnumerator hit(Floor floor)
+    {
+        float tmp = 0.2f;
+        int count = 1;
+        while (tmp > 0)
+        {
+            if(count++ % 2 != 0)
+            {
+                floorTransforms[(int)floor].GetComponent<MeshRenderer>().material.color = new Color(0.7f, 0, 0);
+            }
+            else
+            {
+                floorTransforms[(int)floor].GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
+            }
+            tmp -= 0.01f;
+            yield return new WaitForSeconds(tmp);
+        }
+        floorTransforms[(int)floor].GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
+        ScoreSystem.Score -= 100;
+
+        yield return null;
     }
 }
