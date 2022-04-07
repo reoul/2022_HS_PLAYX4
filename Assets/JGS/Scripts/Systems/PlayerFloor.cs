@@ -76,23 +76,31 @@ public class PlayerFloor : Singleton<PlayerFloor>
 
     IEnumerator hit(Floor floor)
     {
-        float tmp = 0.2f;
-        int count = 1;
-        while (tmp > 0)
+        for(int i = 0; i < 10; i++)
         {
-            if(count++ % 2 != 0)
+            float tmp = 0.2f;
+            int count = 1;
+            int _floor = Random.Range(0, 3);
+            while (tmp > 0)
             {
-                floorTransforms[(int)floor].GetComponent<MeshRenderer>().material.color = new Color(0.7f, 0, 0);
+                if (count++ % 2 != 0)
+                {
+                    floorTransforms[_floor].GetComponent<MeshRenderer>().material.color = new Color(0.7f, 0, 0);
+                }
+                else
+                {
+                    floorTransforms[_floor].GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
+                }
+                tmp -= 0.01f;
+                yield return new WaitForSeconds(tmp);
             }
-            else
+            floorTransforms[_floor].GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
+
+            if (_playerFloor == _floor)
             {
-                floorTransforms[(int)floor].GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
+                ScoreSystem.Score -= 100;
             }
-            tmp -= 0.01f;
-            yield return new WaitForSeconds(tmp);
         }
-        floorTransforms[(int)floor].GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
-        ScoreSystem.Score -= 100;
 
         yield return null;
     }
