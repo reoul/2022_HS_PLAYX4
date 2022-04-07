@@ -31,15 +31,15 @@ public class PlayerFloor : Singleton<PlayerFloor>
 
         if (_camera.position.x < -0.5f)
         {
-            floorTransforms[(int)Floor.Left].GetComponent<MeshRenderer>().material.color = Color.red;
+            floorTransforms[(int)Floor.Left].GetComponent<MeshRenderer>().material.color = new Color(0, 0.4f, 0);
         }
         else if (_camera.position.x > 0.5f)
         {
-            floorTransforms[(int)Floor.Right].GetComponent<MeshRenderer>().material.color = Color.red;
+            floorTransforms[(int)Floor.Right].GetComponent<MeshRenderer>().material.color = new Color(0, 0.4f, 0);
         }
         else
         {
-            floorTransforms[(int)Floor.Center].GetComponent<MeshRenderer>().material.color = Color.red;
+            floorTransforms[(int)Floor.Center].GetComponent<MeshRenderer>().material.color = new Color(0, 0.4f, 0);
         }
     }
 
