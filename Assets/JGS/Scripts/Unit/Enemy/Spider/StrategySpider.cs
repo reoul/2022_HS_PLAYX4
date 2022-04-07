@@ -165,6 +165,7 @@ public class StrategySpider : Strategy
             if (_disolve.State == KYB_Dissolve.DissolveState.Hide)
             {
                 _gameObj.GetComponent<AiSpider>().DisableTarget();
+                SpawnerManager.Instance._currentSpawnCount--;
                 _gameObj.SetActive(false);
             }
         }
@@ -213,6 +214,7 @@ public class StrategySpider : Strategy
             _gameObj.GetComponent<Strategy>().MoveToPlayer(0.06f);
             if (_disolve.State == KYB_Dissolve.DissolveState.Hide)
             {
+                SpawnerManager.Instance._currentSpawnCount--;
                 _gameObj.SetActive(false);
             }
         }
