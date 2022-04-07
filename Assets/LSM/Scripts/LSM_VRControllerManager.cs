@@ -8,7 +8,10 @@ public class LSM_VRControllerManager : Singleton<LSM_VRControllerManager>
     public VRController LeftController { get; private set; }
     public VRController RightController { get; private set; }
 
-    private bool chargePoint = false;
+
+    public AudioClip[] _chargeClip;
+    AudioSource _chargeSource;
+
     /// <summary>
     /// 차징하고 있는지
     /// </summary>
@@ -129,6 +132,15 @@ public class LSM_VRControllerManager : Singleton<LSM_VRControllerManager>
             _chargingTime += 10 * Time.deltaTime;
             Debug.Log(_chargingTime);
         }
+
+        if(Input.GetKeyUp(KeyCode.D))
+        {
+            _chargingTime -= 10 * Time.deltaTime;
+        }
+
+        ChargingSound();
+
+
     }
 
     /// <summary>
@@ -299,11 +311,31 @@ public class LSM_VRControllerManager : Singleton<LSM_VRControllerManager>
         Vibration(HandType.LeftRight, (int) _chargingTime);
     }
 
-    private IEnumerator ChargingSound()
+    private void ChargingSound()
     {
-        
-        yield return new WaitForSeconds(1f);
-        chargePoint = true;
+        if (_chargingTime > 1f && _chargingTime <=20f)
+
+        {
+
+            SoundManager.Instance.PlaySound("Buff 2-1", 1f);
+
+        }
+
+        else if (_chargingTime > 20f && _chargingTime <=40f)
+
+        {
+            SoundManager.Instance.PlaySound("Buff 2-1", 1f);
+            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = 1.4f;
+        }
+
+        else if (_chargingTime > 40f)
+
+        {
+            SoundManager.Instance.PlaySound("Buff 2-1", 1f);
+            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = 1.8f;
+        }
+
+
     }
     /// <summary>
     /// 차징 중일때 일정 시간마다 차징 게이지를 늘려줌

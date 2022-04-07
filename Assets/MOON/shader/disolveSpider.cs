@@ -37,7 +37,6 @@ public class disolveSpider : MonoBehaviour
             float height = transform.position.y - gameObject.GetComponentInParent<Collider>().bounds.size.y * 0.5f;
             Debug.Log(height);
             Debug.Log(Mathf.Sin(time));
-
             height += Mathf.Sin(time) * objectHeight * 5;
             height_two = height;
             Debug.Log(height_two);
