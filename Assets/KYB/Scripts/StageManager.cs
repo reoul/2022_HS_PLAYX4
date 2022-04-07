@@ -26,6 +26,7 @@ public class StageManager : Singleton<StageManager>
     private void NextStage()
     {
         _curStageType = (StageType) (((int) _curStageType + 1) % Enum.GetValues(typeof(StageType)).Length);
+        ScoreSystem.Score = 0;
         SetUpStage(_curStageType);
         StartCoroutine(TimerCoroutine());
     }
@@ -50,6 +51,7 @@ public class StageManager : Singleton<StageManager>
         if (type >= StageType.Stage1 && type <= StageType.Stage3)
         {
             StartHologram(type);
+            _curStage.gameObject.SetActive(true);
             _curStage.StageStart();
         }
         // 조건문 : 만약 홀로그램이 다 끝났다면
@@ -72,9 +74,11 @@ public class StageManager : Singleton<StageManager>
             TimerText.text = $"남은 시간 : {i}초";
             yield return new WaitForSeconds(1f);
         }
-
-        yield return new WaitForSeconds(3f);
         _curStage.RemoveStage();
+        yield return new WaitForSeconds(1f);
+        
+        _curStage.gameObject.SetActive(false);
+
         yield return new WaitForSeconds(3f);
         
         NextStage();

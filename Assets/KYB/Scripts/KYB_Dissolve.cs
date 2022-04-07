@@ -68,7 +68,7 @@ public class KYB_Dissolve : MonoBehaviour
     private float _delayTime = 0;
 
     private bool _isDelay = false;
-    private BoxCollider _collider;
+    public BoxCollider _collider;
     private Material _material;
     private static readonly int CutoffHeight = Shader.PropertyToID("_CutoffHeight");
     private static readonly int DegeWidth = Shader.PropertyToID("_DegeWidth");
@@ -108,6 +108,7 @@ public class KYB_Dissolve : MonoBehaviour
         if (_isDelay || State == DissolveState.Nomal || State == DissolveState.Hide)
         {
             TopBottom topBottom = GetDissolveTopBottom();
+            Debug.Log(_topPos);
             SetHeight(State == DissolveState.Nomal ? topBottom.Top + 0.001f : topBottom.Bottom - 0.001f);
         }
         else

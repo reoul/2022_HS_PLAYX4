@@ -4,12 +4,10 @@ public class Stage2 : Stage
 {
     public override void StageStart()
     {
-        StartCoroutine(PlayerFloor.Instance.Hit(10));
-        //PlayerFloor.Instance.
+        StartCoroutine(PlayerFloor.Instance.Hit(19));
     }
 
     public override void StageUpdate()
     {
-        Debug.Log("스테이지2");
     }
 }

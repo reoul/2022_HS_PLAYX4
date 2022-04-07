@@ -4,11 +4,10 @@ public class Stage3 : Stage
 {
     public override void StageStart()
     {
-        Debug.Log("스테이지3 start");
+        StartCoroutine(PlayerFloor.Instance.Hit(19));
     }
 
     public override void StageUpdate()
     {
-        Debug.Log("스테이지3");
     }
 }

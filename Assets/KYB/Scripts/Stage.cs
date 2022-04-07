@@ -53,12 +53,18 @@ public abstract class Stage : MonoBehaviour
 
     public abstract void StageUpdate();
 
-    public void RemoveEnemy()
+    public virtual void RemoveEnemy()
     {
+        var monsters = FindObjectsOfType<StrategySpider>();
+        foreach (StrategySpider monster in monsters)
+        {
+            monster.GetComponentInChildren<KYB_Dissolve>().StartDestroyDissolve();
+        }
     }
 
     public void RemoveStage()
     {
+        RemoveEnemy();
         foreach (GameObject dissolve in DissolveEnvironments)
         {
             dissolve.GetComponent<KYB_Dissolve>().StartDestroyDissolve();

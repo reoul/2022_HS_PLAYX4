@@ -3,14 +3,21 @@
 public class Stage1 : Stage
 {
     private SpawnerManager _spawnerManager;
+    
     public override void StageStart()
     {
-        Debug.Log("스테이지1 start");
-        _spawnerManager = FindObjectOfType<SpawnerManager>();
+        _spawnerManager = transform.GetChild(0).GetComponent<SpawnerManager>();
+    }
+
+    public override void RemoveEnemy()
+    {
+        base.RemoveEnemy();
+        //_spawnerManager.spawnerQueue
+            
     }
 
     public override void StageUpdate()
     {
-        Debug.Log("스테이지1");
+        _spawnerManager.SpawnUpdate();
     }
 }
