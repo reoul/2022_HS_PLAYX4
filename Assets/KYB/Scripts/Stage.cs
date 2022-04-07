@@ -12,13 +12,6 @@ public abstract class Stage : MonoBehaviour
     /// </summary>
     public void StageSetUP()
     {
-        for (int i = 0; i < 4; i++)
-        {
-            for (int j = 0; j < 7; j++)
-            {
-                DissolveEnvironments[i * 7 + j].transform.position = new Vector3(10 + i * 3, 4, j * 3);
-            }
-        }
         SwapEnvironments();
         float k = 0;
         int cnt = 0;
@@ -56,6 +49,8 @@ public abstract class Stage : MonoBehaviour
     {
     }
 
+    public abstract void StageStart();
+
     public abstract void StageUpdate();
 
     public void RemoveEnemy()
@@ -64,5 +59,9 @@ public abstract class Stage : MonoBehaviour
 
     public void RemoveStage()
     {
+        foreach (GameObject dissolve in DissolveEnvironments)
+        {
+            dissolve.GetComponent<KYB_Dissolve>().StartDestroyDissolve();
+        }
     }
 }

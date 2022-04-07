@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StageManager : Singleton<StageManager>
 {
@@ -13,25 +14,32 @@ public class StageManager : Singleton<StageManager>
         Stage3,
         Ending
     }
-    
-    [SerializeField]
-    private GameObject[] stages;
 
-    private StageType _currentStage = StageType.Intro;
+    [SerializeField] private GameObject[] stages;
+
+    public Text TimerText;
+
+    private StageType _curStageType = StageType.Intro;
+
+    private Stage _curStage => stages[(int) _curStageType - 1].GetComponent<Stage>();
 
     private void NextStage()
     {
-        _currentStage = (StageType)(((int)_currentStage + 1) % Enum.GetValues(typeof(StageType)).Length);
-        SetUpStage(_currentStage);
+        _curStageType = (StageType) (((int) _curStageType + 1) % Enum.GetValues(typeof(StageType)).Length);
+        SetUpStage(_curStageType);
+        StartCoroutine(TimerCoroutine());
     }
-
-    public Stage stage;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
-            stage.StageSetUP();
+            NextStage();
+        }
+
+        if (_curStageType >= StageType.Stage1 && _curStageType <= StageType.Stage3)
+        {
+            _curStage.StageUpdate();
         }
     }
 
@@ -39,19 +47,36 @@ public class StageManager : Singleton<StageManager>
     private void SetUpStage(StageType type)
     {
         // 홀로그램 시작
-        StartHologram();
-        // 조건문 : 만약 홀로그램이 다 끝났다면
-        
-        /*foreach (Transform child in transform)
+        if (type >= StageType.Stage1 && type <= StageType.Stage3)
         {
-            Destroy(child.gameObject);
+            StartHologram(type);
+            _curStage.StageStart();
         }
-
-        Instantiate(stages[_currentStage - 1],transform);*/
+        // 조건문 : 만약 홀로그램이 다 끝났다면
     }
 
-    private void StartHologram()
+    private void StartHologram(StageType type)
     {
+        stages[(int) type - 1].GetComponent<Stage>().StageSetUP();
+    }
+
+    IEnumerator TimerCoroutine()
+    {
+        if (_curStageType == StageType.Ending)
+        {
+            yield break;
+        }
+
+        for (int i = 20; i >= 0; i--)
+        {
+            TimerText.text = $"남은 시간 : {i}초";
+            yield return new WaitForSeconds(1f);
+        }
+
+        yield return new WaitForSeconds(3f);
+        _curStage.RemoveStage();
+        yield return new WaitForSeconds(3f);
         
+        NextStage();
     }
 }
