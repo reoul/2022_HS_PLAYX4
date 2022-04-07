@@ -68,12 +68,12 @@ public class StrategySpider : Strategy
     {
         public StateSpawn(GameObject gameObject) : base(gameObject) { }
 
-        private disolveSpider _disolveSpider;
+        private KYB_Dissolve _disolve;
 
         public override void StateEnter()
         {
-            _disolveSpider = _gameObj.GetComponentInChildren<disolveSpider>();
-            _disolveSpider.InitTime();
+            _disolve = _gameObj.GetComponentInChildren<KYB_Dissolve>();
+            _disolve.StartCreateDissolve();
         }
 
         public override void StateExit()
@@ -92,7 +92,7 @@ public class StrategySpider : Strategy
             //{
             //    gameObject.GetComponent<BeamController>().BeamIn();
             //}
-            if(_disolveSpider.Disolve())
+            if (_disolve.State == KYB_Dissolve.DissolveState.Nomal)
             {
                 _stateMachine.SetState(_dicState[State.Run]);
             }
@@ -119,6 +119,8 @@ public class StrategySpider : Strategy
     private class StateRun : IState
     {
         public StateRun( GameObject gameObject) : base( gameObject) { }
+
+
         public override void StateEnter()
         {
             _gameObj.GetComponent<Animator>().Play("Run");
@@ -143,14 +145,13 @@ public class StrategySpider : Strategy
 
         private Transform _targetTransform;
 
-        private disolveSpider _disolveSpider;
+        private KYB_Dissolve _disolve;
 
         public override void StateEnter()
         {
-            _disolveSpider = _gameObj.GetComponentInChildren<disolveSpider>();
-            _disolveSpider.InitTime();
+            _disolve = _gameObj.GetComponentInChildren<KYB_Dissolve>();
             ScoreSystem.score -= 100;
-            _disolveSpider.InitAA();
+            _disolve.StartDestroyDissolve();
         }
 
         public override void StateExit()
@@ -161,7 +162,7 @@ public class StrategySpider : Strategy
         public override void StateUpdate()
         {
             _gameObj.GetComponent<Strategy>().MoveToPlayer(0.06f);
-            if (_disolveSpider.DeleteDisolve())
+            if (_disolve.State == KYB_Dissolve.DissolveState.Hide)
             {
                 _gameObj.GetComponent<AiSpider>().DisableTarget();
                 _gameObj.SetActive(false);
@@ -193,14 +194,13 @@ public class StrategySpider : Strategy
         private Transform _targetTransform;
         public StateDeath( GameObject gameObject) : base( gameObject) { }
 
-        private disolveSpider _disolveSpider;
+        private KYB_Dissolve _disolve;
 
         public override void StateEnter()
         {
-            _disolveSpider = _gameObj.GetComponentInChildren<disolveSpider>();
-            _disolveSpider.InitTime();
+            _disolve = _gameObj.GetComponentInChildren<KYB_Dissolve>();
             ScoreSystem.score += 100;
-            _disolveSpider.InitAA();
+            _disolve.StartDestroyDissolve();
         }
 
         public override void StateExit()
@@ -211,7 +211,7 @@ public class StrategySpider : Strategy
         public override void StateUpdate()
         {
             _gameObj.GetComponent<Strategy>().MoveToPlayer(0.06f);
-            if (_disolveSpider.DeleteDisolve())
+            if (_disolve.State == KYB_Dissolve.DissolveState.Hide)
             {
                 _gameObj.SetActive(false);
             }

@@ -48,6 +48,7 @@ Material:
     - Vector1_9D28C46A: 0.05
     - Vector1_AB9595E4: 0.05
     - _CutoffHeight: -1
+    - _DegeWidth: 0.05
     - _DisintegrateAmount: 1
     - _DissolveEdge: 0.01
     - _Glossiness: 0.5
