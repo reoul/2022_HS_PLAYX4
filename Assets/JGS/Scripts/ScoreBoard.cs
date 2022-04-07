@@ -16,10 +16,9 @@ public class ScoreBoard : MonoBehaviour
 
     private void Update()
     {
-        ScoreSystem.DebugAddScore();
-        _currentScore = ScoreSystem.score;
+        _currentScore = ScoreSystem.Score;
         UpdateDisplayScore();
-        this.GetComponent<Text>().text = Mathf.Round(_displayScore).ToString();
+        this.GetComponent<Text>().text = $"점수 : {Mathf.Round(_displayScore).ToString()}";
     }
 
     private void UpdateDisplayScore()

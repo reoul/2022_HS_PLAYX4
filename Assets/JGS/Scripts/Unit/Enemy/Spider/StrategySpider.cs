@@ -150,7 +150,7 @@ public class StrategySpider : Strategy
         public override void StateEnter()
         {
             _disolve = _gameObj.GetComponentInChildren<KYB_Dissolve>();
-            ScoreSystem.score -= 100;
+            ScoreSystem.Score -= 100;
             _disolve.StartDestroyDissolve();
         }
 
@@ -199,7 +199,7 @@ public class StrategySpider : Strategy
         public override void StateEnter()
         {
             _disolve = _gameObj.GetComponentInChildren<KYB_Dissolve>();
-            ScoreSystem.score += 100;
+            ScoreSystem.Score += 100;
             _disolve.StartDestroyDissolve();
         }
 

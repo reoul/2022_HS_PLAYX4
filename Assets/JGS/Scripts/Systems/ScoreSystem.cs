@@ -4,24 +4,10 @@ using UnityEngine;
 
 public static class ScoreSystem
 {
-    public static int score { get; set; }
+    public static int Score { get; set; }
 
     static ScoreSystem()
     {
-        score = 0;
-    }
-
-    public static void DebugAddScore()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            score += 100;
-            Debug.Log(score);
-        }
-    }
-
-    public static void StageClear()
-    {
-
+        Score = 0;
     }
 }
