@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: 2
+  State: -1
 --- !u!114 &-5612580856815575748
 MonoBehaviour:
   m_ObjectHideFlags: 0
