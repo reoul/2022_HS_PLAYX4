@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 114418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 0.7, y: 0.6, z: 0.7}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -84,7 +84,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: 2
+  State: -1
 --- !u!21 &2129798
 Material:
   serializedVersion: 6
@@ -435,7 +435,7 @@ MonoBehaviour:
   m_Name: Tree Data
   m_EditorClassIdentifier: 
   _uniqueID: 173
-  materialHash: b488c72140b759341962d64883a2367d215482368
+  materialHash: 0163bd0a2e800b1273956d245ba2c55f215482368
   root:
     _uniqueID: 1
     seed: 1400

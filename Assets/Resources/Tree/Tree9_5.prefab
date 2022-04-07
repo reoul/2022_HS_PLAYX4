@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: 2
+  State: -1
 --- !u!21 &2129798
 Material:
   serializedVersion: 6
@@ -130,7 +130,7 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 33d0597041213ed47a507d92a92f5c6f,
     type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 5
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
@@ -193,7 +193,7 @@ Material:
   m_Shader: {fileID: -6465566751694194690, guid: 33d0597041213ed47a507d92a92f5c6f,
     type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 5
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1

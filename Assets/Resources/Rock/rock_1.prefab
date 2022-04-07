@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: 2
+  State: -1
 --- !u!65 &-4140969200691301328
 BoxCollider:
   m_ObjectHideFlags: 0
