@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerFloor : Singleton<PlayerFloor>
 {
 
-    public enum Floor { Left, Center, Right }
+    public enum Floor { Left = 0, Center, Right }
     public Transform[] floorTransforms;
 
     private Color _floorDefaultColor;
@@ -28,19 +28,33 @@ public class PlayerFloor : Singleton<PlayerFloor>
         {
             obj.GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
         }
-
-        if (_camera.position.x < -0.5f)
+        IsRayHit();
+        if (Input.GetKey(KeyCode.LeftArrow))
         {
-            floorTransforms[(int)Floor.Left].GetComponent<MeshRenderer>().material.color = new Color(0, 0.4f, 0);
+            SetTagetFloor(Floor.Left);
         }
-        else if (_camera.position.x > 0.5f)
+        else if (Input.GetKey(KeyCode.RightArrow))
         {
-            floorTransforms[(int)Floor.Right].GetComponent<MeshRenderer>().material.color = new Color(0, 0.4f, 0);
+            SetTagetFloor(Floor.Right);
         }
-        else
-        {
-            floorTransforms[(int)Floor.Center].GetComponent<MeshRenderer>().material.color = new Color(0, 0.4f, 0);
+        else if (Input.GetKey(KeyCode.DownArrow)){
+            SetTagetFloor(Floor.Center);
         }
     }
 
+    private void IsRayHit()
+    {
+        RaycastHit hit;
+        float distance = 10f;
+        int layerMask = 1 << LayerMask.NameToLayer("PlayerFloor");
+        if (Physics.Raycast(_camera.position,_camera.position - new Vector3(0,10,0), out hit, distance,layerMask))
+        {
+            hit.transform.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0.4f, 0);
+        }
+    }
+
+    public void SetTagetFloor(Floor floor)  
+    {
+        floorTransforms[(int)floor].GetComponent<MeshRenderer>().material.color = new Color(0.7f, 0, 0);
+    }
 }
