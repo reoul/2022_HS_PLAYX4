@@ -15,7 +15,7 @@ public class SoundManager : Singleton<SoundManager>
     AudioClip[] audioClip; // 효과음 소스들 지정.
 
     Dictionary<string, AudioClip> audioClipsDic;
-    AudioSource sfxPlayer;
+    public AudioSource sfxPlayer;
     AudioSource bgmPlayer;
 
 
@@ -56,12 +56,13 @@ public class SoundManager : Singleton<SoundManager>
     // 효과음 재생
     public void PlaySound(string sfx_name, float sfx_volume = 1f)
     {
-        if (audioClipsDic.ContainsKey(sfx_name) == false)
+        if (audioClipsDic.ContainsKey(sfx_name) == false || sfxPlayer.GetComponent<AudioSource>().isPlaying)
         {
             Debug.Log(sfx_name + " 이 포함된 오디오가 없습니다.");
             return;
         }
-        sfxPlayer.PlayOneShot(audioClipsDic[sfx_name], sfx_volume * masterVolumeSFX);
+        else
+            sfxPlayer.PlayOneShot(audioClipsDic[sfx_name], sfx_volume * masterVolumeSFX);
     }
 
 
