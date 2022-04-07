@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Stage : MonoBehaviour
+public abstract class Stage : MonoBehaviour
 {
     public List<GameObject> DissolveEnvironments;
 
@@ -20,15 +20,23 @@ public class Stage : MonoBehaviour
             }
         }
         SwapEnvironments();
+        float k = 0;
+        int cnt = 0;
         foreach (GameObject dissolve in DissolveEnvironments)
         {
-            dissolve.GetComponent<KYB_Dissolve>().StartCreateDissolve();
+            cnt++;
+            if (cnt > 3)
+            {
+                k += 0.2f;
+                cnt = 0;
+            }
+            dissolve.GetComponent<KYB_Dissolve>().StartCreateDissolve(k);
         }
     }
 
     private void SwapEnvironments()
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < DissolveEnvironments.Count * 3; i++)
         {
             int src = Random.Range(0, DissolveEnvironments.Count);
             int dest;
@@ -47,6 +55,8 @@ public class Stage : MonoBehaviour
     public void StartEnemySpawn()
     {
     }
+
+    public abstract void StageUpdate();
 
     public void RemoveEnemy()
     {

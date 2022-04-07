@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Net.Sockets;
 using Unity.Collections.LowLevel.Unsafe;
 using UnityEditor.Compilation;
@@ -46,7 +47,7 @@ public class KYB_Dissolve : MonoBehaviour
     /// <summary>
     /// 디졸브 타이머
     /// </summary>
-    private float _time = 0;
+    private float _timer = 0;
     /// <summary>
     /// 디졸브 상태
     /// </summary>
@@ -62,8 +63,11 @@ public class KYB_Dissolve : MonoBehaviour
     /// <summary>
     /// 디졸브 상태 퍼센트(몇퍼센트 디졸브 됐는지)
     /// </summary>
-    private float _percent => _time / _dissolveSecond;
+    private float _percent => _timer / _dissolveSecond;
 
+    private float _delayTime = 0;
+
+    private bool _isDelay = false;
     private BoxCollider _collider;
     private Material _material;
     private static readonly int CutoffHeight = Shader.PropertyToID("_CutoffHeight");
@@ -76,11 +80,11 @@ public class KYB_Dissolve : MonoBehaviour
         _collider = GetComponent<BoxCollider>();
         if (State == DissolveState.Nomal || State == DissolveState.Dec)
         {
-            _time = _dissolveSecond;
+            _timer = _dissolveSecond;
         }
         else
         {
-            _time = 0;
+            _timer = 0;
         }
     }
     
@@ -91,8 +95,17 @@ public class KYB_Dissolve : MonoBehaviour
 
     private void UpdateDissolve()
     {
+        if (_isDelay)
+        {
+            _timer += Time.deltaTime;
+            if (_timer >= _delayTime)
+            {
+                _isDelay = false;
+                _timer = 0;
+            }
+        }
         // 디졸브 하지 않을때
-        if (State == DissolveState.Nomal || State == DissolveState.Hide)
+        if (_isDelay || State == DissolveState.Nomal || State == DissolveState.Hide)
         {
             TopBottom topBottom = GetDissolveTopBottom();
             SetHeight(State == DissolveState.Nomal ? topBottom.Top + 0.001f : topBottom.Bottom - 0.001f);
@@ -106,10 +119,15 @@ public class KYB_Dissolve : MonoBehaviour
     /// <summary>
     /// 생성 디졸브 시작
     /// </summary>
-    public void StartCreateDissolve()
+    public void StartCreateDissolve(float delayTime = 0)
     {
-        _time = 0;
+        _timer = 0;
         State = DissolveState.Inc;
+        if (delayTime > 0)
+        {
+            _isDelay = true;
+            _delayTime = delayTime;
+        }
     }
 
     /// <summary>
@@ -117,7 +135,7 @@ public class KYB_Dissolve : MonoBehaviour
     /// </summary>
     public void StartDestroyDissolve()
     {
-        _time = _dissolveSecond;
+        _timer = _dissolveSecond;
         State = DissolveState.Dec;
     }
     
@@ -127,12 +145,12 @@ public class KYB_Dissolve : MonoBehaviour
     private void Dissolve()
     {
         
-        _time += ((int)State / 2) * Time.deltaTime;
-        _time = Mathf.Clamp(_time, 0, _dissolveSecond);
+        _timer += ((int)State / 2) * Time.deltaTime;
+        _timer = Mathf.Clamp(_timer, 0, _dissolveSecond);
         // 디졸드 다 됐는지 확인
         if ((_percent % 1) == 0)
         {
-            State = State > DissolveState.Nomal ? DissolveState.Nomal : DissolveState.Hide;
+            State = State >= DissolveState.Nomal ? DissolveState.Nomal : DissolveState.Hide;
         }
 
         TopBottom topBottom = GetDissolveTopBottom();
