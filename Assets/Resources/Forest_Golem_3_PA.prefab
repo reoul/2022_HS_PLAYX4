@@ -1004,6 +1004,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4902727897596808646}
   - component: {fileID: 4902727897593207996}
+  - component: {fileID: 6562871659833021614}
+  - component: {fileID: 6301552213092814796}
   m_Layer: 0
   m_Name: Golem_03_PA
   m_TagString: Untagged
@@ -1043,7 +1045,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: b7e596017016ca0448dc8b346eae8117, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1117,6 +1119,33 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.09017289, y: -0.041733384, z: -0.045943737}
     m_Extent: {x: 0.6206919, y: 1.4543413, z: 1.576751}
   m_DirtyAABB: 0
+--- !u!114 &6562871659833021614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4902727897596318182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a4e3e422d0340f889981d765d6ed82c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dissolveSecond: 1
+  State: 2
+--- !u!65 &6301552213092814796
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4902727897596318182}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.9086843, y: 1.2413882, z: 3.1535027}
+  m_Center: {x: 0.041733254, y: -0.09017295, z: 1.4529946}
 --- !u!1 &4902727897596318184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,7 +1249,7 @@ Animator:
   m_GameObject: {fileID: 4902727897596318190}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 3af0263349623ec429b9409c8b00e4fe, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 98960d5a87385ad44b863d9201e0c747, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
