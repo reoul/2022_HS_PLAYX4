@@ -11,6 +11,8 @@ public class PlayerFloor : Singleton<PlayerFloor>
     private Color _floorDefaultColor;
     private Transform _camera;
 
+    private int _playerFloor = 1;
+
     private void Start()
     {
         floorTransforms = new Transform[3];
@@ -29,16 +31,23 @@ public class PlayerFloor : Singleton<PlayerFloor>
             obj.GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
         }
         IsRayHit();
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.I))
         {
-            SetTagetFloor(Floor.Left);
+            AAAAA();
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+    }
+
+    private void AAAAA()
+    {
+        List<int> target = new List<int>();
+        target.Add(0);
+        target.Add(1);
+        target.Add(2);
+        target = Utility.ShuffleList(target);
+        Debug.Log($"{target[0].ToString()} {target[1].ToString()} {target[2].ToString()}");
+        if (_playerFloor == target[0])
         {
-            SetTagetFloor(Floor.Right);
-        }
-        else if (Input.GetKey(KeyCode.DownArrow)){
-            SetTagetFloor(Floor.Center);
+            ScoreSystem.Score -= 100;
         }
     }
 
@@ -49,7 +58,14 @@ public class PlayerFloor : Singleton<PlayerFloor>
         int layerMask = 1 << LayerMask.NameToLayer("PlayerFloor");
         if (Physics.Raycast(_camera.position,_camera.position - new Vector3(0,10,0), out hit, distance,layerMask))
         {
-            hit.transform.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0.4f, 0);
+            for (int i = 0; i < floorTransforms.Length; i++)
+            {
+                if (hit.collider.transform == floorTransforms[i])
+                {
+                    _playerFloor = i;
+                }
+            }
+            //hit.transform.gameObject.GetComponent<MeshRenderer>().material.color = new Color(0, 0.4f, 0);
         }
     }
 
