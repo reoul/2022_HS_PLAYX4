@@ -4,17 +4,18 @@ using UnityEngine;
 
 public static class Utility
 {
-    public static List<T> ShuffleList<T>(List<T> _list)
+    public static List<T> ShuffleList<T>(List<T> list)
     {
-        for (int i = _list.Count - 1; i > 0; i--)
+        for (int i = 0; i < 3; i++)
         {
-            int rand = Random.Range(0, i);
+            for (int j = list.Count - 1; j > 0; j--)
+            {
+                int rand = Random.Range(0, j);
 
-            T temp = _list[i];
-            _list[i] = _list[rand];
-            _list[rand] = temp;
+                (list[j], list[rand]) = (list[rand], list[j]);
+            }
         }
 
-        return _list;
+        return list;
     }
 }
