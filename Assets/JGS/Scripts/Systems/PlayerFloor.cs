@@ -12,6 +12,8 @@ public class PlayerFloor : Singleton<PlayerFloor>
     private Transform _camera;
 
     private int _playerFloor = 1;
+    private Vector3 _measureStartPos;
+    private float _measureWidth;
 
     private void Start()
     {
@@ -22,6 +24,11 @@ public class PlayerFloor : Singleton<PlayerFloor>
         }
         _floorDefaultColor = floorTransforms[0].GetComponent<MeshRenderer>().material.color;
         _camera = GameObject.Find("Camera").transform;
+
+        foreach (Transform transform in floorTransforms)
+        {
+            transform.position = floorTransforms[(int)Floor.Center].position;
+        }
     }
 
     private void Update()
@@ -33,7 +40,11 @@ public class PlayerFloor : Singleton<PlayerFloor>
         IsRayHit();
         if (Input.GetKeyDown(KeyCode.I))
         {
-            StartCoroutine(Hit(10));
+            StartMeasure();
+        }
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            StopMeasure();
         }
     }
 
@@ -72,6 +83,23 @@ public class PlayerFloor : Singleton<PlayerFloor>
     public void SetTagetFloor(Floor floor)  
     {
         floorTransforms[(int)floor].GetComponent<MeshRenderer>().material.color = new Color(0.7f, 0, 0);
+    }
+
+    public void StartMeasure()
+    {
+        _measureStartPos = _camera.position;
+    }
+
+    public void StopMeasure()
+    {
+        Vector3 _measureEndPos;
+        _measureEndPos = _camera.position;
+        _measureWidth = Vector2.Distance(new Vector2(_measureEndPos.x,_measureEndPos.z), new Vector2(_measureStartPos.x, _measureStartPos.z));
+        floorTransforms[(int)Floor.Left].position -= new Vector3(_measureWidth, 0,0);
+        floorTransforms[(int)Floor.Right].position += new Vector3(_measureWidth, 0,0);
+        floorTransforms[(int)Floor.Left].localScale = new Vector3(_measureWidth, 0.1f, 3.68f);
+        floorTransforms[(int)Floor.Center].localScale = new Vector3(_measureWidth, 0.1f, 3.68f);
+        floorTransforms[(int)Floor.Right].localScale = new Vector3(_measureWidth, 0.1f, 3.68f);
     }
 
     public IEnumerator Hit(int cnt)
