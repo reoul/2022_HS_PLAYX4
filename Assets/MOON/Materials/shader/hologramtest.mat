@@ -75,7 +75,7 @@ Material:
     - _BumpScale: 1
     - _ClipPower: 200
     - _Cutoff: 0.5
-    - _CutoffHeight: 11.06
+    - _CutoffHeight: -2
     - _DegeWidth: 0.05
     - _DetailNormalMapScale: 1
     - _DiffuseAmount: 0

@@ -8,8 +8,8 @@ public class Enemy : Unit
     public enum EnemyType { None, stage1, stage2, stage3 };
 
     public string name { get; private set; }
-    public float maxHealth { get; private set; }
-    public float currentHealth { get; private set; }
+    public float maxHealth { get; protected set; }
+    public float currentHealth { get; protected set; }
 
     public Enemy()
     {
