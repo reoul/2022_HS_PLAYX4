@@ -23,7 +23,7 @@ public class StageManager : Singleton<StageManager>
 
     private Stage _curStage => stages[(int) _curStageType - 1].GetComponent<Stage>();
 
-    private void NextStage()
+    public void NextStage()
     {
         _curStageType = (StageType) (((int) _curStageType + 1) % Enum.GetValues(typeof(StageType)).Length);
         ScoreSystem.Score = 0;
