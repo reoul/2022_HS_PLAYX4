@@ -97,6 +97,7 @@ public class LSM_KYB_Dissolve : MonoBehaviour
     {
         if (_isDelay)
         {
+            SoundManager.Instance.PlaySound("Env3", 1f);
             _timer += Time.deltaTime;
             if (_timer >= _delayTime)
             {
@@ -123,7 +124,6 @@ public class LSM_KYB_Dissolve : MonoBehaviour
     public void StartCreateDissolve(float delayTime = 0)
     {
         _timer = 0;
-        SoundManager.Instance.PlaySound("Env3", 1f);
         State = DissolveState.Inc;
         if (delayTime > 0)
         {
