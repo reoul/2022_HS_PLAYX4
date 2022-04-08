@@ -8,8 +8,8 @@ public class IntroObj : MonoBehaviour
     {
         if(other.CompareTag("Arrow"))
         {
+            this.gameObject.SetActive(false);
             StageManager.Instance.NextStage();
-            Destroy(this.gameObject);
         }
     }
 }

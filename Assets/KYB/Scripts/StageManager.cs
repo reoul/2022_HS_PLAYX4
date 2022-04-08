@@ -21,7 +21,15 @@ public class StageManager : Singleton<StageManager>
 
     private StageType _curStageType = StageType.Intro;
 
-    private Stage _curStage => stages[(int) _curStageType - 1].GetComponent<Stage>();
+    private Stage _curStage => stages[(int) _curStageType].GetComponent<Stage>();
+
+    public GameObject _nextStageObj;
+
+    public void Start()
+    {
+        _nextStageObj = FindObjectOfType<IntroObj>().gameObject;
+        GameObject.Find("Canvas").transform.GetChild(0).gameObject.SetActive(false);
+    }
 
     public void NextStage()
     {
@@ -38,28 +46,22 @@ public class StageManager : Singleton<StageManager>
             NextStage();
         }
 
-        if (_curStageType >= StageType.Stage1 && _curStageType <= StageType.Stage3)
-        {
-            _curStage.StageUpdate();
-        }
+        _curStage.StageUpdate();
     }
 
 
     private void SetUpStage(StageType type)
     {
         // 홀로그램 시작
-        if (type >= StageType.Stage1 && type <= StageType.Stage3)
-        {
-            StartHologram(type);
-            _curStage.gameObject.SetActive(true);
-            _curStage.StageStart();
-        }
+        StartHologram(type);
+        _curStage.gameObject.SetActive(true);
+        _curStage.StageStart();
         // 조건문 : 만약 홀로그램이 다 끝났다면
     }
 
     private void StartHologram(StageType type)
     {
-        stages[(int) type - 1].GetComponent<Stage>().StageSetUP();
+        stages[(int) type].GetComponent<Stage>().StageSetUP();
     }
 
     IEnumerator TimerCoroutine()
@@ -74,13 +76,14 @@ public class StageManager : Singleton<StageManager>
             TimerText.text = $"남은 시간 : {i}초";
             yield return new WaitForSeconds(1f);
         }
+
         _curStage.RemoveStage();
         yield return new WaitForSeconds(1f);
-        
+
         _curStage.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(3f);
-        
+
         NextStage();
     }
 }
