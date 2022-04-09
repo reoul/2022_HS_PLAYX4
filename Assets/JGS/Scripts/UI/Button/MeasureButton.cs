@@ -16,30 +16,31 @@ public class MeasureButton : MonoBehaviour
     {
         if (other.CompareTag("Arrow"))
         {
-            _buttonClass = _buttonClass.Execute();
+            Debug.Log("testTrue");
+            _buttonClass = _buttonClass.Execute(this.gameObject);
         }
     }
 }
 
 public interface ButtonUI
 {
-    ButtonUI Execute();
+    ButtonUI Execute(GameObject gameObj);
 }
 
-public class StartMeasureClass : MonoBehaviour, ButtonUI
+public class StartMeasureClass : ButtonUI
 {
-    public ButtonUI Execute()
+    public ButtonUI Execute(GameObject gameObj)
     {
-        gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+        gameObj.GetComponent<MeshRenderer>().material.color = Color.red;
         PlayerFloor.Instance.StartMeasure();
         return new StopMeasureClass();
     }
 }
-public class StopMeasureClass : MonoBehaviour, ButtonUI
+public class StopMeasureClass : ButtonUI
 {
-    public ButtonUI Execute()
+    public ButtonUI Execute(GameObject gameObj)
     {
-        gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+        gameObj.GetComponent<MeshRenderer>().material.color = Color.blue;
         PlayerFloor.Instance.StopMeasure();
         return new StartMeasureClass();
     }

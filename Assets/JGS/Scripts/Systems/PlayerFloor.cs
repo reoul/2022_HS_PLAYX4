@@ -25,10 +25,6 @@ public class PlayerFloor : Singleton<PlayerFloor>
         _floorDefaultColor = floorTransforms[0].GetComponent<MeshRenderer>().material.color;
         _camera = GameObject.Find("Camera").transform;
 
-        foreach (Transform transform in floorTransforms)
-        {
-            transform.position = floorTransforms[(int)Floor.Center].position;
-        }
     }
 
     private void Update()
@@ -88,6 +84,10 @@ public class PlayerFloor : Singleton<PlayerFloor>
     public void StartMeasure()
     {
         _measureStartPos = _camera.position;
+        foreach (Transform transform in floorTransforms)
+        {
+            transform.position = floorTransforms[(int)Floor.Center].position;
+        }
     }
 
     public void StopMeasure()
