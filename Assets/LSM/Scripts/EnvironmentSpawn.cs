@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnvironmentSpawn : MonoBehaviour
+public class EnvironmentSpawn : Singleton<EnvironmentSpawn>
 {
 
 
