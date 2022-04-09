@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
@@ -12,6 +13,10 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// 차징하고 있는지
     /// </summary>
     public bool IsCharging { get; private set; }
+
+    public bool IsMoveStop { get; private set; }
+
+    private List<Vector3> _posList = new List<Vector3>();
 
     /// <summary>
     /// 차징된 시간
@@ -226,6 +231,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
                 SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().Stop();
                 ArrowManager.Instance.Shot(RightController.transform.position, Direction);
                 SoundManager.Instance.PlaySound("Rock 6", 1f);
+                FindObjectOfType<AfterImage>().Shot();
             }
             ArrowController.MeshON();
             IsCharging = false;
@@ -251,6 +257,38 @@ public class VRControllerManager : Singleton<VRControllerManager>
                 RightController = controller;
             }
         }
+    }
+
+    private void CheckStop()
+    {
+        if(_posList.Count >= 10)
+        {
+            _posList.RemoveAt(0);
+        }
+        _posList.Add(Camera.main.transform.position);
+        IsMoveStop = IsPosStop();
+        Debug.Log($"움직임 상태는 {(IsMoveStop ? "멈춤" : "이동")}");
+    }
+
+    private bool IsPosStop()
+    {
+        Vector3 sum = Vector3.zero;
+        foreach (Vector3 pos in _posList)
+        {
+            sum += pos;
+        }
+        sum /= _posList.Count;
+        if (Mathf.Abs(_posList[0].x - sum.x) < 0.01f)
+        {
+            if (Mathf.Abs(_posList[0].z - sum.z) < 0.01f)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
+        else
+            return false;
     }
 
     private void CreatePoint()
@@ -327,7 +365,6 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// </summary>
     private void ChargingTime()
     {
-        Debug.Log(_chargingTime);
         //if(IsCharging)
         //{
         //    _chargingTime += _chargingSpeed * Time.deltaTime;

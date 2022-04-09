@@ -5,15 +5,21 @@ public class BowManager : Singleton<BowManager>
 {
     public LineRenderer _arrowTrajectoryLineRenderer;
     public LineRenderer _bowStringLineRenderer;
+    public LineRenderer _bowStringLineRenderer2;
     public GameObject BowObj;
+    private Transform _bowTopTransform;
+    private Transform _bowBottomTransform;
 
     private void Awake()
     {
         _arrowTrajectoryLineRenderer = GameObject.Find("ArrowTrajectoryLine").GetComponent<LineRenderer>();
         _bowStringLineRenderer = GameObject.Find("BowStringLine").GetComponent<LineRenderer>();
+        _bowStringLineRenderer2 = GameObject.Find("BowStringLine2").GetComponent<LineRenderer>();
 
         _arrowTrajectoryLineRenderer.SetPosition(0, Vector3.zero);
         _arrowTrajectoryLineRenderer.SetPosition(1, Vector3.zero);
+        _bowTopTransform = BowObj.transform.GetChild(0);
+        _bowBottomTransform = BowObj.transform.GetChild(1);
     }
 
     private void Update()
@@ -60,17 +66,19 @@ public class BowManager : Singleton<BowManager>
         {
             _bowStringLineRenderer.SetPosition(0, Vector3.zero);
             _bowStringLineRenderer.SetPosition(1, Vector3.zero);
-            _bowStringLineRenderer.SetPosition(2, Vector3.zero);
+            _bowStringLineRenderer2.SetPosition(0, Vector3.zero);
+            _bowStringLineRenderer2.SetPosition(1, Vector3.zero);
             return;
         }
         
         // todo : 포지션 수정하기
-        Vector3 bowTopPos = Vector3.zero;
-        Vector3 handPos = VRControllerManager.Instance.ArrowController.CenterTransform.transform.position;
-        Vector3 bowBottomPos = Vector3.zero;
-        _bowStringLineRenderer.SetPosition(0,bowTopPos);
-        _bowStringLineRenderer.SetPosition(1,handPos);
-        _bowStringLineRenderer.SetPosition(2,bowBottomPos);
+        //Vector3 bowTopPos = _bowTopTransform.position;
+        //Vector3 handPos = VRControllerManager.Instance.ArrowController.CenterTransform.transform.position;
+        //Vector3 bowBottomPos = _bowBottomTransform.position;
+        _bowStringLineRenderer.SetPosition(0, _bowTopTransform.position);
+        _bowStringLineRenderer.SetPosition(1, VRControllerManager.Instance.ArrowController.CenterTransform.transform.position);
+        _bowStringLineRenderer2.SetPosition(0, VRControllerManager.Instance.ArrowController.CenterTransform.transform.position);
+        _bowStringLineRenderer2.SetPosition(1, _bowBottomTransform.position);
     }
 
     private void UpdateRotate()

@@ -108,7 +108,6 @@ public class KYB_Dissolve : MonoBehaviour
         if (_isDelay || State == DissolveState.Nomal || State == DissolveState.Hide)
         {
             TopBottom topBottom = GetDissolveTopBottom();
-            Debug.Log(_topPos);
             SetHeight(State == DissolveState.Nomal ? topBottom.Top + 0.001f : topBottom.Bottom - 0.001f);
         }
         else
