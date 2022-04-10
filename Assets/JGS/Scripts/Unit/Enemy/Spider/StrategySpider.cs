@@ -68,11 +68,11 @@ public class StrategySpider : Strategy
     {
         public StateSpawn(GameObject gameObject) : base(gameObject) { }
 
-        private KYB_Dissolve _disolve;
+        private DissolveMat _disolve;
 
         public override void StateEnter()
         {
-            _disolve = _gameObj.GetComponentInChildren<KYB_Dissolve>();
+            _disolve = _gameObj.GetComponentInChildren<DissolveMat>();
             _disolve.StartCreateDissolve();
         }
 
@@ -92,7 +92,7 @@ public class StrategySpider : Strategy
             //{
             //    gameObject.GetComponent<BeamController>().BeamIn();
             //}
-            if (_disolve.State == KYB_Dissolve.DissolveState.Nomal)
+            if (_disolve.State == DissolveMat.DissolveState.Nomal)
             {
                 _stateMachine.SetState(_dicState[State.Run]);
             }
@@ -145,11 +145,11 @@ public class StrategySpider : Strategy
 
         private Transform _targetTransform;
 
-        private KYB_Dissolve _disolve;
+        private DissolveMat _disolve;
 
         public override void StateEnter()
         {
-            _disolve = _gameObj.GetComponentInChildren<KYB_Dissolve>();
+            _disolve = _gameObj.GetComponentInChildren<DissolveMat>();
             ScoreSystem.Score -= 100;
             _disolve.StartDestroyDissolve();
         }
@@ -162,7 +162,7 @@ public class StrategySpider : Strategy
         public override void StateUpdate()
         {
             _gameObj.GetComponent<Strategy>().MoveToPlayer(0.06f);
-            if (_disolve.State == KYB_Dissolve.DissolveState.Hide)
+            if (_disolve.State == DissolveMat.DissolveState.Hide)
             {
                 _gameObj.GetComponent<AiSpider>().DisableTarget();
                 FindObjectOfType<SpawnerManager>()._currentSpawnCount--;
@@ -195,11 +195,11 @@ public class StrategySpider : Strategy
         private Transform _targetTransform;
         public StateDeath( GameObject gameObject) : base( gameObject) { }
 
-        private KYB_Dissolve _disolve;
+        private DissolveMat _disolve;
 
         public override void StateEnter()
         {
-            _disolve = _gameObj.GetComponentInChildren<KYB_Dissolve>();
+            _disolve = _gameObj.GetComponentInChildren<DissolveMat>();
             ScoreSystem.Score += 100;
             _disolve.StartDestroyDissolve();
         }
@@ -212,7 +212,7 @@ public class StrategySpider : Strategy
         public override void StateUpdate()
         {
             _gameObj.GetComponent<Strategy>().MoveToPlayer(0.06f);
-            if (_disolve.State == KYB_Dissolve.DissolveState.Hide)
+            if (_disolve.State == DissolveMat.DissolveState.Hide)
             {
                 FindObjectOfType<SpawnerManager>()._currentSpawnCount--;
                 _gameObj.SetActive(false);

@@ -15,11 +15,11 @@ public class CheckSize : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.O))
         {
-            GetComponent<KYB_Dissolve>().StartCreateDissolve();
+            GetComponent<DissolveMat>().StartCreateDissolve();
         }
         if (Input.GetKeyDown(KeyCode.F))
         {
-            GetComponent<KYB_Dissolve>().StartDestroyDissolve();
+            GetComponent<DissolveMat>().StartDestroyDissolve();
         }
         
     }

@@ -23,7 +23,7 @@ public abstract class Stage : MonoBehaviour
                 k += 0.2f;
                 cnt = 0;
             }
-            dissolve.GetComponent<KYB_Dissolve>().StartCreateDissolve(k);
+            dissolve.GetComponent<DissolveMat>().StartCreateDissolve(k);
         }
     }
 
@@ -58,7 +58,7 @@ public abstract class Stage : MonoBehaviour
         var monsters = FindObjectsOfType<StrategySpider>();
         foreach (StrategySpider monster in monsters)
         {
-            monster.GetComponentInChildren<KYB_Dissolve>().StartDestroyDissolve();
+            monster.GetComponentInChildren<DissolveMat>().StartDestroyDissolve();
         }
     }
 
@@ -67,7 +67,7 @@ public abstract class Stage : MonoBehaviour
         RemoveEnemy();
         foreach (GameObject dissolve in DissolveEnvironments)
         {
-            dissolve.GetComponent<KYB_Dissolve>().StartDestroyDissolve();
+            dissolve.GetComponent<DissolveMat>().StartDestroyDissolve();
         }
     }
 }
