@@ -6,9 +6,10 @@ public class WeakPoint : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "arrow")
+        if(other.CompareTag("Arrow"))
         {
-            Destroy(this.gameObject);
+            ScoreSystem.Score += 100;
+            this.transform.GetComponentInParent<TreeSpirit>().ChangeWeakPoint();
         }
     }
 }

@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class BowManager : Singleton<BowManager>
 {
-    public LineRenderer _arrowTrajectoryLineRenderer;
-    public LineRenderer _bowStringLineRenderer;
-    public LineRenderer _bowStringLineRenderer2;
+    private LineRenderer _arrowTrajectoryLineRenderer;
+    private LineRenderer _bowStringLineRenderer;
+    private LineRenderer _bowStringLineRenderer2;
     public GameObject BowObj;
     private Transform _bowTopTransform;
     private Transform _bowBottomTransform;
@@ -71,16 +71,16 @@ public class BowManager : Singleton<BowManager>
             return;
         }
         
-        // todo : 포지션 수정하기
-        //Vector3 bowTopPos = _bowTopTransform.position;
-        //Vector3 handPos = VRControllerManager.Instance.ArrowController.CenterTransform.transform.position;
-        //Vector3 bowBottomPos = _bowBottomTransform.position;
+        var arrowControllerPos = VRControllerManager.Instance.ArrowController.CenterTransform.transform.position;
         _bowStringLineRenderer.SetPosition(0, _bowTopTransform.position);
-        _bowStringLineRenderer.SetPosition(1, VRControllerManager.Instance.ArrowController.CenterTransform.transform.position);
-        _bowStringLineRenderer2.SetPosition(0, VRControllerManager.Instance.ArrowController.CenterTransform.transform.position);
+        _bowStringLineRenderer.SetPosition(1, arrowControllerPos);
+        _bowStringLineRenderer2.SetPosition(0, arrowControllerPos);
         _bowStringLineRenderer2.SetPosition(1, _bowBottomTransform.position);
     }
 
+    /// <summary>
+    /// 활 각도 변경
+    /// </summary>
     private void UpdateRotate()
     {
         if (VRControllerManager.Instance.IsCharging)
