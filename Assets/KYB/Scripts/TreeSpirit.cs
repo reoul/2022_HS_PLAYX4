@@ -19,6 +19,9 @@ public class TreeSpirit : MonoBehaviour
         _curWeak.gameObject.SetActive(true);
     }
 
+    /// <summary>
+    /// 약점을 변경한다
+    /// </summary>
     public void ChangeWeakPoint()
     {
         int rand;
