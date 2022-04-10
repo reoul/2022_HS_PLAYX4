@@ -2,7 +2,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class MonsterT : MonoBehaviour
+public class TreeSpirit : MonoBehaviour
 {
     public Transform[] weakPoints;
 
