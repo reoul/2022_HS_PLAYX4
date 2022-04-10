@@ -6,7 +6,7 @@ using UnityEditor.Compilation;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class KYB_Dissolve : MonoBehaviour
+public class DissolveMat : MonoBehaviour
 {
     private struct TopBottom
     {
