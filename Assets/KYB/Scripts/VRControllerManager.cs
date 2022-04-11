@@ -231,7 +231,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
                 SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().Stop();
                 ArrowManager.Instance.Shot(RightController.transform.position, Direction);
                 SoundManager.Instance.PlaySound("Rock 6", 1f);
-                FindObjectOfType<AfterImage>().Shot();
+                FindObjectOfType<ArrowAfterImage>().Shot();
             }
             ArrowController.MeshON();
             IsCharging = false;
