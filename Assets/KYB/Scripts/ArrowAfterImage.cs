@@ -10,6 +10,7 @@ public class ArrowAfterImage : MonoBehaviour
     private bool _isShot = false;
 
     private float _speed = 1;
+    private float _alphaSpeed = 1;
 
     private void Start()
     {
@@ -18,7 +19,7 @@ public class ArrowAfterImage : MonoBehaviour
 
     private void Update()
     {
-        Effect2();
+        Effect1();
     }
 
     private void Effect1()
@@ -26,10 +27,15 @@ public class ArrowAfterImage : MonoBehaviour
         if (_isShot)
         {
             _lineRenderer.SetPosition(1, _lineRenderer.GetPosition(1) + (_direction * _speed));
-            _speed *= 100 * Time.deltaTime;
-            if (_speed >= 1000)
+            _speed *= 70 * Time.deltaTime;
+            _alphaSpeed *= 1 + Time.deltaTime;
+
+            _lineRenderer.material.color -= Color.black * _alphaSpeed * Time.deltaTime;
+            if (_lineRenderer.material.color.a <= 0)
             {
                 _isShot = false;
+                _lineRenderer.SetPosition(0, Vector3.zero);
+                _lineRenderer.SetPosition(1, Vector3.zero);
             }
         }
     }
@@ -38,8 +44,9 @@ public class ArrowAfterImage : MonoBehaviour
     {
         if (_isShot)
         {
+            Debug.Log("asdasdasd");
             _speed *= 1 + Time.deltaTime;
-            _lineRenderer.material.color -= Color.black * _speed * Time.deltaTime;
+            _lineRenderer.material.color -= Color.black * _alphaSpeed * Time.deltaTime;
             if (_lineRenderer.material.color.a <= 0)
             {
                 _isShot = false;
