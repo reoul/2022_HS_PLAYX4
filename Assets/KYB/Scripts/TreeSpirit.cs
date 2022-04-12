@@ -13,19 +13,28 @@ public class TreeSpirit : MonoBehaviour
         set { _moveSpeed = value; }
     }
 
-    private StateMachine _stateMachine;
+    public StateMachine _stateMachine;
 
     private Transform _curWeak;
 
-    public void Start()
+    public void Awake()
+    {
+        //RandomWeak();
+    }
+
+    public void Init()
     {
         _stateMachine = new TreeSpiritState(gameObject);
-        RandomWeak();
     }
 
     private void Update()
     {
         _stateMachine.StateUpdate();
+    }
+
+    public void ChangeState(TreeSpiritState.StateType state)
+    {
+        _stateMachine.ChangeState(_stateMachine.StateDictionary[(int)state]);
     }
 
     private void RandomWeak()

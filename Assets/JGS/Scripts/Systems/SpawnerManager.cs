@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class SpawnerManager : Singleton<SpawnerManager>
 {
-    public Queue<EnemySpawner> spawnerQueue = new Queue<EnemySpawner>();
-    private List<EnemySpawner> usedSpawnerList = new List<EnemySpawner>();
-    private EnemySpawner currentSpawner;
+    public Queue<Transform> usedSpawnTransQueue = new Queue<Transform>();
+    public Queue<Transform> unusedSpawnTransQueue = new Queue<Transform>();
     
     private float _spawnDelay;
     private float _currentTime;
@@ -19,18 +18,23 @@ public class SpawnerManager : Singleton<SpawnerManager>
     
     public void Spawn()
     {
-        currentSpawner = spawnerQueue.Dequeue();
-        currentSpawner.Spawn();
-        usedSpawnerList.Add(currentSpawner);
-        if (spawnerQueue.Count <= 0)
+        if(unusedSpawnTransQueue.Count <= 0)
         {
-            usedSpawnerList = Utility.ShuffleList(usedSpawnerList);
-            foreach (var obj in usedSpawnerList)
+            List<Transform> shuffleList = new List<Transform>();
+            for (int i = 0; i < usedSpawnTransQueue.Count;)
             {
-                spawnerQueue.Enqueue(obj);
+                shuffleList.Add(usedSpawnTransQueue.Dequeue());
             }
-            usedSpawnerList.Clear();
+            Utility.ShuffleList(shuffleList);
+            foreach (Transform spawner in shuffleList)
+            {
+                unusedSpawnTransQueue.Enqueue(spawner);
+            }
         }
+
+        Transform unUsedTrans = unusedSpawnTransQueue.Dequeue();
+        FindObjectOfType<EnemySpawner>().Spawn(unUsedTrans.position);
+        usedSpawnTransQueue.Enqueue(unUsedTrans);
     }
 
     private void Start()
@@ -38,6 +42,11 @@ public class SpawnerManager : Singleton<SpawnerManager>
         _currentSpawnCount = 0;
         _spawnDelay = 0.5f;
         _currentTime = 0;
+        var spawnTransforms = GetComponentsInChildren<Transform>();
+        for (int i = 1; i < spawnTransforms.Length; i++)
+        {
+            unusedSpawnTransQueue.Enqueue(spawnTransforms[i]);
+        }
     }
 
     public void SpawnUpdate()
@@ -49,7 +58,7 @@ public class SpawnerManager : Singleton<SpawnerManager>
         }
         if ((_currentTime > _spawnDelay) && (_currentSpawnCount < _maxSpawnCount))
         {
-            _currentTime = 0;
+            _currentTime -= _spawnDelay;
             _currentSpawnCount++;
             Spawn();
         }

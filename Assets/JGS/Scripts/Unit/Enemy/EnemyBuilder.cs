@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyType { monter1, monter2, monter3 }
+public enum EnemyType { monter1 }
 
 public class EnemyBuilder
 {
@@ -35,16 +35,10 @@ public class EnemyBuilder
         switch (enemyType)
         {
             case EnemyType.monter1:
-                enemyObj = GameObject.Instantiate(Resources.Load("SPIDER", typeof(GameObject))) as GameObject;
-                break;
-            case EnemyType.monter2:
-                enemyObj = GameObject.Instantiate(Resources.Load("Monster_X_Green", typeof(GameObject))) as GameObject;
-                break;
-            case EnemyType.monter3:
-                enemyObj = GameObject.Instantiate(Resources.Load("Rhino_PBR", typeof(GameObject))) as GameObject;
+                enemyObj = GameObject.Instantiate(Resources.Load("TreeSpirit", typeof(GameObject))) as GameObject;
                 break;
             default:
-                enemyObj = GameObject.Instantiate(Resources.Load("Temp_DefaultCubeEnemy", typeof(GameObject))) as GameObject;
+                enemyObj = GameObject.Instantiate(Resources.Load("TreeSpirit", typeof(GameObject))) as GameObject;
                 break;
         }
         enemyObj.name = this.name;

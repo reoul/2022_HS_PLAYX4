@@ -83,14 +83,14 @@ public class BowManager : Singleton<BowManager>
     /// </summary>
     private void UpdateRotate()
     {
-        if (VRControllerManager.Instance.IsCharging)
+        /*if (VRControllerManager.Instance.IsCharging)
         {
             BowObj.transform.position = VRControllerManager.Instance.BowController.CenterTransform.position;
             BowObj.transform.forward = VRControllerManager.Instance.Direction;
         }
         else
         {
-            BowObj.transform.localRotation = Quaternion.Euler(70, 0, 0);
-        }
+            //BowObj.transform.localRotation = Quaternion.Euler(70, 0, 0);
+        }*/
     }
 }

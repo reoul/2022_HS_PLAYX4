@@ -16,30 +16,32 @@ public class TreeSpiritState : StateMachine
 
     public TreeSpiritState(GameObject gameObject) : base(gameObject)
     {
+        //InitStateDictionary();
     }
 
-    protected override void InitStateDictionary()
+    public override void InitStateDictionary()
     {
         StateDictionary = new Dictionary<int, State>();
-        StateDictionary.Add((int) StateType.Idle, new IdleState(this));
-        StateDictionary.Add((int) StateType.Spawn, new SpawnState(this));
-        StateDictionary.Add((int) StateType.Run, new RunState(this));
-        StateDictionary.Add((int) StateType.Hit, new HitState(this));
-        StateDictionary.Add((int) StateType.Death, new DeathState(this));
+        StateDictionary.Add((int) StateType.Idle, new IdleState(gameObject));
+        StateDictionary.Add((int) StateType.Spawn, new SpawnState(gameObject));
+        StateDictionary.Add((int) StateType.Run, new RunState(gameObject));
+        StateDictionary.Add((int) StateType.Hit, new HitState(gameObject));
+        StateDictionary.Add((int) StateType.Death, new DeathState(gameObject));
         ChangeState(StateDictionary[(int) StateType.Idle]);
     }
 
     private class IdleState : State
     {
-        public IdleState(StateMachine stateMachine) : base(stateMachine)
+        public IdleState(GameObject gameObject) : base(gameObject)
         {
         }
 
         public override void StateStart()
         {
             base.StateStart();
-            var transform = _stateMachine.gameObject.transform;
-            transform.forward = new Vector3(0, transform.position.y, 0) - transform.position;
+            //var transform = gameObject.transform;
+            //Debug.Log(_stateMachine.gameObject.transform.position);
+            //transform.forward = Camera.main.gameObject.transform.position - transform.position;
         }
 
         public override void StateUpdate()
@@ -49,15 +51,25 @@ public class TreeSpiritState : StateMachine
 
     private class SpawnState : State
     {
-        public SpawnState(StateMachine stateMachine) : base(stateMachine)
+        public SpawnState(GameObject gameObject) : base(gameObject)
         {
+        }
+
+        public override void StateStart()
+        {
+            base.StateStart();
+            Debug.Log("스폰");
         }
 
         public override void StateUpdate()
         {
-            if (_stateMachine.gameObject.GetComponentInChildren<DissolveMat>().Percent >= 1)
+            if (gameObject.GetComponentInChildren<DissolveMat>().Percent >= 1)
             {
-                _stateMachine.ChangeState(_stateMachine.StateDictionary[(int) StateType.Run]);
+                Debug.Log("다됨");
+                //var aaaa = gameObject.GetComponent<StateMachine>();
+                var staticMachine = gameObject.GetComponent<TreeSpirit>()._stateMachine;
+                staticMachine.ChangeState(staticMachine.StateDictionary[(int)StateType.Run]);
+                //gameObject.GetComponent<StateMachine>().ChangeState(_stateMachine.StateDictionary[(int)StateType.Run]);
             }
         }
     }
@@ -66,18 +78,18 @@ public class TreeSpiritState : StateMachine
     {
         private readonly Transform _treeSpiritTransform;
 
-        public RunState(StateMachine stateMachine) : base(stateMachine)
+        public RunState(GameObject gameObject) : base(gameObject)
         {
-            _treeSpiritTransform = stateMachine.gameObject.transform;
+            _treeSpiritTransform = gameObject.transform;
         }
 
         public override void StateUpdate()
         {
-            float moveSpeed = _stateMachine.gameObject.GetComponent<TreeSpirit>().MoveSpeed;
-            _treeSpiritTransform.Translate(_treeSpiritTransform.forward * moveSpeed * Time.deltaTime);
-            
+            float moveSpeed = gameObject.GetComponent<TreeSpirit>().MoveSpeed;
+            _treeSpiritTransform.Translate(-_treeSpiritTransform.forward * moveSpeed * Time.deltaTime);
+
             var distance = Vector3.Distance(_treeSpiritTransform.position, Vector3.zero);
-            if (distance < 5)
+            if (distance < 0.5f)
             {
                 _stateMachine.ChangeState(_stateMachine.StateDictionary[(int) StateType.Death]);
             }
@@ -86,30 +98,30 @@ public class TreeSpiritState : StateMachine
 
     private class HitState : State
     {
-        public HitState(StateMachine stateMachine) : base(stateMachine)
+        public HitState(GameObject gameObject) : base(gameObject)
         {
         }
 
         public override void StateUpdate()
         {
-            if (_stateMachine.gameObject.GetComponentInChildren<DissolveMat>().Percent <= 0)
+            if (gameObject.GetComponentInChildren<DissolveMat>().Percent <= 0)
             {
-                _stateMachine.gameObject.SetActive(false);
+                gameObject.SetActive(false);
             }
         }
     }
 
     private class DeathState : State
     {
-        public DeathState(StateMachine stateMachine) : base(stateMachine)
+        public DeathState(GameObject gameObject) : base(gameObject)
         {
         }
 
         public override void StateUpdate()
         {
-            if (_stateMachine.gameObject.GetComponentInChildren<DissolveMat>().Percent <= 0)
+            if (gameObject.GetComponentInChildren<DissolveMat>().Percent <= 0)
             {
-                _stateMachine.gameObject.SetActive(false);
+                gameObject.SetActive(false);
             }
         }
     }

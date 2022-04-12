@@ -411,7 +411,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
         GameObject bowObj = BowManager.Instance.BowObj;
         bowObj.transform.parent = BowController.transform;
         bowObj.transform.transform.localPosition = Vector3.zero;
-        bowObj.transform.localRotation = Quaternion.Euler(70, 0, 0);
+        //bowObj.transform.localRotation = Quaternion.Euler(70, 0, 0);
         bowObj.SetActive(true);
     }
 

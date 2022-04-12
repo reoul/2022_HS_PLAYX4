@@ -4,11 +4,13 @@ using UnityEngine;
 
 public abstract class State
 {
-    protected readonly StateMachine _stateMachine;
+    protected StateMachine _stateMachine { get { return gameObject.GetComponent<StateMachine>(); } }
 
-    protected State(StateMachine stateMachine)
+    protected readonly GameObject gameObject;
+
+    protected State(GameObject gameObject)
     {
-        _stateMachine = stateMachine;
+        this.gameObject = gameObject;
     }
     
     public virtual void StateStart(){}

@@ -15,13 +15,13 @@ public abstract class StateMachine
     protected StateMachine(GameObject gameObject)
     {
         this.gameObject = gameObject;
-        InitStateDictionary();
+        //InitStateDictionary();
     }
 
     /// <summary>
     /// 상태를 딕셔너리에 추가해준다
     /// </summary>
-    protected abstract void InitStateDictionary();
+    public abstract void InitStateDictionary();
 
     public void ChangeState(State state)
     {

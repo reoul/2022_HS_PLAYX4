@@ -4,92 +4,32 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    private ObjectPooler _pooler;
+    public Queue<GameObject> unUsedEnemyQueue;
 
-    private enum EnemyType{ Spider = 1,Goblin, Lihano};
+    private enum EnemyType{ TreeSpirit = 1};
 
     [SerializeField]
     private EnemyType _enemyType;
 
     private void Start()
     {
-        _pooler = new ObjectPooler();
-        _pooler.StartPooling(this.transform, ((int)_enemyType));
-        FindObjectOfType<SpawnerManager>()?.spawnerQueue.Enqueue(this);
-    }
-
-    public void Spawn()
-    {
-        GameObject spawnedObj;
-        spawnedObj = _pooler.GetPooledObject();
-        spawnedObj.transform.localPosition = Vector3.zero;
-        spawnedObj.transform.LookAt(GameObject.Find("[CameraRig]").transform.position);
-        spawnedObj.SetActive(true);
-    }
-
-
-}
-
-//오브젝트 풀링
-
-public class ObjectPooler : MonoBehaviour
-{
-    private GameObject SpawnEnemy(int type)
-    {
-        Enemy _stage1Enemy;
-        switch (type)
+        unUsedEnemyQueue = new Queue<GameObject>();
+        for (int i = 0; i < 10; i++)
         {
-            case 1:
-                _stage1Enemy = new EnemyBuilder("Spider").SetHealth(100).SetEnemyType(EnemyType.monter1).Build();
-                break;
-            case 2:
-                _stage1Enemy = new EnemyBuilder("Goblin").SetHealth(100).SetEnemyType(EnemyType.monter2).Build();
-                break;
-            case 3:
-                _stage1Enemy = new EnemyBuilder("Lihno").SetHealth(100).SetEnemyType(EnemyType.monter3).Build();
-                break;
-            default:
-                _stage1Enemy = new EnemyBuilder("test").SetHealth(100).SetEnemyType(EnemyType.monter1).Build();
-                break;
-        }
-
-        return _stage1Enemy.gameObject;
-    }
-
-    public int numberOfObject;
-    private List<GameObject> gameObjects;
-    private Transform _parant;
-    private int _enemytype;
-
-    public void StartPooling(Transform parant, int type)
-    {
-        numberOfObject = 3;
-        gameObjects = new List<GameObject>();
-        _parant = parant;
-        for (int i = 0; i < numberOfObject; i++)
-        {
-            _enemytype = type;
-            GameObject gameObject = SpawnEnemy(_enemytype).gameObject;
-            gameObject.transform.parent = _parant;
-            gameObject.SetActive(false);
-            gameObjects.Add(gameObject);
+            var enemy = new EnemyBuilder("TreeSpirit").Build();
+            enemy.gameObject.SetActive(false);
+            unUsedEnemyQueue.Enqueue(enemy.gameObject);
         }
     }
 
-    public GameObject GetPooledObject()
+    public void Spawn(Vector3 pos)
     {
-        foreach (GameObject gameObject in gameObjects)
-        {
-            if (!gameObject.activeInHierarchy)
-            {
-                return gameObject;
-            }
-        }
-
-        GameObject gameObj = SpawnEnemy(_enemytype).gameObject;
-        gameObj.transform.parent = _parant;
-        gameObj.SetActive(false);
-        gameObjects.Add(gameObj);
-        return gameObj;
+        var enemy = unUsedEnemyQueue.Dequeue().gameObject;
+        enemy.transform.position = pos;
+        enemy.SetActive(true);
+        enemy.GetComponent<TreeSpirit>().Init();
+        enemy.GetComponent<TreeSpirit>()._stateMachine.InitStateDictionary();
+        enemy.GetComponent<TreeSpirit>().ChangeState(TreeSpiritState.StateType.Spawn);
     }
+
 }
