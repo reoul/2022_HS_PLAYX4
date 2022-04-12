@@ -15,6 +15,8 @@ public class PlayerFloor : Singleton<PlayerFloor>
     private Vector3 _measureStartPos;
     private float _measureWidth;
 
+    private bool[] _isAttack;
+
     private void Start()
     {
         floorTransforms = new Transform[3];
@@ -25,6 +27,8 @@ public class PlayerFloor : Singleton<PlayerFloor>
         _floorDefaultColor = floorTransforms[0].GetComponent<MeshRenderer>().material.color;
         _camera = GameObject.Find("Camera").transform;
 
+
+        _isAttack = new bool[3];
     }
 
     private void Update()
@@ -119,7 +123,10 @@ public class PlayerFloor : Singleton<PlayerFloor>
                 {
                     floorTransforms[_floor].GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
                 }
-                tmp -= 0.01f;
+                if(tmp > 0.01)
+                {
+                    tmp -= 0.01f;
+                }
                 yield return new WaitForSeconds(tmp);
             }
             floorTransforms[_floor].GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
@@ -131,5 +138,44 @@ public class PlayerFloor : Singleton<PlayerFloor>
         }
 
         yield return null;
+    }
+
+
+    public IEnumerator StartAttack(int _floor)
+    {
+        if (!_isAttack[_floor])
+        {
+            _isAttack[_floor] = true;
+            float tmp = 0.2f;
+            int count = 1;
+            while (_isAttack[_floor])
+            {
+                if (count++ % 2 != 0)
+                {
+                    floorTransforms[_floor].GetComponent<MeshRenderer>().material.color = new Color(0.7f, 0, 0);
+                }
+                else
+                {
+                    floorTransforms[_floor].GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
+                }
+                tmp -= 0.01f;
+                yield return new WaitForSeconds(tmp);
+            }
+            floorTransforms[_floor].GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
+
+            if (_playerFloor == _floor)
+            {
+                ScoreSystem.Score -= 100;
+            }
+        }
+        yield return null;
+    }
+
+    public void StopAttack(int _floor)
+    {
+        if (_isAttack[_floor])
+        {
+            _isAttack[_floor] = false;
+        }
     }
 }
