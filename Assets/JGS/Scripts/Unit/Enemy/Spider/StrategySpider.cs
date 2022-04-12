@@ -43,14 +43,14 @@ public class StrategySpider : Strategy
     {
         if (_stateMachine.CurrentState == _dicState[State.Run])
         {
-            if(other.name == "PlayerZone")
+            if (other.name == "PlayerZone")
             {
                 _stateMachine.SetState(_dicState[State.Attack]);
             }
-            else if(other.tag == "Arrow")
+            else if (other.tag == "Arrow")
             {
                 _stateMachine.SetState(_dicState[State.Death]);
-            }  
+            }
         }
     }
 
@@ -58,7 +58,9 @@ public class StrategySpider : Strategy
     {
         this.GetComponent<AiSpider>().SetTarget(_target);
         //gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, new Vector3(_targetPostion.x, gameObject.transform.position.y, _targetPostion.z), speed * Time.deltaTime * 120);
-        float _distance = Vector2.Distance(new Vector2(gameObject.transform.position.x, gameObject.transform.position.z), new Vector2(_target.position.x, _target.position.z));
+        float _distance =
+            Vector2.Distance(new Vector2(gameObject.transform.position.x, gameObject.transform.position.z),
+                new Vector2(_target.position.x, _target.position.z));
 
         return _distance;
     }
@@ -66,7 +68,9 @@ public class StrategySpider : Strategy
     //States
     private class StateSpawn : IState
     {
-        public StateSpawn(GameObject gameObject) : base(gameObject) { }
+        public StateSpawn(GameObject gameObject) : base(gameObject)
+        {
+        }
 
         private DissolveMat _disolve;
 
@@ -78,12 +82,10 @@ public class StrategySpider : Strategy
 
         public override void StateExit()
         {
-
         }
 
         public override void StateUpdate()
         {
-
             //if (gameObject.transform.GetChild(1).GetComponent<Renderer>().material.GetFloat("_DisintegrateAmount") <= 0)
             //{
             //    gameObject.GetComponent<StrategySpider>()._stateMachine.SetState(gameObject.GetComponent<StrategySpider>()._dicState[State.Run]);
@@ -98,27 +100,31 @@ public class StrategySpider : Strategy
             }
         }
     }
+
     private class StateIdle : IState
     {
-        public StateIdle( GameObject gameObject) : base( gameObject) { }
+        public StateIdle(GameObject gameObject) : base(gameObject)
+        {
+        }
+
         public override void StateEnter()
         {
-
         }
 
         public override void StateExit()
         {
-
         }
 
         public override void StateUpdate()
         {
-
         }
     }
+
     private class StateRun : IState
     {
-        public StateRun( GameObject gameObject) : base( gameObject) { }
+        public StateRun(GameObject gameObject) : base(gameObject)
+        {
+        }
 
 
         public override void StateEnter()
@@ -128,41 +134,51 @@ public class StrategySpider : Strategy
 
         public override void StateExit()
         {
-
         }
 
         public override void StateUpdate()
         {
             if (_gameObj.GetComponent<Strategy>().MoveToPlayer(0.06f) < 7)
             {
+                _gameObj.GetComponent<AiSpider>().DisableTarget();
                 _stateMachine.SetState(_dicState[State.Attack]);
             }
         }
     }
+
     private class StateAttack : IState
     {
-        public StateAttack( GameObject gameObject) : base( gameObject) { }
+        public StateAttack(GameObject gameObject) : base(gameObject)
+        {
+        }
 
         private Transform _targetTransform;
 
-        private DissolveMat _disolve;
+        private DissolveMat _dissolve;
 
         public override void StateEnter()
         {
-            _disolve = _gameObj.GetComponentInChildren<DissolveMat>();
+            _dissolve = _gameObj.GetComponentInChildren<DissolveMat>();
             ScoreSystem.Score -= 100;
-            _disolve.StartDestroyDissolve();
+            _dissolve.StartDestroyDissolve();
         }
 
         public override void StateExit()
         {
-
         }
 
         public override void StateUpdate()
         {
-            _gameObj.GetComponent<Strategy>().MoveToPlayer(0.06f);
-            if (_disolve.State == DissolveMat.DissolveState.Hide)
+            if (!StageManager.Instance._curStage.IsFinish)
+            {
+                _gameObj.GetComponent<Strategy>().MoveToPlayer(0.06f);
+            }
+            else
+            {
+                _gameObj.GetComponent<AiSpider>().DisableTarget();
+            }
+
+            if (_dissolve.State == DissolveMat.DissolveState.Hide)
             {
                 _gameObj.GetComponent<AiSpider>().DisableTarget();
                 FindObjectOfType<SpawnerManager>()._currentSpawnCount--;
@@ -170,30 +186,35 @@ public class StrategySpider : Strategy
             }
         }
     }
+
     private class StateHit : IState
     {
         private GameObject gameObject;
-        public StateHit( GameObject gameObject) : base( gameObject) { }
+
+        public StateHit(GameObject gameObject) : base(gameObject)
+        {
+        }
 
         public override void StateEnter()
         {
-
         }
 
         public override void StateExit()
         {
-
         }
 
         public override void StateUpdate()
         {
-
         }
     }
+
     private class StateDeath : IState
     {
         private Transform _targetTransform;
-        public StateDeath( GameObject gameObject) : base( gameObject) { }
+
+        public StateDeath(GameObject gameObject) : base(gameObject)
+        {
+        }
 
         private DissolveMat _disolve;
 
@@ -206,12 +227,19 @@ public class StrategySpider : Strategy
 
         public override void StateExit()
         {
-
         }
 
         public override void StateUpdate()
         {
-            _gameObj.GetComponent<Strategy>().MoveToPlayer(0.06f);
+            if (!StageManager.Instance._curStage.IsFinish)
+            {
+                _gameObj.GetComponent<Strategy>().MoveToPlayer(0.06f);
+            }
+            else
+            {
+                _gameObj.GetComponent<AiSpider>().DisableTarget();
+            }
+
             if (_disolve.State == DissolveMat.DissolveState.Hide)
             {
                 FindObjectOfType<SpawnerManager>()._currentSpawnCount--;
@@ -219,5 +247,4 @@ public class StrategySpider : Strategy
             }
         }
     }
-
 }

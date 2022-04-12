@@ -6,8 +6,13 @@ using UnityEditor.Compilation;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+
 public class DissolveMat : MonoBehaviour
 {
+    public delegate void DissolveDelegate();
+
+    private DissolveDelegate _finishDissolveDelegate;
+    
     private struct TopBottom
     {
         public float Top;
@@ -63,7 +68,7 @@ public class DissolveMat : MonoBehaviour
     /// <summary>
     /// 디졸브 상태 퍼센트(몇퍼센트 디졸브 됐는지)
     /// </summary>
-    private float _percent => _timer / _dissolveSecond;
+    public float Percent => _timer / _dissolveSecond;
 
     private float _delayTime = 0;
 
@@ -87,7 +92,7 @@ public class DissolveMat : MonoBehaviour
             _timer = 0;
         }
     }
-    
+
     public void Update()
     {
         UpdateDissolve();
@@ -133,10 +138,10 @@ public class DissolveMat : MonoBehaviour
     /// <summary>
     /// 제거 디졸브 시작
     /// </summary>
-    public void StartDestroyDissolve()
+    public void StartDestroyDissolve(DissolveDelegate finishDissolveDelegate = null)
     {
-        _timer = _dissolveSecond;
         State = DissolveState.Dec;
+        _finishDissolveDelegate = finishDissolveDelegate;
     }
     
     /// <summary>
@@ -148,13 +153,20 @@ public class DissolveMat : MonoBehaviour
         _timer += ((int)State / 2) * Time.deltaTime;
         _timer = Mathf.Clamp(_timer, 0, _dissolveSecond);
         // 디졸드 다 됐는지 확인
-        if ((_percent % 1) == 0)
+        if ((Percent % 1) == 0)
         {
+            if (this.transform.parent.tag == "Enemy")
+            {
+                Debug.Log("asdsasad");
+            }
+            // 만약 디졸브 끝나고 실행할 코드가 있다면 실행
+            _finishDissolveDelegate?.Invoke();
+            _finishDissolveDelegate = null;
             State = State >= DissolveState.Nomal ? DissolveState.Nomal : DissolveState.Hide;
         }
 
         TopBottom topBottom = GetDissolveTopBottom();
-        float height = Mathf.Lerp(topBottom.Bottom, topBottom.Top, _percent);
+        float height = Mathf.Lerp(topBottom.Bottom, topBottom.Top, Percent);
         _material.SetFloat(CutoffHeight, height);
     }
 

@@ -43,6 +43,10 @@ public class SpawnerManager : Singleton<SpawnerManager>
     public void SpawnUpdate()
     {
         _currentTime += Time.deltaTime;
+        if (StageManager.Instance._curStage.IsFinish)
+        {
+            return;
+        }
         if ((_currentTime > _spawnDelay) && (_currentSpawnCount < _maxSpawnCount))
         {
             _currentTime = 0;

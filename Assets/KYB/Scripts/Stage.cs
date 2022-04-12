@@ -7,6 +7,9 @@ public abstract class Stage : MonoBehaviour
 {
     public List<GameObject> DissolveEnvironments;
 
+    public bool IsFinish { get; set; }
+    
+    
     /// <summary>
     /// 주변 사물 소환
     /// </summary>
@@ -49,25 +52,27 @@ public abstract class Stage : MonoBehaviour
     {
     }
 
-    public abstract void StageStart();
-
-    public abstract void StageUpdate();
-
-    public virtual void RemoveEnemy()
+    public virtual void StageStart()
     {
-        var monsters = FindObjectsOfType<StrategySpider>();
-        foreach (StrategySpider monster in monsters)
-        {
-            monster.GetComponentInChildren<DissolveMat>().StartDestroyDissolve();
-        }
+        IsFinish = false;
     }
+
+    public virtual void StageUpdate() { }
+
+    public virtual void RemoveEnemy() { }
 
     public void RemoveStage()
     {
+        IsFinish = true;
         RemoveEnemy();
         foreach (GameObject dissolve in DissolveEnvironments)
         {
             dissolve.GetComponent<DissolveMat>().StartDestroyDissolve();
         }
+    }
+
+    public void CheckFinishDissolveAll()
+    {
+        Debug.Log(FindObjectsOfType<StrategySpider>().Length);
     }
 }

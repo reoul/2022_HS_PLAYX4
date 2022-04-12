@@ -6,18 +6,24 @@ public class Stage1 : Stage
     
     public override void StageStart()
     {
+        base.StageStart();
         _spawnerManager = transform.GetChild(0).GetComponent<SpawnerManager>();
+    }
+
+    public override void StageUpdate()
+    {
+        base.StageUpdate();
+        _spawnerManager.SpawnUpdate();
     }
 
     public override void RemoveEnemy()
     {
         base.RemoveEnemy();
-        //_spawnerManager.spawnerQueue
-            
-    }
-
-    public override void StageUpdate()
-    {
-        _spawnerManager.SpawnUpdate();
+        var monsters = FindObjectsOfType<StrategySpider>();
+        foreach (StrategySpider monster in monsters)
+        {
+            var dissolveMat = monster.GetComponentInChildren<DissolveMat>();
+            dissolveMat.StartDestroyDissolve(CheckFinishDissolveAll);
+        }
     }
 }

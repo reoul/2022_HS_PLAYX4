@@ -21,7 +21,7 @@ public class StageManager : Singleton<StageManager>
 
     private StageType _curStageType = StageType.Intro;
 
-    private Stage _curStage => stages[(int) _curStageType].GetComponent<Stage>();
+    public Stage _curStage => stages[(int) _curStageType].GetComponent<Stage>();
 
     public GameObject _nextStageObj;
 
@@ -71,19 +71,19 @@ public class StageManager : Singleton<StageManager>
             yield break;
         }
 
-        for (int i = 20; i >= 0; i--)
+        for (int i = 5; i >= 0; i--)
         {
             TimerText.text = $"남은 시간 : {i}초";
             yield return new WaitForSeconds(1f);
         }
 
         _curStage.RemoveStage();
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(5f);
 
-        _curStage.gameObject.SetActive(false);
+        //_curStage.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(3f);
 
-        NextStage();
+        //NextStage();
     }
 }

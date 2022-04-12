@@ -6,11 +6,26 @@ public class TreeSpirit : MonoBehaviour
 {
     public Transform[] weakPoints;
 
+    [SerializeField] private float _moveSpeed;
+    public float MoveSpeed
+    {
+        get { return _moveSpeed; }
+        set { _moveSpeed = value; }
+    }
+
+    private KYB_StateMachine _stateMachine;
+
     private Transform _curWeak;
 
     public void Start()
     {
+        _stateMachine = new TreeSpiritState(gameObject);
         RandomWeak();
+    }
+
+    private void Update()
+    {
+        _stateMachine.StateUpdate();
     }
 
     private void RandomWeak()
