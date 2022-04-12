@@ -19,11 +19,11 @@ public class Stage1 : Stage
     public override void RemoveEnemy()
     {
         base.RemoveEnemy();
-        var monsters = FindObjectsOfType<StrategySpider>();
+        /*var monsters = FindObjectsOfType<StrategySpider>();
         foreach (StrategySpider monster in monsters)
         {
             var dissolveMat = monster.GetComponentInChildren<DissolveMat>();
             dissolveMat.StartDestroyDissolve(CheckFinishDissolveAll);
-        }
+        }*/
     }
 }

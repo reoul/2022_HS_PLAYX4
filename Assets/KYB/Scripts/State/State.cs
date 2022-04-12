@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class State
 {
-    protected KYB_StateMachine _stateMachine;
+    protected readonly StateMachine _stateMachine;
 
-    protected State(KYB_StateMachine stateMachine)
+    protected State(StateMachine stateMachine)
     {
         _stateMachine = stateMachine;
     }

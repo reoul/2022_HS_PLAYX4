@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeSpiritState : KYB_StateMachine
+public class TreeSpiritState : StateMachine
 {
     public enum StateType
     {
@@ -31,7 +31,7 @@ public class TreeSpiritState : KYB_StateMachine
 
     private class IdleState : State
     {
-        public IdleState(KYB_StateMachine stateMachine) : base(stateMachine)
+        public IdleState(StateMachine stateMachine) : base(stateMachine)
         {
         }
 
@@ -49,7 +49,7 @@ public class TreeSpiritState : KYB_StateMachine
 
     private class SpawnState : State
     {
-        public SpawnState(KYB_StateMachine stateMachine) : base(stateMachine)
+        public SpawnState(StateMachine stateMachine) : base(stateMachine)
         {
         }
 
@@ -66,7 +66,7 @@ public class TreeSpiritState : KYB_StateMachine
     {
         private readonly Transform _treeSpiritTransform;
 
-        public RunState(KYB_StateMachine stateMachine) : base(stateMachine)
+        public RunState(StateMachine stateMachine) : base(stateMachine)
         {
             _treeSpiritTransform = stateMachine.gameObject.transform;
         }
@@ -86,7 +86,7 @@ public class TreeSpiritState : KYB_StateMachine
 
     private class HitState : State
     {
-        public HitState(KYB_StateMachine stateMachine) : base(stateMachine)
+        public HitState(StateMachine stateMachine) : base(stateMachine)
         {
         }
 
@@ -101,7 +101,7 @@ public class TreeSpiritState : KYB_StateMachine
 
     private class DeathState : State
     {
-        public DeathState(KYB_StateMachine stateMachine) : base(stateMachine)
+        public DeathState(StateMachine stateMachine) : base(stateMachine)
         {
         }
 

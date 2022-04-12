@@ -2,44 +2,45 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class IState
+public abstract class StateMachine
 {
-    protected GameObject _gameObj;
-    protected StateMachine _stateMachine { get { return _gameObj.GetComponent<Strategy>()._stateMachine; }}
-    protected Dictionary<Strategy.State, IState> _dicState;
-
-    public IState(GameObject gameObject)
-    {
-        _gameObj = gameObject;
-        _dicState = _gameObj.GetComponent<Strategy>()._dicState;
-    }
+    public GameObject gameObject { get; protected set; }
+    protected State _curState;
     
-    public abstract void StateEnter();
-    public abstract void StateUpdate();
-    public abstract void StateExit();
-}
-
-public class StateMachine
-{
-    public IState CurrentState { get; private set; }
-
-    public StateMachine(IState defaultState)
+    /// <summary>
+    /// key에 있는 int는 각 StateMachine마다 Enum을 줘서 int로 형변환 후 사용
+    /// </summary>
+    public Dictionary<int, State> StateDictionary;
+    
+    protected StateMachine(GameObject gameObject)
     {
-        CurrentState = defaultState;
-        CurrentState.StateEnter();
+        this.gameObject = gameObject;
+        InitStateDictionary();
     }
-    public void SetState(IState state)
+
+    /// <summary>
+    /// 상태를 딕셔너리에 추가해준다
+    /// </summary>
+    protected abstract void InitStateDictionary();
+
+    public void ChangeState(State state)
     {
-        if(CurrentState == state){
+        if (_curState == state)
+        {
             return;
         }
-        CurrentState.StateExit();
-        CurrentState = state;
-        CurrentState.StateEnter();
+
+        if (_curState != null)
+        {
+            _curState.StateExit();
+        }
+
+        _curState = state;
+        _curState.StateStart();
     }
 
-    public void DoUpdate()
+    public void StateUpdate()
     {
-        CurrentState.StateUpdate();
+        _curState.StateUpdate();
     }
 }

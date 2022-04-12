@@ -73,6 +73,6 @@ public abstract class Stage : MonoBehaviour
 
     public void CheckFinishDissolveAll()
     {
-        Debug.Log(FindObjectsOfType<StrategySpider>().Length);
+        //Debug.Log(FindObjectsOfType<StrategySpider>().Length);
     }
 }

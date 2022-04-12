@@ -13,7 +13,7 @@ public class TreeSpirit : MonoBehaviour
         set { _moveSpeed = value; }
     }
 
-    private KYB_StateMachine _stateMachine;
+    private StateMachine _stateMachine;
 
     private Transform _curWeak;
 
