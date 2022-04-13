@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Golem : Enemy
 {
+    [SerializeField]
+    private Transform _shootPosTransfrom;
+    [SerializeField]
+    private GameObject _projectile;
+
     private Transform _target;
 
     private int _targetFloor;
@@ -42,7 +47,7 @@ public class Golem : Enemy
     public void SetTargetFloor()
     {
         _targetFloor = Random.RandomRange(0, 3);
-        _targetPos = PlayerFloor.Instance.floorTransforms[_targetFloor].position + new Vector3(0, 0, 2);
+        _targetPos = PlayerFloor.Instance.floorTransforms[_targetFloor].position + new Vector3(1, 0, 3);
         StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor));
     }
 

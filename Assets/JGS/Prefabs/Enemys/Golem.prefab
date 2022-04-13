@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1706284464586341768
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3088632387860852817}
+  m_Layer: 0
+  m_Name: ShootPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3088632387860852817
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1706284464586341768}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.32, y: 0.17, z: -0.21}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3496481049115090452}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3496481049115116032
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!65 &943115327951130745
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -704,6 +735,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28d133e2c25f1694db38e13f4e8c195e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveSpeed: 0
+  _shootPosTransfrom: {fileID: 3088632387860852817}
+  _projectile: {fileID: 5089136898809455325, guid: 04b0e85af62d8554ba913708111c1e0c,
+    type: 3}
 --- !u!1 &3496481049115116108
 GameObject:
   m_ObjectHideFlags: 0
@@ -1109,6 +1144,7 @@ Transform:
   - {fileID: 3496481049115090436}
   - {fileID: 3496481049115090432}
   - {fileID: 3496481049115090460}
+  - {fileID: 3088632387860852817}
   m_Father: {fileID: 3496481049115090454}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
