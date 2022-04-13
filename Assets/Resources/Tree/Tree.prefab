@@ -108,6 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462227366508
 GameObject:
   m_ObjectHideFlags: 0
@@ -216,6 +217,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462245431856
 GameObject:
   m_ObjectHideFlags: 0
@@ -324,6 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462294200630
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,6 +435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462321457445
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,6 +544,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462343375347
 GameObject:
   m_ObjectHideFlags: 0
@@ -648,6 +653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462345705919
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,6 +762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462402079908
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,6 +871,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462412446257
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,6 +980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462462265445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1080,6 +1089,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462485999564
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,6 +1198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462499367053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1199,7 +1210,6 @@ GameObject:
   - component: {fileID: 2663804462292582465}
   - component: {fileID: 2663804462499367048}
   - component: {fileID: 2663804462499367055}
-  - component: {fileID: 2663804462499367054}
   - component: {fileID: 2663804462499367050}
   - component: {fileID: 2663804462499367049}
   m_Layer: 0
@@ -1279,31 +1289,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2663804462499367054
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2663804462499367053}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 291ae57589ad9a741adf88f043d88321, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopSwayDistance: 50
-  WindStrength: 1
-  WindDampening: 1
-  Offset_Amount: 3
-  Random_Range_Amount: 1.34
-  RandomUpdate_Min: 5
-  RandomUpdate_Max: 40
-  X_Angle: 0.05
-  X_Period: 0.854
-  Y_Angle: 0.05
-  Y_Period: 1.047
-  Z_Angle: 0.05
-  Z_Period: 0.754
 --- !u!65 &2663804462499367050
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1331,6 +1316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462517968354
 GameObject:
   m_ObjectHideFlags: 0
@@ -1439,6 +1425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462543199067
 GameObject:
   m_ObjectHideFlags: 0
@@ -1547,6 +1534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462565295633
 GameObject:
   m_ObjectHideFlags: 0
@@ -1655,6 +1643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462629129741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1763,6 +1752,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462743686021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1871,6 +1861,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462792699285
 GameObject:
   m_ObjectHideFlags: 0
@@ -1882,7 +1873,6 @@ GameObject:
   - component: {fileID: 2663804462792699286}
   - component: {fileID: 2663804462792699281}
   - component: {fileID: 2663804462792699280}
-  - component: {fileID: 2663804462792699287}
   - component: {fileID: 2663804462792699283}
   - component: {fileID: 2663804462792699282}
   m_Layer: 0
@@ -1962,31 +1952,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2663804462792699287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2663804462792699285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 291ae57589ad9a741adf88f043d88321, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopSwayDistance: 50
-  WindStrength: 1
-  WindDampening: 1
-  Offset_Amount: 3
-  Random_Range_Amount: 1.34
-  RandomUpdate_Min: 5
-  RandomUpdate_Max: 40
-  X_Angle: 0.05
-  X_Period: 0.854
-  Y_Angle: 0.05
-  Y_Period: 1.047
-  Z_Angle: 0.05
-  Z_Period: 0.754
 --- !u!65 &2663804462792699283
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2014,6 +1979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462845093809
 GameObject:
   m_ObjectHideFlags: 0
@@ -2025,7 +1991,6 @@ GameObject:
   - component: {fileID: 2663804462845093810}
   - component: {fileID: 2663804462845093805}
   - component: {fileID: 2663804462845093804}
-  - component: {fileID: 2663804462845093811}
   - component: {fileID: 2663804462845093807}
   - component: {fileID: 2663804462845093806}
   m_Layer: 0
@@ -2105,31 +2070,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2663804462845093811
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2663804462845093809}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 291ae57589ad9a741adf88f043d88321, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopSwayDistance: 50
-  WindStrength: 1
-  WindDampening: 1
-  Offset_Amount: 3
-  Random_Range_Amount: 1.34
-  RandomUpdate_Min: 5
-  RandomUpdate_Max: 40
-  X_Angle: 0.05
-  X_Period: 0.854
-  Y_Angle: 0.05
-  Y_Period: 1.047
-  Z_Angle: 0.05
-  Z_Period: 0.754
 --- !u!65 &2663804462845093807
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2157,6 +2097,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462928178452
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,6 +2206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462930275035
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,6 +2315,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462943138555
 GameObject:
   m_ObjectHideFlags: 0
@@ -2481,6 +2424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462960217970
 GameObject:
   m_ObjectHideFlags: 0
@@ -2589,6 +2533,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462963508741
 GameObject:
   m_ObjectHideFlags: 0
@@ -2697,6 +2642,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804462979790989
 GameObject:
   m_ObjectHideFlags: 0
@@ -2805,6 +2751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463009888610
 GameObject:
   m_ObjectHideFlags: 0
@@ -2816,7 +2763,6 @@ GameObject:
   - component: {fileID: 2663804462223444003}
   - component: {fileID: 2663804463009888605}
   - component: {fileID: 2663804463009888604}
-  - component: {fileID: 2663804463009888611}
   - component: {fileID: 2663804463009888607}
   - component: {fileID: 2663804463009888606}
   m_Layer: 0
@@ -2896,31 +2842,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2663804463009888611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2663804463009888610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 291ae57589ad9a741adf88f043d88321, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopSwayDistance: 50
-  WindStrength: 1
-  WindDampening: 1
-  Offset_Amount: 3
-  Random_Range_Amount: 1.34
-  RandomUpdate_Min: 5
-  RandomUpdate_Max: 40
-  X_Angle: 0.05
-  X_Period: 0.854
-  Y_Angle: 0.05
-  Y_Period: 1.047
-  Z_Angle: 0.05
-  Z_Period: 0.754
 --- !u!65 &2663804463009888607
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2948,6 +2869,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463072183981
 GameObject:
   m_ObjectHideFlags: 0
@@ -3056,6 +2978,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463126853281
 GameObject:
   m_ObjectHideFlags: 0
@@ -3164,6 +3087,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463203003137
 GameObject:
   m_ObjectHideFlags: 0
@@ -3272,6 +3196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463271137054
 GameObject:
   m_ObjectHideFlags: 0
@@ -3283,7 +3208,6 @@ GameObject:
   - component: {fileID: 2663804462932913929}
   - component: {fileID: 2663804463271137049}
   - component: {fileID: 2663804463271137048}
-  - component: {fileID: 2663804463271137055}
   - component: {fileID: 2663804463271137051}
   - component: {fileID: 2663804463271137050}
   m_Layer: 0
@@ -3363,31 +3287,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2663804463271137055
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2663804463271137054}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 291ae57589ad9a741adf88f043d88321, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopSwayDistance: 50
-  WindStrength: 1
-  WindDampening: 1
-  Offset_Amount: 3
-  Random_Range_Amount: 1.34
-  RandomUpdate_Min: 5
-  RandomUpdate_Max: 40
-  X_Angle: 0.05
-  X_Period: 0.854
-  Y_Angle: 0.05
-  Y_Period: 1.047
-  Z_Angle: 0.05
-  Z_Period: 0.754
 --- !u!65 &2663804463271137051
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3415,6 +3314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463271324857
 GameObject:
   m_ObjectHideFlags: 0
@@ -3523,6 +3423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463366180612
 GameObject:
   m_ObjectHideFlags: 0
@@ -3631,6 +3532,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463379082757
 GameObject:
   m_ObjectHideFlags: 0
@@ -3739,6 +3641,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463400183801
 GameObject:
   m_ObjectHideFlags: 0
@@ -3847,6 +3750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463405255666
 GameObject:
   m_ObjectHideFlags: 0
@@ -3955,6 +3859,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463461975909
 GameObject:
   m_ObjectHideFlags: 0
@@ -4063,6 +3968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463462720484
 GameObject:
   m_ObjectHideFlags: 0
@@ -4171,6 +4077,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463488776884
 GameObject:
   m_ObjectHideFlags: 0
@@ -4279,6 +4186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463489760998
 GameObject:
   m_ObjectHideFlags: 0
@@ -4387,6 +4295,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463577834403
 GameObject:
   m_ObjectHideFlags: 0
@@ -4398,7 +4307,6 @@ GameObject:
   - component: {fileID: 2663804463577834396}
   - component: {fileID: 2663804463577834399}
   - component: {fileID: 2663804463577834398}
-  - component: {fileID: 2663804463577834397}
   - component: {fileID: 2663804463577834393}
   - component: {fileID: 2663804463577834392}
   m_Layer: 0
@@ -4478,31 +4386,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2663804463577834397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2663804463577834403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 291ae57589ad9a741adf88f043d88321, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopSwayDistance: 50
-  WindStrength: 1
-  WindDampening: 1
-  Offset_Amount: 3
-  Random_Range_Amount: 1.34
-  RandomUpdate_Min: 5
-  RandomUpdate_Max: 40
-  X_Angle: 0.05
-  X_Period: 0.854
-  Y_Angle: 0.05
-  Y_Period: 1.047
-  Z_Angle: 0.05
-  Z_Period: 0.754
 --- !u!65 &2663804463577834393
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4530,6 +4413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463591791274
 GameObject:
   m_ObjectHideFlags: 0
@@ -4638,6 +4522,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463613004422
 GameObject:
   m_ObjectHideFlags: 0
@@ -4649,7 +4534,6 @@ GameObject:
   - component: {fileID: 2663804463613004423}
   - component: {fileID: 2663804463613004418}
   - component: {fileID: 2663804463613004417}
-  - component: {fileID: 2663804463613004416}
   - component: {fileID: 2663804463613005180}
   - component: {fileID: 2663804463613004419}
   m_Layer: 0
@@ -4722,31 +4606,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2663804463613004416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2663804463613004422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 291ae57589ad9a741adf88f043d88321, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopSwayDistance: 50
-  WindStrength: 1
-  WindDampening: 1
-  Offset_Amount: 3
-  Random_Range_Amount: 1.34
-  RandomUpdate_Min: 5
-  RandomUpdate_Max: 40
-  X_Angle: 0.05
-  X_Period: 0.854
-  Y_Angle: 0.05
-  Y_Period: 1.047
-  Z_Angle: 0.05
-  Z_Period: 0.754
 --- !u!65 &2663804463613005180
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4774,6 +4633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463643002028
 GameObject:
   m_ObjectHideFlags: 0
@@ -4882,6 +4742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463653393547
 GameObject:
   m_ObjectHideFlags: 0
@@ -4990,6 +4851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463665861863
 GameObject:
   m_ObjectHideFlags: 0
@@ -5002,7 +4864,7 @@ GameObject:
   - component: {fileID: 2663804463665861858}
   - component: {fileID: 2663804463665861857}
   - component: {fileID: 2663804463665861852}
-  - component: {fileID: 2663804463665861859}
+  - component: {fileID: 4181481081387244744}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Untagged
@@ -5097,7 +4959,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 9.298684, y: 8.333776, z: 70.76379}
   m_Center: {x: -0.97566056, y: 1.3714108, z: 35.323612}
---- !u!114 &2663804463665861859
+--- !u!114 &4181481081387244744
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5110,7 +4972,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: 2
+  State: -1
+  DissolveCollider: {fileID: 2663804463665861852}
 --- !u!1 &2663804463672620412
 GameObject:
   m_ObjectHideFlags: 0
@@ -5219,6 +5082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463675110615
 GameObject:
   m_ObjectHideFlags: 0
@@ -5327,6 +5191,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463705350561
 GameObject:
   m_ObjectHideFlags: 0
@@ -5435,6 +5300,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463718093426
 GameObject:
   m_ObjectHideFlags: 0
@@ -5543,6 +5409,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463735227219
 GameObject:
   m_ObjectHideFlags: 0
@@ -5554,7 +5421,6 @@ GameObject:
   - component: {fileID: 2663804463735227212}
   - component: {fileID: 2663804463735227215}
   - component: {fileID: 2663804463735227214}
-  - component: {fileID: 2663804463735227213}
   - component: {fileID: 2663804463735227209}
   - component: {fileID: 2663804463735227208}
   m_Layer: 0
@@ -5626,31 +5492,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2663804463735227213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2663804463735227219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 291ae57589ad9a741adf88f043d88321, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopSwayDistance: 50
-  WindStrength: 1
-  WindDampening: 1
-  Offset_Amount: 3
-  Random_Range_Amount: 1.34
-  RandomUpdate_Min: 5
-  RandomUpdate_Max: 40
-  X_Angle: 0.05
-  X_Period: 0.854
-  Y_Angle: 0.05
-  Y_Period: 1.047
-  Z_Angle: 0.05
-  Z_Period: 0.754
 --- !u!65 &2663804463735227209
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5678,6 +5519,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463756330085
 GameObject:
   m_ObjectHideFlags: 0
@@ -5786,6 +5628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463783272003
 GameObject:
   m_ObjectHideFlags: 0
@@ -5894,6 +5737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463797572983
 GameObject:
   m_ObjectHideFlags: 0
@@ -6002,6 +5846,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463843997123
 GameObject:
   m_ObjectHideFlags: 0
@@ -6110,6 +5955,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463928081764
 GameObject:
   m_ObjectHideFlags: 0
@@ -6218,6 +6064,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463939390758
 GameObject:
   m_ObjectHideFlags: 0
@@ -6326,6 +6173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463962971555
 GameObject:
   m_ObjectHideFlags: 0
@@ -6434,6 +6282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804463968586988
 GameObject:
   m_ObjectHideFlags: 0
@@ -6542,6 +6391,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804464068844424
 GameObject:
   m_ObjectHideFlags: 0
@@ -6650,6 +6500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804464095769709
 GameObject:
   m_ObjectHideFlags: 0
@@ -6758,6 +6609,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804464114006258
 GameObject:
   m_ObjectHideFlags: 0
@@ -6866,6 +6718,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804464117371007
 GameObject:
   m_ObjectHideFlags: 0
@@ -6877,7 +6730,6 @@ GameObject:
   - component: {fileID: 2663804464117371000}
   - component: {fileID: 2663804464117371003}
   - component: {fileID: 2663804464117371002}
-  - component: {fileID: 2663804464117371001}
   - component: {fileID: 2663804464117370997}
   - component: {fileID: 2663804464117370996}
   m_Layer: 0
@@ -6949,31 +6801,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &2663804464117371001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2663804464117371007}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 291ae57589ad9a741adf88f043d88321, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopSwayDistance: 50
-  WindStrength: 1
-  WindDampening: 1
-  Offset_Amount: 3
-  Random_Range_Amount: 1.34
-  RandomUpdate_Min: 5
-  RandomUpdate_Max: 40
-  X_Angle: 0.05
-  X_Period: 0.854
-  Y_Angle: 0.05
-  Y_Period: 1.047
-  Z_Angle: 0.05
-  Z_Period: 0.754
 --- !u!65 &2663804464117370997
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7001,6 +6828,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804464173274537
 GameObject:
   m_ObjectHideFlags: 0
@@ -7109,6 +6937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804464187616729
 GameObject:
   m_ObjectHideFlags: 0
@@ -7217,6 +7046,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804464206243141
 GameObject:
   m_ObjectHideFlags: 0
@@ -7325,6 +7155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!1 &2663804464257319090
 GameObject:
   m_ObjectHideFlags: 0
@@ -7433,3 +7264,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
+  DissolveCollider: {fileID: 0}
