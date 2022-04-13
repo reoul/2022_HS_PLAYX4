@@ -13,10 +13,10 @@ public class SpawnerManager : Singleton<SpawnerManager>
     [SerializeField]
     private int _maxSpawnCount = 5;
 
-    public int _currentSpawnCount;
+    public int CurrentSpawnCount { get; set; }
 
     
-    public void Spawn()
+    private void Spawn()
     {
         if(unusedSpawnTransQueue.Count <= 0)
         {
@@ -34,12 +34,13 @@ public class SpawnerManager : Singleton<SpawnerManager>
 
         Transform unUsedTrans = unusedSpawnTransQueue.Dequeue();
         FindObjectOfType<EnemySpawner>().Spawn(unUsedTrans.position);
+        CurrentSpawnCount++;
         usedSpawnTransQueue.Enqueue(unUsedTrans);
     }
 
-    private void Start()
+    public void SpawnerAwake()
     {
-        _currentSpawnCount = 0;
+        CurrentSpawnCount = 0;
         _spawnDelay = 0.5f;
         _currentTime = 0;
         var spawnTransforms = GetComponentsInChildren<Transform>();
@@ -49,17 +50,16 @@ public class SpawnerManager : Singleton<SpawnerManager>
         }
     }
 
-    public void SpawnUpdate()
+    public void SpawnerUpdate()
     {
-        _currentTime += Time.deltaTime;
         if (StageManager.Instance._curStage.IsFinish)
         {
             return;
         }
-        if ((_currentTime > _spawnDelay) && (_currentSpawnCount < _maxSpawnCount))
+        _currentTime += Time.deltaTime;
+        if ((_currentTime > _spawnDelay) && (CurrentSpawnCount < _maxSpawnCount))
         {
-            _currentTime -= _spawnDelay;
-            _currentSpawnCount++;
+            _currentTime = 0;
             Spawn();
         }
     }
