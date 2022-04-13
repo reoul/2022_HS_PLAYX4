@@ -918,7 +918,7 @@ GameObject:
   - component: {fileID: 6723319225625172379}
   - component: {fileID: 6723319225625172378}
   m_Layer: 0
-  m_Name: Destroyed_Bullding
+  m_Name: Destroyed_Buillding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 400000}
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
-  - component: {fileID: -9172221311099044300}
   - component: {fileID: -4140969200691301328}
   - component: {fileID: -8894244729685303400}
   - component: {fileID: -780361447488498368}
@@ -62,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b7e596017016ca0448dc8b346eae8117, type: 2}
+  - {fileID: 2100000, guid: 98f1a1b6d5e05784fa7eefbdedc81354, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -83,20 +82,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &-9172221311099044300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a4e3e422d0340f889981d765d6ed82c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dissolveSecond: 1
-  State: -1
 --- !u!65 &-4140969200691301328
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -123,7 +108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
+  State: 2
+  DissolveCollider: {fileID: 0}
 --- !u!114 &-780361447488498368
 MonoBehaviour:
   m_ObjectHideFlags: 0
