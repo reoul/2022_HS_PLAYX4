@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class TreeSpiritState : StateMachine
 {
@@ -14,9 +15,9 @@ public class TreeSpiritState : StateMachine
         Death
     }
 
-    public TreeSpiritState(GameObject gameObject) : base(gameObject)
+    private void Awake()
     {
-        //InitStateDictionary();
+        InitStateDictionary();
     }
 
     public override void InitStateDictionary()
@@ -36,14 +37,6 @@ public class TreeSpiritState : StateMachine
         {
         }
 
-        public override void StateStart()
-        {
-            base.StateStart();
-            //var transform = gameObject.transform;
-            //Debug.Log(_stateMachine.gameObject.transform.position);
-            //transform.forward = Camera.main.gameObject.transform.position - transform.position;
-        }
-
         public override void StateUpdate()
         {
         }
@@ -51,25 +44,24 @@ public class TreeSpiritState : StateMachine
 
     private class SpawnState : State
     {
+        private DissolveMat _dissolveMat;
+
         public SpawnState(GameObject gameObject) : base(gameObject)
         {
         }
 
         public override void StateStart()
         {
-            base.StateStart();
-            Debug.Log("스폰");
+            _dissolveMat = _gameObject.GetComponentInChildren<DissolveMat>();
+            _dissolveMat.SetDissolveHeightMin();
+            _dissolveMat.StartCreateDissolve();
         }
 
         public override void StateUpdate()
         {
-            if (gameObject.GetComponentInChildren<DissolveMat>().Percent >= 1)
+            if (_dissolveMat.Percent >= 1)
             {
-                Debug.Log("다됨");
-                //var aaaa = gameObject.GetComponent<StateMachine>();
-                var staticMachine = gameObject.GetComponent<TreeSpirit>()._stateMachine;
-                staticMachine.ChangeState(staticMachine.StateDictionary[(int)StateType.Run]);
-                //gameObject.GetComponent<StateMachine>().ChangeState(_stateMachine.StateDictionary[(int)StateType.Run]);
+                _stateMachine.ChangeState(_stateMachine.StateDictionary[(int) StateType.Run]);
             }
         }
     }
@@ -83,14 +75,20 @@ public class TreeSpiritState : StateMachine
             _treeSpiritTransform = gameObject.transform;
         }
 
+        public override void StateStart()
+        {
+            _gameObject.GetComponent<Animator>().SetTrigger("Run");
+        }
+
         public override void StateUpdate()
         {
-            float moveSpeed = gameObject.GetComponent<TreeSpirit>().MoveSpeed;
-            _treeSpiritTransform.Translate(-_treeSpiritTransform.forward * moveSpeed * Time.deltaTime);
+            float moveSpeed = _gameObject.GetComponent<TreeSpirit>().MoveSpeed;
+            _treeSpiritTransform.forward = Vector3.zero - _treeSpiritTransform.position;
+            _treeSpiritTransform.position += _treeSpiritTransform.forward * moveSpeed * Time.deltaTime;
 
-            var distance = Vector3.Distance(_treeSpiritTransform.position, Vector3.zero);
-            if (distance < 0.5f)
+            if (Vector3.Distance(_treeSpiritTransform.position, Vector3.zero) < 5)
             {
+                ScoreSystem.Score -= 100;
                 _stateMachine.ChangeState(_stateMachine.StateDictionary[(int) StateType.Death]);
             }
         }
@@ -102,11 +100,17 @@ public class TreeSpiritState : StateMachine
         {
         }
 
+        public override void StateStart()
+        {
+            _gameObject.GetComponent<Animator>().SetTrigger("Hit");
+            _gameObject.GetComponentInChildren<DissolveMat>().StartDestroyDissolve();
+        }
+
         public override void StateUpdate()
         {
-            if (gameObject.GetComponentInChildren<DissolveMat>().Percent <= 0)
+            if (_gameObject.GetComponentInChildren<DissolveMat>().Percent <= 0)
             {
-                gameObject.SetActive(false);
+                FindObjectOfType<EnemySpawner>().Delete(_gameObject);
             }
         }
     }
@@ -117,11 +121,16 @@ public class TreeSpiritState : StateMachine
         {
         }
 
+        public override void StateStart()
+        {
+            _gameObject.GetComponentInChildren<DissolveMat>().StartDestroyDissolve();
+        }
+
         public override void StateUpdate()
         {
-            if (gameObject.GetComponentInChildren<DissolveMat>().Percent <= 0)
+            if (_gameObject.GetComponentInChildren<DissolveMat>().Percent <= 0)
             {
-                gameObject.SetActive(false);
+                FindObjectOfType<EnemySpawner>().Delete(_gameObject);
             }
         }
     }
