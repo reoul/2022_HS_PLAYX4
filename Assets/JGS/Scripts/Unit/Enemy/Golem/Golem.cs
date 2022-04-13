@@ -46,14 +46,16 @@ public class Golem : Enemy
 
     public void SetTargetFloor()
     {
-        _targetFloor = Random.RandomRange(0, 3);
-        _targetPos = PlayerFloor.Instance.floorTransforms[_targetFloor].position + new Vector3(1, 0, 3);
+        _targetFloor = Random.RandomRange(0, 2);
+        _targetPos = (PlayerFloor.Instance.floorTransforms[_targetFloor].position + PlayerFloor.Instance.floorTransforms[_targetFloor +1 ].position) * 0.5f + new Vector3(0, 0, 3);
         StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor));
+        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor + 1));
     }
 
     public void DisableTargetFloor()
     {
        PlayerFloor.Instance.StopAttack(_targetFloor);
+       PlayerFloor.Instance.StopAttack(_targetFloor + 1);
         StopTargeting();
     }
 
@@ -61,5 +63,22 @@ public class Golem : Enemy
     {
         _isTargeted = false;
     }
-    
+
+    private GameObject _stone;
+
+    private void SpawnStone()
+    {
+        _targetFloor = Random.RandomRange(0, 3);
+        _stone = GameObject.Instantiate(_projectile);
+        _stone.transform.localPosition = Vector3.zero;
+        _stone.GetComponent<Projectile_Stone>()._rootTransform = _shootPosTransfrom;
+        _stone.GetComponent<Projectile_Stone>()._targetPos = PlayerFloor.Instance.floorTransforms[_targetFloor].position;
+        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor));
+    }
+
+    public void ThrowStone()
+    {
+        _stone.GetComponent<Projectile_Stone>().isThrow = true;
+        _stone.GetComponent<Projectile_Stone>().targetFloor = _targetFloor;
+    }
 }

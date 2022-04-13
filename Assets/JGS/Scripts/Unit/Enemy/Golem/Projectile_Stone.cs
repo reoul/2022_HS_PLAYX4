@@ -4,15 +4,47 @@ using UnityEngine;
 
 public class Projectile_Stone : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public Vector3 _targetPos;
+    public Transform _rootTransform;
+    public int targetFloor;
+
+    private float _scale;
+    public bool isThrow;
+
     void Start()
     {
-        
+        if(_targetPos == null)
+        {
+            _targetPos = Vector3.zero;
+        }
+        transform.localScale = Vector3.zero;
+        _scale = 0;
+        isThrow = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (_scale < 1)
+        {
+            _scale = Mathf.Lerp(_scale, 1,0.1f);
+            transform.localScale = new Vector3(_scale, _scale, _scale);
+        }
+        if (isThrow)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, _targetPos, 0.5f);
+        }
+        else
+        {
+            this.transform.position = _rootTransform.position;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PlayerFloor"))
+        {
+            PlayerFloor.Instance.StopAttack(targetFloor);
+            Destroy(gameObject);
+        }
     }
 }
