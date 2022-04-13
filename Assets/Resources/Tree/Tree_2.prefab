@@ -94,8 +94,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743364866718249
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -212,8 +212,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743364882565213
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -321,8 +321,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743364925058165
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -430,8 +430,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743364957928461
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -539,8 +539,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365001043253
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -648,8 +648,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365012906351
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -757,8 +757,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365057602657
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -866,8 +866,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365101287587
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -975,8 +975,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365129840542
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1084,8 +1084,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365131974337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1193,8 +1193,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365188810043
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1302,8 +1302,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365220635570
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1411,8 +1411,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365240710774
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1521,8 +1521,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365271429686
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1630,8 +1630,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365278954951
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1739,8 +1739,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365285800133
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1848,8 +1848,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365320035004
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1966,8 +1966,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365418240653
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2075,8 +2075,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365423487699
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2184,8 +2184,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365443179396
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2293,8 +2293,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365464540092
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2402,8 +2402,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365533641074
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2511,8 +2511,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365627441049
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2620,8 +2620,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365687950276
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2738,8 +2738,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365775836985
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2848,8 +2848,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365789090141
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2957,8 +2957,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365810171644
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3066,8 +3066,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365939318482
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3175,8 +3175,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365954812436
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3284,8 +3284,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365968992170
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3393,8 +3393,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743365988828835
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3502,8 +3502,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366015724578
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3611,8 +3611,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366029370421
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3720,8 +3720,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366057379445
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3829,8 +3829,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366070782794
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3938,8 +3938,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366085229615
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4056,8 +4056,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366137299755
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4178,8 +4178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366228808192
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4191,8 +4191,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 100, y: 100, z: 100}
-  m_Center: {x: -0.97566015, y: 1.3714081, z: 35.323612}
+  m_Size: {x: 9.298684, y: 8.333782, z: 90}
+  m_Center: {x: -0.97566015, y: 1.3714081, z: 41.54}
 --- !u!1 &3553743366231773286
 GameObject:
   m_ObjectHideFlags: 0
@@ -4287,8 +4287,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366231773306
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4396,8 +4396,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366240965701
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4505,8 +4505,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366309873524
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4614,8 +4614,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366347861730
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4723,8 +4723,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366354317363
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4834,8 +4834,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366366693502
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4952,8 +4952,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366375029283
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5061,8 +5061,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366442936973
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5170,8 +5170,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366493390089
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5279,8 +5279,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366511034255
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5388,8 +5388,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366514616477
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5497,8 +5497,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366517684920
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5606,8 +5606,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366521741400
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5715,8 +5715,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366540563166
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5824,8 +5824,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366548916848
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5933,8 +5933,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366551535821
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6051,8 +6051,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366595245237
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6160,8 +6160,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366624919176
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6269,8 +6269,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366644935652
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6378,8 +6378,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366688222025
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6487,8 +6487,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366701341913
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6596,8 +6596,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366741653482
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6705,8 +6705,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366743894856
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6814,8 +6814,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366752045649
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6923,8 +6923,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366753787691
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7032,8 +7032,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366765815416
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7141,8 +7141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366910096431
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7250,8 +7250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
-  State: -1
-  DissolveCollider: {fileID: 0}
+  State: 2
+  DissolveCollider: {fileID: 3553743366228808192}
 --- !u!65 &3553743366911080805
 BoxCollider:
   m_ObjectHideFlags: 0
