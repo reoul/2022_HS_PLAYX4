@@ -8,22 +8,24 @@ public class Stage1 : Stage
     {
         base.StageStart();
         _spawnerManager = transform.GetChild(0).GetComponent<SpawnerManager>();
+        _spawnerManager.SpawnerAwake();
     }
 
     public override void StageUpdate()
     {
         base.StageUpdate();
-        _spawnerManager.SpawnUpdate();
+        _spawnerManager.SpawnerUpdate();
     }
 
     public override void RemoveEnemy()
     {
         base.RemoveEnemy();
-        /*var monsters = FindObjectsOfType<StrategySpider>();
-        foreach (StrategySpider monster in monsters)
+        var monsters = FindObjectsOfType<TreeSpirit>();
+        foreach (TreeSpirit monster in monsters)
         {
+            monster.MoveSpeed = 0;
             var dissolveMat = monster.GetComponentInChildren<DissolveMat>();
-            dissolveMat.StartDestroyDissolve(CheckFinishDissolveAll);
-        }*/
+            dissolveMat.StartDestroyDissolve();
+        }
     }
 }

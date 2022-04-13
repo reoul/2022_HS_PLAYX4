@@ -70,9 +70,4 @@ public abstract class Stage : MonoBehaviour
             dissolve.GetComponent<DissolveMat>().StartDestroyDissolve();
         }
     }
-
-    public void CheckFinishDissolveAll()
-    {
-        //Debug.Log(FindObjectsOfType<StrategySpider>().Length);
-    }
 }

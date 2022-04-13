@@ -71,7 +71,7 @@ public class StageManager : Singleton<StageManager>
             yield break;
         }
 
-        for (int i = 5; i >= 0; i--)
+        for (int i = 10; i >= 0; i--)
         {
             TimerText.text = $"남은 시간 : {i}초";
             yield return new WaitForSeconds(1f);
@@ -80,10 +80,10 @@ public class StageManager : Singleton<StageManager>
         _curStage.RemoveStage();
         yield return new WaitForSeconds(5f);
 
-        //_curStage.gameObject.SetActive(false);
+        _curStage.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(3f);
 
-        //NextStage();
+        NextStage();
     }
 }
