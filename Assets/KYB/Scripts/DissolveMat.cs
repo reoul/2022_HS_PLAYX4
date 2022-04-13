@@ -9,10 +9,6 @@ using UnityEngine.Serialization;
 
 public class DissolveMat : MonoBehaviour
 {
-    public delegate void DissolveDelegate();
-
-    private DissolveDelegate _finishDissolveDelegate;
-    
     private struct TopBottom
     {
         public float Top;
@@ -24,6 +20,7 @@ public class DissolveMat : MonoBehaviour
             Bottom = bottom;
         }
     }
+    
     public enum DissolveState
     {
         /// <summary>
@@ -60,11 +57,11 @@ public class DissolveMat : MonoBehaviour
     /// <summary>
     /// 콜리더 상단 위치
     /// </summary>
-    private float _topPos => _collider.bounds.max.y;
+    private float _topPos => DissolveCollider.bounds.max.y;
     /// <summary>
     /// 콜리더 하단 위치
     /// </summary>
-    private float _bottomPos => _collider.bounds.min.y;
+    private float _bottomPos => DissolveCollider.bounds.min.y;
     /// <summary>
     /// 디졸브 상태 퍼센트(몇퍼센트 디졸브 됐는지)
     /// </summary>
@@ -73,7 +70,7 @@ public class DissolveMat : MonoBehaviour
     private float _delayTime = 0;
 
     private bool _isDelay = false;
-    private BoxCollider _collider;
+    public BoxCollider DissolveCollider;
     private Material _material;
     private static readonly int CutoffHeight = Shader.PropertyToID("_CutoffHeight");
     private static readonly int DegeWidth = Shader.PropertyToID("_DegeWidth");
@@ -82,7 +79,10 @@ public class DissolveMat : MonoBehaviour
     private void Awake()
     {
         _material = GetComponent<Renderer>().material;
-        _collider = GetComponent<BoxCollider>();
+        if (DissolveCollider == null)
+        {
+            DissolveCollider = GetComponent<BoxCollider>();
+        }
         if (State == DissolveState.Nomal || State == DissolveState.Dec)
         {
             _timer = _dissolveSecond;
@@ -138,10 +138,9 @@ public class DissolveMat : MonoBehaviour
     /// <summary>
     /// 제거 디졸브 시작
     /// </summary>
-    public void StartDestroyDissolve(DissolveDelegate finishDissolveDelegate = null)
+    public void StartDestroyDissolve()
     {
         State = DissolveState.Dec;
-        _finishDissolveDelegate = finishDissolveDelegate;
     }
     
     /// <summary>
@@ -155,19 +154,11 @@ public class DissolveMat : MonoBehaviour
         // 디졸드 다 됐는지 확인
         if ((Percent % 1) == 0)
         {
-            if (this.transform.parent.tag == "Enemy")
-            {
-                Debug.Log("asdsasad");
-            }
-            // 만약 디졸브 끝나고 실행할 코드가 있다면 실행
-            _finishDissolveDelegate?.Invoke();
-            _finishDissolveDelegate = null;
             State = State >= DissolveState.Nomal ? DissolveState.Nomal : DissolveState.Hide;
         }
 
         TopBottom topBottom = GetDissolveTopBottom();
-        float height = Mathf.Lerp(topBottom.Bottom, topBottom.Top, Percent);
-        _material.SetFloat(CutoffHeight, height);
+        SetHeight(Mathf.Lerp(topBottom.Bottom, topBottom.Top, Percent));
     }
 
     /// <summary>
@@ -181,6 +172,22 @@ public class DissolveMat : MonoBehaviour
         float bottom = _bottomPos + degeWidth - noiseStrength;
         float top = _topPos + degeWidth + noiseStrength;
         return new TopBottom(top, bottom);
+    }
+
+    /// <summary>
+    /// 디졸브 높이를 가장 낮은 높이로 설정
+    /// </summary>
+    public void SetDissolveHeightMin()
+    {
+        SetHeight(GetDissolveTopBottom().Bottom);
+    }
+
+    /// <summary>
+    /// 디졸브 높이를 가장 높은 높이로 설정
+    /// </summary>
+    public void SetDissolveHeightMax()
+    {
+        SetHeight(GetDissolveTopBottom().Top);
     }
     
     /// <summary>
