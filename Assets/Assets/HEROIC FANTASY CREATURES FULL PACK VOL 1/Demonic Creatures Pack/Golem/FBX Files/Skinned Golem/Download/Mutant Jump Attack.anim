@@ -68717,6 +68717,14 @@ AnimationClip:
   - time: 0
     functionName: SetTargetFloor
     data: 
+    objectReferenceParameter: {fileID: 3496481049115116106, guid: fa6f4bee76898c54b89697a3d85ce077,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.53333336
+    functionName: MoveToTarget
+    data: 
     objectReferenceParameter: {fileID: 11500000, guid: 28d133e2c25f1694db38e13f4e8c195e,
       type: 3}
     floatParameter: 0
