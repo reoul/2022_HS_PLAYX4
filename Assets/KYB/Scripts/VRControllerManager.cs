@@ -351,14 +351,17 @@ public class VRControllerManager : Singleton<VRControllerManager>
 
     private void SetBow()
     {
-        GameObject bowOgj = FindObjectOfType<BowManager>().BowObj;
+        /*GameObject bowObj = FindObjectOfType<BowManager>().BowObj;
         //bowOgj.transform.SetParent(BowController.transform);
-        bowOgj.transform.rotation = Quaternion.identity;
-        var trackpadPos = BowController.transform.GetChild(0).Find("trackpad").transform.position;
-        var sysBtnPos = BowController.transform.GetChild(0).Find("sys_button").transform.position;
-        bowOgj.transform.position = Vector3.Lerp(trackpadPos, sysBtnPos, 0.5f);
-        //bowOgj.transform.LookAt(bowOgj.transform.position - Camera.main.transform.position);
-        bowOgj.SetActive(true);
+        bowObj.transform.rotation = Quaternion.identity;
+
+        var trackpadPos = BowController.transform.GetChild(0).Find("trackpad").GetChild(0).transform.position;
+        var sysBtnPos = BowController.transform.GetChild(0).Find("sys_button").GetChild(0).transform.position;
+        bowObj.transform.parent = BowController.transform;
+        bowObj.transform.position = Vector3.Lerp(trackpadPos, sysBtnPos, 0.5f);
+        Debug.Log(BowController.transform.GetChild(0).Find("sys_button").GetChild(0).transform.forward);
+        bowObj.transform.forward = -BowController.transform.GetChild(0).Find("sys_button").GetChild(0).transform.forward;
+        bowObj.SetActive(true);*/
     }
 
     /// <summary>
@@ -416,12 +419,16 @@ public class VRControllerManager : Singleton<VRControllerManager>
     private void SetBowController(VRController controller)
     {
         BowController = controller;
-        //BowController.MeshOff();
+        BowController.MeshOff();
         GameObject bowObj = BowManager.Instance.BowObj;
         bowObj.transform.rotation = Quaternion.identity;
-        var trackpadPos = BowController.transform.GetChild(0).Find("trackpad").transform.position;
-        var sysBtnPos = BowController.transform.GetChild(0).Find("sys_button").transform.position;
+        var sysBtnTrans = BowController.transform.GetChild(0).Find("sys_button").GetChild(0);
+        var trackpadPos = BowController.transform.GetChild(0).Find("trackpad").GetChild(0).transform.position;
+        var sysBtnPos = sysBtnTrans.position;
+        bowObj.transform.parent = BowController.transform;
         bowObj.transform.position = Vector3.Lerp(trackpadPos, sysBtnPos, 0.5f);
+        bowObj.transform.forward = -BowController.transform.GetChild(0).transform.up;
+        bowObj.transform.rotation = sysBtnTrans.rotation * Quaternion.Euler(180,0,180);
         bowObj.SetActive(true);
     }
 

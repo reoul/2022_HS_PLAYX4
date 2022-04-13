@@ -2,11 +2,12 @@
 
 public class Stage1 : Stage
 {
-    private SpawnerManager _spawnerManager;
+    public SpawnerManager _spawnerManager;
     
     public override void StageStart()
     {
         base.StageStart();
+        Debug.Log(123123);
         _spawnerManager = transform.GetChild(0).GetComponent<SpawnerManager>();
         _spawnerManager.SpawnerAwake();
     }

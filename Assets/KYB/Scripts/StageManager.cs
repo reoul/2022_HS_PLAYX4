@@ -53,8 +53,9 @@ public class StageManager : Singleton<StageManager>
     private void SetUpStage(StageType type)
     {
         // 홀로그램 시작
-        StartHologram(type);
         _curStage.gameObject.SetActive(true);
+        StartHologram(type);
+        Debug.Log(_curStage);
         _curStage.StageStart();
         // 조건문 : 만약 홀로그램이 다 끝났다면
     }
@@ -78,11 +79,11 @@ public class StageManager : Singleton<StageManager>
         }
 
         _curStage.RemoveStage();
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
 
         _curStage.gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
 
         NextStage();
     }

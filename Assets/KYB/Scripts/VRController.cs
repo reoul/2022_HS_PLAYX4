@@ -109,7 +109,7 @@ public class VRController : MonoBehaviour
     /// </summary>
     public void MeshON()
     {
-        MeshOnOFF(false);
+        MeshOnOFF(true);
     }
 
     /// <summary>

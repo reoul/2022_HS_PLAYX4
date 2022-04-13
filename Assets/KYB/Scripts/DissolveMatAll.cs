@@ -112,10 +112,6 @@ public class DissolveMatAll : MonoBehaviour
 
     private void UpdateDissolve()
     {
-        if(IsUpdateStop)
-        {
-            return;
-        }
         if (_isDelay)
         {
             _timer += Time.deltaTime;
@@ -125,10 +121,17 @@ public class DissolveMatAll : MonoBehaviour
                 _timer = 0;
             }
         }
+        if(IsUpdateStop)
+        {
+            return;
+        }
         // 디졸브 하지 않을때
         if (_isDelay || State == DissolveState.Nomal || State == DissolveState.Hide)
         {
-            IsUpdateStop = true;
+            if(!_isDelay)
+            {
+                IsUpdateStop = true;
+            }
             TopBottom topBottom = GetDissolveTopBottom();
             SetHeight(State == DissolveState.Nomal ? topBottom.Top + 0.001f : topBottom.Bottom - 0.001f);
         }
@@ -145,6 +148,7 @@ public class DissolveMatAll : MonoBehaviour
     {
         _timer = 0;
         State = DissolveState.Inc;
+        IsUpdateStop = false;
         if (delayTime > 0)
         {
             _isDelay = true;
@@ -158,6 +162,7 @@ public class DissolveMatAll : MonoBehaviour
     public void StartDestroyDissolve()
     {
         State = DissolveState.Dec;
+        IsUpdateStop = false;
     }
     
     /// <summary>

@@ -18,6 +18,7 @@ public abstract class Stage : MonoBehaviour
         SwapEnvironments();
         float k = 0;
         int cnt = 0;
+        Debug.Log(DissolveEnvironments.Count);
         foreach (GameObject dissolve in DissolveEnvironments)
         {
             cnt++;
@@ -26,7 +27,8 @@ public abstract class Stage : MonoBehaviour
                 k += 0.2f;
                 cnt = 0;
             }
-            dissolve.GetComponent<DissolveMat>().StartCreateDissolve(k);
+            dissolve.GetComponent<DissolveMatAll>().SetDissolveHeightMin();
+            dissolve.GetComponent<DissolveMatAll>().StartCreateDissolve(k);
         }
     }
 
@@ -67,7 +69,7 @@ public abstract class Stage : MonoBehaviour
         RemoveEnemy();
         foreach (GameObject dissolve in DissolveEnvironments)
         {
-            dissolve.GetComponent<DissolveMat>().StartDestroyDissolve();
+            dissolve.GetComponent<DissolveMatAll>().StartDestroyDissolve();
         }
     }
 }

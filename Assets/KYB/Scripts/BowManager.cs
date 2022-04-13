@@ -26,7 +26,7 @@ public class BowManager : Singleton<BowManager>
     {
         ShowArrowTrajectory();
         ShowBowString();
-        //UpdateRotate();
+        UpdateRotate();
     }
 
     /// <summary>
@@ -83,20 +83,26 @@ public class BowManager : Singleton<BowManager>
     /// </summary>
     private void UpdateRotate()
     {
-        /*if (VRControllerManager.Instance.IsCharging)
+        if (VRControllerManager.Instance.IsCharging)
         {
-            BowObj.transform.position = VRControllerManager.Instance.BowController.CenterTransform.position;
-            BowObj.transform.forward = VRControllerManager.Instance.Direction;
+            //BowObj.transform.position = VRControllerManager.Instance.BowController.CenterTransform.position;
+            /*BowObj.transform.forward = VRControllerManager.Instance.Direction;
+
+            var trackpadPos = VRControllerManager.Instance.BowController.transform.GetChild(0).Find("sys_button").GetChild(0).transform;
+            var sysBtnPos = trackpadPos.position;
+            BowObj.transform.rotation = trackpadPos.rotation * Quaternion.Euler(180, 0, 180);*/
         }
         else
         {
             //BowObj.transform.localRotation = Quaternion.Euler(70, 0, 0);
-        }*/
+        }
 
-        BowObj.transform.rotation = Quaternion.identity;
-        var trackpadPos = VRControllerManager.Instance.BowController.transform.GetChild(0).Find("trackpad").GetChild(0).transform.position;
+        //BowObj.transform.rotation = Quaternion.identity;
+        /*var trackpadPos = VRControllerManager.Instance.BowController.transform.GetChild(0).Find("trackpad").GetChild(0).transform.position;
         var sysBtnPos = VRControllerManager.Instance.BowController.transform.GetChild(0).Find("sys_button").GetChild(0).transform.position;
-        Debug.Log(Vector3.Lerp(trackpadPos, sysBtnPos, 0.5f));
-        BowObj.transform.position = Vector3.Lerp(trackpadPos, sysBtnPos, 0.5f);
+        var direction = trackpadPos - sysBtnPos;
+        BowObj.transform.forward = direction;
+        BowObj.transform.forward = -BowObj.transform.up;
+        BowObj.transform.position = Vector3.Lerp(trackpadPos, sysBtnPos, 0.5f);*/
     }
 }
