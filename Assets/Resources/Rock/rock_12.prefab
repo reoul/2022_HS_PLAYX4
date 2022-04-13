@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 3300000}
   - component: {fileID: 2300000}
   - component: {fileID: 1420348252388988256}
-  - component: {fileID: -1549626072381809845}
   - component: {fileID: 5255801642978640203}
+  - component: {fileID: -7466914048839934356}
   m_Layer: 0
   m_Name: rock_12
   m_TagString: Untagged
@@ -95,21 +95,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.8667755, y: 12.836563, z: 6.452759}
   m_Center: {x: -0.19189942, y: 6.4182816, z: -0.778759}
---- !u!114 &-1549626072381809845
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 100000}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a4e3e422d0340f889981d765d6ed82c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _dissolveSecond: 1
-  State: 2
-  DissolveCollider: {fileID: 0}
 --- !u!114 &5255801642978640203
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,3 +107,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee441853332436f4faa1141a7dd9dfcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-7466914048839934356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0490295af23a92d4090b2594021c3fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dissolveSecond: 1
+  State: -1
+  IsUpdateStop: 0
+  DissolveCollider: {fileID: 0}
