@@ -26,7 +26,7 @@ public class BowManager : Singleton<BowManager>
     {
         ShowArrowTrajectory();
         ShowBowString();
-        UpdateRotate();
+        //UpdateRotate();
     }
 
     /// <summary>
@@ -92,5 +92,11 @@ public class BowManager : Singleton<BowManager>
         {
             //BowObj.transform.localRotation = Quaternion.Euler(70, 0, 0);
         }*/
+
+        BowObj.transform.rotation = Quaternion.identity;
+        var trackpadPos = VRControllerManager.Instance.BowController.transform.GetChild(0).Find("trackpad").GetChild(0).transform.position;
+        var sysBtnPos = VRControllerManager.Instance.BowController.transform.GetChild(0).Find("sys_button").GetChild(0).transform.position;
+        Debug.Log(Vector3.Lerp(trackpadPos, sysBtnPos, 0.5f));
+        BowObj.transform.position = Vector3.Lerp(trackpadPos, sysBtnPos, 0.5f);
     }
 }

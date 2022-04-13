@@ -120,6 +120,12 @@ public class VRControllerManager : Singleton<VRControllerManager>
         _autoAim = FindObjectOfType<AutoAim>();
     }
 
+    private void Start()
+    {
+        LeftController.MeshOff();
+        RightController.MeshOff();
+    }
+
     private void Update()
     {
         CheckBow();
@@ -346,9 +352,12 @@ public class VRControllerManager : Singleton<VRControllerManager>
     private void SetBow()
     {
         GameObject bowOgj = FindObjectOfType<BowManager>().BowObj;
-        bowOgj.transform.SetParent(BowController.transform);
-        bowOgj.transform.position = Vector3.zero;
-        bowOgj.transform.LookAt(bowOgj.transform.position - Camera.main.transform.position);
+        //bowOgj.transform.SetParent(BowController.transform);
+        bowOgj.transform.rotation = Quaternion.identity;
+        var trackpadPos = BowController.transform.GetChild(0).Find("trackpad").transform.position;
+        var sysBtnPos = BowController.transform.GetChild(0).Find("sys_button").transform.position;
+        bowOgj.transform.position = Vector3.Lerp(trackpadPos, sysBtnPos, 0.5f);
+        //bowOgj.transform.LookAt(bowOgj.transform.position - Camera.main.transform.position);
         bowOgj.SetActive(true);
     }
 
@@ -407,11 +416,12 @@ public class VRControllerManager : Singleton<VRControllerManager>
     private void SetBowController(VRController controller)
     {
         BowController = controller;
-        BowController.MeshOff();
+        //BowController.MeshOff();
         GameObject bowObj = BowManager.Instance.BowObj;
-        bowObj.transform.parent = BowController.transform;
-        bowObj.transform.transform.localPosition = Vector3.zero;
-        //bowObj.transform.localRotation = Quaternion.Euler(70, 0, 0);
+        bowObj.transform.rotation = Quaternion.identity;
+        var trackpadPos = BowController.transform.GetChild(0).Find("trackpad").transform.position;
+        var sysBtnPos = BowController.transform.GetChild(0).Find("sys_button").transform.position;
+        bowObj.transform.position = Vector3.Lerp(trackpadPos, sysBtnPos, 0.5f);
         bowObj.SetActive(true);
     }
 

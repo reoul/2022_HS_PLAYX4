@@ -30,7 +30,7 @@ public class VRController : MonoBehaviour
 
     private void FindChildMesh()
     {
-        _meshRenderers = this.GetComponentsInChildren<MeshRenderer>();
+        _meshRenderers = this.transform.GetChild(0).GetComponentsInChildren<MeshRenderer>();
     }
 
     private IEnumerator FindChildMeshCoroutine()
@@ -109,7 +109,7 @@ public class VRController : MonoBehaviour
     /// </summary>
     public void MeshON()
     {
-        MeshOnOFF(true);
+        MeshOnOFF(false);
     }
 
     /// <summary>
