@@ -9,7 +9,6 @@ public class WeakPoint : MonoBehaviour
         if(other.CompareTag("Arrow"))
         {
             ScoreSystem.Score += 100;
-            this.transform.GetComponentInParent<TreeSpirit>().ChangeWeakPoint();
         }
     }
 }

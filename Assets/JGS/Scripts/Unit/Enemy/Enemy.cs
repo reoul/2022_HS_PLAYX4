@@ -4,21 +4,19 @@ using UnityEngine;
 
 public class Enemy : Unit
 {
-    //Enemy 초기화
-    public enum EnemyType { None, stage1, stage2, stage3 };
-
-    public string name { get; private set; }
+    protected StateMachine _stateMachine;
     public float maxHealth { get; protected set; }
     public float currentHealth { get; protected set; }
 
-    public Enemy()
+    [SerializeField] private float _moveSpeed;
+    public float MoveSpeed
     {
-
+        get { return _moveSpeed; }
+        set { _moveSpeed = value; }
     }
-
-
+    
     //피격 판정
-    override public void Damage(float damage)
+    public override void Damage(float damage)
     {
         OnDamage();
     }

@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class StateMachine
+public abstract class StateMachine : MonoBehaviour
 {
-    public GameObject gameObject { get; protected set; }
     protected State _curState;
     
     /// <summary>
@@ -12,12 +11,6 @@ public abstract class StateMachine
     /// </summary>
     public Dictionary<int, State> StateDictionary;
     
-    protected StateMachine(GameObject gameObject)
-    {
-        this.gameObject = gameObject;
-        //InitStateDictionary();
-    }
-
     /// <summary>
     /// 상태를 딕셔너리에 추가해준다
     /// </summary>

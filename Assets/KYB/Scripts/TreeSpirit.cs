@@ -2,29 +2,13 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class TreeSpirit : MonoBehaviour
+[RequireComponent(typeof(TreeSpiritState))]
+public class TreeSpirit : Enemy
 {
-    public Transform[] weakPoints;
-
-    [SerializeField] private float _moveSpeed;
-    public float MoveSpeed
-    {
-        get { return _moveSpeed; }
-        set { _moveSpeed = value; }
-    }
-
-    public StateMachine _stateMachine;
-
-    private Transform _curWeak;
-
     public void Awake()
     {
+        _stateMachine = GetComponent<StateMachine>();
         //RandomWeak();
-    }
-
-    public void Init()
-    {
-        _stateMachine = new TreeSpiritState(gameObject);
     }
 
     private void Update()
@@ -37,16 +21,25 @@ public class TreeSpirit : MonoBehaviour
         _stateMachine.ChangeState(_stateMachine.StateDictionary[(int)state]);
     }
 
-    private void RandomWeak()
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Arrow"))
+        {
+            ScoreSystem.Score += 100;
+            _stateMachine.ChangeState(_stateMachine.StateDictionary[(int)TreeSpiritState.StateType.Hit]);
+        }
+    }
+
+    /*private void RandomWeak()
     {
         _curWeak = weakPoints[Random.Range(0, weakPoints.Length)];
         _curWeak.gameObject.SetActive(true);
-    }
+    }*/
 
     /// <summary>
     /// 약점을 변경한다
     /// </summary>
-    public void ChangeWeakPoint()
+    /*public void ChangeWeakPoint()
     {
         int rand;
         do
@@ -56,5 +49,5 @@ public class TreeSpirit : MonoBehaviour
         _curWeak.gameObject.SetActive(false);
         weakPoints[rand].gameObject.SetActive(true);
         _curWeak = weakPoints[rand];
-    }
+    }*/
 }
