@@ -21,6 +21,7 @@ public class Golem : Enemy
     {
         _target = GameObject.Find("[CameraRig]").transform;
         _startPos = transform.position;
+        RandomWeak();
     }
 
     private void Update()
@@ -29,6 +30,31 @@ public class Golem : Enemy
         {
             transform.position = Vector3.Lerp(transform.position, _targetPos, 0.05f);
         }
+    }
+
+    private Transform _curWeak;
+    [SerializeField]
+    private Transform[] _weakPoints;
+
+    private void RandomWeak()
+    {
+        _curWeak = _weakPoints[Random.Range(0, _weakPoints.Length)];
+        _curWeak.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// 약점을 변경한다
+    /// </summary>
+    public void ChangeWeakPoint()
+    {
+        int rand;
+        do
+        {
+            rand = Random.Range(0, _weakPoints.Length);
+        } while (_curWeak == _weakPoints[rand]);
+        _curWeak.gameObject.SetActive(false);
+        _weakPoints[rand].gameObject.SetActive(true);
+        _curWeak = _weakPoints[rand];
     }
 
     private bool _isTargeted;
