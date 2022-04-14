@@ -269,7 +269,7 @@ Transform:
   m_GameObject: {fileID: 2474445455391311814}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.08, z: -0.12}
-  m_LocalScale: {x: 0.6, y: 1, z: 0.4}
+  m_LocalScale: {x: 0.5, y: 1, z: 0.4}
   m_Children:
   - {fileID: 2474445456664823911}
   - {fileID: 2474445457231456400}
@@ -310,9 +310,9 @@ GameObject:
   - component: {fileID: 2474445456070210528}
   - component: {fileID: 3019501193107900711}
   - component: {fileID: 1733232992}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right
-  m_TagString: Untagged
+  m_TagString: PlayerFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -502,9 +502,9 @@ GameObject:
   - component: {fileID: 2474445456701767668}
   - component: {fileID: 2095273607515792797}
   - component: {fileID: 10634612}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: center
-  m_TagString: Untagged
+  m_TagString: PlayerFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -695,9 +695,9 @@ GameObject:
   - component: {fileID: 2474445457231456403}
   - component: {fileID: 545085479369750801}
   - component: {fileID: 540529169}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left
-  m_TagString: Untagged
+  m_TagString: PlayerFloor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
