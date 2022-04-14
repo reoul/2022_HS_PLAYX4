@@ -28,7 +28,7 @@ public class StageManager : Singleton<StageManager>
     public void Start()
     {
         _nextStageObj = FindObjectOfType<IntroObj>().gameObject;
-        GameObject.Find("Canvas").transform.GetChild(0).gameObject.SetActive(false);
+        //GameObject.Find("Canvas").transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void NextStage()
@@ -43,6 +43,7 @@ public class StageManager : Singleton<StageManager>
     {
         if (Input.GetKeyDown(KeyCode.Y))
         {
+            _nextStageObj.SetActive(false);
             NextStage();
         }
 
@@ -55,9 +56,7 @@ public class StageManager : Singleton<StageManager>
         // 홀로그램 시작
         _curStage.gameObject.SetActive(true);
         StartHologram(type);
-        Debug.Log(_curStage);
         _curStage.StageStart();
-        // 조건문 : 만약 홀로그램이 다 끝났다면
     }
 
     private void StartHologram(StageType type)
@@ -72,13 +71,13 @@ public class StageManager : Singleton<StageManager>
             yield break;
         }
 
-        for (int i = 70; i >= 0; i--)
+        for (int i = 5; i >= 0; i--)
         {
             TimerText.text = $"남은 시간 : {i}초";
             yield return new WaitForSeconds(1f);
         }
 
-        _curStage.RemoveStage();
+        _curStage.StageEnd();
         yield return new WaitForSeconds(2f);
 
         _curStage.gameObject.SetActive(false);

@@ -17,6 +17,9 @@ public class Golem : Enemy
 
     private Vector3 _targetPos;
 
+    [SerializeField]
+    private float _weakAlphaSpeed;
+
     private void Start()
     {
         _target = GameObject.Find("[CameraRig]").transform;
@@ -40,6 +43,7 @@ public class Golem : Enemy
     {
         _curWeak = _weakPoints[Random.Range(0, _weakPoints.Length)];
         _curWeak.gameObject.SetActive(true);
+        _curWeak.GetComponent<WeakPoint>().Show(3);
     }
 
     /// <summary>
@@ -55,6 +59,7 @@ public class Golem : Enemy
         _curWeak.gameObject.SetActive(false);
         _weakPoints[rand].gameObject.SetActive(true);
         _curWeak = _weakPoints[rand];
+        _curWeak.GetComponent<WeakPoint>().Show(_weakAlphaSpeed);
     }
 
     private bool _isTargeted;
@@ -106,5 +111,10 @@ public class Golem : Enemy
     {
         _stone.GetComponent<Projectile_Stone>().isThrow = true;
         _stone.GetComponent<Projectile_Stone>().targetFloor = _targetFloor;
+    }
+
+    public void HideWeak()
+    {
+        _curWeak.gameObject.SetActive(false);
     }
 }

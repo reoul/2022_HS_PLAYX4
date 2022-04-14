@@ -3,11 +3,10 @@
 public class Stage1 : Stage
 {
     public SpawnerManager _spawnerManager;
-    
+
     public override void StageStart()
     {
         base.StageStart();
-        Debug.Log(123123);
         _spawnerManager = transform.GetChild(0).GetComponent<SpawnerManager>();
         _spawnerManager.SpawnerAwake();
     }
@@ -18,15 +17,29 @@ public class Stage1 : Stage
         _spawnerManager.SpawnerUpdate();
     }
 
-    public override void RemoveEnemy()
+    public override void StageEnd()
     {
-        base.RemoveEnemy();
+        base.StageEnd();
+        
+    }
+
+    void RemoveEnemy()
+    {
         var monsters = FindObjectsOfType<TreeSpirit>();
         foreach (TreeSpirit monster in monsters)
         {
             monster.MoveSpeed = 0;
             var dissolveMat = monster.GetComponentInChildren<DissolveMat>();
             dissolveMat.StartDestroyDissolve();
+            Destroy(monster, 1.1f);
+        }
+
+        var unUsedEnemyQueue = FindObjectOfType<EnemySpawner>().unUsedEnemyQueue;
+        int cnt = unUsedEnemyQueue.Count;
+
+        for (int i = cnt; i > 0; i--)
+        {
+            Destroy(unUsedEnemyQueue.Dequeue(), 1.1f);
         }
     }
 }

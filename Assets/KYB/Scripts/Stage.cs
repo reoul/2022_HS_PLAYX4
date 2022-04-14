@@ -15,10 +15,9 @@ public abstract class Stage : MonoBehaviour
     /// </summary>
     public void StageSetUP()
     {
-        SwapEnvironments();
+        DissolveEnvironments.Swap(DissolveEnvironments.Count * 3);
         float k = 0;
         int cnt = 0;
-        Debug.Log(DissolveEnvironments.Count);
         foreach (GameObject dissolve in DissolveEnvironments)
         {
             cnt++;
@@ -32,28 +31,6 @@ public abstract class Stage : MonoBehaviour
         }
     }
 
-    private void SwapEnvironments()
-    {
-        for (int i = 0; i < DissolveEnvironments.Count * 3; i++)
-        {
-            int src = Random.Range(0, DissolveEnvironments.Count);
-            int dest;
-            do
-            {
-                dest = Random.Range(0, DissolveEnvironments.Count);
-            } while (src == dest);
-            (DissolveEnvironments[src], DissolveEnvironments[dest]) =
-                (DissolveEnvironments[dest], DissolveEnvironments[src]);
-        }
-    }
-
-    /// <summary>
-    /// 몬스터 소환 시작
-    /// </summary>
-    public void StartEnemySpawn()
-    {
-    }
-
     public virtual void StageStart()
     {
         IsFinish = false;
@@ -61,12 +38,14 @@ public abstract class Stage : MonoBehaviour
 
     public virtual void StageUpdate() { }
 
-    public virtual void RemoveEnemy() { }
-
-    public void RemoveStage()
+    public virtual void StageEnd()
     {
         IsFinish = true;
-        RemoveEnemy();
+        RemoveEnvironment();
+    }
+
+    private void RemoveEnvironment()
+    {
         foreach (GameObject dissolve in DissolveEnvironments)
         {
             dissolve.GetComponent<DissolveMatAll>().StartDestroyDissolve();
