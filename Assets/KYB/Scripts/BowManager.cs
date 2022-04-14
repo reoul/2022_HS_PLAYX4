@@ -27,7 +27,7 @@ public class BowManager : Singleton<BowManager>
     {
         ShowArrowTrajectory();
         ShowBowString();
-        UpdateRotate();
+        ShowArrow();
     }
 
     /// <summary>
@@ -91,34 +91,4 @@ public class BowManager : Singleton<BowManager>
             _arrowLineRenderer.SetPosAllZero();
         }
     }
-
-    /// <summary>
-    /// 활 각도 변경
-    /// </summary>
-    private void UpdateRotate()
-    {
-        if (VRControllerManager.Instance.IsCharging)
-        {
-            //BowObj.transform.position = VRControllerManager.Instance.BowController.CenterTransform.position;
-            /*BowObj.transform.forward = VRControllerManager.Instance.Direction;
-
-            var trackpadPos = VRControllerManager.Instance.BowController.transform.GetChild(0).Find("sys_button").GetChild(0).transform;
-            var sysBtnPos = trackpadPos.position;
-            BowObj.transform.rotation = trackpadPos.rotation * Quaternion.Euler(180, 0, 180);*/
-        }
-        else
-        {
-            //BowObj.transform.localRotation = Quaternion.Euler(70, 0, 0);
-        }
-
-        //BowObj.transform.rotation = Quaternion.identity;
-        /*var trackpadPos = VRControllerManager.Instance.BowController.transform.GetChild(0).Find("trackpad").GetChild(0).transform.position;
-        var sysBtnPos = VRControllerManager.Instance.BowController.transform.GetChild(0).Find("sys_button").GetChild(0).transform.position;
-        var direction = trackpadPos - sysBtnPos;
-        BowObj.transform.forward = direction;
-        BowObj.transform.forward = -BowObj.transform.up;
-        BowObj.transform.position = Vector3.Lerp(trackpadPos, sysBtnPos, 0.5f);*/
-    }
-
-    
 }
