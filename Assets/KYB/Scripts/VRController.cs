@@ -20,7 +20,7 @@ public class VRController : MonoBehaviour
     public SteamVR_Action_Vibration HapticAction;
     public Transform CenterTransform { get; private set; }
 
-    private MeshRenderer[] _meshRenderers;
+    public MeshRenderer[] _meshRenderers;
 
     public GameObject SysBtn { get; private set; }
     public GameObject TrackPad { get; private set; }
