@@ -44,15 +44,15 @@ public class BowManager : Singleton<BowManager>
 
         if (!VRControllerManager.Instance.IsChargingFinish)
         {
-            _arrowTrajectoryLineRenderer.material.color = new Color(1, 0, 0, 0.5f);
+            _arrowTrajectoryLineRenderer.material.color = new Color(1, 0, 0, 0.2f);
         }
         else
         {
-            _arrowTrajectoryLineRenderer.material.color = new Color(0, 1, 0, 0.5f);
+            _arrowTrajectoryLineRenderer.material.color = new Color(0, 1, 0, 0.2f);
         }
 
         _arrowTrajectoryLineRenderer.SetPosition(0,
-            VRControllerManager.Instance.BowController.gameObject.transform.position);
+            VRControllerManager.Instance.BowController.CenterTransform.gameObject.transform.position);
         _arrowTrajectoryLineRenderer.SetPosition(1, VRControllerManager.Instance.Direction * 1000);
     }
 

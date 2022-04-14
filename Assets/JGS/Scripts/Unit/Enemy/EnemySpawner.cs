@@ -18,6 +18,7 @@ public class EnemySpawner : MonoBehaviour
         {
             var enemy = new EnemyBuilder("TreeSpirit").Build();
             enemy.gameObject.SetActive(false);
+            enemy.transform.parent = StageManager.Instance._curStage.transform;
             unUsedEnemyQueue.Enqueue(enemy.gameObject);
         }
     }

@@ -9,6 +9,7 @@ TagManager:
   - projectile
   - FxTemporaire
   - PlayerFloor
+  - RecordCamera
   layers:
   - Default
   - TransparentFX

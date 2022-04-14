@@ -7,8 +7,10 @@ public class PlayerFloor : Singleton<PlayerFloor>
 
     public enum FloorType { Left = 0, Center, Right }
     public Transform[] floorTransforms;
+    public Transform[] attackTrans;
 
     private Color _floorDefaultColor;
+    private Color _warningColor = new Color(0.7f, 0, 0,0.8f);
     private Transform _camera;
 
     private int _playerFloor = 1;
@@ -29,6 +31,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
         {
             //obj.GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
         }
+        _floorDefaultColor = new Color(0.2f, 0.2f, 0.2f,0.8f);
         IsRayHit();
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -57,7 +60,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
         int layerMask = 1 << LayerMask.NameToLayer("PlayerFloor");
         foreach (Transform floor in floorTransforms)
         {
-            floor.GetComponent<Floor>().ChangeColor(new Color(0.48f, 0.48f, 0.48f));
+            floor.GetComponent<Floor>().ChangeLineColor(new Color(0.48f, 0.48f, 0.48f));
         }
         if (Physics.Raycast(_camera.position, _camera.position - new Vector3(0, 10, 0), out hit, distance, layerMask))
         {
@@ -68,13 +71,13 @@ public class PlayerFloor : Singleton<PlayerFloor>
                     _playerFloor = i;
                 }
             }
-            hit.transform.gameObject.GetComponent<Floor>().ChangeColor(new Color(0.6f, 0.8f, 0.5f));
+            hit.transform.gameObject.GetComponent<Floor>().ChangeLineColor(new Color(0.6f, 0.8f, 0.5f));
         }
     }
 
     public void SetTagetFloor(FloorType floor)  
     {
-        floorTransforms[(int)floor].GetComponent<MeshRenderer>().material.color = new Color(0.7f, 0, 0);
+        floorTransforms[(int)floor].GetComponent<SpriteRenderer>().color = _warningColor;
     }
 
     public void StartMeasure()
@@ -109,11 +112,11 @@ public class PlayerFloor : Singleton<PlayerFloor>
             {
                 if (count++ % 2 != 0)
                 {
-                    floorTransforms[_floor].GetComponent<MeshRenderer>().material.color = new Color(0.7f, 0, 0);
+                    floorTransforms[_floor].GetComponent<SpriteRenderer>().color = _warningColor;
                 }
                 else
                 {
-                    floorTransforms[_floor].GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
+                    floorTransforms[_floor].GetComponent<SpriteRenderer>().color = _floorDefaultColor;
                 }
                 if(tmp > 0.01)
                 {
@@ -121,7 +124,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
                 }
                 yield return new WaitForSeconds(tmp);
             }
-            floorTransforms[_floor].GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
+            floorTransforms[_floor].GetComponent<SpriteRenderer>().color = _floorDefaultColor;
 
             if (_playerFloor == _floor)
             {
@@ -144,16 +147,16 @@ public class PlayerFloor : Singleton<PlayerFloor>
             {
                 if (count++ % 2 != 0)
                 {
-                    floorTransforms[_floor].GetComponent<MeshRenderer>().material.color = new Color(0.7f, 0, 0);
+                    floorTransforms[_floor].GetComponent<SpriteRenderer>().color = _warningColor;
                 }
                 else
                 {
-                    floorTransforms[_floor].GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
+                    floorTransforms[_floor].GetComponent<SpriteRenderer>().color = _floorDefaultColor;
                 }
                 tmp -= 0.01f;
                 yield return new WaitForSeconds(tmp);
             }
-            floorTransforms[_floor].GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
+            floorTransforms[_floor].GetComponent<SpriteRenderer>().color = _floorDefaultColor;
 
             if (_playerFloor == _floor)
             {
@@ -177,7 +180,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
         _isAttack = new bool[3];
         foreach(Transform obj in floorTransforms)
         {
-            obj.GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
+            obj.GetComponent<SpriteRenderer>().color = _floorDefaultColor;
         }
     }
 }

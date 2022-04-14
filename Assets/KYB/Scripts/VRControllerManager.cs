@@ -214,7 +214,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
             if (_chargingTime >= _maxCharging)
             {
                 SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().Stop();
-                ArrowManager.Instance.Shot(RightController.transform.position, Direction);
+                ArrowManager.Instance.Shot(BowController.CenterTransform.position, Direction);
                 SoundManager.Instance.PlaySound("Rock 6", 1f);
                 FindObjectOfType<ArrowAfterImage>().Shot();
             }

@@ -9,6 +9,7 @@ public class SpawnerManager : Singleton<SpawnerManager>
     
     private float _spawnDelay;
     private float _currentTime;
+    private float _delayTime;
 
     [SerializeField]
     private int _maxSpawnCount = 5;
@@ -43,7 +44,6 @@ public class SpawnerManager : Singleton<SpawnerManager>
         CurrentSpawnCount = 0;
         _spawnDelay = 0.5f;
         _currentTime = 0;
-        Debug.Log("saddsadsaasds");
         var spawnTransforms = GetComponentsInChildren<Transform>(true);
         for (int i = 1; i < spawnTransforms.Length; i++)
         {
@@ -53,6 +53,11 @@ public class SpawnerManager : Singleton<SpawnerManager>
 
     public void SpawnerUpdate()
     {
+        _delayTime += Time.deltaTime;
+        if(_delayTime < 5)
+        {
+            return;
+        }
         if (StageManager.Instance._curStage.IsFinish)
         {
             return;

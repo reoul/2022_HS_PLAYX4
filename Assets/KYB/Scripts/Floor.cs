@@ -7,7 +7,7 @@ public class Floor : MonoBehaviour
 {
     public SpriteRenderer[] childRenderers;
 
-    public void ChangeColor(Color color)
+    public void ChangeLineColor(Color color)
     {
         foreach (SpriteRenderer renderer in childRenderers)
         {
