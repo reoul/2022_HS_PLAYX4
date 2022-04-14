@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class BowManager : Singleton<BowManager>
 {
+    private LineRenderer _arrowLineRenderer;
     private LineRenderer _arrowTrajectoryLineRenderer;
     private LineRenderer _bowStringLineRenderer;
     private LineRenderer _bowStringLineRenderer2;
@@ -12,12 +13,12 @@ public class BowManager : Singleton<BowManager>
 
     private void Awake()
     {
+        _arrowLineRenderer = GameObject.Find("ArrowLine").GetComponent<LineRenderer>();
         _arrowTrajectoryLineRenderer = GameObject.Find("ArrowTrajectoryLine").GetComponent<LineRenderer>();
         _bowStringLineRenderer = GameObject.Find("BowStringLine").GetComponent<LineRenderer>();
         _bowStringLineRenderer2 = GameObject.Find("BowStringLine2").GetComponent<LineRenderer>();
 
-        _arrowTrajectoryLineRenderer.SetPosition(0, Vector3.zero);
-        _arrowTrajectoryLineRenderer.SetPosition(1, Vector3.zero);
+        _arrowTrajectoryLineRenderer.SetPosAllZero();
         _bowTopTransform = BowObj.transform.GetChild(0);
         _bowBottomTransform = BowObj.transform.GetChild(1);
     }
@@ -37,8 +38,7 @@ public class BowManager : Singleton<BowManager>
         // 차징하고 있지 않을 때
         if (!VRControllerManager.Instance.IsCharging)
         {
-            _arrowTrajectoryLineRenderer.SetPosition(0, Vector3.zero);
-            _arrowTrajectoryLineRenderer.SetPosition(1, Vector3.zero);
+            _arrowTrajectoryLineRenderer.SetPosAllZero();
             return;
         }
 
@@ -64,18 +64,32 @@ public class BowManager : Singleton<BowManager>
         // 차징하고 있지 않을 때
         if (!VRControllerManager.Instance.IsCharging)
         {
-            _bowStringLineRenderer.SetPosition(0, Vector3.zero);
-            _bowStringLineRenderer.SetPosition(1, Vector3.zero);
-            _bowStringLineRenderer2.SetPosition(0, Vector3.zero);
-            _bowStringLineRenderer2.SetPosition(1, Vector3.zero);
+            _bowStringLineRenderer.SetPosAllZero();
+            _bowStringLineRenderer2.SetPosAllZero();
             return;
         }
-        
+
         var arrowControllerPos = VRControllerManager.Instance.ArrowController.CenterTransform.transform.position;
         _bowStringLineRenderer.SetPosition(0, _bowTopTransform.position);
         _bowStringLineRenderer.SetPosition(1, arrowControllerPos);
         _bowStringLineRenderer2.SetPosition(0, arrowControllerPos);
         _bowStringLineRenderer2.SetPosition(1, _bowBottomTransform.position);
+    }
+
+    private void ShowArrow()
+    {
+        if (VRControllerManager.Instance.IsCharging)
+        {
+            var bowControllerPos = VRControllerManager.Instance.BowController.CenterTransform.position;
+            var arrowControllerPos = VRControllerManager.Instance.ArrowController.CenterTransform.position;
+            _arrowLineRenderer.SetPosition(0, bowControllerPos);
+            _arrowLineRenderer.SetPosition(1,
+                Vector3.Lerp(bowControllerPos, arrowControllerPos, VRControllerManager.Instance.ChargingPercent));
+        }
+        else
+        {
+            _arrowLineRenderer.SetPosAllZero();
+        }
     }
 
     /// <summary>
@@ -105,4 +119,6 @@ public class BowManager : Singleton<BowManager>
         BowObj.transform.forward = -BowObj.transform.up;
         BowObj.transform.position = Vector3.Lerp(trackpadPos, sysBtnPos, 0.5f);*/
     }
+
+    
 }

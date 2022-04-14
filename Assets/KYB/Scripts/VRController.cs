@@ -18,9 +18,12 @@ public class VRController : MonoBehaviour
     public SteamVR_Input_Sources HandType;  //모두 사용, 왼손, 오른손
     public SteamVR_Action_Boolean GrabAction;
     public SteamVR_Action_Vibration HapticAction;
-    public Transform CenterTransform;
+    public Transform CenterTransform { get; private set; }
 
-    public MeshRenderer[] _meshRenderers;
+    private MeshRenderer[] _meshRenderers;
+
+    public GameObject SysBtn { get; private set; }
+    public GameObject TrackPad { get; private set; }
 
     void Start()
     {
@@ -39,7 +42,9 @@ public class VRController : MonoBehaviour
         {
             if(_meshRenderers.Length != 0)
             {
-                CenterTransform = this.transform.GetChild(0).Find("sys_button");
+                CenterTransform = transform.GetChild(0).Find("sys_button").GetChild(0);
+                SysBtn = CenterTransform.gameObject;
+                TrackPad = transform.GetChild(0).Find("trackpad").GetChild(0).gameObject;
                 break;
             }
             FindChildMesh();

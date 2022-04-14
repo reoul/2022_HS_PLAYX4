@@ -47,6 +47,11 @@ public class DissolveMatAll : MonoBehaviour
     /// </summary>
     [SerializeField]
     private int _dissolveSecond = 1;
+    public int DissolveSecond
+    {
+        get => _dissolveSecond;
+        set => _dissolveSecond = value;
+    }
     /// <summary>
     /// 디졸브 타이머
     /// </summary>

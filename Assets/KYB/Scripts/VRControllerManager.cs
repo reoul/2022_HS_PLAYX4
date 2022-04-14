@@ -28,6 +28,8 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// </summary>
     private const float _maxCharging = 60;
 
+    public float ChargingPercent => _chargingTime / _maxCharging;
+
     /// <summary>
     /// 차징 딜레이 주기 체크하는 변수
     /// </summary>
@@ -51,20 +53,21 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// <summary>
     /// 차징이 100퍼센트 됬는지 체크
     /// </summary>
-    public bool IsChargingFinish {get {return _chargingTime >= _maxCharging;}}
+    public bool IsChargingFinish
+    {
+        get { return _chargingTime >= _maxCharging; }
+    }
 
     /// <summary>
     /// 플레이어의 두 컨트롤러 간의 최대 거리 (최대한 멀어질때마다 값 업데이트)
     /// </summary>
     private float _maxDistance;
 
-    private readonly WaitForSeconds _delay008 = new WaitForSeconds(0.08f);
-
     /// <summary>
     /// 에임 고정 관련 스크립트
     /// </summary>
     private AutoAim _autoAim;
-    
+
     /// <summary>
     /// 활을 들고 있는 컨트롤러
     /// </summary>
@@ -78,7 +81,6 @@ public class VRControllerManager : Singleton<VRControllerManager>
         get { return BowController == LeftController ? RightController : LeftController; }
     }
 
-    public GameObject CameraObj;
 
     /// <summary>
     /// 화살 방향
@@ -92,7 +94,8 @@ public class VRControllerManager : Singleton<VRControllerManager>
                 return Vector3.zero;
             }
 
-            return BowController.CenterTransform.transform.position - ArrowController.CenterTransform.transform.position;
+            return BowController.CenterTransform.transform.position -
+                   ArrowController.CenterTransform.transform.position;
         }
     }
 
@@ -105,7 +108,8 @@ public class VRControllerManager : Singleton<VRControllerManager>
         {
             if (BowController != null)
             {
-                return Vector3.Distance(BowController.CenterTransform.transform.position, ArrowController.CenterTransform.transform.position);
+                return Vector3.Distance(BowController.CenterTransform.transform.position,
+                    ArrowController.CenterTransform.transform.position);
             }
 
             return 0;
@@ -120,12 +124,6 @@ public class VRControllerManager : Singleton<VRControllerManager>
         _autoAim = FindObjectOfType<AutoAim>();
     }
 
-    private void Start()
-    {
-        LeftController.MeshOff();
-        RightController.MeshOff();
-    }
-
     private void Update()
     {
         CheckBow();
@@ -138,30 +136,12 @@ public class VRControllerManager : Singleton<VRControllerManager>
 
     private void ChargingSound()
     {
-        //if (_chargingTime > 1f && _chargingTime <= 20f)
         if (IsCharging)
-
         {
-
             SoundManager.Instance.PlaySound("Buff 2-1", 0.8f);
-            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = Mathf.Lerp(1, 2, _chargingTime / _maxCharging);
+            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch =
+                Mathf.Lerp(1, 2, _chargingTime / _maxCharging);
         }
-
-        /*else if (_chargingTime > 20f && _chargingTime <= 40f)
-
-        {
-            SoundManager.Instance.PlaySound("Buff 2-1", 0.8f);
-            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = 1.5f;
-        }
-
-        else if (_chargingTime > 40f)
-
-        {
-            SoundManager.Instance.PlaySound("Buff 2-1", 0.8f);
-            SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = 2f;
-        }*/
-
-
     }
 
     /// <summary>
@@ -220,7 +200,6 @@ public class VRControllerManager : Singleton<VRControllerManager>
             {
                 IsCharging = true;
                 ArrowController.MeshOff();
-                SetBow();
             }
         }
     }
@@ -239,6 +218,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
                 SoundManager.Instance.PlaySound("Rock 6", 1f);
                 FindObjectOfType<ArrowAfterImage>().Shot();
             }
+
             ArrowController.MeshON();
             IsCharging = false;
             _chargingTime = 0;
@@ -267,13 +247,13 @@ public class VRControllerManager : Singleton<VRControllerManager>
 
     private void CheckStop()
     {
-        if(_posList.Count >= 10)
+        if (_posList.Count >= 10)
         {
             _posList.RemoveAt(0);
         }
+
         _posList.Add(Camera.main.transform.position);
         IsMoveStop = IsPosStop();
-        Debug.Log($"움직임 상태는 {(IsMoveStop ? "멈춤" : "이동")}");
     }
 
     private bool IsPosStop()
@@ -283,6 +263,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
         {
             sum += pos;
         }
+
         sum /= _posList.Count;
         if (Mathf.Abs(_posList[0].x - sum.x) < 0.01f)
         {
@@ -349,21 +330,6 @@ public class VRControllerManager : Singleton<VRControllerManager>
         }
     }
 
-    private void SetBow()
-    {
-        /*GameObject bowObj = FindObjectOfType<BowManager>().BowObj;
-        //bowOgj.transform.SetParent(BowController.transform);
-        bowObj.transform.rotation = Quaternion.identity;
-
-        var trackpadPos = BowController.transform.GetChild(0).Find("trackpad").GetChild(0).transform.position;
-        var sysBtnPos = BowController.transform.GetChild(0).Find("sys_button").GetChild(0).transform.position;
-        bowObj.transform.parent = BowController.transform;
-        bowObj.transform.position = Vector3.Lerp(trackpadPos, sysBtnPos, 0.5f);
-        Debug.Log(BowController.transform.GetChild(0).Find("sys_button").GetChild(0).transform.forward);
-        bowObj.transform.forward = -BowController.transform.GetChild(0).Find("sys_button").GetChild(0).transform.forward;
-        bowObj.SetActive(true);*/
-    }
-
     /// <summary>
     /// 차징 진동
     /// </summary>
@@ -386,19 +352,19 @@ public class VRControllerManager : Singleton<VRControllerManager>
         //    _chargingTime -= _chargingSpeed * Time.deltaTime;
         //}
 
-        if(Distance > _maxDistance)
+        if (Distance > _maxDistance)
         {
             _chargingTime += _chargingSpeed * Time.deltaTime;
         }
         else if (Distance >= Mathf.Lerp(0, _maxDistance, 0.5f))
         {
             _chargingTime += _chargingSpeed * Time.deltaTime;
-            _chargingTime = Mathf.Clamp(_chargingTime, 0, Mathf.Lerp(0,_maxCharging,0.67f));
+            _chargingTime = Mathf.Clamp(_chargingTime, 0, Mathf.Lerp(0, _maxCharging, 0.67f));
         }
         else
         {
             _chargingTime += _chargingSpeed * Time.deltaTime;
-            _chargingTime = Mathf.Clamp(_chargingTime, 0, Mathf.Lerp(0,_maxCharging,0.34f));
+            _chargingTime = Mathf.Clamp(_chargingTime, 0, Mathf.Lerp(0, _maxCharging, 0.34f));
         }
 
         // 두 컨트롤러 거리가 일정 이상 멀어졌을때(활 쏘는 동작을 했을 때)
@@ -420,15 +386,13 @@ public class VRControllerManager : Singleton<VRControllerManager>
     {
         BowController = controller;
         BowController.MeshOff();
+        var sysBtnTrans = BowController.SysBtn.transform;
         GameObject bowObj = BowManager.Instance.BowObj;
-        bowObj.transform.rotation = Quaternion.identity;
-        var sysBtnTrans = BowController.transform.GetChild(0).Find("sys_button").GetChild(0);
-        var trackpadPos = BowController.transform.GetChild(0).Find("trackpad").GetChild(0).transform.position;
-        var sysBtnPos = sysBtnTrans.position;
         bowObj.transform.parent = BowController.transform;
-        bowObj.transform.position = Vector3.Lerp(trackpadPos, sysBtnPos, 0.5f);
+        bowObj.transform.position = Vector3.Lerp(BowController.TrackPad.transform.position, sysBtnTrans.position, 0.5f);
+        // todo : forward 지워도 되는지 확인
         bowObj.transform.forward = -BowController.transform.GetChild(0).transform.up;
-        bowObj.transform.rotation = sysBtnTrans.rotation * Quaternion.Euler(180,0,180);
+        bowObj.transform.rotation = sysBtnTrans.rotation * Quaternion.Euler(180, 0, 180);
         bowObj.SetActive(true);
     }
 
@@ -437,7 +401,6 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// </summary>
     private void UpdateMaxDistance()
     {
-        //Debug.Log(Distance);
         if (Distance > _maxDistance)
         {
             _maxDistance = Distance;
