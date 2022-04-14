@@ -26,8 +26,6 @@ public class PlayerFloor : Singleton<PlayerFloor>
         }
         _floorDefaultColor = floorTransforms[0].GetComponent<MeshRenderer>().material.color;
         _camera = GameObject.Find("Camera").transform;
-
-
         _isAttack = new bool[3];
     }
 
@@ -40,11 +38,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
         IsRayHit();
         if (Input.GetKeyDown(KeyCode.I))
         {
-            StartMeasure();
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            StopMeasure();
+            InitFloors();
         }
     }
 
@@ -176,6 +170,16 @@ public class PlayerFloor : Singleton<PlayerFloor>
         if (_isAttack[_floor])
         {
             _isAttack[_floor] = false;
+        }
+    }
+
+    public void InitFloors()
+    {
+        StopAllCoroutines();
+        _isAttack = new bool[3];
+        foreach(Transform obj in floorTransforms)
+        {
+            obj.GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
         }
     }
 }
