@@ -28,7 +28,7 @@ public class TreeSpirit : Enemy
             ScoreSystem.Score += 100;
             //_stateMachine.ChangeState(_stateMachine.StateDictionary[(int)TreeSpiritState.StateType.Hit]);
             EffectManager.Instance.CreateEffect(this.transform.position);
-            gameObject.SetActive(false);
+            FindObjectOfType<EnemySpawner>().Delete(this.gameObject);
         }
     }
 
