@@ -27,6 +27,7 @@ public class Enemy : Unit
 
     private void OnEnable()
     {
+        gameObject.layer = 10;
         currentHealth = maxHealth;
     }
 }

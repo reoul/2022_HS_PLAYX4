@@ -31,7 +31,7 @@ public class Projectile_Stone : MonoBehaviour
         }
         if (isThrow)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _targetPos, 0.5f);
+            transform.position = Vector3.MoveTowards(transform.position, _targetPos, 35 * Time.deltaTime);
         }
         else
         {
