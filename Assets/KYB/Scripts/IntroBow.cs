@@ -15,4 +15,15 @@ public class IntroBow : MonoBehaviour
         this.transform.localPosition = new Vector3(0, Mathf.Sin(_time) * 0.1f, 0);
         this.transform.Rotate(Vector3.up * 20 * Time.deltaTime);
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.GetComponent<VRController>() != null)
+        {
+            if (other.GetComponent<VRController>().GetTriggerDown())
+            {
+                Debug.Log("asddasasdsda");
+            }
+        }
+    }
 }

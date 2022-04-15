@@ -117,7 +117,6 @@ public class DissolveMatAll : MonoBehaviour
 
     public void ChangeMat(Material material)
     {
-        _materials.Clear();
         foreach (var meshRenderer in GetComponentsInChildren<MeshRenderer>(true))
         {
             meshRenderer.material = material;

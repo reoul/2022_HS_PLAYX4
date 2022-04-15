@@ -149,6 +149,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// </summary>
     private void CheckBow()
     {
+        return;
         if (LeftController.GetTriggerDown())
         {
             // 오른쪽 컨트롤러 트리거를 사용 안할때

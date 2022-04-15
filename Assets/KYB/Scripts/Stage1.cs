@@ -22,18 +22,18 @@ public class Stage1 : Stage
     public override void StageEnd()
     {
         base.StageEnd();
-        
+        RemoveEnemy();
     }
 
     void RemoveEnemy()
     {
-        var monsters = FindObjectsOfType<TreeSpirit>();
+        var monsters = GetComponentsInChildren<TreeSpirit>(true);
         foreach (TreeSpirit monster in monsters)
         {
             monster.MoveSpeed = 0;
             var dissolveMat = monster.GetComponentInChildren<DissolveMat>();
             dissolveMat.StartDestroyDissolve();
-            Destroy(monster, 1.1f);
+            Destroy(monster.gameObject, 1.1f);
         }
 
         var unUsedEnemyQueue = FindObjectOfType<EnemySpawner>().unUsedEnemyQueue;
