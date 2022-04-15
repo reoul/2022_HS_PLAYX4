@@ -71,7 +71,7 @@ public class StageManager : Singleton<StageManager>
             yield break;
         }
 
-        for (int i = 5; i >= 0; i--)
+        for (int i = 30; i >= 0; i--)
         {
             TimerText.text = $"남은 시간 : {i}초";
             yield return new WaitForSeconds(1f);

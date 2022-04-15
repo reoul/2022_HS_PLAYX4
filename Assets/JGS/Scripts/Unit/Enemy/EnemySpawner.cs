@@ -27,6 +27,9 @@ public class EnemySpawner : MonoBehaviour
     {
         var enemy = unUsedEnemyQueue.Dequeue().gameObject;
         enemy.transform.position = pos;
+        int r = Random.Range(0, 4);
+        float scale = 0.7f + r * 0.2f;
+        enemy.transform.localScale = new Vector3(scale, scale,scale);
         enemy.SetActive(true);
         enemy.GetComponent<TreeSpirit>().MoveSpeed = 5;
         enemy.GetComponent<TreeSpirit>().ChangeState(TreeSpiritState.StateType.Spawn);
