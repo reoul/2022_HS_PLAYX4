@@ -83,10 +83,10 @@ public class PlayerFloor : Singleton<PlayerFloor>
     public void StartMeasure()
     {
         _measureStartPos = _camera.position;
-        foreach (Transform transform in floorTransforms)
-        {
-            transform.position = floorTransforms[(int)FloorType.Center].position;
-        }
+        //foreach (Transform transform in floorTransforms)
+        //{
+        //    transform.position = floorTransforms[(int)FloorType.Center].position;
+        //}
     }
 
     public void StopMeasure()
@@ -94,11 +94,12 @@ public class PlayerFloor : Singleton<PlayerFloor>
         Vector3 _measureEndPos;
         _measureEndPos = _camera.position;
         _measureWidth = Vector2.Distance(new Vector2(_measureEndPos.x,_measureEndPos.z), new Vector2(_measureStartPos.x, _measureStartPos.z));
-        floorTransforms[(int)FloorType.Left].position -= new Vector3(_measureWidth, 0,0);
-        floorTransforms[(int)FloorType.Right].position += new Vector3(_measureWidth, 0,0);
-        floorTransforms[(int)FloorType.Left].localScale = new Vector3(_measureWidth, 0.1f, 3.68f);
-        floorTransforms[(int)FloorType.Center].localScale = new Vector3(_measureWidth, 0.1f, 3.68f);
-        floorTransforms[(int)FloorType.Right].localScale = new Vector3(_measureWidth, 0.1f, 3.68f);
+        transform.localScale = new Vector3(_measureWidth * 0.5f, transform.localScale.y, transform.localScale.z);
+        //floorTransforms[(int)FloorType.Left].position -= new Vector3(_measureWidth, 0,0);
+        //floorTransforms[(int)FloorType.Right].position += new Vector3(_measureWidth, 0,0);
+        //floorTransforms[(int)FloorType.Left].localScale = new Vector3(_measureWidth, 0.1f, 3.68f);
+        //floorTransforms[(int)FloorType.Center].localScale = new Vector3(_measureWidth, 0.1f, 3.68f);
+        //floorTransforms[(int)FloorType.Right].localScale = new Vector3(_measureWidth, 0.1f, 3.68f);
     }
 
     public IEnumerator Hit(int cnt)
