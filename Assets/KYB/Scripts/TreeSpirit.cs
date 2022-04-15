@@ -26,7 +26,9 @@ public class TreeSpirit : Enemy
         if (other.CompareTag("Arrow"))
         {
             ScoreSystem.Score += 100;
-            _stateMachine.ChangeState(_stateMachine.StateDictionary[(int)TreeSpiritState.StateType.Hit]);
+            //_stateMachine.ChangeState(_stateMachine.StateDictionary[(int)TreeSpiritState.StateType.Hit]);
+            EffectManager.Instance.CreateEffect(this.transform.position);
+            FindObjectOfType<EnemySpawner>().Delete(this.gameObject);
         }
     }
 
