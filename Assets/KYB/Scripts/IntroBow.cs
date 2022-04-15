@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class IntroBow : MonoBehaviour
 {
+    public Fog fog;
     private float _time = 0;
     private void Start()
     {
@@ -22,7 +23,11 @@ public class IntroBow : MonoBehaviour
         {
             if (other.GetComponent<VRController>().GetTriggerDown())
             {
-                Debug.Log("asddasasdsda");
+                fog.GameStart();
+                StageManager.Instance.NextStage();
+                VRControllerManager.Instance.ClickBow = true;
+                VRControllerManager.Instance.CheckBow();
+                this.gameObject.SetActive(false);
             }
         }
     }

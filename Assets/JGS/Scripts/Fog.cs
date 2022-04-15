@@ -6,6 +6,7 @@ using UnityEngine;
 public class Fog : MonoBehaviour
 {
     private bool _isGameStart;
+    private float _time;
     
     // Use this for initialization
     private void Start ()
@@ -23,7 +24,12 @@ public class Fog : MonoBehaviour
     private void Update () {
         if (_isGameStart)
         {
-            RenderSettings.fogEndDistance = Mathf.Lerp(RenderSettings.fogEndDistance, 100, Time.deltaTime * 2.5f);
+            _time += Time.deltaTime * 0.2f;
+            RenderSettings.fogEndDistance = Mathf.Lerp(RenderSettings.fogEndDistance, 300, _time);
+            if(_time >= 1)
+            {
+                this.gameObject.SetActive(false);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.Z))

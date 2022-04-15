@@ -65,7 +65,7 @@ public class SpawnerManager : Singleton<SpawnerManager>
     public void SpawnerUpdate()
     {
         _delayTime += Time.deltaTime;
-        if(_delayTime < 0)
+        if(_delayTime < 5)
         {
             return;
         }

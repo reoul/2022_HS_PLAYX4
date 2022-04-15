@@ -116,6 +116,8 @@ public class VRControllerManager : Singleton<VRControllerManager>
         }
     }
 
+    public bool ClickBow;
+
     private void Awake()
     {
         FindController();
@@ -147,9 +149,12 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// <summary>
     /// BowController와 ArrowController를 지정해준다
     /// </summary>
-    private void CheckBow()
+    public void CheckBow()
     {
-        return;
+        if (!ClickBow)
+        {
+            return;
+        }
         if (LeftController.GetTriggerDown())
         {
             // 오른쪽 컨트롤러 트리거를 사용 안할때
@@ -336,7 +341,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// </summary>
     private void StartChargingVibration()
     {
-        Vibration(HandType.LeftRight, (int) _chargingTime);
+        Vibration(HandType.LeftRight, (int)_chargingTime);
     }
 
     /// <summary>
