@@ -45,7 +45,7 @@ public class DissolveMat : MonoBehaviour
     /// 디졸브 목표 시간
     /// </summary>
     [SerializeField]
-    private int _dissolveSecond = 1;
+    private float _dissolveSecond = 1;
     /// <summary>
     /// 디졸브 타이머
     /// </summary>
@@ -138,8 +138,13 @@ public class DissolveMat : MonoBehaviour
     /// <summary>
     /// 제거 디졸브 시작
     /// </summary>
-    public void StartDestroyDissolve()
+    public void StartDestroyDissolve(float dissolveTime = 0)
     {
+        if (dissolveTime != 0)
+        {
+            _timer = dissolveTime;
+            _dissolveSecond = dissolveTime;
+        }
         State = DissolveState.Dec;
     }
     

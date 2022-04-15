@@ -123,7 +123,8 @@ public class TreeSpiritState : StateMachine
 
         public override void StateStart()
         {
-            _gameObject.GetComponentInChildren<DissolveMat>().StartDestroyDissolve();
+            _gameObject.GetComponent<Animator>().SetTrigger("Attack");
+            _gameObject.GetComponentInChildren<DissolveMat>().StartDestroyDissolve(1.05f);
         }
 
         public override void StateUpdate()
