@@ -33,6 +33,7 @@ public class EnemySpawner : MonoBehaviour
         enemy.SetActive(true);
         enemy.GetComponent<TreeSpirit>().MoveSpeed = 5;
         enemy.GetComponent<TreeSpirit>().ChangeState(TreeSpiritState.StateType.Spawn);
+        SoundManager.Instance.PlaySound("Env3", 0.5f);
     }
 
     public void Delete(GameObject enemyObj)

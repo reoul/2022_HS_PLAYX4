@@ -15,6 +15,7 @@ public class ArrowManager : Singleton<ArrowManager>
         if (Input.GetKeyDown(KeyCode.A))
         {
             Shot(new Vector3(0,1,4),new Vector3(0,0,1));
+            SoundManager.Instance.PlaySound("Rock 6", 1);
         }
         
     }
