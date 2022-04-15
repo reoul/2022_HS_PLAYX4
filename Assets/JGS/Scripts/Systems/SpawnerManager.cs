@@ -49,6 +49,17 @@ public class SpawnerManager : Singleton<SpawnerManager>
         {
             unusedSpawnTransQueue.Enqueue(spawnTransforms[i]);
         }
+        
+        List<Transform> shuffleList = new List<Transform>();
+        for (int i = 0; i < unusedSpawnTransQueue.Count;)
+        {
+            shuffleList.Add(unusedSpawnTransQueue.Dequeue());
+        }
+        shuffleList.Swap(shuffleList.Count * 3);
+        foreach (Transform spawner in shuffleList)
+        {
+            unusedSpawnTransQueue.Enqueue(spawner);
+        }
     }
 
     public void SpawnerUpdate()

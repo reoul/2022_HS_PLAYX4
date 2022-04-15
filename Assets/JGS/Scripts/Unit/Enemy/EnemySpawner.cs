@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         unUsedEnemyQueue = new Queue<GameObject>();
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 30; i++)
         {
             var enemy = new EnemyBuilder("TreeSpirit").Build();
             enemy.gameObject.SetActive(false);
