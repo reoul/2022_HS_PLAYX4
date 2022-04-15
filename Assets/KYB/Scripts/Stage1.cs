@@ -10,7 +10,6 @@ public class Stage1 : Stage
         base.StageStart();
         
         _spawnerManager = transform.GetChild(0).GetComponent<SpawnerManager>();
-        Debug.Log(_spawnerManager);
         _spawnerManager.SpawnerAwake();
     }
 

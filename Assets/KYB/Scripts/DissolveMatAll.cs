@@ -115,6 +115,15 @@ public class DissolveMatAll : MonoBehaviour
         UpdateDissolve();
     }
 
+    public void ChangeMat(Material material)
+    {
+        _materials.Clear();
+        foreach (var meshRenderer in GetComponentsInChildren<MeshRenderer>(true))
+        {
+            meshRenderer.material = material;
+        }
+    }
+
     private void UpdateDissolve()
     {
         if (_isDelay)
