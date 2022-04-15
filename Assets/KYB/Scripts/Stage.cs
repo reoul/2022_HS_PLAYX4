@@ -5,7 +5,7 @@ using Random = UnityEngine.Random;
 
 public abstract class Stage : MonoBehaviour
 {
-    public List<GameObject> DissolveEnvironments;
+    protected List<DissolveMatAll> DissolveEnvironments;
 
     public bool IsFinish { get; set; }
     
@@ -18,7 +18,7 @@ public abstract class Stage : MonoBehaviour
         DissolveEnvironments.Swap(DissolveEnvironments.Count * 3);
         float k = 0;
         int cnt = 0;
-        foreach (GameObject dissolve in DissolveEnvironments)
+        foreach (DissolveMatAll dissolve in DissolveEnvironments)
         {
             cnt++;
             if (cnt > 3)
@@ -26,14 +26,19 @@ public abstract class Stage : MonoBehaviour
                 k += 0.2f;
                 cnt = 0;
             }
-            dissolve.GetComponent<DissolveMatAll>().SetDissolveHeightMin();
-            dissolve.GetComponent<DissolveMatAll>().StartCreateDissolve(k);
+            dissolve.SetDissolveHeightMin();
+            dissolve.StartCreateDissolve(k);
         }
     }
 
     public virtual void StageStart()
     {
         IsFinish = false;
+        DissolveEnvironments = new List<DissolveMatAll>();
+        foreach (var dissolveMatAll in GetComponentsInChildren<DissolveMatAll>())
+        {
+            DissolveEnvironments.Add(dissolveMatAll);
+        }
     }
 
     public virtual void StageUpdate() { }
@@ -46,9 +51,9 @@ public abstract class Stage : MonoBehaviour
 
     private void RemoveEnvironment()
     {
-        foreach (GameObject dissolve in DissolveEnvironments)
+        foreach (DissolveMatAll dissolve in DissolveEnvironments)
         {
-            dissolve.GetComponent<DissolveMatAll>().StartDestroyDissolve();
+            dissolve.StartDestroyDissolve();
         }
     }
 }

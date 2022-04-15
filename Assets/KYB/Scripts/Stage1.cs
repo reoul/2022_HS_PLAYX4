@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Stage1 : Stage
 {
@@ -7,7 +8,9 @@ public class Stage1 : Stage
     public override void StageStart()
     {
         base.StageStart();
+        
         _spawnerManager = transform.GetChild(0).GetComponent<SpawnerManager>();
+        Debug.Log(_spawnerManager);
         _spawnerManager.SpawnerAwake();
     }
 

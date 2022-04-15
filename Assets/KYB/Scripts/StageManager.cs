@@ -55,8 +55,8 @@ public class StageManager : Singleton<StageManager>
     {
         // 홀로그램 시작
         _curStage.gameObject.SetActive(true);
-        StartHologram(type);
         _curStage.StageStart();
+        StartHologram(type);
     }
 
     private void StartHologram(StageType type)
