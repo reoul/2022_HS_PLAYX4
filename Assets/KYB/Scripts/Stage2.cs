@@ -7,6 +7,8 @@ public class Stage2 : Stage
     public override void StageStart()
     {
         base.StageStart();
+        SoundManager.Instance.StopBGM();
+        SoundManager.Instance.BGMChange("Beside Me - Patrick Patrikios", 1f);
         EnemyInit();
         Invoke("GolemSpawn", 5);
     }

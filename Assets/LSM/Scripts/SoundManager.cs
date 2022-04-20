@@ -13,9 +13,16 @@ public class SoundManager : Singleton<SoundManager>
 
     [SerializeField]
     AudioClip[] audioClip; // 효과음 소스들 지정.
+    public struct BgmType
+    {
+        public string name;
+        public AudioClip audio;
+    }
 
     Dictionary<string, AudioClip> audioClipsDic;
     public AudioSource sfxPlayer;
+    public AudioSource sfxPlayer2;
+    public AudioSource sfxPlayer3;
     AudioSource bgmPlayer;
 
 
@@ -23,8 +30,13 @@ public class SoundManager : Singleton<SoundManager>
     void Awake()
     {
         sfxPlayer = GetComponent<AudioSource>();
+        GameObject monster = transform.GetChild(0).gameObject;
+        sfxPlayer2 = monster.GetComponent<AudioSource>(); ;
+        GameObject golem = transform.GetChild(1).gameObject;
+        sfxPlayer3 = golem.GetComponent<AudioSource>();
+
         SetupBGM();
-        SetVolumeBGM(0.05f);
+        SetVolumeBGM(1);
 
         // 딕셔너리로 오디오클립 배열에서 원하는 오디오를 탐색
         audioClipsDic = new Dictionary<string, AudioClip>();
@@ -47,6 +59,14 @@ public class SoundManager : Singleton<SoundManager>
         bgmPlayer.loop = true;
     }
 
+    public void BGMChange(string bgm_name, float bgm_volume)
+    {
+        bgmPlayer.clip = audioClipsDic[bgm_name];
+        bgmPlayer.volume = bgm_volume;
+        bgmPlayer.loop = true;
+        bgmPlayer.Play();
+    }
+
     private void Start()
     {
         if (bgmPlayer != null)
@@ -66,6 +86,27 @@ public class SoundManager : Singleton<SoundManager>
     }
 
 
+    public void PlaySoundSecond(string sfx_name, float sfx_volume = 1f)
+    {
+        if (audioClipsDic.ContainsKey(sfx_name) == false || sfxPlayer2.GetComponent<AudioSource>().isPlaying)
+        {
+            Debug.Log(sfx_name + " 이 포함된 오디오가 없습니다.");
+            return;
+        }
+        else
+            sfxPlayer2.PlayOneShot(audioClipsDic[sfx_name], sfx_volume * masterVolumeSFX);
+    }
+
+    public void PlaySoundThird(string sfx_name, float sfx_volume = 1f)
+    {
+        if (audioClipsDic.ContainsKey(sfx_name) == false || sfxPlayer3.GetComponent<AudioSource>().isPlaying)
+        {
+            Debug.Log(sfx_name + " 이 포함된 오디오가 없습니다.");
+            return;
+        }
+        else
+            sfxPlayer3.PlayOneShot(audioClipsDic[sfx_name], sfx_volume * masterVolumeSFX);
+    }
 
     // 배경음악 종료
     public void StopBGM()

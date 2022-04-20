@@ -7,7 +7,7 @@ public class EnvironmentSpawn : Singleton<EnvironmentSpawn>
 
     private void Awake()
     {
-        SoundManager.Instance.PlaySound("Env3", 1);
+        //SoundManager.Instance.PlaySound("Env3", 1);
     }
 
 

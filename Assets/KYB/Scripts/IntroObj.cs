@@ -9,6 +9,7 @@ public class IntroObj : MonoBehaviour
         if(other.CompareTag("Arrow"))
         {
             this.gameObject.SetActive(false);
+            SoundManager.Instance.PlaySoundSecond("Access Denied 6", 1f);
             StageManager.Instance.NextStage();
         }
     }

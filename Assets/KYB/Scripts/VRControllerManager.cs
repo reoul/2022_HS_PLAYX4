@@ -140,9 +140,9 @@ public class VRControllerManager : Singleton<VRControllerManager>
     {
         if (IsCharging)
         {
-            SoundManager.Instance.PlaySound("Buff 2-1", 0.8f);
+            SoundManager.Instance.PlaySound("Charge_1", 5f);
             SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch =
-                Mathf.Lerp(1, 2, _chargingTime / _maxCharging);
+                Mathf.Lerp(0.5f, 1, _chargingTime / _maxCharging);
         }
     }
 

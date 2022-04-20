@@ -8,7 +8,8 @@ public class Stage1 : Stage
     public override void StageStart()
     {
         base.StageStart();
-        
+        SoundManager.Instance.StopBGM();
+        SoundManager.Instance.BGMChange("Straight Fuse - French Fuse", 1f);
         _spawnerManager = transform.GetChild(0).GetComponent<SpawnerManager>();
         _spawnerManager.SpawnerAwake();
     }
