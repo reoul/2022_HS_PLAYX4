@@ -1,13 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Golem : Enemy
 {
-    [SerializeField]
-    private Transform _shootPosTransfrom;
-    [SerializeField]
-    private GameObject _projectile;
+    [SerializeField] private Transform _shootPosTransfrom;
+    [SerializeField] private GameObject _projectile;
 
     private Transform _target;
 
@@ -17,8 +17,15 @@ public class Golem : Enemy
 
     private Vector3 _targetPos;
 
-    [SerializeField]
-    private float _weakAlphaSpeed;
+    private float _time;
+    private bool _isMoveForward = false;
+
+    [SerializeField] private float _weakAlphaSpeed;
+
+    private void Awake()
+    {
+        _stateMachine = GetComponent<StateMachine>();
+    }
 
     private void Start()
     {
@@ -29,15 +36,26 @@ public class Golem : Enemy
 
     private void Update()
     {
-        if (_isTargeted)
+        /*if (_isTargeted)
         {
-            transform.position = Vector3.Lerp(transform.position, _targetPos, 0.05f);
+            _time += (_isMoveForward ? 1 : -1.5f) * Time.deltaTime;
+            Debug.Log(_time);
+            transform.position = Vector3.Lerp(_startPos, _targetPos, _time);
+        }*/
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            ChangeState(GolemState.StateType.Idle);
         }
+        _stateMachine.StateUpdate();
+    }
+
+    public void ChangeState(GolemState.StateType state)
+    {
+        _stateMachine.ChangeState(_stateMachine.StateDictionary[(int)state]);
     }
 
     private Transform _curWeak;
-    [SerializeField]
-    private Transform[] _weakPoints;
+    [SerializeField] private Transform[] _weakPoints;
 
     private void RandomWeak()
     {
@@ -56,6 +74,7 @@ public class Golem : Enemy
         {
             rand = Random.Range(0, _weakPoints.Length);
         } while (_curWeak == _weakPoints[rand]);
+
         _curWeak.gameObject.SetActive(false);
         _weakPoints[rand].gameObject.SetActive(true);
         _curWeak = _weakPoints[rand];
@@ -67,32 +86,40 @@ public class Golem : Enemy
     public void MoveToTarget()
     {
         _isTargeted = true;
+        _isMoveForward = true;
     }
 
     public void SetTargetZero()
     {
-        _targetPos = _startPos;
+        //_targetPos = _startPos;
+        _time = 1;
+        _isMoveForward = false;
         _isTargeted = true;
     }
 
     public void SetTargetFloor()
     {
+        _time = 0;
         _targetFloor = Random.RandomRange(0, 2);
-        _targetPos = (PlayerFloor.Instance.floorTransforms[_targetFloor].position + PlayerFloor.Instance.floorTransforms[_targetFloor +1 ].position) * 0.5f + new Vector3(0, 0, 3);
+        _targetPos =
+            (PlayerFloor.Instance.attackTrans[_targetFloor].position +
+             PlayerFloor.Instance.attackTrans[_targetFloor + 1].position) * 0.5f +
+            new Vector3(_targetFloor == 1 ? 1 : -1.5f, 0, 7);
         StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor));
         StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor + 1));
     }
 
     public void DisableTargetFloor()
     {
-       PlayerFloor.Instance.StopAttack(_targetFloor);
-       PlayerFloor.Instance.StopAttack(_targetFloor + 1);
+        PlayerFloor.Instance.StopAttack(_targetFloor);
+        PlayerFloor.Instance.StopAttack(_targetFloor + 1);
         StopTargeting();
     }
 
     public void StopTargeting()
     {
         _isTargeted = false;
+        //_time = 0;
     }
 
     private GameObject _stone;
