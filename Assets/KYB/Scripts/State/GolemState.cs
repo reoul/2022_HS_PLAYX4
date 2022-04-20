@@ -10,7 +10,8 @@ public class GolemState : StateMachine
         Idle = 0,
         Spawn,
         JumpAttack,
-        SwingAttack
+        SwingAttack,
+        ThrowAttack
     }
 
     /// <summary>
@@ -26,6 +27,8 @@ public class GolemState : StateMachine
     public bool CanMove { get; private set; }
 
     public bool IsMoveForward { get; private set; }
+
+    private int _targetFloor;
 
     private void Awake()
     {
@@ -44,19 +47,66 @@ public class GolemState : StateMachine
         StateDictionary.Add((int) StateType.Spawn, new SpawnState(gameObject));
         StateDictionary.Add((int) StateType.JumpAttack, new JumpAttackState(gameObject));
         StateDictionary.Add((int) StateType.SwingAttack, new SwingAttackState(gameObject));
-        ChangeState(StateDictionary[(int) StateType.Idle]);
+        StateDictionary.Add((int) StateType.ThrowAttack, new ThrowAttackState(gameObject));
+        ChangeState(StateDictionary[(int) StateType.Spawn]);
     }
 
-    public void MoveToTarget1()
+    public void MoveForward()
     {
         CanMove = true;
         IsMoveForward = true;
     }
 
-    public void SetTargetZero1()
+    public void MoveBack()
     {
         IsMoveForward = false;
         CanMove = true;
+    }
+
+    public void MoveStop()
+    {
+        CanMove = false;
+    }
+
+    public void ChangeStateIdle()
+    {
+        ChangeState(StateDictionary[(int) StateType.Idle]);
+    }
+
+    public void DissolveHideWeapon()
+    {
+        GetComponent<Golem>().WeaponDissolveMat.StartDestroyDissolve();
+    }
+
+    public void DissolveShowWeapon()
+    {
+        GetComponent<Golem>().WeaponDissolveMat.StartCreateDissolve();
+    }
+
+    public void SetJumpAttackFloor()
+    {
+        _targetFloor = Random.RandomRange(0, 3);
+        DestPos = PlayerFloor.Instance.attackTrans[_targetFloor].position + new Vector3(0, 0, 7);
+        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor));
+    }
+
+    public void SetSwingFloor()
+    {
+        _targetFloor = Random.RandomRange(0, 2);
+        DestPos =
+            (PlayerFloor.Instance.attackTrans[_targetFloor].position +
+             PlayerFloor.Instance.attackTrans[_targetFloor + 1].position) * 0.5f +
+            new Vector3(_targetFloor == 1 ? 1 : -1.5f, 0, 7);
+        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor));
+        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor + 1));
+    }
+
+    public void StopFloor()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            PlayerFloor.Instance.StopAttack(i);
+        }
     }
 
     private class IdleState : State
@@ -75,9 +125,9 @@ public class GolemState : StateMachine
         public override void StateUpdate()
         {
             _time += Time.deltaTime;
-            if (_time >= 5)
+            if (_time >= 1)
             {
-                int rand = Random.Range(0, 2);
+                int rand = Random.Range(0, 3);
                 _stateMachine.ChangeState(_stateMachine.StateDictionary[(int) StateType.JumpAttack + rand]);
             }
         }
@@ -96,7 +146,7 @@ public class GolemState : StateMachine
 
     private class JumpAttackState : State
     {
-        private float _time = 0;
+        private float _time;
         private GolemState _golemState;
 
         public JumpAttackState(GameObject gameObject) : base(gameObject)
@@ -107,14 +157,14 @@ public class GolemState : StateMachine
         public override void StateStart()
         {
             _gameObject.GetComponent<Animator>().SetTrigger("JumpAttack");
+            _time = 0;
         }
 
         public override void StateUpdate()
         {
             if (_golemState.CanMove)
             {
-                _time += (_golemState.IsMoveForward ? 1 : -1.5f) * Time.deltaTime;
-                Debug.Log(_time);
+                _time += (_golemState.IsMoveForward ? 1.4f : -1.5f) * Time.deltaTime;
                 _gameObject.transform.position = Vector3.Lerp(_golemState.BasePos, _golemState.DestPos, _time);
             }
         }
@@ -122,13 +172,39 @@ public class GolemState : StateMachine
 
     private class SwingAttackState : State
     {
+        private float _time;
+        private GolemState _golemState;
+
         public SwingAttackState(GameObject gameObject) : base(gameObject)
         {
+            _golemState = gameObject.GetComponent<GolemState>();
         }
 
         public override void StateStart()
         {
             _gameObject.GetComponent<Animator>().SetTrigger("SwingAttack");
+            _time = 0;
+        }
+
+        public override void StateUpdate()
+        {
+            if (_golemState.CanMove)
+            {
+                _time += (_golemState.IsMoveForward ? 0.91f : -1.5f) * Time.deltaTime;
+                _gameObject.transform.position = Vector3.Lerp(_golemState.BasePos, _golemState.DestPos, _time);
+            }
+        }
+    }
+
+    private class ThrowAttackState : State
+    {
+        public ThrowAttackState(GameObject gameObject) : base(gameObject)
+        {
+        }
+
+        public override void StateStart()
+        {
+            _gameObject.GetComponent<Animator>().SetTrigger("ThrowAttack");
         }
 
         public override void StateUpdate()

@@ -9,13 +9,11 @@ public class Golem : Enemy
     [SerializeField] private Transform _shootPosTransfrom;
     [SerializeField] private GameObject _projectile;
 
+    public DissolveMat WeaponDissolveMat;
+
     private Transform _target;
 
     private int _targetFloor;
-
-    private Vector3 _startPos;
-
-    private Vector3 _targetPos;
 
     private float _time;
     private bool _isMoveForward = false;
@@ -30,22 +28,11 @@ public class Golem : Enemy
     private void Start()
     {
         _target = GameObject.Find("[CameraRig]").transform;
-        _startPos = transform.position;
         RandomWeak();
     }
 
     private void Update()
     {
-        /*if (_isTargeted)
-        {
-            _time += (_isMoveForward ? 1 : -1.5f) * Time.deltaTime;
-            Debug.Log(_time);
-            transform.position = Vector3.Lerp(_startPos, _targetPos, _time);
-        }*/
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            ChangeState(GolemState.StateType.Idle);
-        }
         _stateMachine.StateUpdate();
     }
 
@@ -82,45 +69,6 @@ public class Golem : Enemy
     }
 
     private bool _isTargeted;
-
-    public void MoveToTarget()
-    {
-        _isTargeted = true;
-        _isMoveForward = true;
-    }
-
-    public void SetTargetZero()
-    {
-        //_targetPos = _startPos;
-        _time = 1;
-        _isMoveForward = false;
-        _isTargeted = true;
-    }
-
-    public void SetTargetFloor()
-    {
-        _time = 0;
-        _targetFloor = Random.RandomRange(0, 2);
-        _targetPos =
-            (PlayerFloor.Instance.attackTrans[_targetFloor].position +
-             PlayerFloor.Instance.attackTrans[_targetFloor + 1].position) * 0.5f +
-            new Vector3(_targetFloor == 1 ? 1 : -1.5f, 0, 7);
-        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor));
-        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor + 1));
-    }
-
-    public void DisableTargetFloor()
-    {
-        PlayerFloor.Instance.StopAttack(_targetFloor);
-        PlayerFloor.Instance.StopAttack(_targetFloor + 1);
-        StopTargeting();
-    }
-
-    public void StopTargeting()
-    {
-        _isTargeted = false;
-        //_time = 0;
-    }
 
     private GameObject _stone;
 

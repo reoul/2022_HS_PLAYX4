@@ -68714,7 +68714,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: SetTargetFloor
+    functionName: SetSwingFloor
     data: 
     objectReferenceParameter: {fileID: 3496481049115116106, guid: fa6f4bee76898c54b89697a3d85ce077,
       type: 3}

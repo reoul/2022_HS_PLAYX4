@@ -60194,7 +60194,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 1.2
-    functionName: SetTargetZero1
+    functionName: MoveBack
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 28d133e2c25f1694db38e13f4e8c195e,
       type: 3}
@@ -60202,10 +60202,17 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 1.8666667
-    functionName: StopTargeting
+    functionName: MoveStop
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 28d133e2c25f1694db38e13f4e8c195e,
       type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.1333334
+    functionName: ChangeStateIdle
+    data: 
+    objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
