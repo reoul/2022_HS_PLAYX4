@@ -14,7 +14,7 @@ public class IntroObj : MonoBehaviour
         if(other.CompareTag("Arrow"))
         {
             SoundManager.Instance.PlaySoundSecond("Access Denied 6", 0.8f);
-            Invoke("introObjHit", 1f);
+            Invoke("introObjHit", 0.8f);
         }
     }
 }
