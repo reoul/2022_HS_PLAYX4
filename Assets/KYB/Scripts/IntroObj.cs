@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class IntroObj : MonoBehaviour
 {
+    private void introObjHit()
+    {        
+        this.gameObject.SetActive(false);
+        StageManager.Instance.NextStage();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Arrow"))
         {
-            this.gameObject.SetActive(false);
-            SoundManager.Instance.PlaySoundSecond("Access Denied 6", 1f);
-            StageManager.Instance.NextStage();
+            SoundManager.Instance.PlaySoundSecond("Access Denied 6", 0.8f);
+            Invoke("introObjHit", 0.5f);
         }
     }
 }
