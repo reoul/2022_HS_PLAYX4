@@ -7,6 +7,6 @@ public class Golem_MtJump : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        SoundManager.Instance.PlaySoundThird("G_Hit_2", 1f);
+        SoundManager.Instance.PlaySoundThird("G_Hit_2", 5f);
     }
 }

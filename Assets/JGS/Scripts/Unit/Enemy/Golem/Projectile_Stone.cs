@@ -43,6 +43,7 @@ public class Projectile_Stone : MonoBehaviour
     {
         if (other.CompareTag("PlayerFloor"))
         {
+            SoundManager.Instance.PlaySoundSecond("G_Rock_Impact_2", 1f);
             PlayerFloor.Instance.StopAttack(targetFloor);
             Destroy(gameObject);
         }
