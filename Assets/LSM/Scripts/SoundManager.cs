@@ -31,10 +31,10 @@ public class SoundManager : Singleton<SoundManager>
     void Awake()
     {
         sfxPlayer = GetComponent<AudioSource>();
-        GameObject monster = transform.GetChild(0).gameObject;
-        sfxPlayer2 = monster.GetComponent<AudioSource>(); ;
-        GameObject golem = transform.GetChild(1).gameObject;
-        sfxPlayer3 = golem.GetComponent<AudioSource>();
+        GameObject sfx2 = transform.GetChild(0).gameObject;
+        sfxPlayer2 = sfx2.GetComponent<AudioSource>(); ;
+        GameObject sfx3 = transform.GetChild(1).gameObject;
+        sfxPlayer3 = sfx3.GetComponent<AudioSource>();
 
         SetupBGM();
         SetVolumeBGM(1);
@@ -82,7 +82,6 @@ public class SoundManager : Singleton<SoundManager>
     {
         if (bgmPlayer != null)
         {
-            Debug.Log("12321321");
             bgmPlayer.Play();
         }
     }
@@ -102,7 +101,7 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlaySoundSecond(string sfx_name2, float sfx_volume2 = 1f)
     {
-        if (audioClipsDic.ContainsKey(sfx_name2) == false || sfxPlayer2.GetComponent<AudioSource>().isPlaying)
+        if (audioClipsDic.ContainsKey(sfx_name2) == false && sfxPlayer2.GetComponent<AudioSource>().isPlaying)
         {
             Debug.Log(sfx_name2 + " 이 포함된 오디오가 없습니다.");
             return;
@@ -113,7 +112,7 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlaySoundThird(string sfx_name3, float sfx_volume3 = 1f)
     {
-        if (audioClipsDic.ContainsKey(sfx_name3) == false || sfxPlayer3.GetComponent<AudioSource>().isPlaying)
+        if (audioClipsDic.ContainsKey(sfx_name3) == false && sfxPlayer3.GetComponent<AudioSource>().isPlaying)
         {
             Debug.Log(sfx_name3 + " 이 포함된 오디오가 없습니다.");
             return;
