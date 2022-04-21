@@ -140,7 +140,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
     {
         if (IsCharging)
         {
-            SoundManager.Instance.PlaySound("Charge_1", 5f);
+            SoundManager.Instance.PlaySound("RemakeCharge", 5f);
             SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch =
                 Mathf.Lerp(0.5f, 1, _chargingTime / _maxCharging);
         }

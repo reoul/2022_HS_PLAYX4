@@ -23,6 +23,7 @@ public class SoundManager : Singleton<SoundManager>
     public AudioSource sfxPlayer;
     public AudioSource sfxPlayer2;
     public AudioSource sfxPlayer3;
+    AudioSource StepPlayer;
     AudioSource bgmPlayer;
 
 
@@ -37,6 +38,7 @@ public class SoundManager : Singleton<SoundManager>
 
         SetupBGM();
         SetVolumeBGM(1);
+        FootStepSetup();
 
         // 딕셔너리로 오디오클립 배열에서 원하는 오디오를 탐색
         audioClipsDic = new Dictionary<string, AudioClip>();
@@ -44,6 +46,16 @@ public class SoundManager : Singleton<SoundManager>
         {
             audioClipsDic.Add(a.name, a);
         }
+    }
+
+    void FootStepSetup()
+    {
+        GameObject child = new GameObject("FootStep");
+        child.transform.SetParent(transform);
+        StepPlayer = child.AddComponent<AudioSource>();
+        StepPlayer.clip = audioClipsDic["Player_FootStep"];
+        StepPlayer.volume = masterVolumeSFX;
+        StepPlayer.loop = true;
     }
 
     //배경음악 세팅
