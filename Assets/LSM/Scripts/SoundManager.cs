@@ -70,7 +70,10 @@ public class SoundManager : Singleton<SoundManager>
     private void Start()
     {
         if (bgmPlayer != null)
+        {
+            Debug.Log("12321321");
             bgmPlayer.Play();
+        }
     }
 
     // 효과음 재생
