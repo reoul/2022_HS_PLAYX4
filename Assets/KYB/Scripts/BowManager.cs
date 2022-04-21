@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class BowManager : Singleton<BowManager>
 {
@@ -19,8 +20,8 @@ public class BowManager : Singleton<BowManager>
         _bowStringLineRenderer2 = GameObject.Find("BowStringLine2").GetComponent<LineRenderer>();
 
         _arrowTrajectoryLineRenderer.SetPosAllZero();
-        _bowTopTransform = BowObj.transform.GetChild(0);
-        _bowBottomTransform = BowObj.transform.GetChild(1);
+        _bowTopTransform = BowObj.transform.GetChild(0).GetChild(0);
+        _bowBottomTransform = BowObj.transform.GetChild(0).GetChild(1);
     }
 
     private void Update()
@@ -28,6 +29,7 @@ public class BowManager : Singleton<BowManager>
         ShowArrowTrajectory();
         ShowBowString();
         ShowArrow();
+        VibrationBow();
     }
 
     /// <summary>
@@ -90,5 +92,11 @@ public class BowManager : Singleton<BowManager>
         {
             _arrowLineRenderer.SetPosAllZero();
         }
+    }
+
+    private void VibrationBow()
+    {
+        BowObj.transform.GetChild(0).transform.position = new Vector3(Random.Range(-0.1f, 0.1f),
+            Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
     }
 }
