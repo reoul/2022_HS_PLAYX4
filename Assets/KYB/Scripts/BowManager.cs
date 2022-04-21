@@ -15,6 +15,7 @@ public class BowManager : Singleton<BowManager>
     private Transform _bowBottomTransform;
     public GameObject ChargingEffect;
     public GameObject CancelEffect;
+    public GameObject StopEffect;
 
     private void Awake()
     {
@@ -110,7 +111,7 @@ public class BowManager : Singleton<BowManager>
         BowObj.transform.GetChild(0).transform.localPosition = new Vector3(Random.Range(-vibration, vibration),
             Random.Range(-vibration, vibration), Random.Range(-vibration, vibration));
     }
-
+    float _aa;
     IEnumerator SetAA()
     {
         while(true)
@@ -119,6 +120,14 @@ public class BowManager : Singleton<BowManager>
             {
                 ChargingEffect.SetActive(true);
             }
+            _aa += Time.deltaTime * 0.1f ;
+            Debug.Log(_aa);
+            StopEffect.GetComponent<ParticleSystem>().time = _aa;
+            if(_aa >= 5)
+            {
+                _aa = 0;
+            }
+            Debug.Log( StopEffect.GetComponent<ParticleSystem>().time);
             yield return new WaitForEndOfFrame();
         }
     }
