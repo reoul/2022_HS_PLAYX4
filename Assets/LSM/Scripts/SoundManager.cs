@@ -53,7 +53,6 @@ public class SoundManager : Singleton<SoundManager>
         GameObject child = new GameObject("FootStep");
         child.transform.SetParent(transform);
         StepPlayer = child.AddComponent<AudioSource>();
-        StepPlayer.clip = audioClipsDic["Player_FootStep"];
         StepPlayer.volume = masterVolumeSFX;
         StepPlayer.loop = true;
     }
