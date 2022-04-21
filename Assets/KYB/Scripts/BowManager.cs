@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using System.Collections;
 
 public class BowManager : Singleton<BowManager>
 {
@@ -9,8 +10,11 @@ public class BowManager : Singleton<BowManager>
     private LineRenderer _bowStringLineRenderer;
     private LineRenderer _bowStringLineRenderer2;
     public GameObject BowObj;
+    public Transform BowAttackTransform;
     private Transform _bowTopTransform;
     private Transform _bowBottomTransform;
+    public GameObject ChargingEffect;
+    public GameObject CancelEffect;
 
     private void Awake()
     {
@@ -22,6 +26,12 @@ public class BowManager : Singleton<BowManager>
         _arrowTrajectoryLineRenderer.SetPosAllZero();
         _bowTopTransform = BowObj.transform.GetChild(0).GetChild(0);
         _bowBottomTransform = BowObj.transform.GetChild(0).GetChild(1);
+        BowAttackTransform = BowObj.transform.GetChild(0).GetChild(2);
+    }
+
+    private void Start()
+    {
+        StartCoroutine(SetAA());
     }
 
     private void Update()
@@ -53,8 +63,7 @@ public class BowManager : Singleton<BowManager>
             _arrowTrajectoryLineRenderer.material.color = new Color(0, 1, 0, 0.2f);
         }
 
-        _arrowTrajectoryLineRenderer.SetPosition(0,
-            VRControllerManager.Instance.BowController.CenterTransform.gameObject.transform.position);
+        _arrowTrajectoryLineRenderer.SetPosition(0, BowAttackTransform.position);
         _arrowTrajectoryLineRenderer.SetPosition(1, VRControllerManager.Instance.Direction * 1000);
     }
 
@@ -82,7 +91,7 @@ public class BowManager : Singleton<BowManager>
     {
         if (VRControllerManager.Instance.IsCharging)
         {
-            var bowControllerPos = VRControllerManager.Instance.BowController.CenterTransform.position;
+            var bowControllerPos = BowAttackTransform.position;
             var arrowControllerPos = VRControllerManager.Instance.ArrowController.CenterTransform.position;
             _arrowLineRenderer.SetPosition(0, bowControllerPos);
             _arrowLineRenderer.SetPosition(1,
@@ -96,7 +105,21 @@ public class BowManager : Singleton<BowManager>
 
     private void VibrationBow()
     {
-        BowObj.transform.GetChild(0).transform.position = new Vector3(Random.Range(-0.1f, 0.1f),
-            Random.Range(-0.1f, 0.1f), Random.Range(-0.1f, 0.1f));
+        Debug.Log(VRControllerManager.Instance.ChargingPercent);
+        float vibration = VRControllerManager.Instance.ChargingPercent * 0.002f;
+        BowObj.transform.GetChild(0).transform.localPosition = new Vector3(Random.Range(-vibration, vibration),
+            Random.Range(-vibration, vibration), Random.Range(-vibration, vibration));
+    }
+
+    IEnumerator SetAA()
+    {
+        while(true)
+        {
+            if(!ChargingEffect.activeInHierarchy)
+            {
+                ChargingEffect.SetActive(true);
+            }
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

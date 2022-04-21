@@ -28,7 +28,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// </summary>
     private const float _maxCharging = 60;
 
-    public float ChargingPercent => _chargingTime / _maxCharging;
+    public float ChargingPercent => Mathf.Clamp01(_chargingTime / _maxCharging);
 
     /// <summary>
     /// 차징 딜레이 주기 체크하는 변수
@@ -94,7 +94,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
                 return Vector3.zero;
             }
 
-            return BowController.CenterTransform.transform.position -
+            return BowManager.Instance.BowAttackTransform.transform.position -
                    ArrowController.CenterTransform.transform.position;
         }
     }
@@ -393,7 +393,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
         bowObj.transform.parent = BowController.transform;
         bowObj.transform.position = Vector3.Lerp(BowController.TrackPad.transform.position, sysBtnTrans.position, 0.5f);
         // todo : forward 지워도 되는지 확인
-        bowObj.transform.forward = -BowController.transform.GetChild(0).transform.up;
+        //bowObj.transform.forward = -BowController.transform.GetChild(0).transform.up;
         bowObj.transform.rotation = sysBtnTrans.rotation * Quaternion.Euler(180, 0, 180);
         bowObj.SetActive(true);
     }
