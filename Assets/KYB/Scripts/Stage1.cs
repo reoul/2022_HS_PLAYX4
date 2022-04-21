@@ -9,7 +9,7 @@ public class Stage1 : Stage
     {
         base.StageStart();
         SoundManager.Instance.StopBGM();
-        SoundManager.Instance.BGMChange("Straight Fuse - French Fuse", 1f);
+        SoundManager.Instance.BGMChange("Straight Fuse - French Fuse", 0.7f);
         _spawnerManager = transform.GetChild(0).GetComponent<SpawnerManager>();
         _spawnerManager.SpawnerAwake();
     }
