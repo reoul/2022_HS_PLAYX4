@@ -6,7 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     public Queue<GameObject> unUsedEnemyQueue;
 
-    private enum EnemyType{ TreeSpirit = 1};
+    private enum EnemyType{ TreeSpirit = 1, Wendigo = 2};
 
     [SerializeField]
     private EnemyType _enemyType;
@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
         unUsedEnemyQueue = new Queue<GameObject>();
         for (int i = 0; i < 30; i++)
         {
-            var enemy = new EnemyBuilder("TreeSpirit").Build();
+            var enemy = new EnemyBuilder("Enemy").SetEnemyType(global::EnemyType.Wendigo).Build();
             enemy.gameObject.SetActive(false);
             enemy.transform.parent = StageManager.Instance._curStage.transform;
             unUsedEnemyQueue.Enqueue(enemy.gameObject);
@@ -31,8 +31,8 @@ public class EnemySpawner : MonoBehaviour
         float scale = 0.7f + r * 0.2f;
         enemy.transform.localScale = new Vector3(scale, scale,scale);
         enemy.SetActive(true);
-        enemy.GetComponent<TreeSpirit>().MoveSpeed = 5;
-        enemy.GetComponent<TreeSpirit>().ChangeState(TreeSpiritState.StateType.Spawn);
+        enemy.GetComponent<Enemy>().MoveSpeed = 3;
+        enemy.GetComponent<Wendigo>().ChangeState(WendigoState.StateType.Spawn);
     }
 
     public void Delete(GameObject enemyObj)

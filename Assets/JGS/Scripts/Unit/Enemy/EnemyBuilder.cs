@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyType { monter1 }
+public enum EnemyType { TreeSpirit, Wendigo }
 
 public class EnemyBuilder
 {
@@ -34,15 +34,17 @@ public class EnemyBuilder
         GameObject enemyObj;
         switch (enemyType)
         {
-            case EnemyType.monter1:
+            case EnemyType.TreeSpirit:
                 enemyObj = GameObject.Instantiate(Resources.Load("TreeSpirit", typeof(GameObject))) as GameObject;
                 break;
+            case EnemyType.Wendigo:
+                enemyObj = GameObject.Instantiate(Resources.Load("Wendigo", typeof(GameObject))) as GameObject;
+                break;
             default:
-                enemyObj = GameObject.Instantiate(Resources.Load("TreeSpirit", typeof(GameObject))) as GameObject;
+                enemyObj = GameObject.Instantiate(Resources.Load("Wendigo", typeof(GameObject))) as GameObject;
                 break;
         }
         enemyObj.name = this.name;
-        enemyObj.AddComponent<Enemy>();
         return enemyObj.GetComponent<Enemy>();
     }
 }

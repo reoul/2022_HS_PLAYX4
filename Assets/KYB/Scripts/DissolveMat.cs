@@ -65,7 +65,7 @@ public class DissolveMat : MonoBehaviour
     /// <summary>
     /// 디졸브 상태 퍼센트(몇퍼센트 디졸브 됐는지)
     /// </summary>
-    public float Percent => _timer / _dissolveSecond;
+    public float Percent => Mathf.Clamp01(_timer / _dissolveSecond);
 
     private float _delayTime = 0;
 

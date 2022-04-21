@@ -8,8 +8,8 @@ public class Stage1 : Stage
     public override void StageStart()
     {
         base.StageStart();
-        SoundManager.Instance.StopBGM();
-        SoundManager.Instance.BGMChange("Straight Fuse - French Fuse", 0.7f);
+        //SoundManager.Instance.StopBGM();
+        //SoundManager.Instance.BGMChange("Straight Fuse - French Fuse", 0.7f);
         _spawnerManager = transform.GetChild(0).GetComponent<SpawnerManager>();
         _spawnerManager.SpawnerAwake();
     }
@@ -28,12 +28,15 @@ public class Stage1 : Stage
 
     void RemoveEnemy()
     {
-        var monsters = GetComponentsInChildren<TreeSpirit>(true);
-        foreach (TreeSpirit monster in monsters)
+        var monsters = GetComponentsInChildren<Wendigo>(true);
+        foreach (Wendigo monster in monsters)
         {
             monster.MoveSpeed = 0;
-            var dissolveMat = monster.GetComponentInChildren<DissolveMat>();
-            dissolveMat.StartDestroyDissolve();
+            var dissolveMats = monster.GetComponentsInChildren<DissolveMat>();
+            foreach (var dissolveMat in dissolveMats)
+            {
+                dissolveMat.StartDestroyDissolve();
+            }
             Destroy(monster.gameObject, 1.1f);
         }
 

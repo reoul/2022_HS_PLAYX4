@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : Unit
 {
     protected StateMachine _stateMachine;
+    public StateMachine StateMachine => _stateMachine;
     public float maxHealth { get; protected set; }
     public float currentHealth { get; protected set; }
 

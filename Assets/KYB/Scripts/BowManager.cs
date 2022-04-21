@@ -106,7 +106,6 @@ public class BowManager : Singleton<BowManager>
 
     private void VibrationBow()
     {
-        Debug.Log(VRControllerManager.Instance.ChargingPercent);
         float vibration = VRControllerManager.Instance.ChargingPercent * 0.002f;
         BowObj.transform.GetChild(0).transform.localPosition = new Vector3(Random.Range(-vibration, vibration),
             Random.Range(-vibration, vibration), Random.Range(-vibration, vibration));
@@ -121,13 +120,11 @@ public class BowManager : Singleton<BowManager>
                 ChargingEffect.SetActive(true);
             }
             _aa += Time.deltaTime * 0.1f ;
-            Debug.Log(_aa);
             StopEffect.GetComponent<ParticleSystem>().time = _aa;
             if(_aa >= 5)
             {
                 _aa = 0;
             }
-            Debug.Log( StopEffect.GetComponent<ParticleSystem>().time);
             yield return new WaitForEndOfFrame();
         }
     }
