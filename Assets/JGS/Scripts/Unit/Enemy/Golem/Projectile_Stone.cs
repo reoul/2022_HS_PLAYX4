@@ -10,6 +10,7 @@ public class Projectile_Stone : MonoBehaviour
 
     private float _scale;
     public bool isThrow;
+    public bool isThrownSound;
 
     void Start()
     {
@@ -20,6 +21,7 @@ public class Projectile_Stone : MonoBehaviour
         transform.localScale = Vector3.zero;
         _scale = 0;
         isThrow = false;
+        isThrownSound = false;
     }
 
     void Update()
@@ -32,10 +34,22 @@ public class Projectile_Stone : MonoBehaviour
         if (isThrow)
         {
             transform.position = Vector3.MoveTowards(transform.position, _targetPos, 35 * Time.deltaTime);
+            ThrownSound();
         }
         else
         {
             this.transform.position = _rootTransform.position;
+        }
+    }
+
+    private void ThrownSound()
+    {
+        if(isThrownSound)
+        {
+            Debug.Log("124312321421412");
+            SoundManager.Instance.PlaySoundSecond("G_Rock_Whoosh", 3f);
+            isThrownSound = false;
+
         }
     }
 

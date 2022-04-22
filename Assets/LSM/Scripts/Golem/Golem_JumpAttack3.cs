@@ -10,6 +10,7 @@ public class Golem_JumpAttack3 : StateMachineBehaviour
     {
         SoundManager.Instance.PlaySoundThird("G_Attack_2", 1f);
         batCheck = true;
+        batTime = 0;
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -19,7 +20,6 @@ public class Golem_JumpAttack3 : StateMachineBehaviour
         {
             SoundManager.Instance.PlaySoundSecond("G_JumpAttack_Impact", 1f);
             batCheck = false;
-            batTime = 0;
         }
     }
 }

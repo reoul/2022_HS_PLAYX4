@@ -10,6 +10,7 @@ public class Golem_Attack2 : StateMachineBehaviour
     {
         SoundManager.Instance.PlaySoundThird("G_Attack_2", 1f);
         batCheck = true;
+        batTime = 0;
         
     }
 
