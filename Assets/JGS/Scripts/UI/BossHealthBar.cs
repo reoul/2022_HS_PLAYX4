@@ -17,7 +17,7 @@ public class BossHealthBar : Singleton<BossHealthBar>
     public void ChageCurrentHealth(float health)
     {
         _currentHealth = health;
-        _healthBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _healthBarWidth / (_maxHealth / _currentHealth));
+        //_healthBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, _healthBarWidth / (_maxHealth / _currentHealth));
     }
 
     public void InitHealthBar(float mHealth, float cHealth)
@@ -33,16 +33,17 @@ public class BossHealthBar : Singleton<BossHealthBar>
     private void Start()
     {
         InitHealthBar(100, 100);
-        _healthBarWidth = _healthBarBG.sizeDelta.x;
+        _healthBarWidth = _healthBar.sizeDelta.x;
     }
 
     private void Update()
     {
+        _healthBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Mathf.Lerp(_healthBarBG.sizeDelta.x, _healthBarWidth / (_maxHealth / _currentHealth), 0.1f));
         _healthBarBG.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Mathf.Lerp(_healthBarBG.sizeDelta.x, _healthBar.sizeDelta.x,0.1f));
         //체력바 디버깅용
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ChageCurrentHealth(_currentHealth - 100);
+            ChageCurrentHealth(_currentHealth - 10);
         }
     }
 }

@@ -18,11 +18,11 @@ public class Stage2EntManager : MonoBehaviour
         }
         _attackDelay = 5f;
         _lastAttackTime = Time.time;
+        RandomWeak();
     }
 
     private void Update()
     {
-        Debug.Log(Time.time - _lastAttackTime);
         if (Time.time - _lastAttackTime > _attackDelay)
         {
             SetTarget();
@@ -49,4 +49,34 @@ public class Stage2EntManager : MonoBehaviour
             //Debug.Log("pass");
         }
     }
+
+
+    private Transform _curWeak;
+    [SerializeField] private Transform[] _weakPoints;
+    [SerializeField] private float _weakAlphaSpeed;
+
+    private void RandomWeak()
+    {
+        _curWeak = _weakPoints[Random.Range(0, _weakPoints.Length)];
+        _curWeak.gameObject.SetActive(true);
+        _curWeak.GetComponent<WeakPoint>().Show(3);
+    }
+
+    /// <summary>
+    /// 약점을 변경한다
+    /// </summary>
+    public void ChangeWeakPoint()
+    {
+        int rand;
+        do
+        {
+            rand = Random.Range(0, _weakPoints.Length);
+        } while (_curWeak == _weakPoints[rand]);
+
+        _curWeak.gameObject.SetActive(false);
+        _weakPoints[rand].gameObject.SetActive(true);
+        _curWeak = _weakPoints[rand];
+        _curWeak.GetComponent<WeakPoint>().Show(_weakAlphaSpeed);
+    }
+
 }
