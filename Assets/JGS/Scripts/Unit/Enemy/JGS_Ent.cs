@@ -16,6 +16,15 @@ public class JGS_Ent : Enemy
     {
         _state = this.GetComponent<JGS_EntState>();
         _startPos = transform.position;
+        foreach (var item in GetComponentsInChildren<WeakPoint>(true))
+        {
+            item.changeEvent += ChangeWeak;
+        }
+    }
+
+    private void ChangeWeak()
+    {
+        this.GetComponentInParent<Stage2EntManager>().ChangeWeakPoint();
     }
 
     private void Update()

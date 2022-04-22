@@ -6,8 +6,10 @@ using UnityEngine;
 public class WeakPoint : MonoBehaviour, IHitable
 {
     private Transform _target;
-    private Golem _parant;
+    private Enemy _parant;
     private SpriteRenderer[] _spriteRenderers;
+    public delegate void ChangeWeak();
+    public ChangeWeak changeEvent;
 
     /// <summary>
     /// 이미지의 alpha 값이 증가하는지
@@ -78,7 +80,8 @@ public class WeakPoint : MonoBehaviour, IHitable
   
     public void HitEvent()
     {
-        _parant.ChangeWeakPoint();
+        //_parant.ChangeWeakPoint();
+        changeEvent?.Invoke();
         ScoreSystem.Score += 100;
     }
 
