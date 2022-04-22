@@ -29,6 +29,10 @@ public class Golem : Enemy
     {
         _target = GameObject.Find("[CameraRig]").transform;
         RandomWeak();
+        foreach (var weakPoint in GetComponentsInChildren<WeakPoint>(true))
+        {
+            weakPoint.changeEvent += ChangeWeakPoint;
+        }
     }
 
     private void Update()
