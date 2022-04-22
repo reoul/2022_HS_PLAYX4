@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 428645651}
   - component: {fileID: 428645652}
   m_Layer: 0
-  m_Name: Monster_sfx
+  m_Name: Second_sfx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 822398556}
   - component: {fileID: 822398557}
   m_Layer: 0
-  m_Name: Golem_sfx
+  m_Name: Third_sfx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -305,7 +305,7 @@ MonoBehaviour:
   BGMClip: {fileID: 8300000, guid: ac51e88b6e178c64eaba507047f4d074, type: 3}
   audioClip:
   - {fileID: 8300000, guid: 49e8df422be32df4991d9006b5641c97, type: 3}
-  - {fileID: 8300000, guid: b6ff6fad232519a48ba2d9f7cbdfe0f2, type: 3}
+  - {fileID: 8300000, guid: 2362153f416547e49ac35e1c347f0a37, type: 3}
   - {fileID: 8300000, guid: 51800d2d49587ff4aa66258fdef70841, type: 3}
   - {fileID: 8300000, guid: dc2767238215eab4ba334f55b1931b6a, type: 3}
   - {fileID: 8300000, guid: 3d2c7d103cf30144086ae9ba0a7f7ec0, type: 3}
@@ -317,6 +317,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 30d369a4a61531346abb7966252f3225, type: 3}
   - {fileID: 8300000, guid: 7d8f9854d43629b4f9a933e615c7c141, type: 3}
   - {fileID: 8300000, guid: 98d3265557ffd1145a338ed2c3b3d6d2, type: 3}
+  - {fileID: 8300000, guid: fd7e449f4d9fbbd4db740b5042436cd1, type: 3}
+  - {fileID: 8300000, guid: ba9ddf597badd24459035478cc170f53, type: 3}
+  - {fileID: 8300000, guid: c228dbddf06fa72429b15ee5c899da86, type: 3}
+  - {fileID: 8300000, guid: e28496d25e76fd14a8be4efd330bd1b3, type: 3}
+  - {fileID: 8300000, guid: b48dd804f70cd9846acd42b8868d7c4c, type: 3}
   sfxPlayer: {fileID: 0}
   sfxPlayer2: {fileID: 0}
   sfxPlayer3: {fileID: 0}
