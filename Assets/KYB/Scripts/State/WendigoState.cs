@@ -42,8 +42,8 @@ public class WendigoState : StateMachine
     private class SpawnState : State
     {
         private DissolveMat[] _dissolveMats;
-        private int i;
-        private float sum = 0;
+        private int _index;
+        private float _percentSum;
 
         public SpawnState(GameObject gameObject) : base(gameObject)
         {
@@ -61,12 +61,12 @@ public class WendigoState : StateMachine
 
         public override void StateUpdate()
         {
-            sum = 0;
-            for (i = 0; i < _dissolveMats.Length; i++)
+            _percentSum = 0;
+            for (_index = 0; _index < _dissolveMats.Length; _index++)
             {
-                sum += _dissolveMats[i].Percent;
+                _percentSum += _dissolveMats[_index].Percent;
             }
-            if (i <= sum)
+            if (_index <= _percentSum)
             {
                 _stateMachine.ChangeState(_stateMachine.StateDictionary[(int) StateType.Run]);
             }
@@ -104,8 +104,8 @@ public class WendigoState : StateMachine
     private class HitState : State
     {
         private DissolveMat[] _dissolveMats;
-        private int i;
-        private float sum;
+        private int _index;
+        private float _percentSum;
         public HitState(GameObject gameObject) : base(gameObject)
         {
         }
@@ -122,12 +122,12 @@ public class WendigoState : StateMachine
 
         public override void StateUpdate()
         {
-            sum = 0;
-            for (i = 0; i < _dissolveMats.Length; i++)
+            _percentSum = 0;
+            for (_index = 0; _index < _dissolveMats.Length; _index++)
             {
-                sum += _dissolveMats[i].Percent;
+                _percentSum += _dissolveMats[_index].Percent;
             }
-            if (i <= sum)
+            if (_index <= _percentSum)
             {
                 FindObjectOfType<EnemySpawner>().Delete(_gameObject);
             }
@@ -137,8 +137,8 @@ public class WendigoState : StateMachine
     private class DeathState : State
     {
         private DissolveMat[] _dissolveMats;
-        private int i;
-        private float sum;
+        private int _index;
+        private float _percentSum;
         
         public DeathState(GameObject gameObject) : base(gameObject)
         {
@@ -156,12 +156,12 @@ public class WendigoState : StateMachine
 
         public override void StateUpdate()
         {
-            sum = 0;
-            for (i = 0; i < _dissolveMats.Length; i++)
+            _percentSum = 0;
+            for (_index = 0; _index < _dissolveMats.Length; _index++)
             {
-                sum += _dissolveMats[i].Percent;
+                _percentSum += _dissolveMats[_index].Percent;
             }
-            if (0 >= sum)
+            if (0 >= _percentSum)
             {
                 FindObjectOfType<EnemySpawner>().Delete(_gameObject);
             }
