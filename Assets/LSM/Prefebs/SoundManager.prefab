@@ -452,6 +452,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b48dd804f70cd9846acd42b8868d7c4c, type: 3}
   - {fileID: 8300000, guid: cd398762187f62c4684c3fbcf2354aa9, type: 3}
   - {fileID: 8300000, guid: b18ff971881df3a44b3003265543eb76, type: 3}
+  - {fileID: 8300000, guid: 2e0f6d944c7d79b4eb67ce408b7f1ccd, type: 3}
   sfxPlayer: {fileID: 0}
   sfxPlayer2: {fileID: 0}
   sfxPlayer3: {fileID: 0}
