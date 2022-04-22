@@ -2,7 +2,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(WendigoState))]
-public class Wendigo : Enemy
+public class Wendigo : Enemy, IHitable
 {
     private void Awake()
     {
@@ -19,14 +19,11 @@ public class Wendigo : Enemy
         _stateMachine.ChangeState(_stateMachine.StateDictionary[(int)state]);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void HitEvent()
     {
-        if (other.CompareTag("Arrow"))
-        {
-            ScoreSystem.Score += 100;
-            ChangeState(WendigoState.StateType.Hit);
-            EffectManager.Instance.CreateEffect(this.transform.position + new Vector3(0, transform.lossyScale.y * 1.7f,0));
-            FindObjectOfType<EnemySpawner>().Delete(this.gameObject);
-        }
+        ScoreSystem.Score += 100;
+        ChangeState(WendigoState.StateType.Hit);
+        EffectManager.Instance.CreateEffect(this.transform.position + new Vector3(0, transform.lossyScale.y * 1.7f,0));
+        FindObjectOfType<EnemySpawner>().Delete(this.gameObject);
     }
 }
