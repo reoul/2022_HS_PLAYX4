@@ -984,7 +984,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3190714009797565210}
   - component: {fileID: 3156187717408808227}
-  - component: {fileID: 3156187717408808253}
   m_Layer: 0
   m_Name: Wendigo
   m_TagString: Untagged
@@ -1022,25 +1021,12 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 6cc6ba365d87b9b4a87956bca1a72ebc, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &3156187717408808253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2813731413305115040}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68862fb73ff146f4983ce8ea94a80789, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DAnim: {fileID: 0}
 --- !u!1 &3013517805279297207
 GameObject:
   m_ObjectHideFlags: 0

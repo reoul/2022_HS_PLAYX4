@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeakPoint : MonoBehaviour
+public class WeakPoint : MonoBehaviour, IHitable
 {
     private Transform _target;
     private Golem _parant;
@@ -46,15 +46,6 @@ public class WeakPoint : MonoBehaviour
         UpdateImageAlpha();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Arrow"))
-        {
-            _parant.ChangeWeakPoint();
-            ScoreSystem.Score += 100;
-        }
-    }
-
     public void Show(float time)
     {
         SetImageAllColor(Color.clear);
@@ -82,5 +73,11 @@ public class WeakPoint : MonoBehaviour
         {
             spriteRenderer.color = color;
         }
+    }
+
+    public void HitEvent()
+    {
+        _parant.ChangeWeakPoint();
+        ScoreSystem.Score += 100;
     }
 }
