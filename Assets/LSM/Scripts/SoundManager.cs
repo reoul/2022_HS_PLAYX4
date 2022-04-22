@@ -37,7 +37,7 @@ public class SoundManager : Singleton<SoundManager>
         sfxPlayer3 = sfx3.GetComponent<AudioSource>();
 
         SetupBGM();
-        SetVolumeBGM(1);
+        SetVolumeBGM(0.7f);
         FootStepSetup();
 
         // 딕셔너리로 오디오클립 배열에서 원하는 오디오를 탐색
