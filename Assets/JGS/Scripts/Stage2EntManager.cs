@@ -17,6 +17,10 @@ public class Stage2EntManager : MonoBehaviour
             _ents[i].GetComponent<JGS_Ent>().targetFloor = i;
         }
         _attackDelay = 5f;
+    }
+
+    private void OnEnable()
+    {
         _lastAttackTime = Time.time;
         RandomWeak();
     }
@@ -78,5 +82,8 @@ public class Stage2EntManager : MonoBehaviour
         _curWeak = _weakPoints[rand];
         _curWeak.GetComponent<WeakPoint>().Show(_weakAlphaSpeed);
     }
-
+    public void HideWeak()
+    {
+        _curWeak.gameObject.SetActive(false);
+    }
 }

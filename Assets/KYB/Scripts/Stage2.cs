@@ -2,13 +2,13 @@
 
 public class Stage2 : Stage
 {
-    private Golem _golem;
-    private DissolveMat _golemDissolveMat;
+    private JGS_Ent[] _ent;
+    private DissolveMat[] _entDissolveMat;
     public override void StageStart()
     {
         base.StageStart();
         EnemyInit();
-        Invoke("GolemSpawn", 5);
+        Invoke("EntSpawn", 5);
         SoundManager.Instance.StopBGM();
         SoundManager.Instance.BGMChange("Beside Me - Patrick Patrikios", 0.7f);
     }
@@ -24,22 +24,37 @@ public class Stage2 : Stage
     /// </summary>
     private void EnemyInit()
     {
-        _golem = FindObjectOfType<Golem>();
-        _golemDissolveMat = _golem.GetComponentInChildren<DissolveMat>();
-        _golemDissolveMat.SetDissolveHeightMin();
-        _golemDissolveMat.State = DissolveMat.DissolveState.Hide;
-        _golem.gameObject.SetActive(false);
+        _ent = new JGS_Ent[3];
+        _entDissolveMat = new DissolveMat[3];
+        _ent = FindObjectsOfType<JGS_Ent>();
+        for(int i = 0; i < 3; i++)
+        {
+            Debug.Log(_entDissolveMat[i]);
+            Debug.Log(_ent[i]);
+            _entDissolveMat[i] = _ent[i].GetComponentInChildren<DissolveMat>();
+            _entDissolveMat[i].SetDissolveHeightMin();
+            _entDissolveMat[i].State = DissolveMat.DissolveState.Hide;
+            _ent[i].gameObject.SetActive(false);
+        }
     }
 
-    private void GolemSpawn()
+    private void EntSpawn()
     {
-        _golemDissolveMat.StartCreateDissolve();
-        _golem.gameObject.SetActive(true);
+        for (int i = 0; i < 3; i++)
+        {
+            _entDissolveMat[i].StartCreateDissolve();
+            _ent[i].gameObject.SetActive(true);
+        }
+
     }
 
     private void RemoveEnemy()
     {
-        _golem.HideWeak();
-        _golemDissolveMat.StartDestroyDissolve();
+        Stage2EntManager _entManager = FindObjectOfType<Stage2EntManager>();
+        _entManager.HideWeak();
+        for (int i = 0; i < 3; i++)
+        {
+            _entDissolveMat[i].StartDestroyDissolve();
+        }
     }
 }
