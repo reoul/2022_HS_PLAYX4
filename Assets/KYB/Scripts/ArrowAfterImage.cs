@@ -61,7 +61,7 @@ public class ArrowAfterImage : MonoBehaviour
         _speed = 1;
         _alphaSpeed = 1;
         _lineRenderer.SetPosition(0, VRControllerManager.Instance.Direction * 10000);
-        _lineRenderer.SetPosition(1, VRControllerManager.Instance.BowController.CenterTransform.transform.position);
+        _lineRenderer.SetPosition(1, BowManager.Instance.BowAttackTransform.position);
         _lineRenderer.material.color = Color.white;
         _direction = VRControllerManager.Instance.Direction.normalized;
         _isShot = true;

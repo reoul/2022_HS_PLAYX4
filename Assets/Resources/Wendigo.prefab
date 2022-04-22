@@ -757,7 +757,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7390984319885457556}
   - component: {fileID: 7682073524019128073}
-  - component: {fileID: 3156187717124674918}
   - component: {fileID: 3156187717124674919}
   m_Layer: 0
   m_Name: Body:polySurface2
@@ -883,19 +882,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.033302397, y: -0.1963327, z: 0.050839245}
     m_Extent: {x: 0.5482193, y: 0.92793536, z: 0.4735579}
   m_DirtyAABB: 0
---- !u!65 &3156187717124674918
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2323446529243720844}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.3261034, y: 2.3, z: 1.1600912}
-  m_Center: {x: -0.016808696, y: 1.07, z: 0.06860367}
 --- !u!114 &3156187717124674919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -910,7 +896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
-  DissolveCollider: {fileID: 3156187717124674918}
+  DissolveCollider: {fileID: 3667535383781068715}
 --- !u!1 &2650377852637750011
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,6 +972,7 @@ GameObject:
   - component: {fileID: 3156187717408808227}
   - component: {fileID: 2776114142091627148}
   - component: {fileID: 6299331234864487096}
+  - component: {fileID: 3667535383781068715}
   m_Layer: 0
   m_Name: Wendigo
   m_TagString: Untagged
@@ -1054,6 +1041,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 5
+--- !u!65 &3667535383781068715
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2813731413305115040}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.3261034, y: 2.3, z: 1.1600912}
+  m_Center: {x: -0.016808696, y: 1.07, z: 0.06860367}
 --- !u!1 &3013517805279297207
 GameObject:
   m_ObjectHideFlags: 0
@@ -2334,7 +2334,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dissolveSecond: 1
   State: 2
-  DissolveCollider: {fileID: 3156187717124674918}
+  DissolveCollider: {fileID: 3667535383781068715}
 --- !u!1 &9144504900198779002
 GameObject:
   m_ObjectHideFlags: 0
