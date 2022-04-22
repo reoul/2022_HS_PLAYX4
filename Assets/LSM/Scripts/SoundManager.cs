@@ -72,10 +72,17 @@ public class SoundManager : Singleton<SoundManager>
 
     public void BGMChange(string bgm_name, float bgm_volume)
     {
-        bgmPlayer.clip = audioClipsDic[bgm_name];
-        bgmPlayer.volume = bgm_volume;
-        bgmPlayer.loop = true;
-        bgmPlayer.Play();
+        if(audioClipsDic.ContainsKey(bgm_name))
+        {
+            bgmPlayer.clip = audioClipsDic[bgm_name];
+            bgmPlayer.volume = bgm_volume;
+            bgmPlayer.loop = true;
+            bgmPlayer.Play();
+        }
+        else
+        {
+            Debug.LogWarning($"[{bgm_name}] 음악이 없습니다.");
+        }
     }
 
     private void Start()
