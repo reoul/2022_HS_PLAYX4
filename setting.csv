@@ -1,0 +1,4 @@
+PlayerHp,999,float
+BossHp,999,bool
+BossDamage,999,int
+MoveSpeed,100.2,single

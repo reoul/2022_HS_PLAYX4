@@ -13,9 +13,10 @@ public class BowManager : Singleton<BowManager>
     public Transform BowAttackTransform;
     private Transform _bowTopTransform;
     private Transform _bowBottomTransform;
-    public GameObject ChargingEffect;
+    public ParticleSystem ChargingParticleSystem;
     public GameObject CancelEffect;
     public GameObject StopEffect;
+    public float chargingSpeed;
 
     private void Awake()
     {
@@ -30,17 +31,13 @@ public class BowManager : Singleton<BowManager>
         BowAttackTransform = BowObj.transform.GetChild(0).GetChild(2);
     }
 
-    private void Start()
-    {
-        StartCoroutine(SetAA());
-    }
-
     private void Update()
     {
         ShowArrowTrajectory();
         ShowBowString();
         ShowArrow();
         VibrationBow();
+        ShowChargingEffect();
     }
 
     /// <summary>
@@ -107,25 +104,26 @@ public class BowManager : Singleton<BowManager>
     private void VibrationBow()
     {
         float vibration = VRControllerManager.Instance.ChargingPercent * 0.002f;
-        BowObj.transform.GetChild(0).transform.localPosition = new Vector3(Random.Range(-vibration, vibration),
-            Random.Range(-vibration, vibration), Random.Range(-vibration, vibration));
+        float x = Random.Range(-vibration, vibration);
+        float y = Random.Range(-vibration, vibration);
+        float z = Random.Range(-vibration, vibration);
+        BowObj.transform.GetChild(0).transform.localPosition = new Vector3(x, y, z);
     }
-    float _aa;
-    IEnumerator SetAA()
+
+    private void ShowChargingEffect()
     {
-        while(true)
+        if (VRControllerManager.Instance.IsCharging)
         {
-            if(!ChargingEffect.activeInHierarchy)
+            if(!ChargingParticleSystem.gameObject.activeInHierarchy)
             {
-                ChargingEffect.SetActive(true);
+                ChargingParticleSystem.gameObject.SetActive(true);
             }
-            _aa += Time.deltaTime * 0.1f ;
-            StopEffect.GetComponent<ParticleSystem>().time = _aa;
-            if(_aa >= 5)
-            {
-                _aa = 0;
-            }
-            yield return new WaitForEndOfFrame();
+
+            ChargingParticleSystem.startLifetime = 1 - VRControllerManager.Instance.ChargingPercent * 0.65f;
+        }
+        else
+        {
+            ChargingParticleSystem.gameObject.SetActive(false);
         }
     }
 }
