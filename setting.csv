@@ -2,3 +2,17 @@ PlayerHp,999,float
 BossHp,999,bool
 BossDamage,999,int
 MoveSpeed,100.2,single
+WendigoSpawnDelay,0.5,single
+WendigoMaxSpawnCount,5,int
+WendigoMoveSpeed,1.0,single
+WendigoDamage,100,single
+EntAttackDelay,5.0,single
+EntDamage,100,single
+GolemMaxHealth,20,int
+GolemDamage,100,single
+FloorWidth,1.0,single
+Stage1TargetScore,2000,int
+Stage2TargetScore,4000,int
+Stage1TimeLimit,10,int
+Stage2TimeLimit,10,int
+Stage3TimeLimit,10,int
