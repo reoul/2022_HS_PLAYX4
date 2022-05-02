@@ -16,7 +16,7 @@ public class Wendigo_Attack : StateMachineBehaviour
         attackTime += Time.deltaTime;
         if (attackTime >= 0.9f && attackCheck == true)
         {
-            SoundManager.Instance.PlaySoundThird("Wendigo_Attack", 1f);
+            SoundManager.Instance.PlaySoundThird("monster-groan-pain-SBA-300108043-preview", 1f);
             attackCheck = false;
         }
     }

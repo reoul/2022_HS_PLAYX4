@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wendigo_Dead : StateMachineBehaviour
+public class Ent_Attack : StateMachineBehaviour
 {
+
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        SoundManager.Instance.PlaySoundFourth("punch-body-hard-SBA-300156609-preview", 1f);
+        SoundManager.Instance.PlaySoundThird("monster-low-roar-SBA-300055103-preview", 1f);
     }
 }
