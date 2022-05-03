@@ -24,6 +24,7 @@
     //====== Player ======
     public float FloorWidth;
     public float BowMaxChargingTime;
+    public float BowMaxDistance;
 
     public SettingData()
     {
@@ -46,5 +47,6 @@
         Stage2TimeLimit = 10;
         Stage3TimeLimit = 10;
         BowMaxChargingTime = 3f;
+        BowMaxDistance = 1f;
     }
 }
