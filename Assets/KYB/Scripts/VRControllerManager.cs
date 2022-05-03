@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
 
-public class LSM_VRControllerManager : Singleton<VRControllerManager>
+public class VRControllerManager : Singleton<VRControllerManager>
 {
     public VRController LeftController { get; private set; }
     public VRController RightController { get; private set; }
@@ -140,6 +140,7 @@ public class LSM_VRControllerManager : Singleton<VRControllerManager>
     {
         if (IsCharging)
         {
+            Debug.Log("1414523523");
             SoundManager.Instance.PlaySound("crystal-glow-SBA-300099769-preview", 5f);
             SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch =
                 Mathf.Lerp(0.5f, 1, _chargingTime / _maxCharging);
@@ -215,10 +216,11 @@ public class LSM_VRControllerManager : Singleton<VRControllerManager>
         {
             if (_chargingTime >= _maxCharging)
             {
+                Debug.Log("141241");
                 SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().Stop();
                 ArrowManager.Instance.Shot(BowManager.Instance.BowAttackTransform.position, Direction);
-                SoundManager.Instance.PlaySound("fast-flying-whoosh-8-creative-motion-film-SBA-300462765-preview", 1f);
                 FindObjectOfType<ArrowAfterImage>().Shot();
+                SoundManager.Instance.PlaySound("fast-flying-whoosh-8-creative-motion-film-SBA-300462765-preview", 1f);
             }
 
             ArrowController.MeshON();

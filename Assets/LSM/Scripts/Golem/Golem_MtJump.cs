@@ -17,8 +17,8 @@ public class Golem_MtJump : StateMachineBehaviour
         LandTime += Time.deltaTime;
         if (LandTime >= 1.3f && LandCheck == true)
         {
-            SoundManager.Instance.PlaySoundSecond("G_Landing", 0.5f);
             LandCheck = false;
+            SoundManager.Instance.PlaySoundSecond("G_Landing", 0.5f);
         }
     }
 }

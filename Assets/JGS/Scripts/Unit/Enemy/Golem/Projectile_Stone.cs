@@ -46,8 +46,8 @@ public class Projectile_Stone : MonoBehaviour
     {
         if(isThrownSound)
         {
-            SoundManager.Instance.PlaySoundSecond("G_Rock_Whoosh", 1f);
             isThrownSound = false;
+            SoundManager.Instance.PlaySoundSecond("G_Rock_Whoosh", 1f);
         }
     }
 

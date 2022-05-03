@@ -7,6 +7,6 @@ public class Golem_Attack1 : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        SoundManager.Instance.PlaySoundThird("G_Attack_1", 1f);
+        SoundManager.Instance.PlaySoundThird("monster-breath-element-deep-SBA-300099984-preview", 1f);
     }
 }

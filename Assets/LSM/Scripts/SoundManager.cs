@@ -134,13 +134,21 @@ public class SoundManager : Singleton<SoundManager>
 
     public void PlaySoundFourth(string sfx_name4, float sfx_volume4 = 1f)
     {
-        if (audioClipsDic.ContainsKey(sfx_name4) == false && sfxPlayer4.GetComponent<AudioSource>().isPlaying)
+        try
         {
-            Debug.Log(sfx_name4 + " 이 포함된 오디오가 없습니다.");
-            return;
+            if (audioClipsDic.ContainsKey(sfx_name4) == false && sfxPlayer4.GetComponent<AudioSource>().isPlaying)
+            {
+                Debug.Log(sfx_name4 + " 이 포함된 오디오가 없습니다.");
+                return;
+            }
+            else
+                sfxPlayer4.PlayOneShot(audioClipsDic[sfx_name4], sfx_volume4 * masterVolumeSFX);
         }
-        else
-            sfxPlayer4.PlayOneShot(audioClipsDic[sfx_name4], sfx_volume4 * masterVolumeSFX);
+        catch (System.Exception)
+        {
+            Debug.Log("asdfsdfa");
+        }
+     
     }
 
     // 배경음악 종료
