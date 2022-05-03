@@ -2,17 +2,18 @@ PlayerHp,999,float
 BossHp,999,bool
 BossDamage,999,int
 MoveSpeed,100.2,single
-WendigoSpawnDelay,0.5,single
-WendigoMaxSpawnCount,5,int
-WendigoMoveSpeed,1.0,single
-WendigoDamage,100,single
-EntAttackDelay,5.0,single
-EntDamage,100,single
-GolemMaxHealth,20,int
-GolemDamage,100,single
-FloorWidth,1.0,single
-Stage1TargetScore,2000,int
-Stage2TargetScore,4000,int
-Stage1TimeLimit,10,int
-Stage2TimeLimit,10,int
-Stage3TimeLimit,10,int
+WendigoSpawnDelay,0.5,single,웬디고 스폰 딜레이
+WendigoMaxSpawnCount,5,int,웬디고 최대 스폰 수 제한
+WendigoMoveSpeed,1.0,single,웬디고 이동속도
+WendigoDamage,100,single,웬디고가 플레이어에게 주는 데미지
+EntAttackDelay,5.0,single,나무골렘 공격 딜레이
+EntDamage,100,single,나무골렘 데미지
+GolemMaxHealth,20,int,바위골렘 체력
+GolemDamage,100,single,바위골렘 데미지
+FloorWidth,1.0,single,플레이어 발판 기본값
+Stage1TargetScore,2000,int,1스테이지 클리어 목표 점수
+Stage2TargetScore,4000,int,2스테이지 클리어 목표 점수
+Stage1TimeLimit,10,int,1스테이지 제한시간
+Stage2TimeLimit,10,int,2스테이지 제한시간
+Stage3TimeLimit,10,int,3스테이지 제한시간
+BowMaxChargingTime,3,single,활이 풀차징 되는데 걸리는 시간

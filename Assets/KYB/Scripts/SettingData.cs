@@ -4,7 +4,6 @@
     public int BossHp;
     public int BossDamage;
     public float MoveSpeed;
-    public float FloorWidth;
     
     //====== Wendigo ======
     public int WendigoMaxSpawnCount;
@@ -22,6 +21,9 @@
     public int GolemMaxHealth;
     public int Stage3TimeLimit;
     public int GolemDamage;
+    //====== Player ======
+    public float FloorWidth;
+    public float BowMaxChargingTime;
 
     public SettingData()
     {
@@ -43,5 +45,6 @@
         Stage1TimeLimit = 10;
         Stage2TimeLimit = 10;
         Stage3TimeLimit = 10;
+        BowMaxChargingTime = 3f;
     }
 }
