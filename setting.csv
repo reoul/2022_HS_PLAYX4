@@ -6,10 +6,13 @@ WendigoSpawnDelay,0.5,single,웬디고 스폰 딜레이
 WendigoMaxSpawnCount,5,int,웬디고 최대 스폰 수 제한
 WendigoMoveSpeed,1.0,single,웬디고 이동속도
 WendigoDamage,100,single,웬디고가 플레이어에게 주는 데미지
+WendigoScore,100,int,웬디고 처치 시 획득 스코어
 EntAttackDelay,5.0,single,나무골렘 공격 딜레이
 EntDamage,100,single,나무골렘 데미지
+EntScore,100,나무골렘 타격 시 획득 스코어
 GolemMaxHealth,20,int,바위골렘 체력
 GolemDamage,100,single,바위골렘 데미지
+GolemScore,100,int,바위골렘 타격 시 획득 스코어
 FloorWidth,1.0,single,플레이어 발판 기본값
 Stage1TargetScore,2000,int,1스테이지 클리어 목표 점수
 Stage2TargetScore,4000,int,2스테이지 클리어 목표 점수

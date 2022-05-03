@@ -12,15 +12,18 @@
     public int Stage1TargetScore;
     public int Stage1TimeLimit;
     public int WendigoDamage;
+    public int WendigoScore;
     //====== Ent ======
     public float EntAttackDelay;
     public int Stage2TargetScore;
     public int Stage2TimeLimit;
     public int EntDamage;
+    public int EntScore;
     //====== Golem ======
     public int GolemMaxHealth;
     public int Stage3TimeLimit;
     public int GolemDamage;
+    public int GolemScore;
     //====== Player ======
     public float FloorWidth;
     public float BowMaxChargingTime;
@@ -48,5 +51,8 @@
         Stage3TimeLimit = 10;
         BowMaxChargingTime = 3f;
         BowMaxDistance = 1f;
+        WendigoScore = 100;
+        EntScore = 100;
+        GolemScore = 100;
     }
 }
