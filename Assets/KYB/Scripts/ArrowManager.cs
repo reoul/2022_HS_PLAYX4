@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class ArrowManager : Singleton<ArrowManager>
 {
+    [SerializeField] private Transform ArrowTrans;
+    
     public void Shot(Vector3 positon, Vector3 direction)
     {
         RaycastHit[] hits = new RaycastHit[] { };
@@ -12,4 +14,12 @@ public class ArrowManager : Singleton<ArrowManager>
             hits[i].collider.GetComponent<IHitable>()?.HitEvent();
         }
     }
-} 
+
+    private void Update()
+    {
+        if (VRControllerManager.Instance.IsCharging)
+        {
+            ArrowTrans.position = VRControllerManager.Instance.ArrowController.transform.position;
+        }
+    }
+}
