@@ -47,7 +47,7 @@ public class Projectile_Stone : MonoBehaviour
         if(isThrownSound)
         {
             isThrownSound = false;
-            SoundManager.Instance.PlaySoundSecond("G_Rock_Whoosh", 1f);
+            SoundManager.Instance.PlaySoundSecond("StoneImpact", 1f);
         }
     }
 
@@ -57,7 +57,7 @@ public class Projectile_Stone : MonoBehaviour
         {
             PlayerFloor.Instance.StopAttack(targetFloor);
             Destroy(gameObject);
-            SoundManager.Instance.PlaySoundSecond("G_Rock_Impact_2", 1f);
+            //SoundManager.Instance.PlaySoundSecond("G_Rock_Impact_2", 1f);
         }
     }
 }

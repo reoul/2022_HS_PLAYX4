@@ -100,36 +100,57 @@ public class SoundManager : Singleton<SoundManager>
     // 효과음 재생
     public void PlaySound(string sfx_name, float sfx_volume = 1f)
     {
-        if (audioClipsDic.ContainsKey(sfx_name) == false || sfxPlayer.GetComponent<AudioSource>().isPlaying)
+        try
         {
-            Debug.Log(sfx_name + " 이 포함된 오디오가 없습니다.");
-            return;
+            if (audioClipsDic.ContainsKey(sfx_name) == false || sfxPlayer.GetComponent<AudioSource>().isPlaying)
+            {
+                Debug.Log(sfx_name + " 이 포함된 오디오가 없습니다.");
+                return;
+            }
+            else
+                sfxPlayer.PlayOneShot(audioClipsDic[sfx_name], sfx_volume * masterVolumeSFX);
         }
-        else
-            sfxPlayer.PlayOneShot(audioClipsDic[sfx_name], sfx_volume * masterVolumeSFX);
+        catch (System.Exception)
+        {
+            Debug.Log("error");
+        }
     }
 
 
     public void PlaySoundSecond(string sfx_name2, float sfx_volume2 = 1f)
     {
-        if (audioClipsDic.ContainsKey(sfx_name2) == false && sfxPlayer2.GetComponent<AudioSource>().isPlaying)
+        try
         {
-            Debug.Log(sfx_name2 + " 이 포함된 오디오가 없습니다.");
-            return;
+            if (audioClipsDic.ContainsKey(sfx_name2) == false && sfxPlayer2.GetComponent<AudioSource>().isPlaying)
+            {
+                Debug.Log(sfx_name2 + " 이 포함된 오디오가 없습니다.");
+                return;
+            }
+            else
+                sfxPlayer2.PlayOneShot(audioClipsDic[sfx_name2], sfx_volume2 * masterVolumeSFX);
         }
-        else
-            sfxPlayer2.PlayOneShot(audioClipsDic[sfx_name2], sfx_volume2 * masterVolumeSFX);
+        catch (System.Exception)
+        {
+            Debug.Log("error");
+        }
     }
 
     public void PlaySoundThird(string sfx_name3, float sfx_volume3 = 1f)
     {
-        if (audioClipsDic.ContainsKey(sfx_name3) == false && sfxPlayer3.GetComponent<AudioSource>().isPlaying)
+        try
         {
-            Debug.Log(sfx_name3 + " 이 포함된 오디오가 없습니다.");
-            return;
+            if (audioClipsDic.ContainsKey(sfx_name3) == false && sfxPlayer3.GetComponent<AudioSource>().isPlaying)
+            {
+                Debug.Log(sfx_name3 + " 이 포함된 오디오가 없습니다.");
+                return;
+            }
+            else
+                sfxPlayer3.PlayOneShot(audioClipsDic[sfx_name3], sfx_volume3 * masterVolumeSFX);
         }
-        else
-            sfxPlayer3.PlayOneShot(audioClipsDic[sfx_name3], sfx_volume3 * masterVolumeSFX);
+        catch(System.Exception)
+        {
+            Debug.Log("error");
+        }
     }
 
     public void PlaySoundFourth(string sfx_name4, float sfx_volume4 = 1f)
@@ -146,7 +167,7 @@ public class SoundManager : Singleton<SoundManager>
         }
         catch (System.Exception)
         {
-            Debug.Log("asdfsdfa");
+            Debug.Log("error");
         }
      
     }

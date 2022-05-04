@@ -8,7 +8,7 @@ public class Golem_MtJump : StateMachineBehaviour
     bool LandCheck = false;
     public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        SoundManager.Instance.PlaySoundThird("G_Hit_2", 5f);
+        SoundManager.Instance.PlaySoundThird("G_Hit", 5f);
         LandCheck = true;
         LandTime = 0;
     }
@@ -18,7 +18,7 @@ public class Golem_MtJump : StateMachineBehaviour
         if (LandTime >= 1.3f && LandCheck == true)
         {
             LandCheck = false;
-            SoundManager.Instance.PlaySoundSecond("G_Landing", 0.5f);
+            SoundManager.Instance.PlaySoundSecond("G_Landing2", 0.5f);
         }
     }
 }
