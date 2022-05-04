@@ -35,7 +35,6 @@ public class BowManager : Singleton<BowManager>
     {
         ShowArrowTrajectory();
         ShowBowString();
-        ShowArrow();
         VibrationBow();
         ShowChargingEffect();
     }
@@ -83,22 +82,6 @@ public class BowManager : Singleton<BowManager>
         _bowStringLineRenderer.SetPosition(1, arrowControllerPos);
         _bowStringLineRenderer2.SetPosition(0, arrowControllerPos);
         _bowStringLineRenderer2.SetPosition(1, _bowBottomTransform.position);
-    }
-
-    private void ShowArrow()
-    {
-        if (VRControllerManager.Instance.IsCharging)
-        {
-            var bowControllerPos = BowAttackTransform.position;
-            var arrowControllerPos = VRControllerManager.Instance.ArrowController.CenterTransform.position;
-            _arrowLineRenderer.SetPosition(0, bowControllerPos);
-            _arrowLineRenderer.SetPosition(1,
-                Vector3.Lerp(bowControllerPos, arrowControllerPos, VRControllerManager.Instance.ChargingPercent));
-        }
-        else
-        {
-            _arrowLineRenderer.SetPosAllZero();
-        }
     }
 
     private void VibrationBow()
