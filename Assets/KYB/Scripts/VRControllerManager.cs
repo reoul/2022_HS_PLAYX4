@@ -202,6 +202,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
             {
                 IsCharging = true;
                 ArrowController.MeshOff();
+                ArrowManager.Instance.ShowArrow();
             }
         }
     }
