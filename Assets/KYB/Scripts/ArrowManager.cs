@@ -5,9 +5,9 @@ public class ArrowManager : Singleton<ArrowManager>
 {
     [SerializeField] private Transform ArrowTrans;
 
-    public void ShowArrow()
+    public void ShowArrow(bool isShow)
     {
-        ArrowTrans.gameObject.SetActive(true);
+        ArrowTrans.gameObject.SetActive(isShow);
     }
     
     public void Shot(Vector3 positon, Vector3 direction)

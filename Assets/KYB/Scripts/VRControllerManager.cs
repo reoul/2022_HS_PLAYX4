@@ -173,7 +173,9 @@ public class VRControllerManager : Singleton<VRControllerManager>
             if (BowController.GetTriggerUp())
             {
                 BowController.MeshON();
+                ArrowController.MeshON();
                 BowManager.Instance.BowObj.SetActive(false);
+                ArrowManager.Instance.ShowArrow(false);
                 BowController = null;
                 IsCharging = false;
                 _chargingTime = 0;
@@ -202,7 +204,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
             {
                 IsCharging = true;
                 ArrowController.MeshOff();
-                ArrowManager.Instance.ShowArrow();
+                ArrowManager.Instance.ShowArrow(true);
             }
         }
     }
