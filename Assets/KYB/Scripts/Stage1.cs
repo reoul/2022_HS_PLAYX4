@@ -11,7 +11,7 @@ public class Stage1 : Stage
         _spawnerManager = transform.GetChild(0).GetComponent<SpawnerManager>();
         _spawnerManager.SpawnerAwake();
         SoundManager.Instance.StopBGM();
-        SoundManager.Instance.BGMChange("Straight Fuse - French Fuse", 0.7f);
+        SoundManager.Instance.BGMChange("Straight Fuse - French Fuse", 0.3f);
     }
 
     public override void StageUpdate()

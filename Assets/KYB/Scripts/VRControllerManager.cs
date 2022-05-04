@@ -140,9 +140,9 @@ public class VRControllerManager : Singleton<VRControllerManager>
     {
         if (IsCharging)
         {
-            SoundManager.Instance.PlaySound("crystal-glow-SBA-300099769-preview", 5f);
+            SoundManager.Instance.PlaySound("RemakeCharge", 5f);
             SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch =
-                Mathf.Lerp(0.5f, 1, _chargingTime / _maxCharging);
+                Mathf.Lerp(0.5f, 1.5f, _chargingTime / _maxCharging);
         }
     }
 

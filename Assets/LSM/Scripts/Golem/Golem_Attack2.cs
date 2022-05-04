@@ -20,7 +20,7 @@ public class Golem_Attack2 : StateMachineBehaviour
         if (batTime >= 0.7f && batCheck == true)
         {
             batCheck = false;
-            SoundManager.Instance.PlaySoundSecond("G_JumpAttack_Impact", 1f);
+            SoundManager.Instance.PlaySoundSecond("G_JumpAttack_Impact", 0.5f);
         }
     }
 }

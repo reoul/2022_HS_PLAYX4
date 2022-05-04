@@ -7,7 +7,7 @@ public class IntroObj : MonoBehaviour, IHitable
     public void HitEvent()
     {
         Invoke("introObjHit", 0);
-        SoundManager.Instance.PlaySoundSecond("Access Denied 3", 0.6f);
+        SoundManager.Instance.PlaySoundSecond("Access Denied 3", 0.2f);
     }
 
     private void introObjHit()

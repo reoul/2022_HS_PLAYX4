@@ -83,14 +83,8 @@ public class WeakPoint : MonoBehaviour, IHitable
         //_parant.ChangeWeakPoint();
         changeEvent?.Invoke();
         ScoreSystem.Score += 100;
+        SoundManager.Instance.PlaySoundFourth("StartButton_Hit", 0.5f);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Arrow"))
-        {
-            SoundManager.Instance.PlaySoundFourth("WeakPoint_Hit", 1f);
-        }
-    }
 
 }

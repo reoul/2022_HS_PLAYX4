@@ -10,7 +10,7 @@ public class Stage2 : Stage
         EnemyInit();
         Invoke("EntSpawn", 5);
         SoundManager.Instance.StopBGM();
-        SoundManager.Instance.BGMChange("Beside Me - Patrick Patrikios", 0.7f);
+        SoundManager.Instance.BGMChange("Beside Me - Patrick Patrikios", 0.2f);
     }
 
     public override void StageEnd()

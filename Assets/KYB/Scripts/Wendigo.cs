@@ -25,6 +25,6 @@ public class Wendigo : Enemy, IHitable
         ChangeState(WendigoState.StateType.Hit);
         EffectManager.Instance.CreateEffect(this.transform.position + new Vector3(0, transform.lossyScale.y * 1.7f,0));
         FindObjectOfType<EnemySpawner>().Delete(this.gameObject);
-        SoundManager.Instance.PlaySoundFourth("Wendigo_Dead", 1f);
+        SoundManager.Instance.PlaySoundFourth("Wendigo_Dead2", 0.9f);
     }
 }
