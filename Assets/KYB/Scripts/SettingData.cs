@@ -1,10 +1,5 @@
 ﻿public class SettingData
 {
-    public int PlayerHp;
-    public int BossHp;
-    public int BossDamage;
-    public float MoveSpeed;
-    
     //====== Wendigo ======
     public int WendigoMaxSpawnCount;
     public float WendigoSpawnDelay;
@@ -31,10 +26,6 @@
 
     public SettingData()
     {
-        PlayerHp = 100;
-        BossHp = 100;
-        BossDamage = 13;
-        MoveSpeed = 100;
         WendigoSpawnDelay = 0.5f;
         WendigoMaxSpawnCount = 5;
         WendigoMoveSpeed = 1f;
