@@ -4,9 +4,10 @@ using UnityEngine;
 using System.IO;
 using System.Reflection;
 
-public class DataManager : MonoBehaviour
+public class DataManager : Singleton<DataManager>
 {
     private const string _settingFilePath = "./setting.csv";
+    private const string _scoreFilePath = "./score.csv";
     public SettingData Data;
 
     void Start()
@@ -99,5 +100,14 @@ public class DataManager : MonoBehaviour
 
         fieldInfo.SetValue(Data, value);
         Debug.Log($"{fieldName}의 값이 {value}로 변경되었습니다");
+    }
+
+    public void SaveNewScore(string name, int score)
+    {
+        using (StreamWriter reader = new StreamWriter(_settingFilePath, true))
+        {
+            string data = name + "," + score.ToString();
+            reader.Write(data);
+        }
     }
 }
