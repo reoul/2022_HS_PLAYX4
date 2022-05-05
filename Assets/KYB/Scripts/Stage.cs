@@ -57,6 +57,11 @@ public abstract class Stage : MonoBehaviour
 
     private void RemoveEnvironment()
     {
+        if (DissolveEnvironments == null)
+        {
+            return;
+        }
+        
         foreach (DissolveMatAll dissolve in DissolveEnvironments)
         {
             dissolve.StartDestroyDissolve();

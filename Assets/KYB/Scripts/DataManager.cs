@@ -128,7 +128,7 @@ public class DataManager : Singleton<DataManager>
         {
             using (StreamReader reader = new StreamReader(_scoreFilePath))
             {
-                string[] data = {"100","100"};
+                string[] data = {"99","99"};
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
@@ -137,7 +137,7 @@ public class DataManager : Singleton<DataManager>
                     data[0] = data[0].Substring(6);
                 }
                 
-                LastPlayerIndex = Convert.ToInt32(data[0]);
+                LastPlayerIndex = Convert.ToInt32(data[0]) + 1;
             }
         }
         catch (Exception e) //파일이 없음

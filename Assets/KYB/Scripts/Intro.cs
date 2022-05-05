@@ -13,7 +13,7 @@ public class Intro : Stage
     {
         base.StageStart();
         StageManager.Instance._nextStageObj.SetActive(true);
-        
+        ScoreSystem.Init();
         GameObject.Find("ScoreDisplay").transform.GetChild(1).gameObject.SetActive(false);
     }
 }

@@ -12,6 +12,8 @@ public class HealthBarManager : Singleton<HealthBarManager>
     private int _maxHealth;
 
     [SerializeField] private int _playerMaxHealth;
+    public int PlayerHealth => _playerHealthStack.Count;
+    public int GolemHealth => _healthStack.Count;
 
     private Stack<GameObject> _healthStack;
     private Stack<GameObject> _playerHealthStack;

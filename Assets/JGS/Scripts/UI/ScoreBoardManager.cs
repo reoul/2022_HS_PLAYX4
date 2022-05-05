@@ -15,6 +15,11 @@ public class ScoreBoardManager : MonoBehaviour
     
     private void Start()
     {
+        UpdateScoreData();
+    }
+
+    public void UpdateScoreData()
+    {
         _ranking = DataManager.Instance.GetScore();
         _playerScore = _ranking[_ranking.Count - 1];
         UpdateScoreBoard();
@@ -25,8 +30,6 @@ public class ScoreBoardManager : MonoBehaviour
         //스코어 순으로 정렬
         _ranking = _ranking.OrderBy(x => x.score).Reverse().ToList();
 
-        Debug.Log(_ranking.IndexOf(_playerScore));
-        
         //스코어보드 출력
         for (int i = 0; i < _rankP.Length; i++)
         {

@@ -49,6 +49,7 @@ public class StageManager : Singleton<StageManager>
         }
         _curStageType = (StageType) (((int) _curStageType + 1) % Enum.GetValues(typeof(StageType)).Length);
         Debug.Log("Next Stage11");
+        ScoreSystem.SumScore += ScoreSystem.Score;
         ScoreSystem.Score = 0;
         SetUpStage(_curStageType);
     }
@@ -59,6 +60,7 @@ public class StageManager : Singleton<StageManager>
         _curStage.StageEnd();
         _curStage.gameObject.SetActive(false);
         _curStageType = StageType.Ending;
+        _curStage.StageStart();
     }
 
     private void Update()
@@ -84,6 +86,12 @@ public class StageManager : Singleton<StageManager>
     private void StartHologram(StageType type)
     {
         stages[(int) type].GetComponent<Stage>().StageSetUP();
+    }
+
+    public void StopTimer()
+    {
+        StopAllCoroutines();
+        _curStage.StageEnd();
     }
 
     public IEnumerator TimerCoroutine(int time)

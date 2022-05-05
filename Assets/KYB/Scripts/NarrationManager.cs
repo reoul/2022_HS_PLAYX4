@@ -74,6 +74,8 @@ public class NarrationManager : Singleton<NarrationManager>
     public AudioClip LastNarrationClip { get; private set; }
     public bool IsCheckFlag = false;
     private bool _isFirst = true;
+    public GameObject IntroBow;
+    public ScoreBoardManager scoreBoardManager;
 
     private WaitForEndOfFrame _waitEndFrame = new WaitForEndOfFrame();
 
@@ -122,6 +124,7 @@ public class NarrationManager : Singleton<NarrationManager>
         PlayVoice(NarrationClips.CheckMove);
         yield return StartCoroutine(CheckMoveCoroutine());
         // 활 소환
+        ShowIntroBow();
         PlayVoice(NarrationClips.Shot1);
         yield return StartCoroutine(CheckFlagCoroutine());
         PlayVoice(NarrationClips.Shot2);
@@ -159,12 +162,16 @@ public class NarrationManager : Singleton<NarrationManager>
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartLevel3));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ConditionGolem));
         yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(210)));
-        yield return StartCoroutine(CheckTrainingResult());
+        yield return StartCoroutine(CheckBossResult());
+        StageManager.Instance.StopTimer();
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.LevelClear));
+        yield return new WaitForSeconds(3f);
+        StageManager.Instance.NextStage();
         
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.SuccessTraning));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.NextSector));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ThankYouEffort));
+        ShowScoreBoard();
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ScoreBoard));
         yield return null;
     }
@@ -235,12 +242,31 @@ public class NarrationManager : Singleton<NarrationManager>
         while (true)
         {
             yield return _waitEndFrame;
-            if ((float) ScoreSystem.Score / StageManager.Instance._curStage.GoalScore < 1)
+            if (HealthBarManager.Instance.GolemHealth <= 0)
+            {
+                break;
+            }
+            if (HealthBarManager.Instance.PlayerHealth <= 0 || StageManager.Instance._curStage.IsFinish)
             {
                 FailedTraining();
             }
         }
         
+    }
+
+    private void ShowIntroBow()
+    {
+        IntroBow.transform.position =
+            PlayerFloor.Instance.attackTrans[PlayerFloor.Instance.PlayerCurFloor].transform.position + new Vector3(0,1,0.5f);
+        IntroBow.SetActive(true);
+        IntroBow.GetComponentInChildren<DissolveMat>().StartCreateDissolve();
+    }
+
+    private void ShowScoreBoard()
+    {
+        DataManager.Instance.SaveNewScore();
+        scoreBoardManager.UpdateScoreData();
+        scoreBoardManager.gameObject.SetActive(true);
     }
 
     private AudioClip GetTimeAudio(int time)
