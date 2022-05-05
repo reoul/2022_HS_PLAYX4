@@ -148,7 +148,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
         {
             SoundManager.Instance.PlaySound("RemakeCharge", 5f);
             SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch =
-                Mathf.Lerp(0.5f, 1.5f, _chargingTime / _maxCharging);
+                Mathf.Lerp(0f, 0.77f, _chargingTime / _maxCharging);
         }
     }
 
@@ -227,6 +227,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
                 SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().Stop();
                 ArrowManager.Instance.Shot(BowManager.Instance.BowAttackTransform.position, Direction);
                 FindObjectOfType<ArrowAfterImage>().Shot();
+                SoundManager.Instance.sfxPlayer.GetComponent<AudioSource>().pitch = 1f;
                 SoundManager.Instance.PlaySound("ArrowShot_1", 1f);
             }
             ArrowManager.Instance.ShowArrow(false);

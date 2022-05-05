@@ -47,7 +47,7 @@ public class Projectile_Stone : MonoBehaviour
         if(isThrownSound)
         {
             isThrownSound = false;
-            SoundManager.Instance.PlaySoundSecond("StoneImpact", 0.5f);
+            SoundManager.Instance.PlaySoundSecond("StoneImpact", 0.3f);
         }
     }
 
