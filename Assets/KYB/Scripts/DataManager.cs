@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Reflection;
+using Random = UnityEngine.Random;
 
 public class DataManager : Singleton<DataManager>
 {
@@ -10,12 +11,25 @@ public class DataManager : Singleton<DataManager>
     private const string _scoreFilePath = "./score.csv";
     public SettingData Data;
     private List<Score> _scores;
+    public int LastPlayerIndex = 100;
 
     void Awake()
     {
         Data = new SettingData();
+        ScoreSystem.SumScore = 100;
         _scores = new List<Score>();
         SettingLoad();
+        GetScore();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            ScoreSystem.SumScore += Random.Range(-10, 10);
+            SaveNewScore();
+        }
+        Debug.Log(LastPlayerIndex);
     }
 
     /// <summary>
@@ -104,11 +118,13 @@ public class DataManager : Singleton<DataManager>
         Debug.Log($"{fieldName}의 값이 {value}로 변경되었습니다");
     }
 
-    public Score SaveNewScore(string name)
+    public Score SaveNewScore()
     {
+        
+        _scores.Add(new Score($"HUNTER{LastPlayerIndex.ToString()}",ScoreSystem.SumScore));
         using (StreamWriter writer = new StreamWriter(_scoreFilePath, true))
         {
-            string data = $"{name},{ScoreSystem.SumScore.ToString()}\n";
+            string data = $"HUNTER{(LastPlayerIndex++).ToString()},{ScoreSystem.SumScore.ToString()}\n";
             writer.Write(data);
             writer.Flush();
         }
@@ -118,16 +134,22 @@ public class DataManager : Singleton<DataManager>
 
     public List<Score> GetScore()
     {
+        _scores.Clear();
         try
         {
             using (StreamReader reader = new StreamReader(_scoreFilePath))
             {
+                string[] data = {"100","100"};
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
-                    string[] data = line.Split(',');
+                    data = line.Split(',');
+                    Debug.Log(data[0]);
                     _scores.Add(new Score(data[0], Convert.ToInt32(data[1])));
+                    data[0] = data[0].Substring(6);
                 }
+                
+                LastPlayerIndex = Convert.ToInt32(data[0]);
             }
         }
         catch (Exception e) //파일이 없음
