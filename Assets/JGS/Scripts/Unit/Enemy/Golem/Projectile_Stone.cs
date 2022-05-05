@@ -11,6 +11,7 @@ public class Projectile_Stone : MonoBehaviour
     private float _scale;
     public bool isThrow;
     public bool isThrownSound;
+    public bool stage3_Stone = false;
 
     void Start()
     {
@@ -47,17 +48,15 @@ public class Projectile_Stone : MonoBehaviour
         if(isThrownSound)
         {
             isThrownSound = false;
-            SoundManager.Instance.PlaySoundSecond("StoneImpact", 0.3f);
+            if (!stage3_Stone)
+            {
+                SoundManager.Instance.PlaySoundSecond("StoneImpact", 0.3f);
+            }
+            else if(stage3_Stone)
+            {
+                SoundManager.Instance.PlaySoundSecond("StoneImpact", 0.7f);
+            }
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("PlayerFloor"))
-        {
-            PlayerFloor.Instance.StopAttack(targetFloor);
-            Destroy(gameObject);
-            //SoundManager.Instance.PlaySoundSecond("G_Rock_Impact_2", 1f);
-        }
-    }
 }

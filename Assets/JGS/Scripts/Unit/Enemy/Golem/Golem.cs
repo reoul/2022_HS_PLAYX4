@@ -94,6 +94,7 @@ public class Golem : Enemy
     {
         _stone.GetComponent<Projectile_Stone>().isThrow = true;
         _stone.GetComponent<Projectile_Stone>().isThrownSound = true;
+        _stone.GetComponent<Projectile_Stone>().stage3_Stone = true;
         _stone.GetComponent<Projectile_Stone>().targetFloor = _targetFloor;
     }
 
