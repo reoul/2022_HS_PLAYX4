@@ -11,7 +11,7 @@ public class Stage2 : Stage
         Invoke("EntSpawn", 5);
         StartCoroutine(StageManager.Instance.TimerCoroutine(LimitTime));
         SoundManager.Instance.StopBGM();
-        SoundManager.Instance.BGMChange("Beside Me - Patrick Patrikios", 0.2f);
+        SoundManager.Instance.BGMChange("Stage2_BGM", 0.2f);
     }
 
     public override void StageEnd()
