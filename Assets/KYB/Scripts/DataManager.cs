@@ -9,10 +9,12 @@ public class DataManager : Singleton<DataManager>
     private const string _settingFilePath = "./setting.csv";
     private const string _scoreFilePath = "./score.csv";
     public SettingData Data;
+    private List<Score> _scores;
 
     void Awake()
     {
         Data = new SettingData();
+        _scores = new List<Score>();
         SettingLoad();
     }
 
@@ -102,12 +104,35 @@ public class DataManager : Singleton<DataManager>
         Debug.Log($"{fieldName}의 값이 {value}로 변경되었습니다");
     }
 
-    public void SaveNewScore(string name, int score)
+    public void SaveNewScore(string name)
     {
-        using (StreamWriter reader = new StreamWriter(_settingFilePath, true))
+        using (StreamWriter writer = new StreamWriter(_scoreFilePath, true))
         {
-            string data = name + "," + score.ToString();
-            reader.Write(data);
+            string data = $"{name},{ScoreSystem.SumScore.ToString()}\n";
+            writer.Write(data);
+            writer.Flush();
         }
+    }
+
+    public List<Score> GetScore()
+    {
+        try
+        {
+            using (StreamReader reader = new StreamReader(_settingFilePath))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string line = reader.ReadLine();
+                    string[] data = line.Split(',');
+                    _scores.Add(new Score(data[0], Convert.ToInt32(data[1])));
+                }
+            }
+        }
+        catch (Exception e) //파일이 없음
+        {
+            // ignored
+        }
+
+        return _scores;
     }
 }
