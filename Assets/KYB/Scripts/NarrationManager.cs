@@ -88,6 +88,16 @@ public class NarrationManager : Singleton<NarrationManager>
         {
             StartCoroutine(NarrationCoroutine());
         }
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            IsCheckFlag = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            ScoreSystem.Score += 100;
+        }
     }
 
     public void PlayVoice(AudioClip audioClip)
@@ -106,9 +116,9 @@ public class NarrationManager : Singleton<NarrationManager>
     private IEnumerator NarrationCoroutine()
     {
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro1));
-        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro2));
-        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro3));
-        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro4));
+        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro2));
+        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro3));
+        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro4));
         PlayVoice(NarrationClips.CheckMove);
         yield return StartCoroutine(CheckMoveCoroutine());
         Debug.Log("adsadass");
@@ -162,7 +172,7 @@ public class NarrationManager : Singleton<NarrationManager>
 
     private void FailedTraining()
     {
-        StopAllCoroutines();
+        //StopAllCoroutines();
         StartCoroutine(FailedTrainingCoroutine());
     }
 
@@ -179,12 +189,10 @@ public class NarrationManager : Singleton<NarrationManager>
     /// <returns></returns>
     private IEnumerator CheckMoveCoroutine()
     {
-        while (PlayerFloor.Instance.PlayerCurFloor != 1)
+        while (PlayerFloor.Instance.PlayerCurFloor == 1)
         {
-            Debug.Log(PlayerFloor.Instance.PlayerCurFloor);
-            yield return _waitEndFrame;
+            yield return new WaitForEndOfFrame();
         }
-        Debug.Log("탈출");
     }
 
     /// <summary>
@@ -201,8 +209,9 @@ public class NarrationManager : Singleton<NarrationManager>
     }
 
     private IEnumerator CheckScorePercent50Coroutine()
-    {
-        while ((float)ScoreSystem.Score / StageManager.Instance._curStage.GoalScore < 0.5f)
+    {            
+        Debug.Log($"{ScoreSystem.Score} {StageManager.Instance._curStage.GoalScore}");
+        while (((float)ScoreSystem.Score / StageManager.Instance._curStage.GoalScore) < 0.5f)
         {
             yield return _waitEndFrame;
         }
@@ -210,7 +219,10 @@ public class NarrationManager : Singleton<NarrationManager>
 
     private IEnumerator CheckTrainingResult()
     {
-        yield return null;
+        while (!StageManager.Instance._curStage.IsFinish)
+        {
+            yield return _waitEndFrame;
+        }
         if ((float) ScoreSystem.Score / StageManager.Instance._curStage.GoalScore < 1)
         {
             FailedTraining();

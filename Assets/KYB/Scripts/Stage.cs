@@ -9,6 +9,7 @@ public abstract class Stage : MonoBehaviour
 
     public bool IsFinish { get; set; }
     
+    public int LimitTime { get; set; }
     public int GoalScore { get; set; }
     
     /// <summary>

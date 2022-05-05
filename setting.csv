@@ -10,10 +10,10 @@ GolemMaxHealth,20,int,바위골렘 체력
 GolemDamage,100,int,바위골렘 데미지
 GolemScore,1999,int,바위골렘 타격 시 획득 스코어
 FloorWidth,0.5,single,플레이어 발판 기본값
-Stage1TargetScore,2000,int,1스테이지 클리어 목표 점수
-Stage2TargetScore,4000,int,2스테이지 클리어 목표 점수
-Stage1TimeLimit,10,int,1스테이지 제한시간
-Stage2TimeLimit,10,int,2스테이지 제한시간
-Stage3TimeLimit,10,int,3스테이지 제한시간
+Stage1TargetScore,1000,int,1스테이지 클리어 목표 점수o
+Stage2TargetScore,1000,int,2스테이지 클리어 목표 점수o
+Stage1TimeLimit,60,int,1스테이지 제한시간
+Stage2TimeLimit,90,int,2스테이지 제한시간
+Stage3TimeLimit,120,int,3스테이지 제한시간
 BowMaxChargingTime,60,single,활이 풀차징 되는데 걸리는 시간
 BowMaxDistance,0.3,single,활시위 당기기 최대값
