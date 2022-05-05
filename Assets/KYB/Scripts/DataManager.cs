@@ -10,7 +10,7 @@ public class DataManager : Singleton<DataManager>
     private const string _scoreFilePath = "./score.csv";
     public SettingData Data;
 
-    void Start()
+    void Awake()
     {
         Data = new SettingData();
         SettingLoad();

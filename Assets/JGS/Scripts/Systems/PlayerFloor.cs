@@ -64,6 +64,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
         {
             floor.GetComponent<Floor>().ChangeLineColor(new Color(0.48f, 0.48f, 0.48f));
         }
+        Debug.Log(_camera.name);
         if (Physics.Raycast(_camera.position, _camera.position - new Vector3(0, 10, 0), out hit, distance, layerMask))
         {
             for (int i = 0; i < floorTransforms.Length; i++)

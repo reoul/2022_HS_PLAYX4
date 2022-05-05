@@ -28,7 +28,7 @@ public class Wendigo : Enemy, IHitable
 
     public void HitEvent()
     {
-        ScoreSystem.Score += 100;
+        ScoreSystem.Score += score;
         ChangeState(WendigoState.StateType.Hit);
         EffectManager.Instance.CreateEffect(this.transform.position + new Vector3(0, transform.lossyScale.y * 1.7f,0));
         FindObjectOfType<EnemySpawner>().Delete(this.gameObject);

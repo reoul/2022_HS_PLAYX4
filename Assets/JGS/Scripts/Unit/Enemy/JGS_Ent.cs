@@ -19,9 +19,9 @@ public class JGS_Ent : Enemy
         foreach (var item in GetComponentsInChildren<WeakPoint>(true))
         {
             item.changeEvent += ChangeWeak;
+            item.Score = DataManager.Instance.Data.EntScore;
         }
         damage = DataManager.Instance.Data.EntDamage;
-        score = DataManager.Instance.Data.EntScore;
     }
 
     private void ChangeWeak()

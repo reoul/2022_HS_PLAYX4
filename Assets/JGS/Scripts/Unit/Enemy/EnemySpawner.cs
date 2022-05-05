@@ -19,6 +19,7 @@ public class EnemySpawner : MonoBehaviour
             var enemy = new EnemyBuilder("Enemy").SetEnemyType(global::EnemyType.Wendigo).Build();
             enemy.gameObject.SetActive(false);
             enemy.transform.parent = StageManager.Instance._curStage.transform;
+            enemy.GetComponent<Enemy>().score = DataManager.Instance.Data.WendigoScore;
             unUsedEnemyQueue.Enqueue(enemy.gameObject);
         }
     }

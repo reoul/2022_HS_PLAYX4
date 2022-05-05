@@ -10,7 +10,7 @@ public class Stage3 : Stage
         EnemyInit();
         Invoke("GolemSpawn", 5);
         SoundManager.Instance.StopBGM();
-        SoundManager.Instance.BGMChange("Beside Me - Patrick Patrikios", 0.2f);
+        SoundManager.Instance.BGMChange("hollywood-trailer-SBA-346722074-preview", 0.2f);
     }
 
     public override void StageEnd()

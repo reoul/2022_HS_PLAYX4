@@ -229,7 +229,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
                 FindObjectOfType<ArrowAfterImage>().Shot();
                 SoundManager.Instance.PlaySound("ArrowShot_1", 1f);
             }
-
+            ArrowManager.Instance.ShowArrow(false);
             ArrowController.MeshON();
             IsCharging = false;
             _chargingTime = 0;

@@ -32,10 +32,10 @@ public class Golem : Enemy
         foreach (var weakPoint in GetComponentsInChildren<WeakPoint>(true))
         {
             weakPoint.changeEvent += ChangeWeakPoint;
+            weakPoint.Score = DataManager.Instance.Data.GolemScore;
         }
         maxHealth = DataManager.Instance.Data.GolemMaxHealth;
         damage = DataManager.Instance.Data.GolemDamage;
-        score = DataManager.Instance.Data.GolemScore;
     }
 
     private void Update()

@@ -10,6 +10,7 @@ public class WeakPoint : MonoBehaviour, IHitable
     private SpriteRenderer[] _spriteRenderers;
     public delegate void ChangeWeak();
     public ChangeWeak changeEvent;
+    public int Score { get; set; }
 
     /// <summary>
     /// 이미지의 alpha 값이 증가하는지
@@ -82,7 +83,7 @@ public class WeakPoint : MonoBehaviour, IHitable
     {
         //_parant.ChangeWeakPoint();
         changeEvent?.Invoke();
-        ScoreSystem.Score += 100;
+        ScoreSystem.Score += Score;
         SoundManager.Instance.PlaySoundFourth("StartButton_Hit", 0.5f);
     }
 
