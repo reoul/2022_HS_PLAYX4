@@ -59,4 +59,5 @@ public class JGS_Ent : Enemy
         _stone.GetComponent<Projectile_Stone>().isThrownSound = true;
         _stone.GetComponent<Projectile_Stone>().targetFloor = targetFloor;
     }
+    
 }

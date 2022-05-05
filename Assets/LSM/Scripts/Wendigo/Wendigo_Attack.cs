@@ -14,7 +14,7 @@ public class Wendigo_Attack : StateMachineBehaviour
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         attackTime += Time.deltaTime;
-        if (attackTime >= 0.5f && attackCheck == true)
+        if (attackTime >= 1f && attackCheck == true)
         {
             SoundManager.Instance.PlaySoundThird("Wendigo_Attack", 1f);
             attackCheck = false;

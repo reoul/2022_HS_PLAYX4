@@ -58,5 +58,13 @@ public class Projectile_Stone : MonoBehaviour
             }
         }
     }
-
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("PlayerFloor"))
+        {
+            PlayerFloor.Instance.StopAttack(targetFloor);
+            Destroy(gameObject);
+            //SoundManager.Instance.PlaySoundSecond("G_Rock_Impact_2", 1f);
+        }
+    }
 }
