@@ -104,7 +104,7 @@ public class DataManager : Singleton<DataManager>
         Debug.Log($"{fieldName}의 값이 {value}로 변경되었습니다");
     }
 
-    public void SaveNewScore(string name)
+    public Score SaveNewScore(string name)
     {
         using (StreamWriter writer = new StreamWriter(_scoreFilePath, true))
         {
@@ -112,13 +112,15 @@ public class DataManager : Singleton<DataManager>
             writer.Write(data);
             writer.Flush();
         }
+
+        return new Score(name, ScoreSystem.SumScore);
     }
 
     public List<Score> GetScore()
     {
         try
         {
-            using (StreamReader reader = new StreamReader(_settingFilePath))
+            using (StreamReader reader = new StreamReader(_scoreFilePath))
             {
                 while (!reader.EndOfStream)
                 {
