@@ -9,7 +9,7 @@ public class ArrowManager : Singleton<ArrowManager>
     {
         ArrowTrans.gameObject.SetActive(isShow);
     }
-    
+
     public void Shot(Vector3 positon, Vector3 direction)
     {
         ArrowTrans.gameObject.SetActive(false);

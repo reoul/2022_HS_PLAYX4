@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,8 +10,11 @@ public class StageManager : Singleton<StageManager>
     public enum StageType
     {
         Intro,
+        Stage1Before,
         Stage1,
+        Stage2Before,
         Stage2,
+        Stage3Before,
         Stage3,
         Ending
     }
@@ -37,6 +41,13 @@ public class StageManager : Singleton<StageManager>
         ScoreSystem.Score = 0;
         SetUpStage(_curStageType);
         StartCoroutine(TimerCoroutine());
+    }
+
+    public void ChangeToEnding()
+    {
+        StopAllCoroutines();
+        _curStage.StageEnd();
+        _curStageType = StageType.Ending;
     }
 
     private void Update()

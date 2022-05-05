@@ -9,6 +9,7 @@ public abstract class Stage : MonoBehaviour
 
     public bool IsFinish { get; set; }
     
+    public int GoalScore { get; set; }
     
     /// <summary>
     /// 주변 사물 소환

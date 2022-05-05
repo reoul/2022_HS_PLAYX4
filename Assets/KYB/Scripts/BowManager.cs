@@ -5,7 +5,6 @@ using System.Collections;
 
 public class BowManager : Singleton<BowManager>
 {
-    private LineRenderer _arrowLineRenderer;
     private LineRenderer _arrowTrajectoryLineRenderer;
     private LineRenderer _bowStringLineRenderer;
     private LineRenderer _bowStringLineRenderer2;
@@ -17,10 +16,10 @@ public class BowManager : Singleton<BowManager>
     public GameObject CancelEffect;
     public GameObject StopEffect;
     public float chargingSpeed;
+    private bool _isFirstAimStartTarget;
 
     private void Awake()
     {
-        _arrowLineRenderer = GameObject.Find("ArrowLine").GetComponent<LineRenderer>();
         _arrowTrajectoryLineRenderer = GameObject.Find("ArrowTrajectoryLine").GetComponent<LineRenderer>();
         _bowStringLineRenderer = GameObject.Find("BowStringLine").GetComponent<LineRenderer>();
         _bowStringLineRenderer2 = GameObject.Find("BowStringLine2").GetComponent<LineRenderer>();
@@ -37,6 +36,7 @@ public class BowManager : Singleton<BowManager>
         ShowBowString();
         VibrationBow();
         ShowChargingEffect();
+        CheckAnimeStartTarget();
     }
 
     /// <summary>
@@ -107,6 +107,28 @@ public class BowManager : Singleton<BowManager>
         else
         {
             ChargingParticleSystem.gameObject.SetActive(false);
+        }
+    }
+    
+    public void CheckAnimeStartTarget()
+    {
+        if (!_isFirstAimStartTarget)
+        {
+            return;
+        }
+        
+        if (VRControllerManager.Instance.IsCharging)
+        {
+            RaycastHit[] hits = new RaycastHit[] { };
+            hits = Physics.RaycastAll(BowAttackTransform.position, VRControllerManager.Instance.Direction, 1000);
+            for (int i = 0; i < hits.Length; i++)
+            {
+                if (hits[i].collider.name.Equals("NextStageObj"))
+                {
+                    NarrationManager.Instance.IsCheckFlag = false;
+                    break;
+                }
+            }
         }
     }
 }
