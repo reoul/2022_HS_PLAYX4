@@ -121,7 +121,7 @@ public class NarrationManager : Singleton<NarrationManager>
         //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro4));
         PlayVoice(NarrationClips.CheckMove);
         yield return StartCoroutine(CheckMoveCoroutine());
-        Debug.Log("adsadass");
+        // 활 소환
         PlayVoice(NarrationClips.Shot1);
         yield return StartCoroutine(CheckFlagCoroutine());
         PlayVoice(NarrationClips.Shot2);
@@ -135,8 +135,7 @@ public class NarrationManager : Singleton<NarrationManager>
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartLevel1));
         // 시간 표현
         yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(60)));
-        yield return StartCoroutine(CheckScorePercent50Coroutine());
-        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Persent50));
+        StartCoroutine(CheckScorePercent50Coroutine());
         // 클리어 했는지 표시
         yield return StartCoroutine(CheckTrainingResult());
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.LevelClear));
@@ -172,7 +171,7 @@ public class NarrationManager : Singleton<NarrationManager>
 
     private void FailedTraining()
     {
-        //StopAllCoroutines();
+        StopAllCoroutines();
         StartCoroutine(FailedTrainingCoroutine());
     }
 
@@ -209,12 +208,12 @@ public class NarrationManager : Singleton<NarrationManager>
     }
 
     private IEnumerator CheckScorePercent50Coroutine()
-    {            
-        Debug.Log($"{ScoreSystem.Score} {StageManager.Instance._curStage.GoalScore}");
+    {
         while (((float)ScoreSystem.Score / StageManager.Instance._curStage.GoalScore) < 0.5f)
         {
             yield return _waitEndFrame;
         }
+        PlayVoice(NarrationClips.Persent50);
     }
 
     private IEnumerator CheckTrainingResult()

@@ -45,13 +45,13 @@ public class StageManager : Singleton<StageManager>
         _curStageType = (StageType) (((int) _curStageType + 1) % Enum.GetValues(typeof(StageType)).Length);
         ScoreSystem.Score = 0;
         SetUpStage(_curStageType);
-        StartCoroutine(TimerCoroutine());
     }
 
     public void ChangeToEnding()
     {
         StopAllCoroutines();
         _curStage.StageEnd();
+        _curStage.gameObject.SetActive(false);
         _curStageType = StageType.Ending;
     }
 
@@ -80,14 +80,14 @@ public class StageManager : Singleton<StageManager>
         stages[(int) type].GetComponent<Stage>().StageSetUP();
     }
 
-    IEnumerator TimerCoroutine()
+    public IEnumerator TimerCoroutine(int time)
     {
         if (_curStageType == StageType.Ending)
         {
             yield break;
         }
 
-        for (int i = 30; i >= 0; i--)
+        for (int i = time; i >= 0; i--)
         {
             TimerText.text = $"남은 시간 : {i}초";
             yield return new WaitForSeconds(1f);

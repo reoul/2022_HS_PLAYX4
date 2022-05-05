@@ -64,6 +64,7 @@ public class SpawnerManager : Singleton<SpawnerManager>
         {
             unusedSpawnTransQueue.Enqueue(spawner);
         }
+        GetComponent<EnemySpawner>().Init();
     }
 
     public void SpawnerUpdate()

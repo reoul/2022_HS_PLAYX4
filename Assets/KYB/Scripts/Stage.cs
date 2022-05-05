@@ -17,6 +17,10 @@ public abstract class Stage : MonoBehaviour
     /// </summary>
     public void StageSetUP()
     {
+        if (DissolveEnvironments == null || DissolveEnvironments.Count == 0)
+        {
+            return;
+        }
         DissolveEnvironments.Swap(DissolveEnvironments.Count * 3);
         float k = 0;
         int cnt = 0;

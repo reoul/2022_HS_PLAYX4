@@ -9,6 +9,7 @@ public class Stage3 : Stage
         base.StageStart();
         EnemyInit();
         Invoke("GolemSpawn", 5);
+        StartCoroutine(StageManager.Instance.TimerCoroutine(LimitTime));
         SoundManager.Instance.StopBGM();
         SoundManager.Instance.BGMChange("hollywood-trailer-SBA-346722074-preview", 0.2f);
     }

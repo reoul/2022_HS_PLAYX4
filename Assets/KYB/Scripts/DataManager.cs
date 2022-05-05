@@ -16,22 +16,11 @@ public class DataManager : Singleton<DataManager>
     void Awake()
     {
         Data = new SettingData();
-        ScoreSystem.SumScore = 100;
         _scores = new List<Score>();
         SettingLoad();
         GetScore();
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            ScoreSystem.SumScore += Random.Range(-10, 10);
-            SaveNewScore();
-        }
-        Debug.Log(LastPlayerIndex);
-    }
-
+    
     /// <summary>
     /// 게임 세팅을 설정 할 수 있는 파일 생성(기본값으로 생성됨)
     /// </summary>
@@ -144,7 +133,6 @@ public class DataManager : Singleton<DataManager>
                 {
                     string line = reader.ReadLine();
                     data = line.Split(',');
-                    Debug.Log(data[0]);
                     _scores.Add(new Score(data[0], Convert.ToInt32(data[1])));
                     data[0] = data[0].Substring(6);
                 }

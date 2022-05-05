@@ -9,6 +9,7 @@ public class Stage2 : Stage
         base.StageStart();
         EnemyInit();
         Invoke("EntSpawn", 5);
+        StartCoroutine(StageManager.Instance.TimerCoroutine(LimitTime));
         SoundManager.Instance.StopBGM();
         SoundManager.Instance.BGMChange("Beside Me - Patrick Patrikios", 0.2f);
     }

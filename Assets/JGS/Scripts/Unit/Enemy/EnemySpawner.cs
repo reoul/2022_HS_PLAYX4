@@ -11,7 +11,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private EnemyType _enemyType;
 
-    private void Start()
+    public void Init()
     {
         unUsedEnemyQueue = new Queue<GameObject>();
         for (int i = 0; i < 30; i++)
