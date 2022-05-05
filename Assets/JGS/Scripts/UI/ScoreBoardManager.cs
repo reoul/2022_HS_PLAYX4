@@ -26,7 +26,7 @@ public class ScoreBoardManager : MonoBehaviour
         }
         
         //스코어 순으로 정렬
-        _ranking = _ranking.OrderBy(_ranking => _ranking.score).Reverse().ToList();
+        _ranking = _ranking.OrderBy(x => x.score).Reverse().ToList();
         
         //스코어보드 출력
         for (int i = 0; i < _rankP.Length; i++)
@@ -34,7 +34,23 @@ public class ScoreBoardManager : MonoBehaviour
             _rankP[i].GetChild(1).GetComponent<Text>().text = _ranking[i].name;
             _rankP[i].GetChild(2).GetComponent<Text>().text = _ranking[i].score.ToString();
         }
+        
+        _myRank.GetChild(0).GetComponent<Text>().text = FindPlayerRank(newScore).ToString();
         _myRank.GetChild(1).GetComponent<Text>().text = newScore.name;
         _myRank.GetChild(2).GetComponent<Text>().text = newScore.score.ToString();
+    }
+
+    private int FindPlayerRank(Score myScore)
+    {
+        int myRank = 0;
+        foreach (var score in _ranking.Select((value, index) => (value, index)))
+        {
+            if (score.value.name == myScore.name && score.value.score == myScore.score)
+            {
+                myRank = score.index;
+            }
+        }
+
+        return myRank;
     }
 }
