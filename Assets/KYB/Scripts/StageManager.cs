@@ -42,7 +42,13 @@ public class StageManager : Singleton<StageManager>
 
     public void NextStage()
     {
+        if (_curStage.gameObject.activeInHierarchy)
+        {
+            _curStage.StageEnd();
+            _curStage.gameObject.SetActive(false);
+        }
         _curStageType = (StageType) (((int) _curStageType + 1) % Enum.GetValues(typeof(StageType)).Length);
+        Debug.Log("Next Stage11");
         ScoreSystem.Score = 0;
         SetUpStage(_curStageType);
     }
@@ -89,17 +95,20 @@ public class StageManager : Singleton<StageManager>
 
         for (int i = time; i >= 0; i--)
         {
-            TimerText.text = $"남은 시간 : {i}초";
+            TimerText.text = $"TIME : {i} S";
             yield return new WaitForSeconds(1f);
         }
 
+        Debug.Log("Next Stage1");
         _curStage.StageEnd();
+        Debug.Log("Next Stage2");
         yield return new WaitForSeconds(2f);
 
         _curStage.gameObject.SetActive(false);
+        Debug.Log("Next Stage3");
 
-        yield return new WaitForSeconds(1f);
-
+        //yield return new WaitForSeconds(1f);
+        Debug.Log("Next Stage4");
         NextStage();
     }
 }

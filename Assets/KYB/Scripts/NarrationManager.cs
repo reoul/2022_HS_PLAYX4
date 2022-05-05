@@ -180,6 +180,8 @@ public class NarrationManager : Singleton<NarrationManager>
         StageManager.Instance.ChangeToEnding();
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.FailedTraning));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.TryAgain));
+        yield return new WaitForSeconds(2f);
+        StageManager.Instance.NextStage();
     }
 
     /// <summary>
@@ -226,6 +228,19 @@ public class NarrationManager : Singleton<NarrationManager>
         {
             FailedTraining();
         }
+    }
+    
+    private IEnumerator CheckBossResult()
+    {
+        while (true)
+        {
+            yield return _waitEndFrame;
+            if ((float) ScoreSystem.Score / StageManager.Instance._curStage.GoalScore < 1)
+            {
+                FailedTraining();
+            }
+        }
+        
     }
 
     private AudioClip GetTimeAudio(int time)

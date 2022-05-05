@@ -9,6 +9,7 @@ public class Stage3 : Stage
         base.StageStart();
         EnemyInit();
         Invoke("GolemSpawn", 5);
+        FindObjectOfType<ScoreDisplay>().switchDisplay();
         StartCoroutine(StageManager.Instance.TimerCoroutine(LimitTime));
         SoundManager.Instance.StopBGM();
         SoundManager.Instance.BGMChange("Beside Me - Patrick Patrikios", 0.2f);
@@ -18,6 +19,7 @@ public class Stage3 : Stage
     {
         base.StageEnd();
         RemoveEnemy();
+        FindObjectOfType<ScoreDisplay>().switchDisplay();
     }
 
     /// <summary>

@@ -18,7 +18,7 @@ public class ScoreBoard : MonoBehaviour
     {
         _currentScore = ScoreSystem.Score;
         UpdateDisplayScore();
-        this.GetComponent<Text>().text = $"점수 : {Mathf.Round(_displayScore).ToString()}";
+        this.GetComponent<Text>().text = $"SCORE : {Mathf.Round(_displayScore).ToString()} / {StageManager.Instance._curStage.GoalScore.ToString()}";
     }
 
     private void UpdateDisplayScore()
