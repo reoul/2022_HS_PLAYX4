@@ -21,6 +21,8 @@ public class PlayerFloor : Singleton<PlayerFloor>
 
     private void Start()
     {
+        _measureWidth = DataManager.Instance.Data.FloorWidth;
+        transform.localScale = new Vector3(_measureWidth, transform.localScale.y, transform.localScale.z);
         _camera = Camera.main.transform;
         _isAttack = new bool[3];
     }

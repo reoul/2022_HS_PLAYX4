@@ -8,6 +8,8 @@ public class Enemy : Unit
     public StateMachine StateMachine => _stateMachine;
     public float maxHealth { get; protected set; }
     public float currentHealth { get; protected set; }
+    public int damage;
+    public int score;
 
     [SerializeField] private float _moveSpeed;
     public float MoveSpeed

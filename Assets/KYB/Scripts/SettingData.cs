@@ -40,8 +40,8 @@
         Stage1TimeLimit = 10;
         Stage2TimeLimit = 10;
         Stage3TimeLimit = 10;
-        BowMaxChargingTime = 3f;
-        BowMaxDistance = 1f;
+        BowMaxChargingTime = 60f;
+        BowMaxDistance = 0.3f;
         WendigoScore = 100;
         EntScore = 100;
         GolemScore = 100;

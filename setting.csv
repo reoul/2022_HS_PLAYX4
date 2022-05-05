@@ -15,5 +15,5 @@ Stage2TargetScore,4000,int,2스테이지 클리어 목표 점수
 Stage1TimeLimit,10,int,1스테이지 제한시간
 Stage2TimeLimit,10,int,2스테이지 제한시간
 Stage3TimeLimit,10,int,3스테이지 제한시간
-BowMaxChargingTime,3,single,활이 풀차징 되는데 걸리는 시간
-BowMaxDistance,1,single,활시위 당기기 최대값
+BowMaxChargingTime,60,single,활이 풀차징 되는데 걸리는 시간
+BowMaxDistance,0.3,single,활시위 당기기 최대값

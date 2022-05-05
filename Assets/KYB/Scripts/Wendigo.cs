@@ -8,7 +8,14 @@ public class Wendigo : Enemy, IHitable
     {
         _stateMachine = this.GetComponent<StateMachine>();
     }
-    
+
+    private void Start()
+    {
+        MoveSpeed = DataManager.Instance.Data.WendigoMoveSpeed;
+        damage = DataManager.Instance.Data.WendigoDamage;
+        score = DataManager.Instance.Data.WendigoScore;
+    }
+
     private void Update()
     {
         _stateMachine.StateUpdate();

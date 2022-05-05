@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarManager : MonoBehaviour
+public class HealthBarManager : Singleton<HealthBarManager>
 {
     [SerializeField]
     private GameObject _healthBlock;
@@ -20,6 +20,7 @@ public class HealthBarManager : MonoBehaviour
 
     private void Start()
     {
+        _maxHealth = DataManager.Instance.Data.GolemMaxHealth;
         for (int i = 0; i < _maxHealth; i++)
         {
             GameObject _tempHealthBlock = GameObject.Instantiate(_healthBlock, this.transform);
@@ -39,5 +40,10 @@ public class HealthBarManager : MonoBehaviour
                 Destroy(_curHealthBlock);
             }
         }
+    }
+
+    public void DistractDamage()
+    {
+        Destroy(_healthStack.Pop());
     }
 }

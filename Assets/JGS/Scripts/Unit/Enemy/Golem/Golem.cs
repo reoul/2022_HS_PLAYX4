@@ -33,6 +33,9 @@ public class Golem : Enemy
         {
             weakPoint.changeEvent += ChangeWeakPoint;
         }
+        maxHealth = DataManager.Instance.Data.GolemMaxHealth;
+        damage = DataManager.Instance.Data.GolemDamage;
+        score = DataManager.Instance.Data.GolemScore;
     }
 
     private void Update()
@@ -70,6 +73,7 @@ public class Golem : Enemy
         _weakPoints[rand].gameObject.SetActive(true);
         _curWeak = _weakPoints[rand];
         _curWeak.GetComponent<WeakPoint>().Show(_weakAlphaSpeed);
+        HealthBarManager.Instance.DistractDamage();
     }
 
     private bool _isTargeted;

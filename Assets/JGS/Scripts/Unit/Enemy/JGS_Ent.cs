@@ -20,6 +20,8 @@ public class JGS_Ent : Enemy
         {
             item.changeEvent += ChangeWeak;
         }
+        damage = DataManager.Instance.Data.EntDamage;
+        score = DataManager.Instance.Data.EntScore;
     }
 
     private void ChangeWeak()

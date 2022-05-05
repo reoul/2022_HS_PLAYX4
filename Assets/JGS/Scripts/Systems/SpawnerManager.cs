@@ -11,12 +11,16 @@ public class SpawnerManager : Singleton<SpawnerManager>
     private float _currentTime;
     private float _delayTime;
 
-    [SerializeField]
     private int _maxSpawnCount = 5;
 
     public int CurrentSpawnCount { get; set; }
 
-    
+    private void Start()
+    {
+        _spawnDelay = DataManager.Instance.Data.WendigoSpawnDelay;
+        _maxSpawnCount = DataManager.Instance.Data.WendigoMaxSpawnCount;
+    }
+
     private void Spawn()
     {
         if(unusedSpawnTransQueue.Count <= 0)

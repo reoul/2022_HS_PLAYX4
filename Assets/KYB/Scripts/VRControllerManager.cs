@@ -26,7 +26,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// <summary>
     /// 최대 차징 게이지
     /// </summary>
-    private const float _maxCharging = 60;
+    private float _maxCharging = 60;
 
     public float ChargingPercent => Mathf.Clamp01(_chargingTime / _maxCharging);
 
@@ -43,12 +43,12 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// <summary>
     /// 차징 딜레이 시간
     /// </summary>
-    private const float _chargingDelay = 0.08f;
+    private float _chargingDelay = 0.08f;
 
     /// <summary>
     /// 차징 할 때 두 컨트롤러 최대 거리
     /// </summary>
-    private const float _chargingDistance = 0.3f;
+    private float _chargingDistance = 0.3f;
 
     /// <summary>
     /// 차징이 100퍼센트 됬는지 체크
@@ -124,6 +124,12 @@ public class VRControllerManager : Singleton<VRControllerManager>
         IsCharging = false;
         _maxDistance = 0;
         _autoAim = FindObjectOfType<AutoAim>();
+    }
+
+    private void Start()
+    {
+        _chargingDistance = DataManager.Instance.Data.BowMaxDistance;
+        _maxCharging = DataManager.Instance.Data.BowMaxChargingTime;
     }
 
     private void Update()

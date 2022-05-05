@@ -16,7 +16,7 @@ public class Stage2EntManager : MonoBehaviour
         {
             _ents[i].GetComponent<JGS_Ent>().targetFloor = i;
         }
-        _attackDelay = 5f;
+        _attackDelay = DataManager.Instance.Data.EntAttackDelay;
     }
 
     private void OnEnable()
