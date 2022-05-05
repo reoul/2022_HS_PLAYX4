@@ -10,7 +10,7 @@ public class LSM_Stage2 : Stage
         EnemyInit();
         Invoke("EntSpawn", 5);
         SoundManager.Instance.StopBGM();
-        SoundManager.Instance.BGMChange("epic-action-cinematic-hollywood-trailer-SBA-346496494-preview", 0.5f);
+        SoundManager.Instance.BGMChange("Beside Me - Patrick Patrikios", 0.5f);
     }
 
     public override void StageEnd()
