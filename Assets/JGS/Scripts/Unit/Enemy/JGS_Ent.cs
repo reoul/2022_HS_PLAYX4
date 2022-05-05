@@ -50,7 +50,7 @@ public class JGS_Ent : Enemy
         _stone.transform.localPosition = Vector3.zero;
         _stone.GetComponent<Projectile_Stone>()._rootTransform = _shootPosTransfrom;
         _stone.GetComponent<Projectile_Stone>()._targetPos = PlayerFloor.Instance.attackTrans[targetFloor].position;
-        StartCoroutine(PlayerFloor.Instance.StartAttack(targetFloor));
+        StartCoroutine(PlayerFloor.Instance.StartAttack(targetFloor, damage));
     }
 
     public void ThrowStone()

@@ -141,7 +141,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
     }
 
 
-    public IEnumerator StartAttack(int _floor)
+    public IEnumerator StartAttack(int _floor, int damage)
     {
         if (!_isAttack[_floor])
         {
@@ -165,7 +165,11 @@ public class PlayerFloor : Singleton<PlayerFloor>
 
             if (_playerFloor == _floor)
             {
-                ScoreSystem.Score -= 100;
+                ScoreSystem.Score -= damage;
+                if (damage == 0)
+                {
+                    HealthBarManager.Instance.DistractPlayerDamage();
+                }
             }
         }
         yield return null;

@@ -87,7 +87,7 @@ public class GolemState : StateMachine
     {
         _targetFloor = Random.RandomRange(0, 3);
         DestPos = PlayerFloor.Instance.attackTrans[_targetFloor].position + new Vector3(0, 0, 7);
-        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor));
+        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor, 0));
     }
 
     public void SetSwingFloor()
@@ -97,8 +97,8 @@ public class GolemState : StateMachine
             (PlayerFloor.Instance.attackTrans[_targetFloor].position +
              PlayerFloor.Instance.attackTrans[_targetFloor + 1].position) * 0.5f +
             new Vector3(_targetFloor == 1 ? 1 : -1.5f, 0, 7);
-        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor));
-        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor + 1));
+        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor, 0));
+        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor + 1, 0));
     }
 
     public void StopFloor()

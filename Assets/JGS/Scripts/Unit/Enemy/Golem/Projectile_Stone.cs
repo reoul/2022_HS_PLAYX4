@@ -12,6 +12,7 @@ public class Projectile_Stone : MonoBehaviour
     public bool isThrow;
     public bool isThrownSound;
     public bool stage3_Stone = false;
+    public int damage;
 
     void Start()
     {

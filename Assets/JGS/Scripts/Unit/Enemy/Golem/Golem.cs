@@ -87,7 +87,7 @@ public class Golem : Enemy
         _stone.transform.localPosition = Vector3.zero;
         _stone.GetComponent<Projectile_Stone>()._rootTransform = _shootPosTransfrom;
         _stone.GetComponent<Projectile_Stone>()._targetPos = PlayerFloor.Instance.attackTrans[_targetFloor].position;
-        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor));
+        StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor, 0));
     }
 
     public void ThrowStone()
