@@ -11,13 +11,18 @@ public class HealthBarManager : Singleton<HealthBarManager>
     [SerializeField]
     private int _maxHealth;
 
+    [SerializeField] private int _playerMaxHealth;
+
     private Stack<GameObject> _healthStack;
+    private Stack<GameObject> _playerHealthStack;
 
     private Color[] color;
+    private float baseWidth = 42.5f;
 
     private void Awake()
     {
         _healthStack = new Stack<GameObject>();
+        _playerHealthStack = new Stack<GameObject>();
     }
 
     private void Start()
@@ -30,9 +35,19 @@ public class HealthBarManager : Singleton<HealthBarManager>
             GameObject _tempHealthBlock = GameObject.Instantiate(_healthBlock, this.transform);
             RectTransform _tempRect = _tempHealthBlock.GetComponent<RectTransform>();
             _tempHealthBlock.GetComponent<Image>().color = color[1];
-            _tempRect.sizeDelta = new Vector2((20f / _maxHealth) * 65, _tempRect.sizeDelta.y);
+            _tempRect.sizeDelta = new Vector2((20f / _maxHealth) * baseWidth, _tempRect.sizeDelta.y);
             _tempHealthBlock.transform.localPosition = new Vector3(i * _tempRect.sizeDelta.x, 0, 0);
             _healthStack.Push(_tempHealthBlock);
+        }
+        
+        for (int i = 0; i < _playerMaxHealth; i++)
+        {
+            GameObject _tempHealthBlock = GameObject.Instantiate(_healthBlock, this.transform);
+            RectTransform _tempRect = _tempHealthBlock.GetComponent<RectTransform>();
+            _tempHealthBlock.GetComponent<Image>().color = color[0];
+            _tempRect.sizeDelta = new Vector2((20f / _maxHealth) * baseWidth, _tempRect.sizeDelta.y);
+            _tempHealthBlock.transform.localPosition = new Vector3(i * _tempRect.sizeDelta.x, -90, 0);
+            _playerHealthStack.Push(_tempHealthBlock);
         }
     }
 
@@ -55,6 +70,18 @@ public class HealthBarManager : Singleton<HealthBarManager>
         else
         {
             Destroy(_healthStack.Pop());
+        }
+    }
+    
+    public void DistractPlayerDamage()
+    {
+        if(_playerHealthStack.Peek().GetComponent<Image>().color == color[1])
+        {
+            _playerHealthStack.Peek().GetComponent<Image>().color = color[0];
+        }
+        else
+        {
+            Destroy(_playerHealthStack.Pop());
         }
     }
 }
