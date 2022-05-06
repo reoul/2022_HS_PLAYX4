@@ -100,6 +100,13 @@ public class NarrationManager : Singleton<NarrationManager>
         {
             ScoreSystem.Score += 100;
         }
+
+        if (_isFirst && VRControllerManager.Instance.LeftController.GetTrigger() && VRControllerManager.Instance.RightController.GetTrigger())
+        {
+            _isFirst = false;
+            StartCoroutine(NarrationCoroutine());
+        }
+
     }
 
     public void PlayVoice(AudioClip audioClip)
@@ -113,14 +120,14 @@ public class NarrationManager : Singleton<NarrationManager>
     public IEnumerator PlayVoiceCoroutine(AudioClip audioClip)
     {
         PlayVoice(audioClip);
-        yield return new WaitForSeconds(audioClip.length+0.2f);
+        yield return new WaitForSeconds(audioClip.length + 0.2f);
     }
     private IEnumerator NarrationCoroutine()
     {
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro1));
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro2));
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro3));
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro4));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro2));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro3));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro4));
         PlayVoice(NarrationClips.CheckMove);
         yield return StartCoroutine(CheckMoveCoroutine());
         // 활 소환
@@ -167,7 +174,7 @@ public class NarrationManager : Singleton<NarrationManager>
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.LevelClear));
         yield return new WaitForSeconds(3f);
         StageManager.Instance.NextStage();
-        
+
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.SuccessTraning));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.NextSector));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ThankYouEffort));
@@ -231,12 +238,12 @@ public class NarrationManager : Singleton<NarrationManager>
         {
             yield return _waitEndFrame;
         }
-        if ((float) ScoreSystem.Score / StageManager.Instance._curStage.GoalScore < 1)
+        if ((float)ScoreSystem.Score / StageManager.Instance._curStage.GoalScore < 1)
         {
             FailedTraining();
         }
     }
-    
+
     private IEnumerator CheckBossResult()
     {
         while (true)
@@ -251,13 +258,13 @@ public class NarrationManager : Singleton<NarrationManager>
                 FailedTraining();
             }
         }
-        
+
     }
 
     private void ShowIntroBow()
     {
         IntroBow.transform.position =
-            PlayerFloor.Instance.attackTrans[PlayerFloor.Instance.PlayerCurFloor].transform.position + new Vector3(0,1,0.5f);
+            PlayerFloor.Instance.attackTrans[PlayerFloor.Instance.PlayerCurFloor].transform.position + new Vector3(0, 1, 0.5f);
         IntroBow.SetActive(true);
         IntroBow.GetComponentInChildren<DissolveMat>().StartCreateDissolve();
     }
