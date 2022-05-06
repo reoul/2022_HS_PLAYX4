@@ -146,7 +146,7 @@ public class NarrationManager : Singleton<NarrationManager>
         // 스테이지 주변 환경 등장
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartLevel1));
         // 시간 표현
-        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(60)));
+        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(DataManager.Instance.Data.Stage1TimeLimit)));
         StartCoroutine(CheckScorePercent50Coroutine());
         // 클리어 했는지 표시
         yield return StartCoroutine(CheckTrainingResult());
@@ -158,7 +158,7 @@ public class NarrationManager : Singleton<NarrationManager>
         // 스테이지 2 이동
         StageManager.Instance.NextStage();
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartLevel2));
-        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(150)));
+        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(DataManager.Instance.Data.Stage2TimeLimit)));
         yield return StartCoroutine(CheckScorePercent50Coroutine());
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Persent50));
         yield return StartCoroutine(CheckTrainingResult());
@@ -170,7 +170,7 @@ public class NarrationManager : Singleton<NarrationManager>
         // 스테이지 3 이동
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartLevel3));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ConditionGolem));
-        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(210)));
+        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(DataManager.Instance.Data.Stage3TimeLimit)));
         yield return StartCoroutine(CheckBossResult());
         StageManager.Instance.StopTimer();
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.LevelClear));

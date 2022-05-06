@@ -16,6 +16,7 @@ public class Wendigo_Attack : StateMachineBehaviour
         attackTime += Time.deltaTime;
         if (attackTime >= 1f && attackCheck == true)
         {
+            ScoreSystem.Score -= DataManager.Instance.Data.WendigoDamage;
             SoundManager.Instance.PlaySoundThird("Wendigo_Attack", 1f);
             HealthBarManager.Instance.DistractPlayerDamage();
             attackCheck = false;
