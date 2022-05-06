@@ -21,7 +21,7 @@ public class Stage3 : Stage
         base.StageEnd();
         RemoveEnemy();
         //FindObjectOfType<ScoreDisplay>().switchDisplay();
-
+        _golem.gameObject.SetActive(false);
         HealthBarManager.Instance.ActiveBossHP(false);
     }
 
