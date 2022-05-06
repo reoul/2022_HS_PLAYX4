@@ -128,6 +128,7 @@ public class NarrationManager : Singleton<NarrationManager>
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro2));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro3));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro4));
+        PlayerFloor.Instance.StartMeasure();
         PlayVoice(NarrationClips.CheckMove);
         yield return StartCoroutine(CheckMoveCoroutine());
         // 활 소환
@@ -136,6 +137,7 @@ public class NarrationManager : Singleton<NarrationManager>
         yield return StartCoroutine(CheckFlagCoroutine());
         PlayVoice(NarrationClips.Shot2);
         yield return StartCoroutine(CheckFlagCoroutine());
+        PlayerFloor.Instance.StopMeasure();
         // 스테이지 1 before 이동
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartTraning));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Condition));
@@ -180,7 +182,9 @@ public class NarrationManager : Singleton<NarrationManager>
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ThankYouEffort));
         ShowScoreBoard();
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ScoreBoard));
-        yield return null;
+        yield return new WaitForSeconds(10f);
+        scoreBoardManager.gameObject.SetActive(false);
+        StageManager.Instance.NextStage();
     }
 
     private void FailedTraining()
@@ -259,6 +263,18 @@ public class NarrationManager : Singleton<NarrationManager>
             }
         }
 
+    }
+
+    private IEnumerator CheckPlayerHP()
+    {
+        while (true)
+        {
+            yield return _waitEndFrame;
+            if (HealthBarManager.Instance.PlayerHealth <= 0)
+            {
+                FailedTraining();
+            }
+        }
     }
 
     private void ShowIntroBow()

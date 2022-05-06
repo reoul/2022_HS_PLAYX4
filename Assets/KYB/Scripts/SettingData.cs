@@ -23,6 +23,7 @@
     public float FloorWidth;
     public float BowMaxChargingTime;
     public float BowMaxDistance;
+    public int PlayerMaxHP;
 
     public SettingData()
     {
@@ -45,5 +46,6 @@
         WendigoScore = 100;
         EntScore = 100;
         GolemScore = 100;
+        PlayerMaxHP = 15;
     }
 }

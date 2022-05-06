@@ -26,13 +26,13 @@ public class ScoreDisplay : MonoBehaviour
     {
         if (_isBossStage)
         {
-            rect.sizeDelta = new Vector2(rect.sizeDelta.x, 300);
+            //rect.sizeDelta = new Vector2(rect.sizeDelta.x, 300);
             transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
             transform.GetChild(1).gameObject.SetActive(false);
         }
         else
         {
-            rect.sizeDelta = new Vector2(rect.sizeDelta.x, 500);
+            //rect.sizeDelta = new Vector2(rect.sizeDelta.x, 500);
             transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
             transform.GetChild(1).gameObject.SetActive(true);
         }

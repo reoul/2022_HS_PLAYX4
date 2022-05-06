@@ -45,6 +45,9 @@ public class VRController : MonoBehaviour
                 CenterTransform = transform.GetChild(0).Find("sys_button").GetChild(0);
                 SysBtn = CenterTransform.gameObject;
                 TrackPad = transform.GetChild(0).Find("trackpad").GetChild(0).gameObject;
+                var collider = this.gameObject.AddComponent<BoxCollider>();
+                collider.size = Vector3.one * 0.1f;
+                collider.isTrigger = true;
                 break;
             }
             FindChildMesh();

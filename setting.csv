@@ -17,3 +17,4 @@ Stage2TimeLimit,30,int,2스테이지 제한시간o
 Stage3TimeLimit,60,int,3스테이지 제한시간o
 BowMaxChargingTime,60,single,활이 풀차징 되는데 걸리는 시간
 BowMaxDistance,0.3,single,활시위 당기기 최대값
+PlayerMaxHP,15,int,플레이어 최대 체력

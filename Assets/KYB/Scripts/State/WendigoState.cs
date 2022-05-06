@@ -96,7 +96,7 @@ public class WendigoState : StateMachine
 
             if (Vector3.Distance(_wendigoTransform.position, Vector3.zero) < 5)
             {
-                ScoreSystem.Score -= _gameObject.GetComponent<Wendigo>().damage;
+                //ScoreSystem.Score -= _gameObject.GetComponent<Wendigo>().damage;
                 _stateMachine.ChangeState(_stateMachine.StateDictionary[(int) StateType.Death]);
             }
         }

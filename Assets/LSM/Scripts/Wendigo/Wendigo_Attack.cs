@@ -17,6 +17,7 @@ public class Wendigo_Attack : StateMachineBehaviour
         if (attackTime >= 1f && attackCheck == true)
         {
             SoundManager.Instance.PlaySoundThird("Wendigo_Attack", 1f);
+            HealthBarManager.Instance.DistractPlayerDamage();
             attackCheck = false;
         }
     }

@@ -16,7 +16,7 @@ public class BowManager : Singleton<BowManager>
     public GameObject CancelEffect;
     public GameObject StopEffect;
     public float chargingSpeed;
-    private bool _isFirstAimStartTarget;
+    private bool _isFirstAimStartTarget = true;
 
     private void Awake()
     {
@@ -37,6 +37,11 @@ public class BowManager : Singleton<BowManager>
         VibrationBow();
         ShowChargingEffect();
         CheckAnimeStartTarget();
+    }
+
+    public void Init()
+    {
+        _isFirstAimStartTarget = true;
     }
 
     /// <summary>
@@ -126,6 +131,7 @@ public class BowManager : Singleton<BowManager>
                 if (hits[i].collider.name.Equals("NextStageObj"))
                 {
                     NarrationManager.Instance.IsCheckFlag = false;
+                    _isFirstAimStartTarget = false;
                     break;
                 }
             }

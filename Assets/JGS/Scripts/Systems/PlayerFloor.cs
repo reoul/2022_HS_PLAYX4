@@ -10,7 +10,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
     public Transform[] attackTrans;
 
     private Color _floorDefaultColor;
-    private Color _warningColor = new Color(0.7f, 0, 0,0.8f);
+    private Color _warningColor = new Color(0.7f, 0, 0, 0.8f);
     private Transform _camera;
 
     private int _playerFloor = 1;
@@ -30,11 +30,11 @@ public class PlayerFloor : Singleton<PlayerFloor>
 
     private void Update()
     {
-        foreach(Transform obj in floorTransforms)
+        foreach (Transform obj in floorTransforms)
         {
             //obj.GetComponent<MeshRenderer>().material.color = _floorDefaultColor;
         }
-        _floorDefaultColor = new Color(0.2f, 0.2f, 0.2f,0.8f);
+        _floorDefaultColor = new Color(0.2f, 0.2f, 0.2f, 0.8f);
         IsRayHit();
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -65,7 +65,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
         {
             floor.GetComponent<Floor>().ChangeLineColor(new Color(0.48f, 0.48f, 0.48f));
         }
-        
+
         if (Physics.Raycast(_camera.position, _camera.position - new Vector3(0, 10, 0), out hit, distance, layerMask))
         {
             for (int i = 0; i < floorTransforms.Length; i++)
@@ -79,7 +79,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
         }
     }
 
-    public void SetTagetFloor(FloorType floor)  
+    public void SetTagetFloor(FloorType floor)
     {
         floorTransforms[(int)floor].GetComponent<SpriteRenderer>().color = _warningColor;
     }
@@ -97,7 +97,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
     {
         Vector3 _measureEndPos;
         _measureEndPos = _camera.position;
-        _measureWidth = Vector2.Distance(new Vector2(_measureEndPos.x,_measureEndPos.z), new Vector2(_measureStartPos.x, _measureStartPos.z));
+        _measureWidth = Vector2.Distance(new Vector2(_measureEndPos.x, _measureEndPos.z), new Vector2(_measureStartPos.x, _measureStartPos.z));
         transform.localScale = new Vector3(_measureWidth, transform.localScale.y, transform.localScale.z);
         //floorTransforms[(int)FloorType.Left].position -= new Vector3(_measureWidth, 0,0);
         //floorTransforms[(int)FloorType.Right].position += new Vector3(_measureWidth, 0,0);
@@ -108,7 +108,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
 
     public IEnumerator Hit(int cnt)
     {
-        for(int i = 0; i < cnt; i++)
+        for (int i = 0; i < cnt; i++)
         {
             float tmp = 0.2f;
             int count = 1;
@@ -123,7 +123,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
                 {
                     floorTransforms[_floor].GetComponent<SpriteRenderer>().color = _floorDefaultColor;
                 }
-                if(tmp > 0.01)
+                if (tmp > 0.01)
                 {
                     tmp -= 0.01f;
                 }
@@ -166,10 +166,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
             if (_playerFloor == _floor)
             {
                 ScoreSystem.Score -= damage;
-                if (damage == 0)
-                {
-                    HealthBarManager.Instance.DistractPlayerDamage();
-                }
+                HealthBarManager.Instance.DistractPlayerDamage();
             }
         }
         yield return null;
@@ -187,7 +184,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
     {
         StopAllCoroutines();
         _isAttack = new bool[3];
-        foreach(Transform obj in floorTransforms)
+        foreach (Transform obj in floorTransforms)
         {
             obj.GetComponent<SpriteRenderer>().color = _floorDefaultColor;
         }
