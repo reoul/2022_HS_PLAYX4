@@ -97,7 +97,10 @@ public class PlayerFloor : Singleton<PlayerFloor>
     {
         Vector3 _measureEndPos;
         _measureEndPos = _camera.position;
-        _measureWidth = Vector2.Distance(new Vector2(_measureEndPos.x, _measureEndPos.z), new Vector2(_measureStartPos.x, _measureStartPos.z));
+        // todo : 최소 넓이 적용 됬는지 확인
+        float distance = Vector2.Distance(new Vector2(_measureEndPos.x, _measureEndPos.z),
+            new Vector2(_measureStartPos.x, _measureStartPos.z));
+        _measureWidth = Mathf.Max(_measureWidth, distance);
         transform.localScale = new Vector3(_measureWidth, transform.localScale.y, transform.localScale.z);
         //floorTransforms[(int)FloorType.Left].position -= new Vector3(_measureWidth, 0,0);
         //floorTransforms[(int)FloorType.Right].position += new Vector3(_measureWidth, 0,0);
