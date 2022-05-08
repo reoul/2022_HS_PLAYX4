@@ -78,6 +78,7 @@ public class WeakPoint : MonoBehaviour, IHitable
         }
     }
 
+    // todo : 약점 3번마다 휴식 시간 주기
   
     public void HitEvent()
     {
