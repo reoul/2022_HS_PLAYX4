@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Net.Sockets;
-using Unity.Collections.LowLevel.Unsafe;
-using UnityEditor.Compilation;
-using UnityEngine;
-using UnityEngine.Serialization;
-
+﻿using UnityEngine;
 
 public class DissolveMat : MonoBehaviour
 {

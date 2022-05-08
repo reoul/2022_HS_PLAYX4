@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+
+#if UNITY_EDITOR
 [CustomEditor(typeof(ChangeMatTool))]
 public class ChangeMatToolEditor : Editor
 {
@@ -29,6 +31,7 @@ public class ChangeMatToolEditor : Editor
         serializedObject.ApplyModifiedProperties ();
     }
 }
+#endif
 
 public class ChangeMatTool : MonoBehaviour
 {

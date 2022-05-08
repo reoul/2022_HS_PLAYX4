@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Sockets;
-using Unity.Collections.LowLevel.Unsafe;
-using UnityEditor.Compilation;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 
 public class DissolveMatAll : MonoBehaviour
