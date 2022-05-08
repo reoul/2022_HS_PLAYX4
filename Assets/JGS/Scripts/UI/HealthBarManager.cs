@@ -95,7 +95,6 @@ public class HealthBarManager : Singleton<HealthBarManager>
 
     public void DistractPlayerDamage()
     {
-        return;
         if (_playerHealthStack.Peek().GetComponent<Image>().color == color[1])
         {
             _playerHealthStack.Peek().GetComponent<Image>().color = color[0];
