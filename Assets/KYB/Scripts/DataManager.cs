@@ -90,8 +90,6 @@ public class DataManager : Singleton<DataManager>
         {
             return;
         }
-
-        // todo : 불러온 세팅값 실제 플레이에 적용
     }
 
     void ApplyData<T>(string fieldName, T value)

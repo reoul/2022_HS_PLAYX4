@@ -407,8 +407,6 @@ public class VRControllerManager : Singleton<VRControllerManager>
         GameObject bowObj = BowManager.Instance.BowObj;
         bowObj.transform.parent = BowController.transform;
         bowObj.transform.position = Vector3.Lerp(BowController.TrackPad.transform.position, sysBtnTrans.position, 0.5f);
-        // todo : forward 지워도 되는지 확인
-        //bowObj.transform.forward = -BowController.transform.GetChild(0).transform.up;
         bowObj.transform.rotation = sysBtnTrans.rotation * Quaternion.Euler(180, 0, 180);
         bowObj.SetActive(true);
     }
