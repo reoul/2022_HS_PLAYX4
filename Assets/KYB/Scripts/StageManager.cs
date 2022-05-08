@@ -48,7 +48,7 @@ public class StageManager : Singleton<StageManager>
             _curStage.gameObject.SetActive(false);
         }
         _curStageType = (StageType) (((int) _curStageType + 1) % Enum.GetValues(typeof(StageType)).Length);
-        Debug.Log("Next Stage11");
+        _curStage.IsFinish = false;
         ScoreSystem.SumScore += ScoreSystem.Score;
         ScoreSystem.Score = 0;
         SetUpStage(_curStageType);
@@ -57,7 +57,6 @@ public class StageManager : Singleton<StageManager>
     public void ChangeToEnding()
     {
         StopAllCoroutines();
-        _curStage.StageEnd();
         _curStage.gameObject.SetActive(false);
         _curStageType = StageType.Ending;
         _curStage.StageStart();
@@ -107,16 +106,12 @@ public class StageManager : Singleton<StageManager>
             yield return new WaitForSeconds(1f);
         }
 
-        Debug.Log("Next Stage1");
         _curStage.StageEnd();
-        Debug.Log("Next Stage2");
         yield return new WaitForSeconds(2f);
 
         _curStage.gameObject.SetActive(false);
-        Debug.Log("Next Stage3");
 
         //yield return new WaitForSeconds(1f);
-        Debug.Log("Next Stage4");
         NextStage();
     }
 }

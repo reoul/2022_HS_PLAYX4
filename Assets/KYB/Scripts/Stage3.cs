@@ -3,7 +3,7 @@
 public class Stage3 : Stage
 {
     private Golem _golem;
-    private DissolveMat _golemDissolveMat;
+    private DissolveMat[] _golemDissolveMats;
     public override void StageStart()
     {
         base.StageStart();
@@ -20,8 +20,6 @@ public class Stage3 : Stage
     {
         base.StageEnd();
         RemoveEnemy();
-        //FindObjectOfType<ScoreDisplay>().switchDisplay();
-        _golem.gameObject.SetActive(false);
         HealthBarManager.Instance.ActiveBossHP(false);
     }
 
@@ -31,21 +29,30 @@ public class Stage3 : Stage
     private void EnemyInit()
     {
         _golem = FindObjectOfType<Golem>();
-        _golemDissolveMat = _golem.GetComponentInChildren<DissolveMat>();
-        _golemDissolveMat.SetDissolveHeightMin();
-        _golemDissolveMat.State = DissolveMat.DissolveState.Hide;
+        _golemDissolveMats = _golem.GetComponentsInChildren<DissolveMat>();
+        foreach (var dissolveMat in _golemDissolveMats)
+        {
+            dissolveMat.SetDissolveHeightMin();
+            dissolveMat.State = DissolveMat.DissolveState.Hide;
+        }
         _golem.gameObject.SetActive(false);
     }
 
     private void GolemSpawn()
     {
-        _golemDissolveMat.StartCreateDissolve();
+        foreach (var dissolveMat in _golemDissolveMats)
+        {
+            dissolveMat.StartCreateDissolve();
+        }
         _golem.gameObject.SetActive(true);
     }
 
     private void RemoveEnemy()
     {
         _golem.HideWeak();
-        _golemDissolveMat.StartDestroyDissolve();
+        foreach (var dissolveMat in _golemDissolveMats)
+        {
+            dissolveMat.StartDestroyDissolve();
+        }
     }
 }

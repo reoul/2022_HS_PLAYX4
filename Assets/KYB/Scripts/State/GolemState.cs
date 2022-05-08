@@ -124,6 +124,10 @@ public class GolemState : StateMachine
 
         public override void StateUpdate()
         {
+            if (StageManager.Instance._curStage.IsFinish)
+            {
+                return;
+            }
             _time += Time.deltaTime;
             if (_time >= 1)
             {

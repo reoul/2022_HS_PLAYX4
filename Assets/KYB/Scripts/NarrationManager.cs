@@ -124,10 +124,10 @@ public class NarrationManager : Singleton<NarrationManager>
     }
     private IEnumerator NarrationCoroutine()
     {
-        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro1));
-        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro2));
-        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro3));
-        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro4));
+        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro1));
+        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro2));
+        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro3));
+        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro4));
         PlayerFloor.Instance.StartMeasure();
         PlayVoice(NarrationClips.CheckMove);
         yield return StartCoroutine(CheckMoveCoroutine());
@@ -139,10 +139,11 @@ public class NarrationManager : Singleton<NarrationManager>
         yield return StartCoroutine(CheckFlagCoroutine());
         PlayerFloor.Instance.StopMeasure();
         // 스테이지 1 before 이동
-        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartTraning));
-        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Condition));
+        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartTraning));
+        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Condition));
         // 스테이지 1 이동
         StageManager.Instance.NextStage();
+        StartCoroutine(CheckPlayerHP());
         // 스테이지 주변 환경 등장
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartLevel1));
         // 시간 표현
@@ -197,6 +198,8 @@ public class NarrationManager : Singleton<NarrationManager>
 
     private IEnumerator FailedTrainingCoroutine()
     {
+        StageManager.Instance._curStage.StageEnd();
+        yield return new WaitForSeconds(2f);
         StageManager.Instance.ChangeToEnding();
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.FailedTraning));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.TryAgain));

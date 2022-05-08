@@ -24,6 +24,8 @@ public class HealthBarManager : Singleton<HealthBarManager>
     public Transform bossTextTrans;
     public Transform playerTextTrans;
 
+    public bool IsPlayerInvin;
+
     private void Awake()
     {
         _healthStack = new Stack<GameObject>();
@@ -79,10 +81,20 @@ public class HealthBarManager : Singleton<HealthBarManager>
                 DistractDamage();
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
+            DistractPlayerDamage();
+        }
     }
 
     public void DistractDamage()
     {
+        if (_healthStack.Count == 0)
+        {
+            return;
+        }
+        
         if (_healthStack.Peek().GetComponent<Image>().color == color[1])
         {
             _healthStack.Peek().GetComponent<Image>().color = color[0];
@@ -95,6 +107,11 @@ public class HealthBarManager : Singleton<HealthBarManager>
 
     public void DistractPlayerDamage()
     {
+        if (IsPlayerInvin || PlayerHealth == 0)
+        {
+            return;
+        }
+        
         if (_playerHealthStack.Peek().GetComponent<Image>().color == color[1])
         {
             _playerHealthStack.Peek().GetComponent<Image>().color = color[0];

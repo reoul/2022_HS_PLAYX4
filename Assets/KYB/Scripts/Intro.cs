@@ -14,6 +14,8 @@ public class Intro : Stage
         base.StageStart();
         StageManager.Instance._nextStageObj.SetActive(true);
         ScoreSystem.Init();
+        
+        // todo : 스코어디스플레이 초기화시켜주기
         //GameObject.Find("ScoreDisplay").transform.GetChild(1).gameObject.SetActive(false);
         BowManager.Instance.Init();
     }

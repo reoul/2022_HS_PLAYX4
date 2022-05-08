@@ -35,6 +35,10 @@ public class Stage2EntManager : MonoBehaviour
 
     private void Update()
     {
+        if (StageManager.Instance._curStage.IsFinish)
+        {
+            return;
+        }
         if (Time.time - _lastAttackTime > _attackDelay)
         {
             _lastAttackTime = Time.time;
