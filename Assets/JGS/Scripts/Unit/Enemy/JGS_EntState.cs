@@ -44,6 +44,12 @@ public class JGS_EntState : StateMachine
         ChangeState(StateDictionary[(int)StateType.Attack]);
     }
 
+    public IEnumerator AttackDelayCoroutine(float delay = 0)
+    {
+        yield return new WaitForSeconds(delay);
+        Attack();
+    }
+
     public void Idle()
     {
         ChangeState(StateDictionary[(int)StateType.Idle]);

@@ -1,22 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class Stage2EntManager : MonoBehaviour
 {
-    [SerializeField]
-    private Transform[] _ents;
+    [SerializeField] private Transform[] _ents;
 
     private float _attackDelay;
     private float _lastAttackTime;
+    /// <summary>
+    /// 시간차 공격하는 딜레이 시간
+    /// </summary>
+    private float _attackTimeLagDelay;
+    private int _lastAttackPatten;
 
     private void Start()
     {
-        for(int i = 0; i < 3; i++)
+        for (int i = 0; i < 3; i++)
         {
             _ents[i].GetComponent<JGS_Ent>().targetFloor = i;
         }
+
         _attackDelay = DataManager.Instance.Data.EntAttackDelay;
+        _attackTimeLagDelay = _attackDelay * 0.4f;
+        _lastAttackPatten = -1;
     }
 
     private void OnEnable()
@@ -29,32 +37,68 @@ public class Stage2EntManager : MonoBehaviour
     {
         if (Time.time - _lastAttackTime > _attackDelay)
         {
-            SetTarget();
             _lastAttackTime = Time.time;
+            SetTarget();
         }
     }
 
     private void SetTarget()
     {
-        int[] _randTaget = new int[2];
-        _randTaget[0] = Random.RandomRange(0, 3);
-        _randTaget[1] = _randTaget[0];
-        while (_randTaget[0] == _randTaget[1])
+        int[] rands = new int[3];
+        do
         {
-            _randTaget[1] = Random.RandomRange(0, 3);
-        }
-        int _attackCount;
-        _attackCount = Random.RandomRange(1, 3);
-        for(int i= 0; i < _attackCount; i++)
+            rands[0] = Random.Range(0, 4);
+        } while (rands[0] == _lastAttackPatten);
+        _lastAttackPatten = rands[0];
+        Assert.IsTrue(_ents.Length == 3);
+        // todo : 밸런스 확인
+        switch (rands[0])
         {
-            Debug.Log(_ents[_randTaget[i]]);
-            _ents[_randTaget[i]].GetComponent<JGS_EntState>().Attack();
-            //StartCoroutine(PlayerFloor.Instance.StartAttack(_randTaget[i]));
-            //Debug.Log("pass");
+            // 돌 던지기
+            case 0:
+                rands[0] = Random.Range(0, _ents.Length);
+                _ents[rands[0]].GetComponent<JGS_EntState>().Attack();
+                break;
+            // 돌 두개 던지기
+            case 1:
+                rands[0] = Random.Range(0, _ents.Length);
+                do
+                {
+                    rands[1] = Random.Range(0, _ents.Length);
+                } while (rands[0] == rands[1]);
+
+                _ents[rands[0]].GetComponent<JGS_EntState>().Attack();
+                _ents[rands[1]].GetComponent<JGS_EntState>().Attack();
+                break;
+            // 시간차 2개 던지기
+            case 2:
+                rands[0] = Random.Range(0, _ents.Length);
+                do
+                {
+                    rands[1] = Random.Range(0, _ents.Length);
+                } while (rands[0] == rands[1]);
+
+                _ents[rands[0]].GetComponent<JGS_EntState>().Attack();
+                StartCoroutine(_ents[rands[1]].GetComponent<JGS_EntState>().AttackDelayCoroutine(_attackTimeLagDelay));
+                _lastAttackTime += _attackTimeLagDelay;
+                break;
+            // 시간차 3개 던지기
+            case 3:
+                rands[0] = Random.Range(0, _ents.Length);
+                do
+                {
+                    rands[1] = Random.Range(0, _ents.Length);
+                } while (rands[0] == rands[1]);
+                rands[2] = _ents.Length - (rands[0] + rands[1]);
+                
+                _ents[rands[0]].GetComponent<JGS_EntState>().Attack();
+                StartCoroutine(_ents[rands[1]].GetComponent<JGS_EntState>().AttackDelayCoroutine(_attackTimeLagDelay));
+                StartCoroutine(_ents[rands[2]].GetComponent<JGS_EntState>().AttackDelayCoroutine(_attackTimeLagDelay * 2));
+                _lastAttackTime += _attackTimeLagDelay * 2;
+                break;
         }
     }
-
-
+    
     private Transform _curWeak;
     [SerializeField] private Transform[] _weakPoints;
     [SerializeField] private float _weakAlphaSpeed;
@@ -82,6 +126,7 @@ public class Stage2EntManager : MonoBehaviour
         _curWeak = _weakPoints[rand];
         _curWeak.GetComponent<WeakPoint>().Show(_weakAlphaSpeed);
     }
+
     public void HideWeak()
     {
         _curWeak.gameObject.SetActive(false);
