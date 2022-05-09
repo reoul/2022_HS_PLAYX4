@@ -14,11 +14,15 @@
     public int Stage2TimeLimit;
     public int EntDamage;
     public int EntScore;
+    public int EntWeakAttackBreakCnt;
+    public float EntWeakAttackBreakTime;
     //====== Golem ======
     public int GolemMaxHealth;
     public int Stage3TimeLimit;
     public int GolemDamage;
     public int GolemScore;
+    public int GolemWeakAttackBreakCnt;
+    public float GolemWeakAttackBreakTime;
     //====== Player ======
     public float FloorWidth;
     public float BowMaxChargingTime;
@@ -47,5 +51,9 @@
         EntScore = 100;
         GolemScore = 100;
         PlayerMaxHP = 15;
+        EntWeakAttackBreakCnt = 3;
+        EntWeakAttackBreakTime = 3;
+        GolemWeakAttackBreakCnt = 3;
+        GolemWeakAttackBreakTime = 3;
     }
 }

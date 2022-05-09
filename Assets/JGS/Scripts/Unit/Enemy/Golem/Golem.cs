@@ -14,6 +14,9 @@ public class Golem : Enemy
     private Transform _target;
 
     private int _targetFloor;
+    private int _weakAttackCnt = 0;
+    private int _weakAttackBreakCnt = 3;
+    private float _weakAttackBreakTime = 3;
 
     private float _time;
     private bool _isMoveForward = false;
@@ -36,6 +39,13 @@ public class Golem : Enemy
         }
         maxHealth = DataManager.Instance.Data.GolemMaxHealth;
         damage = DataManager.Instance.Data.GolemDamage;
+        _weakAttackBreakCnt = DataManager.Instance.Data.EntWeakAttackBreakCnt;
+        _weakAttackBreakTime = DataManager.Instance.Data.EntWeakAttackBreakTime;
+    }
+
+    public void Init()
+    {
+        _weakAttackCnt = 0;
     }
 
     private void Update()
@@ -70,10 +80,18 @@ public class Golem : Enemy
         } while (_curWeak == _weakPoints[rand]);
 
         _curWeak.gameObject.SetActive(false);
-        _weakPoints[rand].gameObject.SetActive(true);
-        _curWeak = _weakPoints[rand];
-        _curWeak.GetComponent<WeakPoint>().Show(_weakAlphaSpeed);
         HealthBarManager.Instance.DistractDamage();
+        _curWeak = _weakPoints[rand];
+        _weakAttackCnt = ++_weakAttackCnt % _weakAttackBreakCnt;
+        // todo : 약점 휴식 시간 적용되는지 확인
+        StartCoroutine(ShowWeakPoint(_weakAttackCnt == 0 ? _weakAttackBreakTime : 0));
+    }
+
+    private IEnumerator ShowWeakPoint(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        _curWeak.gameObject.SetActive(true);
+        _curWeak.GetComponent<WeakPoint>().Show(_weakAlphaSpeed);
     }
 
     private bool _isTargeted;

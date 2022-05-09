@@ -9,11 +9,16 @@ public class Stage2EntManager : MonoBehaviour
 
     private float _attackDelay;
     private float _lastAttackTime;
+
     /// <summary>
     /// 시간차 공격하는 딜레이 시간
     /// </summary>
     private float _attackTimeLagDelay;
+
     private int _lastAttackPatten;
+    private int _weakAttackCnt = 0;
+    private int _weakAttackBreakCnt = 3;
+    private float _weakAttackBreakTime = 3;
 
     private void Start()
     {
@@ -23,6 +28,8 @@ public class Stage2EntManager : MonoBehaviour
         }
 
         _attackDelay = DataManager.Instance.Data.EntAttackDelay;
+        _weakAttackBreakCnt = DataManager.Instance.Data.GolemWeakAttackBreakCnt;
+        _weakAttackBreakTime = DataManager.Instance.Data.GolemWeakAttackBreakTime;
         _attackTimeLagDelay = _attackDelay * 0.4f;
         _lastAttackPatten = -1;
     }
@@ -31,6 +38,13 @@ public class Stage2EntManager : MonoBehaviour
     {
         _lastAttackTime = Time.time;
         RandomWeak();
+        Init();
+    }
+
+
+    public void Init()
+    {
+        _weakAttackCnt = 0;
     }
 
     private void Update()
@@ -39,6 +53,7 @@ public class Stage2EntManager : MonoBehaviour
         {
             return;
         }
+
         if (Time.time - _lastAttackTime > _attackDelay)
         {
             _lastAttackTime = Time.time;
@@ -53,6 +68,7 @@ public class Stage2EntManager : MonoBehaviour
         {
             rands[0] = Random.Range(0, 4);
         } while (rands[0] == _lastAttackPatten);
+
         _lastAttackPatten = rands[0];
         Assert.IsTrue(_ents.Length == 3);
         // todo : 밸런스 확인
@@ -93,16 +109,18 @@ public class Stage2EntManager : MonoBehaviour
                 {
                     rands[1] = Random.Range(0, _ents.Length);
                 } while (rands[0] == rands[1]);
+
                 rands[2] = _ents.Length - (rands[0] + rands[1]);
-                
+
                 _ents[rands[0]].GetComponent<JGS_EntState>().Attack();
                 StartCoroutine(_ents[rands[1]].GetComponent<JGS_EntState>().AttackDelayCoroutine(_attackTimeLagDelay));
-                StartCoroutine(_ents[rands[2]].GetComponent<JGS_EntState>().AttackDelayCoroutine(_attackTimeLagDelay * 2));
+                StartCoroutine(_ents[rands[2]].GetComponent<JGS_EntState>()
+                                              .AttackDelayCoroutine(_attackTimeLagDelay * 2));
                 _lastAttackTime += _attackTimeLagDelay * 2;
                 break;
         }
     }
-    
+
     private Transform _curWeak;
     [SerializeField] private Transform[] _weakPoints;
     [SerializeField] private float _weakAlphaSpeed;
@@ -126,8 +144,16 @@ public class Stage2EntManager : MonoBehaviour
         } while (_curWeak == _weakPoints[rand]);
 
         _curWeak.gameObject.SetActive(false);
-        _weakPoints[rand].gameObject.SetActive(true);
         _curWeak = _weakPoints[rand];
+        _weakAttackCnt = ++_weakAttackCnt % _weakAttackBreakCnt;
+        // todo : 약점 휴식 시간 적용되는지 확인
+        StartCoroutine(ShowWeakPoint(_weakAttackCnt == 0 ? _weakAttackBreakTime : 0));
+    }
+
+    private IEnumerator ShowWeakPoint(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        _curWeak.gameObject.SetActive(true);
         _curWeak.GetComponent<WeakPoint>().Show(_weakAlphaSpeed);
     }
 
