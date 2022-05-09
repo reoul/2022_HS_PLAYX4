@@ -9,16 +9,12 @@ EntScore,30,int,나무골렘 타격 시 획득 스코어
 GolemMaxHealth,20,int,바위골렘 체력
 GolemDamage,20,int,바위골렘 데미지
 GolemScore,30,int,바위골렘 타격 시 획득 스코어
-FloorWidth,0.4,single,플레이어 발판 기본값o
+FloorWidth,0.3,single,플레이어 발판 기본값o
 Stage1TargetScore,150,int,1스테이지 클리어 목표 점수o
 Stage2TargetScore,80,int,2스테이지 클리어 목표 점수o
 Stage1TimeLimit,30,int,1스테이지 제한시간o
-Stage2TimeLimit,30,int,2스테이지 제한시간o
-Stage3TimeLimit,30,int,3스테이지 제한시간o
+Stage2TimeLimit,45,int,2스테이지 제한시간o
+Stage3TimeLimit,60,int,3스테이지 제한시간o
 BowMaxChargingTime,60,single,활이 풀차징 되는데 걸리는 시간
 BowMaxDistance,0.3,single,활시위 당기기 최대값
-PlayerMaxHP,5,int,플레이어 최대 체력
-EntWeakAttackBreakCnt,3,int,2스테이지 몬스터약점 몇번 공격해야 휴식되는지
-EntWeakAttackBreakTime,3,float,2스테이지 몬스터 약점 휴식 시간
-GolemWeakAttackBreakCnt,3,int,3스테이지 몬스터약점 몇번 공격해야 휴식되는지
-GolemWeakAttackBreakTime,3,float,3스테이지 몬스터 약점 휴식 시간
+PlayerMaxHP,15,int,플레이어 최대 체력

@@ -24,6 +24,7 @@ public class SoundManager : Singleton<SoundManager>
     public AudioSource sfxPlayer2;
     public AudioSource sfxPlayer3;
     public AudioSource sfxPlayer4;
+    public AudioSource sfxPlayer5;
     AudioSource StepPlayer;
     AudioSource bgmPlayer;
 
@@ -38,6 +39,8 @@ public class SoundManager : Singleton<SoundManager>
         sfxPlayer3 = sfx3.GetComponent<AudioSource>();
         GameObject sfx4 = transform.GetChild(2).gameObject;
         sfxPlayer4 = sfx4.GetComponent<AudioSource>();
+        GameObject sfx5 = transform.GetChild(2).gameObject;
+        sfxPlayer5 = sfx5.GetComponent<AudioSource>();
 
 
         SetupBGM();
@@ -171,6 +174,27 @@ public class SoundManager : Singleton<SoundManager>
         }
      
     }
+
+    public void PlaySoundFive(string sfx_name5, float sfx_volume5 = 1f)
+    {
+        try
+        {
+            if (audioClipsDic.ContainsKey(sfx_name5) == false || sfxPlayer5.GetComponent<AudioSource>().isPlaying)
+            {
+                Debug.Log(sfx_name5 + " 이 포함된 오디오가 없습니다.");
+                return;
+            }
+            else
+                sfxPlayer5.PlayOneShot(audioClipsDic[sfx_name5], sfx_volume5 * masterVolumeSFX);
+        }
+        catch (System.Exception)
+        {
+            Debug.Log("error");
+        }
+
+    }
+
+
 
     // 배경음악 종료
     public void StopBGM()

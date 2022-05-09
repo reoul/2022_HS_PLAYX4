@@ -120,5 +120,8 @@ public class HealthBarManager : Singleton<HealthBarManager>
         {
             Destroy(_playerHealthStack.Pop());
         }
+
+        SoundManager.Instance.sfxPlayer5.GetComponent<AudioSource>().pitch = 1.5f;
+        SoundManager.Instance.PlaySoundFive("HeartBeat1_out", 1f);
     }
 }

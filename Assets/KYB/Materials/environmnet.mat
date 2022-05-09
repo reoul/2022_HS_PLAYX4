@@ -25,7 +25,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_EC796762:
-        m_Texture: {fileID: 2800000, guid: 8036a15b25fd6624fb2bdbd6c81b0fd9, type: 3}
+        m_Texture: {fileID: 2800000, guid: f93afb234fae4ac4798090a44f3b0fa8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -71,7 +71,7 @@ Material:
     - _BumpScale: 1
     - _ClipPower: 200
     - _Cutoff: 0.5
-    - _CutoffHeight: -1
+    - _CutoffHeight: 24.1
     - _DegeWidth: 3.55
     - _DetailNormalMapScale: 1
     - _DiffuseAmount: 0
@@ -94,7 +94,7 @@ Material:
     - Color_38AF21B: {r: 4.715724, g: 2.8821204, b: 2.2466424, a: 0.08627451}
     - Color_3E147E5: {r: 0.69705826, g: 2.8418531, b: 2.8418531, a: 1}
     - Color_D6F51521: {r: 132.19795, g: 61.26281, b: 45.520992, a: 0}
-    - Vector2_DBB181D0: {r: 0, g: 0, b: 0, a: 0}
+    - Vector2_DBB181D0: {r: 150, g: 0.5, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _RimColor: {r: 0.25999996, g: 0.7, b: 1, a: 0}
