@@ -454,15 +454,13 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c35d7cf098f811b4e9046618f71094ce, type: 3}
   - {fileID: 8300000, guid: 2362153f416547e49ac35e1c347f0a37, type: 3}
   - {fileID: 8300000, guid: 570b9cd0f5bd4964b92227673884e9a5, type: 3}
-  - {fileID: 8300000, guid: 855d8d7cc70ae424d96caf3930cd0157, type: 3}
-  - {fileID: 8300000, guid: 758ee9cc8c7dea24e9b3c9a29a8f8149, type: 3}
-  - {fileID: 8300000, guid: f52fc9ea3e8b1574f91bcd4c28eb0eb1, type: 3}
-  - {fileID: 8300000, guid: 2b0a70623189c9943b7e9072469ec495, type: 3}
-  - {fileID: 8300000, guid: 001e01b4325b28b41b8ef4fd767f8946, type: 3}
+  - {fileID: 8300000, guid: ac51e88b6e178c64eaba507047f4d074, type: 3}
+  - {fileID: 8300000, guid: f484b1a021daba442acff6d6a8e80659, type: 3}
   sfxPlayer: {fileID: 0}
   sfxPlayer2: {fileID: 0}
   sfxPlayer3: {fileID: 0}
   sfxPlayer4: {fileID: 0}
+  sfxPlayer5: {fileID: 0}
 --- !u!82 &5107186861748916425
 AudioSource:
   m_ObjectHideFlags: 0
