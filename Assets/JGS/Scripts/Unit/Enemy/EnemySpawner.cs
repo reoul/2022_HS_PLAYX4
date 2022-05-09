@@ -11,6 +11,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private EnemyType _enemyType;
 
+    private float _wendigoSpeed;
+
     public void Init()
     {
         unUsedEnemyQueue = new Queue<GameObject>();
@@ -18,10 +20,12 @@ public class EnemySpawner : MonoBehaviour
         {
             var enemy = new EnemyBuilder("Enemy").SetEnemyType(global::EnemyType.Wendigo).Build();
             enemy.gameObject.SetActive(false);
-            enemy.transform.parent = StageManager.Instance._curStage.transform;
+            enemy.transform.parent = StageManager.Instance.CurStage.transform;
             enemy.GetComponent<Enemy>().score = DataManager.Instance.Data.WendigoScore;
             unUsedEnemyQueue.Enqueue(enemy.gameObject);
         }
+
+        _wendigoSpeed = DataManager.Instance.Data.WendigoMoveSpeed;
     }
 
     public void Spawn(Vector3 pos)
@@ -32,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
         float scale = 0.7f + r * 0.2f;
         enemy.transform.localScale = new Vector3(scale, scale,scale);
         enemy.SetActive(true);
-        enemy.GetComponent<Enemy>().MoveSpeed = 3;
+        enemy.GetComponent<Enemy>().MoveSpeed = _wendigoSpeed * (0.7f + r * 0.1f);
         enemy.GetComponent<Wendigo>().ChangeState(WendigoState.StateType.Spawn);
     }
 

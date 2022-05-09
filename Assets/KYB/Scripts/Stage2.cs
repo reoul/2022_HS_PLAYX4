@@ -17,6 +17,7 @@ public class Stage2 : Stage
     public override void StageEnd()
     {
         base.StageEnd();
+        PlayerFloor.Instance.StopAllAttack();
         RemoveEnemy();
     }
 
@@ -30,8 +31,6 @@ public class Stage2 : Stage
         _ent = FindObjectsOfType<JGS_Ent>();
         for(int i = 0; i < 3; i++)
         {
-            Debug.Log(_entDissolveMat[i]);
-            Debug.Log(_ent[i]);
             _entDissolveMat[i] = _ent[i].GetComponentInChildren<DissolveMat>();
             _entDissolveMat[i].SetDissolveHeightMin();
             _entDissolveMat[i].State = DissolveMat.DissolveState.Hide;
@@ -55,6 +54,7 @@ public class Stage2 : Stage
         _entManager.HideWeak();
         for (int i = 0; i < 3; i++)
         {
+            _ent[i].ChangeState(JGS_EntState.StateType.Idle);
             _entDissolveMat[i].StartDestroyDissolve();
         }
     }

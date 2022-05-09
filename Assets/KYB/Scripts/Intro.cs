@@ -13,7 +13,8 @@ public class Intro : Stage
     {
         base.StageStart();
         SoundManager.Instance.BGMChange("Vital Whales - Unicorn Heads", 0.5f);
-        StageManager.Instance._nextStageObj.SetActive(true);
+        StageManager.Instance.NextStageObj.SetActive(true);
+        StageManager.Instance.GameExitObj.SetActive(true);
         ScoreSystem.Init();
         PlayerFloor.Instance.Init();
         NarrationManager.Instance.Init();

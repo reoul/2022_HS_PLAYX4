@@ -188,6 +188,13 @@ public class PlayerFloor : Singleton<PlayerFloor>
         }
     }
 
+    public void StopAllAttack()
+    {
+        StopAttack(0);
+        StopAttack(1);
+        StopAttack(2);
+    }
+
     public void InitFloors()
     {
         StopAllCoroutines();

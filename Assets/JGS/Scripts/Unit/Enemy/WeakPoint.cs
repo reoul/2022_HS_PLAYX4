@@ -81,7 +81,7 @@ public class WeakPoint : MonoBehaviour, IHitable
     public void HitEvent()
     {
         //_parant.ChangeWeakPoint();
-        if(StageManager.Instance._curStage.IsFinish)
+        if(StageManager.Instance.CurStage.IsFinish)
         {
             return;
         }

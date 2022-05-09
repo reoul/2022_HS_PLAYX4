@@ -11,7 +11,6 @@ public class Wendigo : Enemy, IHitable
 
     private void Start()
     {
-        MoveSpeed = DataManager.Instance.Data.WendigoMoveSpeed;
         damage = DataManager.Instance.Data.WendigoDamage;
         score = DataManager.Instance.Data.WendigoScore;
     }

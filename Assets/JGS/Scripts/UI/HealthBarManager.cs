@@ -128,7 +128,7 @@ public class HealthBarManager : Singleton<HealthBarManager>
             return;
         }
 
-        if(StageManager.Instance._curStage.IsFinish)
+        if(StageManager.Instance.CurStage.IsFinish)
         {
             return;
         }    

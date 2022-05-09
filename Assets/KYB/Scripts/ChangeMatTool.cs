@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 
 #if UNITY_EDITOR
@@ -27,6 +28,15 @@ public class ChangeMatToolEditor : Editor
         {
             _changeMatTool.Apply();
         }
+        if (GUILayout.Button("랜더러 ShadowCast OFF"))
+        {
+            _changeMatTool.Apply2();
+        }
+        if (GUILayout.Button("박스 콜리더 삭제"))
+        {
+            _changeMatTool.Apply3();
+        }
+        
 
         serializedObject.ApplyModifiedProperties ();
     }
@@ -42,6 +52,22 @@ public class ChangeMatTool : MonoBehaviour
         foreach (var dissolveMatAll in GetComponentsInChildren<DissolveMatAll>(true))
         {
             dissolveMatAll.ChangeMat(Mat);
+        }
+    }
+
+    public void Apply2()
+    {
+        foreach (var Renderer in GetComponentsInChildren<Renderer>(true))
+        {
+            Renderer.shadowCastingMode = ShadowCastingMode.Off;
+        }
+    }
+
+    public void Apply3()
+    {
+        foreach (var boxCollider in GetComponentsInChildren<BoxCollider>(true))
+        {
+            DestroyImmediate(boxCollider);
         }
     }
 }

@@ -7,14 +7,13 @@ public class JGS_Ent : Enemy
     [SerializeField] private Transform _shootPosTransfrom;
     [SerializeField] private GameObject _projectile;
 
-    private JGS_EntState _state;
     private Vector3 _startPos;
 
     public int targetFloor;
 
     private void Start()
     {
-        _state = this.GetComponent<JGS_EntState>();
+        _stateMachine = this.GetComponent<JGS_EntState>();
         _startPos = transform.position;
         foreach (var item in GetComponentsInChildren<WeakPoint>(true))
         {
@@ -28,18 +27,10 @@ public class JGS_Ent : Enemy
     {
         this.GetComponentInParent<Stage2EntManager>().ChangeWeakPoint();
     }
-
-    private void Update()
+    
+    public void ChangeState(JGS_EntState.StateType state)
     {
-        //if(state == null)
-        //{
-        //    state = this.GetComponent<JGS_EntState>();
-        //}
-
-        //if (_state.IsIdle())
-        //{
-        //    transform.localPosition = Vector3.Lerp(transform.localPosition, _startPos, 0.1f);
-        //}
+        _stateMachine.ChangeState(_stateMachine.StateDictionary[(int)state]);
     }
 
     private GameObject _stone;

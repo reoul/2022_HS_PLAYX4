@@ -80,7 +80,7 @@ public class Golem : Enemy
         {
             rand = Random.Range(0, _weakPoints.Length);
         } while (_curWeak == _weakPoints[rand]);
-        if(StageManager.Instance._curStage.IsFinish)
+        if(StageManager.Instance.CurStage.IsFinish)
         {
             return;
         }

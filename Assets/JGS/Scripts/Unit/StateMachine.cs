@@ -20,11 +20,13 @@ public abstract class StateMachine : MonoBehaviour
     {
         if (_curState == state)
         {
+            Debug.Log($"{gameObject.name}의 현재 상태는 {_curState.ToString()} 새로운 상태는{state.ToString()}");
             return;
         }
 
         if (_curState != null)
         {
+            Debug.Log($"{gameObject.name}의 현재 상태는 {_curState.ToString()} 새로운 상태는{state.ToString()}");
             _curState.StateExit();
         }
 

@@ -74,7 +74,7 @@ public class SpawnerManager : Singleton<SpawnerManager>
         {
             return;
         }
-        if (StageManager.Instance._curStage.IsFinish)
+        if (StageManager.Instance.CurStage.IsFinish)
         {
             return;
         }

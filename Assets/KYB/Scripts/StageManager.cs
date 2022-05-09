@@ -26,13 +26,17 @@ public class StageManager : Singleton<StageManager>
     private StageType _curStageType = StageType.Intro;
     public StageType CurStageType => _curStageType;
 
-    public Stage _curStage => stages[(int) _curStageType].GetComponent<Stage>();
+    public Stage CurStage => stages[(int) _curStageType].GetComponent<Stage>();
+    
+    public int LastTime { get; private set; }
 
-    public GameObject _nextStageObj;
+    public GameObject NextStageObj { get; private set; }
+    public GameObject GameExitObj { get; private set; }
 
     public void Start()
     {
-        _nextStageObj = FindObjectOfType<IntroObj>().gameObject;
+        NextStageObj = FindObjectOfType<IntroObj>().gameObject;
+        GameExitObj = FindObjectOfType<GameExitObj>().gameObject;
         stages[(int)StageType.Stage1].GetComponent<Stage>().GoalScore = DataManager.Instance.Data.Stage1TargetScore;
         stages[(int)StageType.Stage1].GetComponent<Stage>().LimitTime = DataManager.Instance.Data.Stage1TimeLimit;
         stages[(int)StageType.Stage2].GetComponent<Stage>().GoalScore = DataManager.Instance.Data.Stage2TargetScore;
@@ -43,24 +47,22 @@ public class StageManager : Singleton<StageManager>
 
     public void NextStage()
     {
-        if (_curStage.gameObject.activeInHierarchy)
+        if (CurStage.gameObject.activeInHierarchy)
         {
-            _curStage.StageEnd();
-            _curStage.gameObject.SetActive(false);
+            CurStage.StageEnd();
+            CurStage.gameObject.SetActive(false);
         }
         _curStageType = (StageType) (((int) _curStageType + 1) % Enum.GetValues(typeof(StageType)).Length);
-        _curStage.IsFinish = false;
-        ScoreSystem.SumScore += ScoreSystem.Score;
-        ScoreSystem.Score = 0;
+        CurStage.IsFinish = false;
         SetUpStage(_curStageType);
     }
 
     public void ChangeToEnding()
     {
         StopAllCoroutines();
-        _curStage.gameObject.SetActive(false);
+        CurStage.gameObject.SetActive(false);
         _curStageType = StageType.Ending;
-        _curStage.StageStart();
+        CurStage.StageStart();
     }
 
     private void Update()
@@ -68,19 +70,19 @@ public class StageManager : Singleton<StageManager>
         // todo : 입력키 지우기
         if (Input.GetKeyDown(KeyCode.Y))
         {
-            _nextStageObj.SetActive(false);
+            NextStageObj.SetActive(false);
             NextStage();
         }
 
-        _curStage.StageUpdate();
+        CurStage.StageUpdate();
     }
 
 
     private void SetUpStage(StageType type)
     {
         // 홀로그램 시작
-        _curStage.gameObject.SetActive(true);
-        _curStage.StageStart();
+        CurStage.gameObject.SetActive(true);
+        CurStage.StageStart();
         StartHologram(type);
     }
 
@@ -92,11 +94,12 @@ public class StageManager : Singleton<StageManager>
     public void StopTimer()
     {
         StopAllCoroutines();
-        _curStage.StageEnd();
+        CurStage.StageEnd();
     }
 
     public IEnumerator TimerCoroutine(int time)
     {
+        LastTime = time;
         if (_curStageType == StageType.Ending)
         {
             yield break;
@@ -106,12 +109,17 @@ public class StageManager : Singleton<StageManager>
         {
             TimerText.text = $"TIME : {i} S";
             yield return new WaitForSeconds(1f);
+            LastTime = i;
+            if (CurStage.IsFinish)
+            {
+                break;
+            }
         }
 
-        _curStage.StageEnd();
+        CurStage.StageEnd();
         yield return new WaitForSeconds(2f);
 
-        _curStage.gameObject.SetActive(false);
+        CurStage.gameObject.SetActive(false);
 
         //yield return new WaitForSeconds(1f);
         NextStage();

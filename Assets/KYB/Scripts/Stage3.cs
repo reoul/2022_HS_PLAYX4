@@ -19,6 +19,7 @@ public class Stage3 : Stage
     public override void StageEnd()
     {
         base.StageEnd();
+        PlayerFloor.Instance.StopAllAttack();
         RemoveEnemy();
         HealthBarManager.Instance.ActiveBossHP(false);
     }

@@ -80,6 +80,10 @@ public class GolemState : StateMachine
 
     public void DissolveShowWeapon()
     {
+        if (StageManager.Instance.CurStage.IsFinish)
+        {
+            return;
+        }
         GetComponent<Golem>().WeaponDissolveMat.StartCreateDissolve();
     }
 
@@ -124,7 +128,7 @@ public class GolemState : StateMachine
 
         public override void StateUpdate()
         {
-            if (StageManager.Instance._curStage.IsFinish)
+            if (StageManager.Instance.CurStage.IsFinish)
             {
                 return;
             }

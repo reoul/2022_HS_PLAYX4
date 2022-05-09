@@ -92,7 +92,7 @@ public class NarrationManager : Singleton<NarrationManager>
             StartCoroutine(NarrationCoroutine());
         }
 
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             IsCheckFlag = false;
         }
@@ -130,10 +130,10 @@ public class NarrationManager : Singleton<NarrationManager>
     }
     private IEnumerator NarrationCoroutine()
     {
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro1));
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro2));
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro3));
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro4));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro1));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro2));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro3));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro4));
         PlayerFloor.Instance.StartMeasure();
         PlayVoice(NarrationClips.CheckMove);
         yield return StartCoroutine(CheckMoveCoroutine());
@@ -144,55 +144,69 @@ public class NarrationManager : Singleton<NarrationManager>
         PlayVoice(NarrationClips.Shot2);
         yield return StartCoroutine(CheckFlagCoroutine());
         PlayerFloor.Instance.StopMeasure();
+        
         // 스테이지 1 before 이동
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartTraning));
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Condition));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Condition));
+        
         // 스테이지 1 이동
         StageManager.Instance.NextStage();
         StartCoroutine(CheckPlayerHP());
-        // 스테이지 주변 환경 등장
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartLevel1));
-        // 시간 표현
         yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(60)));
         StartCoroutine(CheckScorePercent50Coroutine());
-        // 클리어 했는지 표시
         yield return StartCoroutine(CheckTrainingResult());
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.LevelClear));
+        ScoreSystem.AddScore(ScoreSystem.Score);
+        ScoreSystem.Score = 0;
+        
         // 스테이지 2 before 이동
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.NextTraning));
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.MoveAvoid));
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.GetScore));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.MoveAvoid));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.GetScore));
+        
         // 스테이지 2 이동
         StageManager.Instance.NextStage();
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartLevel2));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartLevel2));
         yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(60)));
-        //yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(DataManager.Instance.Data.Stage2TimeLimit)));
-        //yield return StartCoroutine(CheckScorePercent50Coroutine());
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Persent50));
+        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(DataManager.Instance.Data.Stage2TimeLimit)));
+        yield return StartCoroutine(CheckScorePercent50Coroutine());
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Persent50));
         yield return StartCoroutine(CheckTrainingResult());
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.LevelClear));
+        ScoreSystem.AddScore(ScoreSystem.Score);
+        ScoreSystem.Score = 0;
+        
         // 스테이지 3 before 이동
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.NextTraning));
         yield return new WaitForSeconds(3f);
         StageManager.Instance.NextStage();
+        
         // 스테이지 3 이동
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartLevel3));
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ConditionGolem));
-        //yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(60)));
-        //yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(DataManager.Instance.Data.Stage3TimeLimit)));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartLevel3));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ConditionGolem));
+        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(60)));
+        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(DataManager.Instance.Data.Stage3TimeLimit)));
         yield return StartCoroutine(CheckBossResult());
+        ScoreSystem.AddScore(ScoreSystem.Score);
+        // todo : 점수 획득 포인트 적정한지 확인
+        ScoreSystem.SumScore *= StageManager.Instance.LastTime * HealthBarManager.Instance.PlayerHealth;
+        ScoreSystem.Score = 0;
         StageManager.Instance.StopTimer();
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.LevelClear));
         yield return new WaitForSeconds(3f);
+        
+        // 스테이지 ending 이동
         StageManager.Instance.NextStage();
-
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.SuccessTraning));
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.NextSector));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.SuccessTraning));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.NextSector));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ThankYouEffort));
         ShowScoreBoard();
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ScoreBoard));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ScoreBoard));
         yield return new WaitForSeconds(10f);
         scoreBoardManager.gameObject.SetActive(false);
+        
+        // 스테이지 intro 이동
         StageManager.Instance.NextStage();
     }
 
@@ -204,7 +218,7 @@ public class NarrationManager : Singleton<NarrationManager>
 
     private IEnumerator FailedTrainingCoroutine()
     {
-        StageManager.Instance._curStage.StageEnd();
+        StageManager.Instance.CurStage.StageEnd();
         yield return new WaitForSeconds(2f);
         StageManager.Instance.ChangeToEnding();
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.FailedTraning));
@@ -240,7 +254,7 @@ public class NarrationManager : Singleton<NarrationManager>
 
     private IEnumerator CheckScorePercent50Coroutine()
     {
-        while (((float)ScoreSystem.Score / StageManager.Instance._curStage.GoalScore) < 0.5f)
+        while (((float)ScoreSystem.Score / StageManager.Instance.CurStage.GoalScore) < 0.5f)
         {
             yield return _waitEndFrame;
         }
@@ -249,14 +263,13 @@ public class NarrationManager : Singleton<NarrationManager>
 
     private IEnumerator CheckTrainingResult()
     {
-        while (!StageManager.Instance._curStage.IsFinish)
+        while (!StageManager.Instance.CurStage.IsFinish)
         {
             yield return _waitEndFrame;
         }
         ScoreSystem.Score = (ScoreSystem.Score == 0) ? 1 : ScoreSystem.Score;
-        if ((float)ScoreSystem.Score / StageManager.Instance._curStage.GoalScore < 1)
+        if (StageManager.Instance.LastTime == 0 || (float)ScoreSystem.Score / StageManager.Instance.CurStage.GoalScore < 1)
         {
-            Debug.Log("asddasdadasd");
             FailedTraining();
         }
     }
@@ -268,9 +281,10 @@ public class NarrationManager : Singleton<NarrationManager>
             yield return _waitEndFrame;
             if (HealthBarManager.Instance.GolemHealth <= 0)
             {
+                StageManager.Instance.CurStage.IsFinish = true;
                 break;
             }
-            if (HealthBarManager.Instance.PlayerHealth <= 0 || StageManager.Instance._curStage.IsFinish)
+            if (HealthBarManager.Instance.PlayerHealth <= 0 || StageManager.Instance.LastTime == 0)
             {
                 FailedTraining();
             }

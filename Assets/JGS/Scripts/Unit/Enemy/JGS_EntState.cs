@@ -41,13 +41,14 @@ public class JGS_EntState : StateMachine
 
     public void Attack()
     {
+        Debug.Log($"Attack {gameObject.name}",this.gameObject);
         ChangeState(StateDictionary[(int)StateType.Attack]);
     }
 
     public IEnumerator AttackDelayCoroutine(float delay = 0)
     {
         yield return new WaitForSeconds(delay);
-        if(StageManager.Instance._curStage.IsFinish == false)
+        if(StageManager.Instance.CurStage.IsFinish == false)
         {
             Attack();
         }
@@ -154,6 +155,7 @@ public class JGS_EntState : StateMachine
 
         public override void StateStart()
         {
+            Debug.Log($"AttackState Start : {_gameObject.name}",_gameObject);
             Attack();
         }
 
@@ -164,6 +166,7 @@ public class JGS_EntState : StateMachine
 
         private void Attack()
         {
+            Debug.Log(_gameObject.GetComponent<Animator>().runtimeAnimatorController.name);
             _gameObject.GetComponent<Animator>().SetTrigger("Attack");
         }
     }
