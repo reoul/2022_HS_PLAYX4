@@ -24,18 +24,22 @@ public class HealthBarManager : Singleton<HealthBarManager>
     public Transform bossTextTrans;
     public Transform playerTextTrans;
 
+    private Vector3 _playerTextDefaultPos;
+    private Vector3 _playerTextMovePos;
+
     public bool IsPlayerInvin;
 
     private void Awake()
     {
         _healthStack = new Stack<GameObject>();
         _playerHealthStack = new Stack<GameObject>();
+        _playerTextDefaultPos = playerTextTrans.transform.localPosition;
+        _playerTextMovePos = _playerTextDefaultPos + Vector3.up * 55;
     }
 
     private void Start()
     {
         _playerMaxHealth = DataManager.Instance.Data.PlayerMaxHP;
-        Init();
     }
 
     public void Init()
@@ -43,6 +47,17 @@ public class HealthBarManager : Singleton<HealthBarManager>
         color = new Color[2] { new Color(0.9960784f, 0.3035352f, 0.282353f), new Color(0.282353f, 0.5973283f, 0.9960784f) };
 
         _maxHealth = DataManager.Instance.Data.GolemMaxHealth;
+
+
+        while (_healthStack.Count > 0)
+        {
+            Destroy(_healthStack.Pop());
+        }
+
+        while (_playerHealthStack.Count > 0)
+        {
+            Destroy(_playerHealthStack.Pop());
+        }
 
         for (int i = 0; i < _maxHealth; i++)
         {
@@ -70,10 +85,11 @@ public class HealthBarManager : Singleton<HealthBarManager>
     public void ActiveBossHP(bool active)
     {
         bossTextTrans.gameObject.SetActive(active);
-        playerTextTrans.transform.localPosition += Vector3.up * (active ? -55 : 55 );
+        playerTextTrans.transform.localPosition = active ? _playerTextDefaultPos : _playerTextMovePos;
     }
     private void Update()
     {
+        // todo : 입력키 지우기
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (_healthStack.Count > 0)
@@ -111,6 +127,11 @@ public class HealthBarManager : Singleton<HealthBarManager>
         {
             return;
         }
+
+        if(StageManager.Instance._curStage.IsFinish)
+        {
+            return;
+        }    
         
         if (_playerHealthStack.Peek().GetComponent<Image>().color == color[1])
         {
@@ -121,7 +142,8 @@ public class HealthBarManager : Singleton<HealthBarManager>
             Destroy(_playerHealthStack.Pop());
         }
 
+        FindObjectOfType<AttackFade>().ShowAttackFade();
         SoundManager.Instance.sfxPlayer5.GetComponent<AudioSource>().pitch = 1.5f;
-        SoundManager.Instance.PlaySoundFive("HeartBeat1_out", 1f);
+        SoundManager.Instance.PlaySoundFive("HeartBeat1_out", (StageManager.Instance.CurStageType == StageManager.StageType.Stage1) ? 3 : 2) ;
     }
 }

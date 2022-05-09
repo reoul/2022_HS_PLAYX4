@@ -77,12 +77,14 @@ public class WeakPoint : MonoBehaviour, IHitable
             spriteRenderer.color = color;
         }
     }
-
-    // todo : 약점 3번마다 휴식 시간 주기
   
     public void HitEvent()
     {
         //_parant.ChangeWeakPoint();
+        if(StageManager.Instance._curStage.IsFinish)
+        {
+            return;
+        }
         changeEvent?.Invoke();
         ScoreSystem.Score += Score;
         SoundManager.Instance.PlaySoundFourth("StartButton_Hit", 0.5f);

@@ -16,6 +16,7 @@ public class ScoreDisplay : MonoBehaviour
 
     private void Update()
     {
+        // todo : 입력키 지우기
         if (Input.GetKeyDown(KeyCode.B))
         {
             switchDisplay();
@@ -28,13 +29,13 @@ public class ScoreDisplay : MonoBehaviour
         {
             //rect.sizeDelta = new Vector2(rect.sizeDelta.x, 300);
             transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
-            transform.GetChild(1).gameObject.SetActive(false);
+            HealthBarManager.Instance.ActiveBossHP(false);
         }
         else
         {
             //rect.sizeDelta = new Vector2(rect.sizeDelta.x, 500);
             transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-            transform.GetChild(1).gameObject.SetActive(true);
+            HealthBarManager.Instance.ActiveBossHP(true);
         }
         _isBossStage = !_isBossStage;
     }

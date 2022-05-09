@@ -7,7 +7,8 @@ public class Ending : Stage
     {
         base.StageStart();
         ScoreDisplay = GameObject.Find("ScoreDisplay");
-        ScoreDisplay.SetActive(false);
+        VRControllerManager.Instance.Init();
+        //ScoreDisplay.SetActive(false);
     }
 
     public override void StageUpdate()
@@ -18,6 +19,6 @@ public class Ending : Stage
     public override void StageEnd()
     {
         base.StageEnd();
-        ScoreDisplay.SetActive(true);
+        //ScoreDisplay.SetActive(true);
     }
 }

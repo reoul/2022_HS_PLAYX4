@@ -146,7 +146,6 @@ public class Stage2EntManager : MonoBehaviour
         _curWeak.gameObject.SetActive(false);
         _curWeak = _weakPoints[rand];
         _weakAttackCnt = ++_weakAttackCnt % _weakAttackBreakCnt;
-        // todo : 약점 휴식 시간 적용되는지 확인
         StartCoroutine(ShowWeakPoint(_weakAttackCnt == 0 ? _weakAttackBreakTime : 0));
     }
 

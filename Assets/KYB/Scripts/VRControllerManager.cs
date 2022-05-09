@@ -64,11 +64,6 @@ public class VRControllerManager : Singleton<VRControllerManager>
     private float _maxDistance;
 
     /// <summary>
-    /// 에임 고정 관련 스크립트
-    /// </summary>
-    private AutoAim _autoAim;
-
-    /// <summary>
     /// 활을 들고 있는 컨트롤러
     /// </summary>
     public VRController BowController { get; set; }
@@ -123,13 +118,24 @@ public class VRControllerManager : Singleton<VRControllerManager>
         FindController();
         IsCharging = false;
         _maxDistance = 0;
-        _autoAim = FindObjectOfType<AutoAim>();
     }
 
     private void Start()
     {
         _chargingDistance = DataManager.Instance.Data.BowMaxDistance;
         _maxCharging = DataManager.Instance.Data.BowMaxChargingTime;
+    }
+
+    public void Init()
+    {
+        ClickBow = false;
+        BowController?.MeshON();
+        ArrowController?.MeshON();
+        BowManager.Instance.BowObj.SetActive(false);
+        ArrowManager.Instance.ShowArrow(false);
+        BowController = null;
+        IsCharging = false;
+        _chargingTime = 0;
     }
 
     private void Update()

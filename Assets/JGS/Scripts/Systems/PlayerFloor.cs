@@ -22,10 +22,15 @@ public class PlayerFloor : Singleton<PlayerFloor>
 
     private void Start()
     {
-        _measureWidth = DataManager.Instance.Data.FloorWidth;
-        transform.localScale = new Vector3(_measureWidth, transform.localScale.y, transform.localScale.z);
+        Init();
         _camera = Camera.main.transform;
         _isAttack = new bool[3];
+    }
+
+    public void Init()
+    {
+        _measureWidth = DataManager.Instance.Data.FloorWidth;
+        transform.localScale = new Vector3(_measureWidth, transform.localScale.y, transform.localScale.z);
     }
 
     private void Update()
@@ -36,6 +41,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
         }
         _floorDefaultColor = new Color(0.2f, 0.2f, 0.2f, 0.8f);
         IsRayHit();
+        // todo : 입력키 지우기
         if (Input.GetKeyDown(KeyCode.I))
         {
             InitFloors();
@@ -97,7 +103,6 @@ public class PlayerFloor : Singleton<PlayerFloor>
     {
         Vector3 _measureEndPos;
         _measureEndPos = _camera.position;
-        // todo : 최소 넓이 적용 됬는지 확인
         float distance = Vector2.Distance(new Vector2(_measureEndPos.x, _measureEndPos.z),
             new Vector2(_measureStartPos.x, _measureStartPos.z));
         _measureWidth = Mathf.Max(_measureWidth, distance);

@@ -12,6 +12,7 @@ public class LSM_ArrowManager : Singleton<LSM_ArrowManager>
 
     private void Update()
     {
+        // todo : 입력키 지우기
         if (Input.GetKeyDown(KeyCode.A))
         {
             Shot(new Vector3(0,1,4),new Vector3(0,0,1));

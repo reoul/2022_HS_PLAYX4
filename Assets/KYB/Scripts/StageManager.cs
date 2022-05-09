@@ -24,6 +24,7 @@ public class StageManager : Singleton<StageManager>
     public Text TimerText;
 
     private StageType _curStageType = StageType.Intro;
+    public StageType CurStageType => _curStageType;
 
     public Stage _curStage => stages[(int) _curStageType].GetComponent<Stage>();
 
@@ -64,6 +65,7 @@ public class StageManager : Singleton<StageManager>
 
     private void Update()
     {
+        // todo : 입력키 지우기
         if (Input.GetKeyDown(KeyCode.Y))
         {
             _nextStageObj.SetActive(false);

@@ -31,7 +31,7 @@ public class Golem : Enemy
     private void Start()
     {
         _target = GameObject.Find("[CameraRig]").transform;
-        RandomWeak();
+        //RandomWeak();
         foreach (var weakPoint in GetComponentsInChildren<WeakPoint>(true))
         {
             weakPoint.changeEvent += ChangeWeakPoint;
@@ -46,6 +46,8 @@ public class Golem : Enemy
     public void Init()
     {
         _weakAttackCnt = 0;
+        RandomWeak();
+        ChangeState(GolemState.StateType.Spawn);
     }
 
     private void Update()
@@ -78,12 +80,14 @@ public class Golem : Enemy
         {
             rand = Random.Range(0, _weakPoints.Length);
         } while (_curWeak == _weakPoints[rand]);
-
+        if(StageManager.Instance._curStage.IsFinish)
+        {
+            return;
+        }
         _curWeak.gameObject.SetActive(false);
         HealthBarManager.Instance.DistractDamage();
         _curWeak = _weakPoints[rand];
         _weakAttackCnt = ++_weakAttackCnt % _weakAttackBreakCnt;
-        // todo : 약점 휴식 시간 적용되는지 확인
         StartCoroutine(ShowWeakPoint(_weakAttackCnt == 0 ? _weakAttackBreakTime : 0));
     }
 
@@ -118,6 +122,10 @@ public class Golem : Enemy
 
     public void HideWeak()
     {
-        _curWeak.gameObject.SetActive(false);
+        StopAllCoroutines();
+        foreach (Transform weak in _weakPoints)
+        {
+            weak.gameObject.SetActive(false);
+        }
     }
 }

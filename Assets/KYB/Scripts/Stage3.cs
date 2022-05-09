@@ -45,14 +45,15 @@ public class Stage3 : Stage
             dissolveMat.StartCreateDissolve();
         }
         _golem.gameObject.SetActive(true);
+        _golem.GetComponent<Golem>().Init();
     }
 
     private void RemoveEnemy()
     {
-        _golem.HideWeak();
         foreach (var dissolveMat in _golemDissolveMats)
         {
             dissolveMat.StartDestroyDissolve();
         }
+        _golem.HideWeak();
     }
 }

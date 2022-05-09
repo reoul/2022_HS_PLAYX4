@@ -143,6 +143,12 @@ public class GolemState : StateMachine
         {
         }
 
+        public override void StateStart()
+        {
+            base.StateStart();
+            _gameObject.GetComponent<Animator>().SetTrigger("Idle");
+        }
+
         public override void StateUpdate()
         {
         }
