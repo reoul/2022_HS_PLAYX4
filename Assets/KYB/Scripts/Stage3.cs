@@ -51,6 +51,10 @@ public class Stage3 : Stage
 
     private void RemoveEnemy()
     {
+        foreach (var stone in FindObjectsOfType<Projectile_Stone>())
+        {
+            Destroy(stone.gameObject);
+        }
         foreach (var dissolveMat in _golemDissolveMats)
         {
             dissolveMat.StartDestroyDissolve();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public class NarrationClips
@@ -186,9 +187,9 @@ public class NarrationManager : Singleton<NarrationManager>
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ScoreBoard));
         yield return new WaitForSeconds(10f);
         scoreBoardManager.gameObject.SetActive(false);
-        
+
         // 스테이지 intro 이동
-        StageManager.Instance.NextStage();
+        SceneManager.LoadScene(0);
     }
 
     private void FailedTraining()

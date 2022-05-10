@@ -217,6 +217,10 @@ public class PlayerFloor : Singleton<PlayerFloor>
         StopAttack(0);
         StopAttack(1);
         StopAttack(2);
+        foreach (Transform obj in floorTransforms)
+        {
+            obj.GetComponent<SpriteRenderer>().color = _floorDefaultColor;
+        }
     }
 
     public void InitFloors()
