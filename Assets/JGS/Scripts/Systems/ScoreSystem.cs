@@ -20,7 +20,7 @@ public static class ScoreSystem
     public static int Score
     {
         get { return _score;}
-        set { _score = Mathf.Clamp(value,0, 9999) ; }
+        set { _score = Mathf.Clamp(value,0, 99999) ; }
     }
     public static int SumScore { get; set; }
     

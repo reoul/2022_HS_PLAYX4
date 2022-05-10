@@ -28,6 +28,7 @@
     public float BowMaxChargingTime;
     public float BowMaxDistance;
     public int PlayerMaxHP;
+    public float PlayerExitTimeInterval;
 
     public SettingData()
     {
@@ -55,5 +56,6 @@
         EntWeakAttackBreakTime = 3;
         GolemWeakAttackBreakCnt = 3;
         GolemWeakAttackBreakTime = 3;
+        PlayerExitTimeInterval = 1;
     }
 }

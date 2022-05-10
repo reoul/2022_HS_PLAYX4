@@ -9,6 +9,7 @@ public class Ending : Stage
         ScoreDisplay = GameObject.Find("ScoreDisplay");
         VRControllerManager.Instance.Init();
         //ScoreDisplay.SetActive(false);
+        HealthBarManager.Instance.IsPlayerInvin = true;
     }
 
     public override void StageUpdate()
@@ -19,6 +20,7 @@ public class Ending : Stage
     public override void StageEnd()
     {
         base.StageEnd();
+        HealthBarManager.Instance.IsPlayerInvin = false;
         //ScoreDisplay.SetActive(true);
     }
 }

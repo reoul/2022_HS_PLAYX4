@@ -12,6 +12,7 @@ public class Intro : Stage
     public override void StageStart()
     {
         base.StageStart();
+        HealthBarManager.Instance.IsPlayerInvin = true;
         SoundManager.Instance.BGMChange("Vital Whales - Unicorn Heads", 0.5f);
         StageManager.Instance.NextStageObj.SetActive(true);
         StageManager.Instance.GameExitObj.SetActive(true);
@@ -24,5 +25,10 @@ public class Intro : Stage
         BowManager.Instance.Init();
         HealthBarManager.Instance.Init();
         VRControllerManager.Instance.Init();
+    }
+
+    public override void StageEnd()
+    {
+        HealthBarManager.Instance.IsPlayerInvin = false;
     }
 }

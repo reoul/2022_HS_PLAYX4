@@ -17,6 +17,10 @@ public class PlayerFloor : Singleton<PlayerFloor>
     public int PlayerCurFloor => _playerFloor;
     private Vector3 _measureStartPos;
     private float _measureWidth;
+    private bool _isPlayerExit;
+    private bool _isPlayerExitFlag;
+    private float _playerExitTime;
+    private float _playerExitTimeInterval;
 
     private bool[] _isAttack;
 
@@ -25,6 +29,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
         Init();
         _camera = Camera.main.transform;
         _isAttack = new bool[3];
+        _playerExitTimeInterval = DataManager.Instance.Data.PlayerExitTimeInterval;
     }
 
     public void Init()
@@ -41,6 +46,7 @@ public class PlayerFloor : Singleton<PlayerFloor>
         }
         _floorDefaultColor = new Color(0.2f, 0.2f, 0.2f, 0.8f);
         IsRayHit();
+        CheckPlayerExitFloor();
         // todo : 입력키 지우기
         if (Input.GetKeyDown(KeyCode.I))
         {
@@ -62,6 +68,19 @@ public class PlayerFloor : Singleton<PlayerFloor>
         }
     }
 
+    private void CheckPlayerExitFloor()
+    {
+        if(_isPlayerExit)
+        {
+            _playerExitTime += Time.deltaTime;
+            if(_playerExitTime >= _playerExitTimeInterval)
+            {
+                _playerExitTime -= _playerExitTimeInterval;
+                HealthBarManager.Instance.DistractPlayerDamage();
+            }
+        }
+    }
+
     private void IsRayHit()
     {
         RaycastHit hit;
@@ -74,6 +93,8 @@ public class PlayerFloor : Singleton<PlayerFloor>
 
         if (Physics.Raycast(_camera.position, _camera.position - new Vector3(0, 10, 0), out hit, distance, layerMask))
         {
+            _isPlayerExitFlag = false;
+            _isPlayerExit = false;
             for (int i = 0; i < floorTransforms.Length; i++)
             {
                 if (hit.collider.transform == floorTransforms[i])
@@ -82,6 +103,15 @@ public class PlayerFloor : Singleton<PlayerFloor>
                 }
             }
             hit.transform.gameObject.GetComponent<Floor>().ChangeLineColor(new Color(0.6f, 0.8f, 0.5f));
+        }
+        else
+        {
+            if(_isPlayerExitFlag == false)
+            {
+                _isPlayerExitFlag = true;
+                _isPlayerExit = true;
+                _playerExitTime = 0;
+            }
         }
     }
 
