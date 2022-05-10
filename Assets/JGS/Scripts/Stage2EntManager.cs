@@ -72,7 +72,6 @@ public class Stage2EntManager : MonoBehaviour
 
         _lastAttackPatten = rands[0];
         Assert.IsTrue(_ents.Length == 3);
-        // todo : 밸런스 확인
         switch (rands[0])
         {
             // 돌 던지기

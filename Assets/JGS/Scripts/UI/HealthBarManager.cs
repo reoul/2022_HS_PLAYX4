@@ -87,22 +87,6 @@ public class HealthBarManager : Singleton<HealthBarManager>
         bossTextTrans.gameObject.SetActive(active);
         playerTextTrans.transform.localPosition = active ? _playerTextDefaultPos : _playerTextMovePos;
     }
-    private void Update()
-    {
-        // todo : 입력키 지우기
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (_healthStack.Count > 0)
-            {
-                DistractDamage();
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            DistractPlayerDamage();
-        }
-    }
 
     public void DistractDamage()
     {

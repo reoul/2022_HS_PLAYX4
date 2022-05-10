@@ -41,10 +41,5 @@ public class BossHealthBar : Singleton<BossHealthBar>
         _healthBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Mathf.Lerp(_healthBarBG.sizeDelta.x, _healthBarWidth / (_maxHealth / _currentHealth), 0.1f));
         _healthBarBG.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, Mathf.Lerp(_healthBarBG.sizeDelta.x, _healthBar.sizeDelta.x,0.1f));
         //체력바 디버깅용
-        // todo : 입력키 지우기
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ChageCurrentHealth(_currentHealth - 10);
-        }
     }
 }

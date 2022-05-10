@@ -14,15 +14,6 @@ public class ScoreDisplay : MonoBehaviour
         rect = transform.GetChild(0).GetComponent<RectTransform>();
     }
 
-    private void Update()
-    {
-        // todo : 입력키 지우기
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            switchDisplay();
-        }
-    }
-
     public void switchDisplay()
     {
         if (_isBossStage)

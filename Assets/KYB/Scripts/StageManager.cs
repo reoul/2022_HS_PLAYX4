@@ -68,13 +68,6 @@ public class StageManager : Singleton<StageManager>
 
     private void Update()
     {
-        // todo : 입력키 지우기
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            NextStageObj.SetActive(false);
-            NextStage();
-        }
-
         CurStage.StageUpdate();
     }
 

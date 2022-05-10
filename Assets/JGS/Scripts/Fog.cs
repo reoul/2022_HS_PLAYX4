@@ -31,12 +31,6 @@ public class Fog : MonoBehaviour
                 this.gameObject.SetActive(false);
             }
         }
-
-        // todo : 입력키 지우기
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            GameStart();
-        }
     }
 
     public void GameStart()

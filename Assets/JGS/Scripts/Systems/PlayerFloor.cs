@@ -47,11 +47,6 @@ public class PlayerFloor : Singleton<PlayerFloor>
         _floorDefaultColor = new Color(0.2f, 0.2f, 0.2f, 0.8f);
         IsRayHit();
         CheckPlayerExitFloor();
-        // todo : 입력키 지우기
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            InitFloors();
-        }
     }
 
     private void AAAAA()

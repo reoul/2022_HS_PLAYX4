@@ -86,22 +86,6 @@ public class NarrationManager : Singleton<NarrationManager>
 
     private void Update()
     {
-        // todo : 입력키 지우기
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            StartCoroutine(NarrationCoroutine());
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            IsCheckFlag = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            ScoreSystem.Score += 100;
-        }
-
         if (_isFirst && VRControllerManager.Instance.LeftController.GetTrigger() && VRControllerManager.Instance.RightController.GetTrigger())
         {
             _isFirst = false;
@@ -153,7 +137,7 @@ public class NarrationManager : Singleton<NarrationManager>
         StageManager.Instance.NextStage();
         StartCoroutine(CheckPlayerHP());
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartLevel1));
-        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(60)));
+        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(DataManager.Instance.Data.Stage1TimeLimit)));
         StartCoroutine(CheckScorePercent50Coroutine());
         yield return StartCoroutine(CheckTrainingResult());
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.LevelClear));
@@ -168,8 +152,7 @@ public class NarrationManager : Singleton<NarrationManager>
         // 스테이지 2 이동
         StageManager.Instance.NextStage();
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartLevel2));
-        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(60)));
-        //yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(DataManager.Instance.Data.Stage2TimeLimit)));
+        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(DataManager.Instance.Data.Stage2TimeLimit)));
         yield return StartCoroutine(CheckScorePercent50Coroutine());
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Persent50));
         yield return StartCoroutine(CheckTrainingResult());
@@ -185,13 +168,12 @@ public class NarrationManager : Singleton<NarrationManager>
         // 스테이지 3 이동
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.StartLevel3));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ConditionGolem));
-        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(60)));
-        //yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(DataManager.Instance.Data.Stage3TimeLimit)));
+        yield return StartCoroutine(PlayVoiceCoroutine(GetTimeAudio(DataManager.Instance.Data.Stage3TimeLimit)));
         yield return StartCoroutine(CheckBossResult());
         ScoreSystem.AddScore(ScoreSystem.Score);
         // todo : 점수 획득 포인트 적정한지 확인
         Debug.Log($"{ScoreSystem.SumScore} {StageManager.Instance.LastTime} {HealthBarManager.Instance.PlayerHealth}");
-        ScoreSystem.SumScore *= StageManager.Instance.LastTime * HealthBarManager.Instance.PlayerHealth;
+        ScoreSystem.SumScore *= StageManager.Instance.LastTime + HealthBarManager.Instance.PlayerHealth;
         ScoreSystem.Score = 0;
         StageManager.Instance.StopTimer();
         Debug.Log(StageManager.Instance.CurStageType);
@@ -292,7 +274,6 @@ public class NarrationManager : Singleton<NarrationManager>
             }
             if (HealthBarManager.Instance.PlayerHealth <= 0 || StageManager.Instance.LastTime == 0)
             {
-                Debug.Log("asdsdaasd");
                 FailedTraining();
                 break;
             }
