@@ -44,7 +44,6 @@ public class ArrowAfterImage : MonoBehaviour
     {
         if (_isShot)
         {
-            Debug.Log("asdasdasd");
             _speed *= 1 + Time.deltaTime;
             _lineRenderer.material.color -= Color.black * _alphaSpeed * Time.deltaTime;
             if (_lineRenderer.material.color.a <= 0)

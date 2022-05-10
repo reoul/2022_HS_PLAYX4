@@ -56,7 +56,6 @@ public class PlayerFloor : Singleton<PlayerFloor>
         target.Add(1);
         target.Add(2);
         target = Utility.ShuffleList(target);
-        Debug.Log($"{target[0].ToString()} {target[1].ToString()} {target[2].ToString()}");
         if (_playerFloor == target[0])
         {
             ScoreSystem.Score -= 100;

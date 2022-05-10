@@ -16,7 +16,6 @@ public class MeasureButton : MonoBehaviour
     {
         if (other.CompareTag("Arrow"))
         {
-            Debug.Log("testTrue");
             _buttonClass = _buttonClass.Execute(this.gameObject);
         }
     }

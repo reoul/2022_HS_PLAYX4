@@ -41,7 +41,6 @@ public class JGS_EntState : StateMachine
 
     public void Attack()
     {
-        Debug.Log($"Attack {gameObject.name}",this.gameObject);
         ChangeState(StateDictionary[(int)StateType.Attack]);
     }
 
@@ -155,7 +154,6 @@ public class JGS_EntState : StateMachine
 
         public override void StateStart()
         {
-            Debug.Log($"AttackState Start : {_gameObject.name}",_gameObject);
             Attack();
         }
 
@@ -166,7 +164,6 @@ public class JGS_EntState : StateMachine
 
         private void Attack()
         {
-            Debug.Log(_gameObject.GetComponent<Animator>().runtimeAnimatorController.name);
             _gameObject.GetComponent<Animator>().SetTrigger("Attack");
         }
     }

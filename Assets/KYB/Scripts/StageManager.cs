@@ -47,7 +47,6 @@ public class StageManager : Singleton<StageManager>
 
     public void NextStage()
     {
-        Debug.Log("Next Stage");
         if (CurStage.gameObject.activeInHierarchy)
         {
             CurStage.StageEnd();
@@ -116,7 +115,6 @@ public class StageManager : Singleton<StageManager>
         CurStage.gameObject.SetActive(false);
 
         //yield return new WaitForSeconds(1f);
-        Debug.Log("코루틴 next");
         NextStage();
     }
 }

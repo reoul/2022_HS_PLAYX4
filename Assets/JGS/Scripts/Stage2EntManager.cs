@@ -78,7 +78,6 @@ public class Stage2EntManager : MonoBehaviour
             case 0:
                 rands[0] = Random.Range(0, _ents.Length);
                 _ents[rands[0]].GetComponent<JGS_EntState>().Attack();
-                Debug.Log("돌 하나 공격");
                 break;
             // 돌 두개 던지기
             case 1:
@@ -90,7 +89,6 @@ public class Stage2EntManager : MonoBehaviour
 
                 _ents[rands[0]].GetComponent<JGS_EntState>().Attack();
                 _ents[rands[1]].GetComponent<JGS_EntState>().Attack();
-                Debug.Log($"돌 두개 {rands[0].ToString()} {rands[1].ToString()} 공격");
                 break;
             // 시간차 2개 던지기
             case 2:
@@ -103,7 +101,6 @@ public class Stage2EntManager : MonoBehaviour
                 _ents[rands[0]].GetComponent<JGS_EntState>().Attack();
                 StartCoroutine(_ents[rands[1]].GetComponent<JGS_EntState>().AttackDelayCoroutine(_attackTimeLagDelay));
                 _lastAttackTime += _attackTimeLagDelay;
-                Debug.Log($"돌 시간차 두개 {rands[0].ToString()} -> {rands[1].ToString()} 공격");
                 break;
             // 시간차 3개 던지기
             case 3:
@@ -120,7 +117,6 @@ public class Stage2EntManager : MonoBehaviour
                 StartCoroutine(_ents[rands[2]].GetComponent<JGS_EntState>()
                                               .AttackDelayCoroutine(_attackTimeLagDelay * 2));
                 _lastAttackTime += _attackTimeLagDelay * 2;
-                Debug.Log($"돌 3개 {rands[0].ToString()} -> {rands[1].ToString()} -> {rands[2].ToString()} 공격");
                 break;
         }
     }

@@ -104,7 +104,6 @@ public class NarrationManager : Singleton<NarrationManager>
         _audioSource.clip = audioClip;
         LastNarrationClip = audioClip;
         _audioSource.Play();
-        Debug.Log($"{audioClip.name} 사운드가 플레이 됩니다");
     }
 
     public IEnumerator PlayVoiceCoroutine(AudioClip audioClip)
@@ -172,23 +171,17 @@ public class NarrationManager : Singleton<NarrationManager>
         yield return StartCoroutine(CheckBossResult());
         ScoreSystem.AddScore(ScoreSystem.Score);
         // todo : 점수 획득 포인트 적정한지 확인
-        Debug.Log($"{ScoreSystem.SumScore} {StageManager.Instance.LastTime} {HealthBarManager.Instance.PlayerHealth}");
         ScoreSystem.SumScore *= StageManager.Instance.LastTime + HealthBarManager.Instance.PlayerHealth;
         ScoreSystem.Score = 0;
         StageManager.Instance.StopTimer();
-        Debug.Log(StageManager.Instance.CurStageType);
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.LevelClear));
-        Debug.Log(StageManager.Instance.CurStageType);
         //yield return new WaitForSeconds(3f);
         
         // 스테이지 ending 이동
-        Debug.Log(StageManager.Instance.CurStageType);
         StageManager.Instance.NextStage();
-        Debug.Log(StageManager.Instance.CurStageType);
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.SuccessTraning));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.NextSector));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ThankYouEffort));
-        Debug.Log(StageManager.Instance.CurStageType);
         ShowScoreBoard();
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.ScoreBoard));
         yield return new WaitForSeconds(10f);

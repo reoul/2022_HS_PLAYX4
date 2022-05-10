@@ -10,9 +10,4 @@ public class Dragon : Enemy
         currentHealth = maxHealth;
         BossHealthBar.Instance.InitHealthBar(maxHealth,currentHealth);
     }
-
-    public void FlyingStart()
-    {
-        Debug.Log("test");
-    }
 }
