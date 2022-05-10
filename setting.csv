@@ -6,14 +6,14 @@ WendigoScore,15,int,웬디고 처치 시 획득 스코어
 EntAttackDelay,5.0,single,나무골렘 공격 딜레이
 EntDamage,15,int,나무골렘 데미지
 EntScore,9,int,나무골렘 타격 시 획득 스코어
-GolemMaxHealth,22,int,바위골렘 체력
+GolemMaxHealth,19,int,바위골렘 체력
 GolemDamage,20,int,바위골렘 데미지
 GolemScore,7,int,바위골렘 타격 시 획득 스코어
 FloorWidth,0.3,single,플레이어 발판 기본값o
 Stage1TargetScore,340,int,1스테이지 클리어 목표 점수o
 Stage2TargetScore,250,int,2스테이지 클리어 목표 점수o
 Stage1TimeLimit,60,int,1스테이지 제한시간o
-Stage2TimeLimit,120,int,2스테이지 제한시간o
+Stage2TimeLimit,90,int,2스테이지 제한시간o
 Stage3TimeLimit,210,int,3스테이지 제한시간o
 BowMaxChargingTime,60,single,활이 풀차징 되는데 걸리는 시간
 BowMaxDistance,0.3,single,활시위 당기기 최대값
