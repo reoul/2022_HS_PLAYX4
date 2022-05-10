@@ -206,7 +206,7 @@ public class NarrationManager : Singleton<NarrationManager>
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.FailedTraning));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.TryAgain));
         yield return new WaitForSeconds(2f);
-        StageManager.Instance.NextStage();
+        SceneManager.LoadScene(0);
     }
 
     /// <summary>
