@@ -89,7 +89,16 @@ public class GolemState : StateMachine
 
     public void SetJumpAttackFloor()
     {
-        _targetFloor = Random.RandomRange(0, 3);
+        if (GetComponent<Golem>().AttackFollowPlayer)
+        {
+            int playerCurFloor = PlayerFloor.Instance.PlayerCurFloor == 0 ? 0 : 1;
+            _targetFloor = playerCurFloor + Random.Range(0, 2);
+        }
+        else
+        {
+            _targetFloor = Random.Range(0, 3);
+        }
+
         DestPos = PlayerFloor.Instance.attackTrans[_targetFloor].position + new Vector3(0, 0, 7);
         StartCoroutine(PlayerFloor.Instance.StartAttack(_targetFloor, 0));
     }
@@ -116,6 +125,7 @@ public class GolemState : StateMachine
     private class IdleState : State
     {
         private float _time;
+        private int _lastAttackState = -1;
 
         public IdleState(GameObject gameObject) : base(gameObject)
         {
@@ -135,7 +145,12 @@ public class GolemState : StateMachine
             _time += Time.deltaTime;
             if (_time >= 1)
             {
-                int rand = Random.Range(0, 3);
+                int rand;
+                do
+                {
+                    rand = Random.Range(0, 3);
+                } while (rand == _lastAttackState);
+                _lastAttackState = rand;
                 _stateMachine.ChangeState(_stateMachine.StateDictionary[(int) StateType.JumpAttack + rand]);
             }
         }

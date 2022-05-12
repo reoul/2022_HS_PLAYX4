@@ -20,6 +20,7 @@ public class Golem : Enemy
 
     private float _time;
     private bool _isMoveForward = false;
+    public bool AttackFollowPlayer = false;
 
     [SerializeField] private float _weakAlphaSpeed;
 
@@ -41,6 +42,7 @@ public class Golem : Enemy
         damage = DataManager.Instance.Data.GolemDamage;
         _weakAttackBreakCnt = DataManager.Instance.Data.EntWeakAttackBreakCnt;
         _weakAttackBreakTime = DataManager.Instance.Data.EntWeakAttackBreakTime;
+        AttackFollowPlayer = DataManager.Instance.Data.GolemAttackFollowPlayer;
     }
 
     public void Init()
@@ -104,7 +106,16 @@ public class Golem : Enemy
 
     private void SpawnStone()
     {
-        _targetFloor = Random.RandomRange(0, 3);
+        if (AttackFollowPlayer)
+        {
+            int playerCurFloor = PlayerFloor.Instance.PlayerCurFloor == 0 ? 0 : 1;
+            _targetFloor = playerCurFloor + Random.Range(0, 2);
+        }
+        else
+        {
+            _targetFloor = Random.Range(0, 3);
+        }
+        
         _stone = GameObject.Instantiate(_projectile);
         _stone.transform.localPosition = Vector3.zero;
         _stone.GetComponent<Projectile_Stone>()._rootTransform = _shootPosTransfrom;

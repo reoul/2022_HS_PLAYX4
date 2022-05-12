@@ -77,12 +77,14 @@ public class NarrationManager : Singleton<NarrationManager>
     private bool _isFirst = true;
     public GameObject IntroBow;
     public ScoreBoardManager scoreBoardManager;
+    private float _introBowSpawnPosZ;
 
     private WaitForEndOfFrame _waitEndFrame = new WaitForEndOfFrame();
 
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+        _introBowSpawnPosZ = DataManager.Instance.Data.IntroBowSpawnPosZ;
     }
 
     private void Update()
@@ -92,6 +94,13 @@ public class NarrationManager : Singleton<NarrationManager>
             _isFirst = false;
             StartCoroutine(NarrationCoroutine());
         }
+
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            IsCheckFlag = false;
+            StartCoroutine(NarrationCoroutine());
+        }
+        
 
     }
 
@@ -289,8 +298,9 @@ public class NarrationManager : Singleton<NarrationManager>
 
     private void ShowIntroBow()
     {
+        // todo : 활 소환 위치 바꾸기
         IntroBow.transform.position =
-            PlayerFloor.Instance.attackTrans[PlayerFloor.Instance.PlayerCurFloor].transform.position + new Vector3(0, 1, 0.5f);
+            PlayerFloor.Instance.attackTrans[PlayerFloor.Instance.PlayerCurFloor].transform.position + new Vector3(0, 1, _introBowSpawnPosZ);
         IntroBow.SetActive(true);
         IntroBow.transform.GetChild(0).gameObject.SetActive(true);
         IntroBow.GetComponentInChildren<DissolveMat>().StartCreateDissolve();

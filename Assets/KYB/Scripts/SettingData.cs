@@ -23,12 +23,14 @@
     public int GolemScore;
     public int GolemWeakAttackBreakCnt;
     public float GolemWeakAttackBreakTime;
+    public bool GolemAttackFollowPlayer;
     //====== Player ======
     public float FloorWidth;
     public float BowMaxChargingTime;
     public float BowMaxDistance;
     public int PlayerMaxHP;
     public float PlayerExitTimeInterval;
+    public float IntroBowSpawnPosZ;
 
     public SettingData()
     {
@@ -57,5 +59,7 @@
         GolemWeakAttackBreakCnt = 3;
         GolemWeakAttackBreakTime = 3;
         PlayerExitTimeInterval = 1;
+        IntroBowSpawnPosZ = 0f;
+        GolemAttackFollowPlayer = false;
     }
 }
