@@ -16,8 +16,9 @@ Stage1TimeLimit,60,int,1스테이지 제한시간o
 Stage2TimeLimit,90,int,2스테이지 제한시간o
 Stage3TimeLimit,210,int,3스테이지 제한시간o
 BowMaxChargingTime,60,single,활이 풀차징 되는데 걸리는 시간
-BowMaxDistance,0.3,single,활시위 당기기 최대값
+StartChargingDistanceMin,0.35,single,첫 차징 컨트롤러 최소 거리
 PlayerMaxHP,10,int,플레이어 최대 체력
 PlayerExitTimeInterval,1,float,플레이어가바닥에서벗어날때몇초마다데미지입힐지
 IntroBowSpawnPosZ,0,float,처음활등장위치
 GolemAttackFollowPlayer,true,bool,골렘공격이플레이어위치를기반으로할껀지
+ChargingMaxDistance,0.5,float,차징시 컨트롤러 최대 거리

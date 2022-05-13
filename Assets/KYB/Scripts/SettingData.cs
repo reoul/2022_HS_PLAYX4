@@ -27,10 +27,11 @@
     //====== Player ======
     public float FloorWidth;
     public float BowMaxChargingTime;
-    public float BowMaxDistance;
+    public float StartChargingDistanceMin;
     public int PlayerMaxHP;
     public float PlayerExitTimeInterval;
     public float IntroBowSpawnPosZ;
+    public float ChargingMaxDistance;
 
     public SettingData()
     {
@@ -49,7 +50,8 @@
         Stage2TimeLimit = 10;
         Stage3TimeLimit = 10;
         BowMaxChargingTime = 60f;
-        BowMaxDistance = 0.3f;
+        StartChargingDistanceMin = 0.3f;
+        ChargingMaxDistance = 0.5f;
         WendigoScore = 100;
         EntScore = 100;
         GolemScore = 100;

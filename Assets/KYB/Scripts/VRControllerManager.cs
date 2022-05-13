@@ -46,10 +46,16 @@ public class VRControllerManager : Singleton<VRControllerManager>
     private float _chargingDelay = 0.08f;
 
     /// <summary>
-    /// 차징 할 때 두 컨트롤러 최대 거리
+    /// 차징 처음 시작할때 두 컨트롤러 최소거리
     /// </summary>
-    private float _chargingDistance = 0.3f;
+    private float _startChargingDistanceMin = 0.3f;
 
+
+    /// <summary>
+    /// 차징 시 두 컨트롤러 최대 거리
+    /// </summary>
+    private float _chargingMaxDistance = 0.5f;
+    
     /// <summary>
     /// 차징이 100퍼센트 됬는지 체크
     /// </summary>
@@ -122,8 +128,9 @@ public class VRControllerManager : Singleton<VRControllerManager>
 
     private void Start()
     {
-        _chargingDistance = DataManager.Instance.Data.BowMaxDistance;
+        _startChargingDistanceMin = DataManager.Instance.Data.StartChargingDistanceMin;
         _maxCharging = DataManager.Instance.Data.BowMaxChargingTime;
+        _chargingMaxDistance = DataManager.Instance.Data.ChargingMaxDistance;
     }
 
     public void Init()
@@ -212,7 +219,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
 
         if (BowController != null)
         {
-            if (Distance > _chargingDistance)
+            if (Distance > _startChargingDistanceMin)
             {
                 return;
             }
@@ -375,19 +382,19 @@ public class VRControllerManager : Singleton<VRControllerManager>
         //    _chargingTime -= _chargingSpeed * Time.deltaTime;
         //}
 
-        if (Distance > _maxDistance)
+        if (Distance > _chargingMaxDistance)
         {
             _chargingTime += _chargingSpeed * Time.deltaTime;
         }
-        else if (Distance >= Mathf.Lerp(0, _maxDistance, 0.5f))
+        else if (Distance >= Mathf.Lerp(0, _chargingMaxDistance, 0.5f))
         {
             _chargingTime += _chargingSpeed * Time.deltaTime;
-            _chargingTime = Mathf.Clamp(_chargingTime, 0, Mathf.Lerp(0, _maxCharging, 0.67f));
+            _chargingTime = Mathf.Clamp(_chargingTime, 0, Mathf.Lerp(0, _chargingMaxDistance, 0.67f));
         }
         else
         {
             _chargingTime += _chargingSpeed * Time.deltaTime;
-            _chargingTime = Mathf.Clamp(_chargingTime, 0, Mathf.Lerp(0, _maxCharging, 0.34f));
+            _chargingTime = Mathf.Clamp(_chargingTime, 0, Mathf.Lerp(0, _chargingMaxDistance, 0.34f));
         }
 
         // 두 컨트롤러 거리가 일정 이상 멀어졌을때(활 쏘는 동작을 했을 때)
