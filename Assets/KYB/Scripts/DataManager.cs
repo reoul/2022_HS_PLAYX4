@@ -130,11 +130,13 @@ public class DataManager : Singleton<DataManager>
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
-                    data = line.Split(',');
-                    _scores.Add(new Score(data[0], Convert.ToInt32(data[1])));
-                    data[0] = data[0].Substring(6);
+                    if (line.Length > 6)
+                    {
+                        data = line.Split(',');
+                        _scores.Add(new Score(data[0], Convert.ToInt32(data[1])));
+                        data[0] = data[0].Substring(6);
+                    }
                 }
-                
                 LastPlayerIndex = Convert.ToInt32(data[0]) + 1;
             }
         }
