@@ -20,7 +20,7 @@ public class ScoreBoardManager : MonoBehaviour
 
     public void UpdateScoreData()
     {
-        _ranking = DataManager.Instance.GetScore();
+        _ranking = DataManager.Instance.GetScoreToPlayerPrefs();
         _playerScore = _ranking[_ranking.Count - 1];
         UpdateScoreBoard();
     }

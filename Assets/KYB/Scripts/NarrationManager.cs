@@ -308,7 +308,7 @@ public class NarrationManager : Singleton<NarrationManager>
 
     private void ShowScoreBoard()
     {
-        DataManager.Instance.SaveNewScore();
+        DataManager.Instance.SaveNewScoreToPlayerPrefs();
         scoreBoardManager.UpdateScoreData();
         scoreBoardManager.gameObject.SetActive(true);
     }

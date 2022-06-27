@@ -36,32 +36,32 @@
     public SettingData()
     {
         WendigoSpawnDelay = 0.5f;
-        WendigoMaxSpawnCount = 5;
-        WendigoMoveSpeed = 1f;
-        WendigoDamage = 100;
-        EntAttackDelay = 5f;
-        EntDamage = 100;
-        GolemMaxHealth = 20;
-        GolemDamage = 100;
-        FloorWidth = 1f;
-        Stage1TargetScore = 2000;
-        Stage2TargetScore = 4000;
-        Stage1TimeLimit = 10;
-        Stage2TimeLimit = 10;
-        Stage3TimeLimit = 10;
-        BowMaxChargingTime = 60f;
-        StartChargingDistanceMin = 0.3f;
-        ChargingMaxDistance = 0.5f;
-        WendigoScore = 100;
-        EntScore = 100;
-        GolemScore = 100;
+        WendigoMaxSpawnCount = 3;
+        WendigoMoveSpeed = 3.8f;
+        WendigoDamage = 1;
+        WendigoScore = 15;
+        EntAttackDelay = 5;
+        EntDamage = 3;
+        EntScore = 10;
+        GolemMaxHealth = 15;
+        GolemDamage = 20;
+        GolemScore = 7;
+        FloorWidth = 0.4f;
+        Stage1TargetScore = 150;
+        Stage2TargetScore = 120;
+        Stage1TimeLimit = 160;
+        Stage2TimeLimit = 90;
+        Stage3TimeLimit = 210;
+        BowMaxChargingTime = 46;
+        StartChargingDistanceMin = 0.35f;
+        ChargingMaxDistance = 0.4f;
         PlayerMaxHP = 15;
         EntWeakAttackBreakCnt = 3;
         EntWeakAttackBreakTime = 3;
         GolemWeakAttackBreakCnt = 3;
         GolemWeakAttackBreakTime = 3;
         PlayerExitTimeInterval = 1;
-        IntroBowSpawnPosZ = 0f;
-        GolemAttackFollowPlayer = false;
+        IntroBowSpawnPosZ = 0;
+        GolemAttackFollowPlayer = true;
     }
 }

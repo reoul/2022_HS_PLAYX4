@@ -18,21 +18,15 @@ public class DataManager : Singleton<DataManager>
         Data = new SettingData();
         _scores = new List<Score>();
         SettingLoad();
-        GetScore();
-    }
-    
-    /// <summary>
-    /// 게임 세팅을 설정 할 수 있는 파일 생성(기본값으로 생성됨)
-    /// </summary>
-    private SettingData CreateDefaultSettingFile()
-    {
-        var writer = new StreamWriter(_settingFilePath, false);
-        Data = new SettingData();
-        string strData = JsonUtility.ToJson(Data, true);
-        writer.Write(strData);
-        writer.Flush();
-        writer.Close();
-        return Data;
+        if (PlayerPrefs.HasKey("ScoreCount"))
+        {
+            LastPlayerIndex = 100 + PlayerPrefs.GetInt("ScoreCount");
+        }
+        else
+        {
+            LastPlayerIndex = 100;
+            PlayerPrefs.SetInt("ScoreCount", 100);
+        }
     }
 
     // 반드시 게임 시작시 무조건 호출해서
@@ -107,8 +101,7 @@ public class DataManager : Singleton<DataManager>
 
     public Score SaveNewScore()
     {
-        
-        _scores.Add(new Score($"HUNTER{LastPlayerIndex.ToString()}",ScoreSystem.SumScore));
+        _scores.Add(new Score($"HUNTER{LastPlayerIndex.ToString()}", ScoreSystem.SumScore));
         using (StreamWriter writer = new StreamWriter(_scoreFilePath, true))
         {
             string data = $"HUNTER{(LastPlayerIndex++).ToString()},{ScoreSystem.SumScore.ToString()}\n";
@@ -119,6 +112,32 @@ public class DataManager : Singleton<DataManager>
         return new Score(name, ScoreSystem.SumScore);
     }
 
+    public void SaveNewScoreToPlayerPrefs()
+    {
+        string hunterName = $"HUNTER{LastPlayerIndex.ToString()}";
+        _scores.Add(new Score(hunterName, ScoreSystem.SumScore));
+        PlayerPrefs.SetInt("ScoreCount", ++LastPlayerIndex);
+        PlayerPrefs.SetInt(hunterName, ScoreSystem.SumScore);
+    }
+
+    public List<Score> GetScoreToPlayerPrefs()
+    {
+        _scores.Clear();
+        for (int i = 100; i < LastPlayerIndex; i++)
+        {
+            string hunterName = $"HUNTER{i.ToString()}";
+            int score = PlayerPrefs.GetInt(hunterName, 0);
+            _scores.Add(new Score(hunterName, score));
+        }
+
+        for (int emptyCnt = 10 - _scores.Count; emptyCnt > 0; --emptyCnt)
+        {
+            _scores.Add(new Score("NO_DATA", 0));
+        }
+
+        return _scores;
+    }
+
     public List<Score> GetScore()
     {
         _scores.Clear();
@@ -126,7 +145,7 @@ public class DataManager : Singleton<DataManager>
         {
             using (StreamReader reader = new StreamReader(_scoreFilePath))
             {
-                string[] data = {"99","99"};
+                string[] data = {"99", "99"};
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
@@ -137,6 +156,7 @@ public class DataManager : Singleton<DataManager>
                         data[0] = data[0].Substring(6);
                     }
                 }
+
                 LastPlayerIndex = Convert.ToInt32(data[0]) + 1;
             }
         }
