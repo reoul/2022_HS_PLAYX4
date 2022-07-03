@@ -38,7 +38,7 @@ public class EnemyBuilder
                 enemyObj = GameObject.Instantiate(Resources.Load("TreeSpirit", typeof(GameObject))) as GameObject;
                 break;
             case EnemyType.Wendigo:
-                enemyObj = GameObject.Instantiate(Resources.Load("Wendigo", typeof(GameObject))) as GameObject;
+                enemyObj = GameObject.Instantiate(Resources.Load("SkeletonWarrior", typeof(GameObject))) as GameObject;
                 break;
             default:
                 enemyObj = GameObject.Instantiate(Resources.Load("Wendigo", typeof(GameObject))) as GameObject;
