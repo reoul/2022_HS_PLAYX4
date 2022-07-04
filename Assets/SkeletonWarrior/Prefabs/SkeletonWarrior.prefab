@@ -845,6 +845,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5830978267466790071}
   - component: {fileID: 98307265084685963}
+  - component: {fileID: 2621919448414258987}
   m_Layer: 0
   m_Name: SkeletonWarrior
   m_TagString: Untagged
@@ -958,6 +959,21 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.077147484, y: -0.26060104, z: 0.46289468}
     m_Extent: {x: 1.4172566, y: 1.7221911, z: 0.98015285}
   m_DirtyAABB: 0
+--- !u!114 &2621919448414258987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3998004769673247114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a4e3e422d0340f889981d765d6ed82c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _dissolveSecond: 1
+  State: -1
+  DissolveCollider: {fileID: 0}
 --- !u!1 &4092871609460787513
 GameObject:
   m_ObjectHideFlags: 0

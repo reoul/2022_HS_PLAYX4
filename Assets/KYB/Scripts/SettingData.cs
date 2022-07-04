@@ -1,11 +1,19 @@
 ﻿public class SettingData
 {
+    //====== Skeleton ======
+    public int SkeletonMaxSpawnCount;
+    public float SkeletonSpawnDelay;
+    public float SkeletonMoveSpeed;
+    public int Stage1TargetScore;
+    public int Stage1TimeLimit;
+    public int SkeletonDamage;
+    public int SkeletonScore;
     //====== Wendigo ======
     public int WendigoMaxSpawnCount;
     public float WendigoSpawnDelay;
     public float WendigoMoveSpeed;
-    public int Stage1TargetScore;
-    public int Stage1TimeLimit;
+    //public int Stage1TargetScore;
+    //public int Stage1TimeLimit;
     public int WendigoDamage;
     public int WendigoScore;
     //====== Ent ======
