@@ -490,6 +490,11 @@ public class VRControllerManager : Singleton<VRControllerManager>
 
     private void UpdateFixBar()
     {
+        if (BowAbleController != null)
+        {
+            return;
+        }
+
         FixBarImage.fillAmount = (_fixLeftTimer > _fixRightTimer ? _fixLeftTimer : _fixRightTimer) / FIX_INTERVAL_TIME;
     }
 }
