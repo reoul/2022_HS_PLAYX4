@@ -38,19 +38,17 @@ public class VRController : MonoBehaviour
 
     void CheckRay()
     {
-        RaycastHit hit;
         if (SysBtn != null && TrackPad != null)
         {
             Debug.Log("11111");
-            if (Physics.Raycast(CenterTransform.position, SysBtn.transform.position - TrackPad.transform.position,
-                    out hit, 1000)
-               )
+            RaycastHit[] hits = Physics.RaycastAll(CenterTransform.position,
+                SysBtn.transform.position - TrackPad.transform.position, 1000);
+            foreach (var hit in hits)
             {
-                Debug.Log("22222");
-                if (GetTriggerDown())
+                IRayInteractive ray;
+                if (hit.collider.TryGetComponent<IRayInteractive>(out ray))
                 {
-                    Debug.Log("33333");
-                    hit.collider.GetComponent<IRayInteractive>()?.RayInteractive();
+                    ray.RayInteractive();
                 }
             }
         }
