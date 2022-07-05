@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Valve.VR;
 
 public class VRControllerManager : Singleton<VRControllerManager>
@@ -65,6 +66,8 @@ public class VRControllerManager : Singleton<VRControllerManager>
     private bool _isFixStartRightController = false;
 
     private const float FIX_INTERVAL_TIME = 3;
+
+    public Image FixBarImage;
     
     /// <summary>
     /// 차징이 100퍼센트 됬는지 체크
@@ -152,6 +155,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
     private void Update()
     {
         CheckFixController();
+        UpdateFixBar();
         CheckBow();
         CheckCharging();
         ChargingSound();
@@ -455,10 +459,12 @@ public class VRControllerManager : Singleton<VRControllerManager>
         else if (LeftController.GetTriggerUp())
         {
             _isFixStartLeftController = false;
+            _fixLeftTimer = 0;
         }
         else if (RightController.GetTriggerUp())
         { 
             _isFixStartRightController = false;
+            _fixRightTimer = 0;
         }
 
         if (_isFixStartLeftController)
@@ -480,5 +486,10 @@ public class VRControllerManager : Singleton<VRControllerManager>
                 _isFixStartRightController = false;
             }
         }
+    }
+
+    private void UpdateFixBar()
+    {
+        FixBarImage.fillAmount = (_fixLeftTimer > _fixRightTimer ? _fixLeftTimer : _fixRightTimer) / FIX_INTERVAL_TIME;
     }
 }
