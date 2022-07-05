@@ -11,7 +11,7 @@ public class DataManager : Singleton<DataManager>
     private const string _scoreFilePath = "./score.csv";
     public SettingData Data;
     private List<Score> _scores;
-    public int LastPlayerIndex = 100;
+    private int _lastPlayerIndex = 100;
 
     void Awake()
     {
@@ -20,11 +20,11 @@ public class DataManager : Singleton<DataManager>
         SettingLoad();
         if (PlayerPrefs.HasKey("ScoreCount"))
         {
-            LastPlayerIndex = 100 + PlayerPrefs.GetInt("ScoreCount");
+            _lastPlayerIndex = 100 + PlayerPrefs.GetInt("ScoreCount");
         }
         else
         {
-            LastPlayerIndex = 100;
+            _lastPlayerIndex = 100;
             PlayerPrefs.SetInt("ScoreCount", 100);
         }
     }
@@ -101,10 +101,10 @@ public class DataManager : Singleton<DataManager>
 
     public Score SaveNewScore()
     {
-        _scores.Add(new Score($"HUNTER{LastPlayerIndex.ToString()}", ScoreSystem.SumScore));
+        _scores.Add(new Score($"HUNTER{_lastPlayerIndex.ToString()}", ScoreSystem.SumScore));
         using (StreamWriter writer = new StreamWriter(_scoreFilePath, true))
         {
-            string data = $"HUNTER{(LastPlayerIndex++).ToString()},{ScoreSystem.SumScore.ToString()}\n";
+            string data = $"HUNTER{(_lastPlayerIndex++).ToString()},{ScoreSystem.SumScore.ToString()}\n";
             writer.Write(data);
             writer.Flush();
         }
@@ -114,16 +114,16 @@ public class DataManager : Singleton<DataManager>
 
     public void SaveNewScoreToPlayerPrefs()
     {
-        string hunterName = $"HUNTER{LastPlayerIndex.ToString()}";
+        string hunterName = $"HUNTER{_lastPlayerIndex.ToString()}";
         _scores.Add(new Score(hunterName, ScoreSystem.SumScore));
-        PlayerPrefs.SetInt("ScoreCount", ++LastPlayerIndex);
+        PlayerPrefs.SetInt("ScoreCount", ++_lastPlayerIndex);
         PlayerPrefs.SetInt(hunterName, ScoreSystem.SumScore);
     }
 
     public List<Score> GetScoreToPlayerPrefs()
     {
         _scores.Clear();
-        for (int i = 100; i < LastPlayerIndex; i++)
+        for (int i = 100; i < _lastPlayerIndex; i++)
         {
             string hunterName = $"HUNTER{i.ToString()}";
             int score = PlayerPrefs.GetInt(hunterName, 0);
@@ -157,7 +157,7 @@ public class DataManager : Singleton<DataManager>
                     }
                 }
 
-                LastPlayerIndex = Convert.ToInt32(data[0]) + 1;
+                _lastPlayerIndex = Convert.ToInt32(data[0]) + 1;
             }
         }
         catch (Exception e) //파일이 없음

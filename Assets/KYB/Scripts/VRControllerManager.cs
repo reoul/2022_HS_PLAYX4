@@ -9,6 +9,8 @@ public class VRControllerManager : Singleton<VRControllerManager>
     public VRController LeftController { get; private set; }
     public VRController RightController { get; private set; }
 
+    public VRController BowAbleController { get; set; } = null;
+    
     /// <summary>
     /// 차징하고 있는지
     /// </summary>
@@ -55,6 +57,14 @@ public class VRControllerManager : Singleton<VRControllerManager>
     /// 차징 시 두 컨트롤러 최대 거리
     /// </summary>
     private float _chargingMaxDistance = 0.5f;
+
+    private float _fixLeftTimer = 0;
+    private float _fixRightTimer = 0;
+
+    private bool _isFixStartLeftController = false;
+    private bool _isFixStartRightController = false;
+
+    private const float FIX_INTERVAL_TIME = 3;
     
     /// <summary>
     /// 차징이 100퍼센트 됬는지 체크
@@ -63,11 +73,6 @@ public class VRControllerManager : Singleton<VRControllerManager>
     {
         get { return _chargingTime >= _maxCharging; }
     }
-
-    /// <summary>
-    /// 플레이어의 두 컨트롤러 간의 최대 거리 (최대한 멀어질때마다 값 업데이트)
-    /// </summary>
-    private float _maxDistance;
 
     /// <summary>
     /// 활을 들고 있는 컨트롤러
@@ -123,7 +128,6 @@ public class VRControllerManager : Singleton<VRControllerManager>
     {
         FindController();
         IsCharging = false;
-        _maxDistance = 0;
     }
 
     private void Start()
@@ -147,10 +151,10 @@ public class VRControllerManager : Singleton<VRControllerManager>
 
     private void Update()
     {
+        CheckFixController();
         CheckBow();
         CheckCharging();
         ChargingSound();
-        UpdateMaxDistance();
         ChargingVibration();
         CheckShot();
     }
@@ -175,7 +179,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
             return;
         }
         
-        if (LeftController.GetTriggerDown())
+        /*if (LeftController.GetTriggerDown())
         {
             // 오른쪽 컨트롤러 트리거를 사용 안할때
             if (!(RightController.GetTrigger() || RightController.GetTriggerDown()))
@@ -190,7 +194,16 @@ public class VRControllerManager : Singleton<VRControllerManager>
             {
                 SetBowController(RightController);
             }
+        }*/
+
+        if (BowAbleController != null)
+        {
+            if (BowAbleController.GetTriggerDown())
+            {
+                SetBowController(BowAbleController);
+            }
         }
+        
 
         if (BowController != null)
         {
@@ -424,17 +437,47 @@ public class VRControllerManager : Singleton<VRControllerManager>
         bowObj.SetActive(true);
     }
 
-    /// <summary>
-    /// 플레이어의 최대 팔 거리 업데이트
-    /// </summary>
-    private void UpdateMaxDistance()
+    private void CheckFixController()
     {
-        if (Distance > _maxDistance)
+        if (BowAbleController != null)
         {
-            _maxDistance = Distance;
-            if (_maxDistance >= 0.6f)
+            return;
+        }
+        
+        if (LeftController.GetTriggerDown())
+        {
+            _isFixStartLeftController = true;
+        }
+        else if (RightController.GetTriggerDown())
+        {
+            _isFixStartRightController = true;
+        }
+        else if (LeftController.GetTriggerUp())
+        {
+            _isFixStartLeftController = false;
+        }
+        else if (RightController.GetTriggerUp())
+        { 
+            _isFixStartRightController = false;
+        }
+
+        if (_isFixStartLeftController)
+        {
+            _fixLeftTimer += Time.deltaTime;
+            if (_fixLeftTimer > FIX_INTERVAL_TIME)
             {
-                _maxDistance = 0.6f;
+                BowAbleController = LeftController;
+                _isFixStartLeftController = false;
+            }
+        }
+
+        if (_isFixStartRightController)
+        {
+            _fixRightTimer += Time.deltaTime;
+            if (_fixRightTimer > FIX_INTERVAL_TIME)
+            {
+                BowAbleController = RightController;
+                _isFixStartRightController = false;
             }
         }
     }
