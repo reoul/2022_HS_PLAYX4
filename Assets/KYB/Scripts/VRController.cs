@@ -41,12 +41,15 @@ public class VRController : MonoBehaviour
         RaycastHit hit;
         if (SysBtn != null && TrackPad != null)
         {
+            Debug.Log("11111");
             if (Physics.Raycast(CenterTransform.position, SysBtn.transform.position - TrackPad.transform.position,
                     out hit, 1000)
                )
             {
+                Debug.Log("22222");
                 if (GetTriggerDown())
                 {
+                    Debug.Log("33333");
                     hit.collider.GetComponent<IRayInteractive>()?.RayInteractive();
                 }
             }

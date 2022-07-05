@@ -36,6 +36,7 @@ public class StageManager : Singleton<StageManager>
     public void Start()
     {
         NextStageObj = FindObjectOfType<IntroObj>().gameObject;
+        NextStageObj.SetActive(false);
         GameExitObj = FindObjectOfType<GameExitObj>().gameObject;
         stages[(int)StageType.Stage1].GetComponent<Stage>().GoalScore = DataManager.Instance.Data.Stage1TargetScore;
         stages[(int)StageType.Stage1].GetComponent<Stage>().LimitTime = DataManager.Instance.Data.Stage1TimeLimit;
