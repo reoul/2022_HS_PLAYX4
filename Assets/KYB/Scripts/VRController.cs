@@ -44,13 +44,17 @@ public class VRController : MonoBehaviour
         {
             RaycastHit[] hits = Physics.RaycastAll(CenterTransform.position,
                 TrackPad.transform.position - SysBtn.transform.position, 10000);
-            Linerend.SetPosition(0, CenterTransform.position);
-            Linerend.SetPosition(1, (TrackPad.transform.position - SysBtn.transform.position) * 1000);
+            
+            int cnt = 0;
             foreach (var hit in hits)
             {
                 IRayInteractive rayInteractive;
                 if (hit.collider.TryGetComponent<IRayInteractive>(out rayInteractive))
                 {
+                    Linerend.SetPosition(0, CenterTransform.position);
+                    Linerend.SetPosition(1, (TrackPad.transform.position - SysBtn.transform.position) * 1000);
+                    cnt++;
+                    
                     if (GetTriggerDown())
                     {
                         rayInteractive.RayInteractive();
@@ -58,6 +62,11 @@ public class VRController : MonoBehaviour
 
                     break;
                 }
+            }
+
+            if (cnt == 0)
+            {
+                Linerend.SetPosAllZero();
             }
         }
     }
