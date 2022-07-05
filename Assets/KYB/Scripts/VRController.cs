@@ -42,7 +42,7 @@ public class VRController : MonoBehaviour
         {
             Debug.Log("11111");
             RaycastHit[] hits = Physics.RaycastAll(CenterTransform.position,
-                SysBtn.transform.position - TrackPad.transform.position, 1000);
+                TrackPad.transform.position - SysBtn.transform.position, 10000);
             foreach (var hit in hits)
             {
                 IRayInteractive ray;
