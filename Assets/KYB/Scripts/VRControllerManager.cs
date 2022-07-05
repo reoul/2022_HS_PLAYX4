@@ -474,6 +474,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
             {
                 BowAbleController = LeftController;
                 _isFixStartLeftController = false;
+                GameObject.Find("GameManager").GetComponent<GameManager>().FixBar.StartHide();
             }
         }
 
@@ -484,6 +485,7 @@ public class VRControllerManager : Singleton<VRControllerManager>
             {
                 BowAbleController = RightController;
                 _isFixStartRightController = false;
+                GameObject.Find("GameManager").GetComponent<GameManager>().FixBar.StartHide();
             }
         }
     }

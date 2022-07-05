@@ -30,7 +30,7 @@ public class FixBar : MonoBehaviour
         _isShow = true;
     }
 
-    private void StartHide()
+    public void StartHide()
     {
         _alpha = 1;
         _isHide = true;
@@ -51,7 +51,6 @@ public class FixBar : MonoBehaviour
         if (_alpha >= 1)
         {
             _isShow = false;
-            StartHide();
         }
     }
 
