@@ -39,11 +39,11 @@ public class FixBar : MonoBehaviour
     private void UpdateShow()
     {
         _alpha += Time.deltaTime;
-        foreach (var image in GetComponents<Image>())
+        foreach (var image in GetComponentsInChildren<Image>())
         {
             image.color = new Color(0, 1, 1, _alpha);
         }
-        foreach (var text in GetComponents<Text>())
+        foreach (var text in GetComponentsInChildren<Text>())
         {
             text.color = new Color(0, 1, 1, _alpha);
         }
