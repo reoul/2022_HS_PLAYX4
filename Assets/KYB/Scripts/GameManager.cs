@@ -5,6 +5,7 @@
     public class GameManager : MonoBehaviour
     {
         private bool _isPause;
+        public FixBar FixBar;
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.P))

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Valve.VR;
@@ -15,21 +16,42 @@ public enum HandType
 
 public class VRController : MonoBehaviour
 {
-    public SteamVR_Input_Sources HandType;  //모두 사용, 왼손, 오른손
+    public SteamVR_Input_Sources HandType; //모두 사용, 왼손, 오른손
     public SteamVR_Action_Boolean GrabAction;
     public SteamVR_Action_Vibration HapticAction;
     public Transform CenterTransform { get; private set; }
 
     public MeshRenderer[] _meshRenderers;
 
-    public GameObject SysBtn { get; private set; }
-    public GameObject TrackPad { get; private set; }
+    public GameObject SysBtn { get; private set; } = null;
+    public GameObject TrackPad { get; private set; } = null;
 
     void Start()
     {
         StartCoroutine(FindChildMeshCoroutine());
     }
 
+    private void Update()
+    {
+        CheckRay();
+    }
+
+    void CheckRay()
+    {
+        RaycastHit hit;
+        if (SysBtn != null && TrackPad != null)
+        {
+            if (Physics.Raycast(CenterTransform.position, SysBtn.transform.position - TrackPad.transform.position,
+                    out hit, 1000)
+               )
+            {
+                if (GetTriggerDown())
+                {
+                    hit.collider.GetComponent<IRayInteractive>()?.RayInteractive();
+                }
+            }
+        }
+    }
 
     private void FindChildMesh()
     {
@@ -40,7 +62,7 @@ public class VRController : MonoBehaviour
     {
         while (true)
         {
-            if(_meshRenderers.Length != 0)
+            if (_meshRenderers.Length != 0)
             {
                 CenterTransform = transform.GetChild(0).Find("sys_button").GetChild(0);
                 SysBtn = CenterTransform.gameObject;
@@ -50,6 +72,7 @@ public class VRController : MonoBehaviour
                 collider.isTrigger = true;
                 break;
             }
+
             FindChildMesh();
             yield return new WaitForEndOfFrame();
         }
@@ -64,7 +87,7 @@ public class VRController : MonoBehaviour
         frequency = Mathf.Clamp(frequency, 0, 60);
         Pulse(0.1f, frequency, 1, HandType);
     }
-    
+
     /// <summary>
     /// 진동
     /// </summary>
@@ -74,7 +97,7 @@ public class VRController : MonoBehaviour
     /// <param name="source"></param>
     private void Pulse(float duration, float frequency, float amplitude, SteamVR_Input_Sources source)
     {
-        HapticAction.Execute(0,duration, frequency, amplitude, source);
+        HapticAction.Execute(0, duration, frequency, amplitude, source);
     }
 
     /// <summary>

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameExitObj : MonoBehaviour, IHitable
+public class GameExitObj : MonoBehaviour, IRayInteractive
 {
-    public void HitEvent()
+    public void RayInteractive()
     {
         Application.Quit();
     }

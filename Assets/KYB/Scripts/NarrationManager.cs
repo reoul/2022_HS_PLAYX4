@@ -75,6 +75,7 @@ public class NarrationManager : Singleton<NarrationManager>
     public AudioClip LastNarrationClip { get; private set; }
     public bool IsCheckFlag = false;
     private bool _isFirst = true;
+    public bool IsNarrationStart = false;
     public GameObject IntroBow;
     public ScoreBoardManager scoreBoardManager;
     private float _introBowSpawnPosZ;
@@ -89,7 +90,7 @@ public class NarrationManager : Singleton<NarrationManager>
 
     private void Update()
     {
-        if (_isFirst && VRControllerManager.Instance.LeftController.GetTrigger() && VRControllerManager.Instance.RightController.GetTrigger())
+        if (_isFirst && IsNarrationStart)
         {
             _isFirst = false;
             StartCoroutine(NarrationCoroutine());
