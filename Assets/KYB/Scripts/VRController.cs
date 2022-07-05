@@ -26,6 +26,8 @@ public class VRController : MonoBehaviour
     public GameObject SysBtn { get; private set; } = null;
     public GameObject TrackPad { get; private set; } = null;
 
+    public LineRenderer Linerend;
+
     void Start()
     {
         StartCoroutine(FindChildMeshCoroutine());
@@ -40,16 +42,24 @@ public class VRController : MonoBehaviour
     {
         if (SysBtn != null && TrackPad != null)
         {
-            Debug.Log("11111");
             RaycastHit[] hits = Physics.RaycastAll(CenterTransform.position,
                 TrackPad.transform.position - SysBtn.transform.position, 10000);
             foreach (var hit in hits)
             {
-                IRayInteractive ray;
-                if (hit.collider.TryGetComponent<IRayInteractive>(out ray))
+                IRayInteractive rayInteractive;
+                if (hit.collider.TryGetComponent<IRayInteractive>(out rayInteractive))
                 {
-                    ray.RayInteractive();
+                    Linerend.SetPosition(0, CenterTransform.position);
+                    Linerend.SetPosition(1, TrackPad.transform.position * 100 - SysBtn.transform.position * 100);
+                    if (GetTriggerDown())
+                    {
+                        rayInteractive.RayInteractive();
+                    }
+
+                    break;
                 }
+
+                Linerend.SetPosAllZero();
             }
         }
     }
