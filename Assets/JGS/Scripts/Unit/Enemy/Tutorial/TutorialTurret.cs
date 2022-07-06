@@ -35,10 +35,6 @@ public class TutorialTurret : MonoBehaviour
                 StartCoroutine(Attack());
             }
         }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Shoot2();
-        }
     }
 
     private void Shoot(Vector3 targetPos)

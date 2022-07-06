@@ -62,7 +62,7 @@
         FloorWidth = 0.4f;
         Stage1TargetScore = 150;
         Stage2TargetScore = 120;
-        Stage1TimeLimit = 160;
+        Stage1TimeLimit = 60;
         Stage2TimeLimit = 90;
         Stage3TimeLimit = 210;
         BowMaxChargingTime = 46;

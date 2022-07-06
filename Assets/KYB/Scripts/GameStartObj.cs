@@ -13,12 +13,4 @@ public class GameStartObj : MonoBehaviour, IRayInteractive
         ExitObj.SetActive(false);
         this.gameObject.SetActive(false);
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            RayInteractive();
-        }
-    }
 }

@@ -14,12 +14,4 @@ public class IntroObj : MonoBehaviour, IHitable
         NarrationManager.Instance.IsCheckFlag = false;
         SoundManager.Instance.PlaySoundSecond("Access Denied 3", 0.2f);
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            HitEvent();
-        }
-    }
 }

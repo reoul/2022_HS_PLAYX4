@@ -95,14 +95,6 @@ public class NarrationManager : Singleton<NarrationManager>
             _isFirst = false;
             StartCoroutine(NarrationCoroutine());
         }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            IsCheckFlag = false;
-            StartCoroutine(NarrationCoroutine());
-        }
-        
-
     }
 
     public void Init()
@@ -124,17 +116,17 @@ public class NarrationManager : Singleton<NarrationManager>
     }
     private IEnumerator NarrationCoroutine()
     {
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro1));
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro2));
-        //yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro3));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro1));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro2));
+        yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro3));
         yield return StartCoroutine(PlayVoiceCoroutine(NarrationClips.Intro4));
         PlayerFloor.Instance.StartMeasure();
         PlayVoice(NarrationClips.CheckMove);
         yield return StartCoroutine(CheckMoveCoroutine());
         // 활 소환
-        /*ShowIntroBow();
+        ShowIntroBow();
         PlayVoice(NarrationClips.Shot1);
-        yield return StartCoroutine(CheckFlagCoroutine());*/
+        yield return StartCoroutine(CheckFlagCoroutine());
         PlayVoice(NarrationClips.Shot2);
         yield return StartCoroutine(CheckFlagCoroutine());
         PlayerFloor.Instance.StopMeasure();

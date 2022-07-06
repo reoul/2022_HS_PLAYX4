@@ -20,7 +20,7 @@ public class DataManager : Singleton<DataManager>
         SettingLoad();
         if (PlayerPrefs.HasKey("ScoreCount"))
         {
-            _lastPlayerIndex = 100 + PlayerPrefs.GetInt("ScoreCount");
+            _lastPlayerIndex = PlayerPrefs.GetInt("ScoreCount");
         }
         else
         {
@@ -127,7 +127,14 @@ public class DataManager : Singleton<DataManager>
         {
             string hunterName = $"HUNTER{i.ToString()}";
             int score = PlayerPrefs.GetInt(hunterName, 0);
-            _scores.Add(new Score(hunterName, score));
+            if(score == 0)
+            {
+                _scores.Add(new Score("NO_DATA", 0));
+            }
+            else
+            {
+                _scores.Add(new Score(hunterName, score));
+            }
         }
 
         for (int emptyCnt = 10 - _scores.Count; emptyCnt > 0; --emptyCnt)
