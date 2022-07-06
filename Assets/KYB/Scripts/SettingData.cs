@@ -43,6 +43,11 @@
 
     public SettingData()
     {
+        SkeletonMaxSpawnCount = 3;
+        SkeletonSpawnDelay = 0.5f;
+        SkeletonDamage = 1;
+        SkeletonMoveSpeed = 3.8f;
+        SkeletonScore = 15;
         WendigoSpawnDelay = 0.5f;
         WendigoMaxSpawnCount = 3;
         WendigoMoveSpeed = 3.8f;

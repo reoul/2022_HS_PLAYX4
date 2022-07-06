@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EnemyType { TreeSpirit, Wendigo }
+public enum EnemyType { TreeSpirit, Wendigo, Skeleton }
 
 public class EnemyBuilder
 {
@@ -37,7 +37,7 @@ public class EnemyBuilder
             case EnemyType.TreeSpirit:
                 enemyObj = GameObject.Instantiate(Resources.Load("TreeSpirit", typeof(GameObject))) as GameObject;
                 break;
-            case EnemyType.Wendigo:
+            case EnemyType.Skeleton:
                 enemyObj = GameObject.Instantiate(Resources.Load("SkeletonWarrior", typeof(GameObject))) as GameObject;
                 break;
             default:

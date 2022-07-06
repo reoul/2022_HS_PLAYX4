@@ -1,3 +1,8 @@
+SkeletonMaxSpawnCount = 3;
+SkeletonSpawnDelay = 0.5f;
+SkeletonDamage = 1;
+SkeletonMoveSpeed = 3.8f;
+SkeletonScore = 15;
 WendigoSpawnDelay,0.5,single,웬디고 스폰 딜레이
 WendigoMaxSpawnCount,3,int,웬디고 최대 스폰 수 제한
 WendigoMoveSpeed,3.8,single,웬디고 이동속도

@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
         unUsedEnemyQueue = new Queue<GameObject>();
         for (int i = 0; i < 30; i++)
         {
-            var enemy = new EnemyBuilder("Enemy").SetEnemyType(global::EnemyType.Wendigo).Build();
+            var enemy = new EnemyBuilder("Enemy").SetEnemyType(global::EnemyType.Skeleton).Build();
             enemy.gameObject.SetActive(false);
             enemy.transform.parent = StageManager.Instance.CurStage.transform;
             enemy.GetComponent<Enemy>().score = DataManager.Instance.Data.SkeletonScore;
@@ -38,7 +38,7 @@ public class EnemySpawner : MonoBehaviour
         enemy.transform.localScale = new Vector3(scale, scale,scale);
         enemy.SetActive(true);
         enemy.GetComponent<Enemy>().MoveSpeed = _skeletonSpeed * (0.7f + r * 0.1f);
-        enemy.GetComponent<Skeleton>().ChangeState(SkeletonState.StateType.Spawn);
+        enemy.GetComponent<Wendigo>().ChangeState(WendigoState.StateType.Spawn);
     }
 
     public void Delete(GameObject enemyObj)
