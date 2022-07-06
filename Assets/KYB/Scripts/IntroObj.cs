@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class IntroObj : MonoBehaviour, IHitable
 {
@@ -12,5 +13,13 @@ public class IntroObj : MonoBehaviour, IHitable
         StageManager.Instance.NextStage();
         NarrationManager.Instance.IsCheckFlag = false;
         SoundManager.Instance.PlaySoundSecond("Access Denied 3", 0.2f);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            HitEvent();
+        }
     }
 }

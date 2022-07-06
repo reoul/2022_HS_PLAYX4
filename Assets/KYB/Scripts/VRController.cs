@@ -28,6 +28,8 @@ public class VRController : MonoBehaviour
 
     public LineRenderer Linerend;
 
+    private bool _isStart = false;
+
     void Start()
     {
         StartCoroutine(FindChildMeshCoroutine());
@@ -40,7 +42,7 @@ public class VRController : MonoBehaviour
 
     void CheckRay()
     {
-        if (SysBtn != null && TrackPad != null)
+        if (!_isStart && SysBtn != null && TrackPad != null)
         {
             RaycastHit[] hits = Physics.RaycastAll(CenterTransform.position,
                 TrackPad.transform.position - SysBtn.transform.position, 10000);
@@ -58,6 +60,7 @@ public class VRController : MonoBehaviour
                     if (GetTriggerDown())
                     {
                         rayInteractive.RayInteractive();
+                        _isStart = true;
                     }
 
                     break;

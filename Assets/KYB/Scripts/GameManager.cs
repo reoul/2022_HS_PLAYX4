@@ -18,5 +18,14 @@
             {
                 SceneManager.LoadScene(0);
             }
+
+            if (Input.GetKeyDown(KeyCode.V))
+            {
+                ScoreSystem.Score += 10;
+            }
+
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+            }
         }
     }

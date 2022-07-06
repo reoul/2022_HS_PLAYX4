@@ -467,6 +467,11 @@ public class VRControllerManager : Singleton<VRControllerManager>
             _fixRightTimer = 0;
         }
 
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            _isFixStartLeftController = true;
+        }
+
         if (_isFixStartLeftController)
         {
             _fixLeftTimer += Time.deltaTime;

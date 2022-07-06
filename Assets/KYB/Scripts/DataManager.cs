@@ -91,12 +91,12 @@ public class DataManager : Singleton<DataManager>
         FieldInfo fieldInfo = Type.GetType("SettingData").GetField(fieldName);
         if (fieldInfo.FieldType != typeof(T))
         {
-            Debug.LogError($"{fieldName} 변수의 타입 {fieldInfo.FieldType}이 입력 데이터 타입 {typeof(T)}이랑 같지 않습니다");
+            //Debug.LogError($"{fieldName} 변수의 타입 {fieldInfo.FieldType}이 입력 데이터 타입 {typeof(T)}이랑 같지 않습니다");
             return;
         }
 
         fieldInfo.SetValue(Data, value);
-        Debug.Log($"{fieldName}의 값이 {value}로 변경되었습니다");
+        //Debug.Log($"{fieldName}의 값이 {value}로 변경되었습니다");
     }
 
     public Score SaveNewScore()
