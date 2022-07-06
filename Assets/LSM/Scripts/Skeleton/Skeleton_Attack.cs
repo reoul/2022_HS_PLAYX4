@@ -17,7 +17,7 @@ public class Skeleton_Attack : StateMachineBehaviour
         if (attackTime >= 0.3f && attackCheck == true)
         {
             ScoreSystem.Score -= DataManager.Instance.Data.SkeletonDamage;
-            SoundManager.Instance.PlaySoundThird("Skeleton_Attack", 1f);
+            SoundManager.Instance.PlaySoundThird("SkeletonAttack", 1f);
             HealthBarManager.Instance.DistractPlayerDamage();
             attackCheck = false;
         }
